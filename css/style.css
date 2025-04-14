@@ -62,7 +62,7 @@
            
 /*------------------------------------------ Social Media Menu Styles ------------------------------------------------------------------------------------*/
 ./* Social Media Bar Styling */
-..social-media-bar {
+.social-media-bar {
   flex-direction: row; /* Side-by-side icons */
   left: 50%;
   transform: translateX(-50%);
