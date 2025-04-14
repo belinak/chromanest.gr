@@ -63,13 +63,10 @@
 /*------------------------------------------ Social Media Menu Styles ------------------------------------------------------------------------------------*/
 ./* Social Media Bar Styling */
 .social-media-bar {
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  flex-direction: row; /* Side-by-side icons */
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
 }
 
 .social-icon {
