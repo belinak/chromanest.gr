@@ -63,14 +63,10 @@
 /*------------------------------------------ Social Media Menu Styles ------------------------------------------------------------------------------------*/
 ./* Social Media Bar Styling */
 ..social-media-bar {
-  position: fixed;
+  flex-direction: row; /* Side-by-side icons */
   left: 50%;
   transform: translateX(-50%);
   bottom: 10px;
-  display: flex;
-  flex-direction: row; /* Side-by-side icons */
-  gap: 15px;
-  z-index: 1000;
 }
 
 .social-icon {
@@ -82,7 +78,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
+  text-decoration: none !important; /* No underline */
   transition: all 0.3s ease;
   font-size: 20px; /* Adjust icon size as needed */
 }
