@@ -78,7 +78,7 @@
 
         .social-icon {
             color: #9e9e9e;
-            font-size: 16px;
+            font-size: 16px !important; 
             text-decoration: none;
             transition: all 0.3s ease;
         }
