@@ -4,108 +4,103 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chromanest</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet"/>
- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
-
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 </head>
 <body>
 
-  <!-- Header / Navbar -->
-  <header class="navbar">
+  <!-- NAVBAR -->
+  <nav class="navbar">
     <div class="logo">Chromanest</div>
-    <nav class="menu">
+    <div class="menu">
       <ul>
         <li class="dropdown">
           <a href="#">Photography</a>
           <ul class="dropdown-content">
-            <li><a href="https://chromanest.gr/wedding">Wedding</a></li>
-            <li><a href="https://chromanest.gr/newborns">Newborns</a></li>
-            <li><a href="https://chromanest.gr/maternity">Maternity</a></li>
-            <li><a href="https://chromanest.gr/fashion">Fashion</a></li>
-            <li><a href="https://chromanest.gr/portraits">Portraits</a></li>
+            <li><a href="wedding.html">Wedding</a></li>
+            <li><a href="newborns.html">Newborns</a></li>
+            <li><a href="maternity.html">Maternity</a></li>
+            <li><a href="fashion.html">Fashion</a></li>
+            <li><a href="portraits.html">Portraits</a></li>
           </ul>
         </li>
-        <li><a href="https://chromanest.gr/about">About</a></li>
-        <li><a href="https://chromanest.gr/workshops">Workshops</a></li>
-        <li><a href="https://chromanest.gr/blog">Blog</a></li>
-        <li><a href="https://chromanest.gr/contact">Contact</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="workshops.html">Workshops</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
-    </nav>
-  </header>
+    </div>
+  </nav>
 
-  <!-- Fullscreen Carousel -->
+  <!-- CAROUSEL -->
   <section class="carousel-container">
     <div class="carousel">
-      <div class="slide active"><img src="images/slide1.jpg" alt="Slide 1"/></div>
-      <div class="slide"><img src="images/slide2.jpg" alt="Slide 2"/></div>
-      <div class="slide"><img src="images/slide3.jpg" alt="Slide 3"/></div>
+      <div class="slide active"><img src="images/slide1.jpg" alt="Slide 1"></div>
+      <div class="slide"><img src="images/slide2.jpg" alt="Slide 2"></div>
+      <div class="slide"><img src="images/slide3.jpg" alt="Slide 3"></div>
       <button class="carousel-btn prev">&#10094;</button>
       <button class="carousel-btn next">&#10095;</button>
     </div>
   </section>
 
-  <!-- Title & Subtitle -->
+  <!-- TITLES -->
   <section class="titles" data-aos="fade-up">
-    <h1>Capturing Emotions</h1>
-    <p>Through the lens of timeless elegance</p>
+    <h1>Welcome to Chromanest</h1>
+    <p>Capturing life's most precious moments with artful precision</p>
   </section>
 
-  <!-- Photo Grid Navigation -->
+  <!-- PHOTO GRID -->
   <section class="photo-grid" data-aos="fade-up">
     <div class="left-side">
       <div class="top-small">
-        <div class="grid-photo" onclick="location.href='https://chromanest.gr/wedding'">
+        <a href="wedding.html" class="grid-photo">
           <img src="images/wedding.jpg" alt="Wedding"/>
           <div class="photo-title">Wedding</div>
-        </div>
-        <div class="grid-photo" onclick="location.href='https://chromanest.gr/newborns'">
+        </a>
+        <a href="newborns.html" class="grid-photo">
           <img src="images/newborns.jpg" alt="Newborns"/>
           <div class="photo-title">Newborns</div>
-        </div>
+        </a>
       </div>
-      <div class="bottom-big">
-        <div class="grid-photo" onclick="location.href='https://chromanest.gr/maternity'">
+      <div class="bottom-small">
+        <a href="maternity.html" class="grid-photo">
           <img src="images/maternity.jpg" alt="Maternity"/>
           <div class="photo-title">Maternity</div>
-        </div>
+        </a>
       </div>
     </div>
     <div class="right-side">
-      <div class="top-big">
-        <div class="grid-photo" onclick="location.href='https://chromanest.gr/fashion'">
-          <img src="images/fashion.jpg" alt="Fashion"/>
-          <div class="photo-title">Fashion</div>
-        </div>
-      </div>
+      <a href="fashion.html" class="grid-photo">
+        <img src="images/fashion.jpg" alt="Fashion"/>
+        <div class="photo-title">Fashion</div>
+      </a>
       <div class="bottom-small">
-        <div class="grid-photo" onclick="location.href='https://chromanest.gr/portraits'">
-          <img src="images/portraits.jpg" alt="Portraits"/>
+        <a href="portraits.html" class="grid-photo">
+          <img src="images/portraits1.jpg" alt="Portrait 1"/>
           <div class="photo-title">Portraits</div>
-        </div>
-        <div class="grid-photo" onclick="location.href='https://chromanest.gr/blog'">
-          <img src="images/blog.jpg" alt="Blog"/>
-          <div class="photo-title">Blog</div>
-        </div>
+        </a>
+        <a href="portraits.html" class="grid-photo">
+          <img src="images/portraits2.jpg" alt="Portrait 2"/>
+          <div class="photo-title">Portraits</div>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
+  <!-- FOOTER -->
+  <footer class="footer" data-aos="fade-up">
     <div class="footer-logo">Chromanest</div>
-    <div class="footer-copy">&copy; 2025 Chromanest. All rights reserved.</div>
+    <div class="footer-copy">© 2025 Chromanest. All rights reserved.</div>
     <div class="footer-top">
-      <button onclick="scrollToTop()">Top ↑</button>
+      <button onclick="scrollToTop()">Back to Top</button>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- SCRIPTS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000 });
 
-    // Carousel functionality
     const slides = document.querySelectorAll('.slide');
     const prevBtn = document.querySelector('.prev');
     const nextBtn = document.querySelector('.next');
@@ -128,7 +123,6 @@
       showSlide(current);
     });
 
-    // Scroll to top
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
