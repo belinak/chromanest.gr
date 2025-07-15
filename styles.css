@@ -60,6 +60,10 @@ body {
   margin: 0;
 }
 
+/* Show on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 .dropdown-content li {
   list-style: none;
 }
@@ -76,10 +80,7 @@ body {
   background-color: #f0f0f0;
 }
 
-/* Show on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+
 
 /* Carousel */
 .carousel-container {
