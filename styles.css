@@ -57,12 +57,19 @@ body {
 }
 
 .dropdown-content li {
-  padding: 0.5rem 1rem;
+  list-style: none;
 }
 
 .dropdown-content li a {
-  color: #333;
   display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dropdown-content li a:hover {
+  background-color: #f0f0f0;
 }
 
 /* Show on hover */
