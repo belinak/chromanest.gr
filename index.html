@@ -127,5 +127,17 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
+  
+  <script>
+  window.addEventListener('scroll', () => {
+    const dropdown = document.querySelector('.dropdown');
+    if (window.scrollY > 50) {
+      dropdown.classList.add('show-on-scroll');
+    } else {
+      dropdown.classList.remove('show-on-scroll');
+    }
+  });
+</script>
+
 </body>
 </html>
