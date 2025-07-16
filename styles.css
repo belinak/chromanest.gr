@@ -95,7 +95,7 @@ body {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  margin-top: 30px;
+  margin-top: 0;
 }
 
 .carousel {
