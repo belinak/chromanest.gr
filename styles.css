@@ -256,3 +256,60 @@ body {
     flex-direction: column;
   }
 }
+
+
+/*------------------------------------------------------- About Intro Section Start -------------------------------------------------------*/
+.about-intro {
+  padding: 4rem 2rem;
+  background-color: #f9f9f9;
+}
+
+.about-container {
+  display: flex;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.about-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.about-text p {
+  font-size: 1.125rem;
+  color: #555;
+  line-height: 1.8;
+}
+
+/* Responsive About Section */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-text h2 {
+    font-size: 2rem;
+  }
+}
+
+/*------------------------------------------------------- About Intro Section End -------------------------------------------------------*/
