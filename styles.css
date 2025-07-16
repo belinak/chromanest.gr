@@ -28,7 +28,10 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
 }
-
+.logo a {
+  text-decoration: none;
+  color: inherit;
+}
 /* Main menu */
 .nav-menu {
   list-style: none;
