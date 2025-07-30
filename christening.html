@@ -85,62 +85,55 @@
     </div>
   </footer>
 
-  <!-- SCRIPTS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1000 });
-
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function openLightbox(src) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox').style.display = 'flex';
-    }
-
-    function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
-    }
-  </script>
+ <!-- SCRIPTS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const imageElements = Array.from(document.querySelectorAll('.cta-photos img, .cta-img-bottom'));
-  let currentIndex = 0;
+  AOS.init({ duration: 1000 });
 
-  function openLightbox(src) {
-    currentIndex = imageElements.findIndex(img => img.src === src);
-    lightboxImg.src = src;
-    lightbox.style.display = 'flex';
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function closeLightbox(event) {
-    if (event.target === lightbox || event.target.classList.contains('close')) {
-      lightbox.style.display = 'none';
+  window.onload = function () {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const imageElements = Array.from(document.querySelectorAll('.cta-photos img, .cta-img-bottom'));
+    let currentIndex = 0;
+
+    // Make functions global so they work from inline HTML
+    window.openLightbox = function (src) {
+      currentIndex = imageElements.findIndex(img => img.src === src);
+      lightboxImg.src = src;
+      lightbox.style.display = 'flex';
     }
-  }
 
-  function showImage(index) {
-    if (index >= 0 && index < imageElements.length) {
-      currentIndex = index;
-      lightboxImg.src = imageElements[currentIndex].src;
+    window.closeLightbox = function (event) {
+      if (event.target === lightbox || event.target.classList.contains('close')) {
+        lightbox.style.display = 'none';
+      }
     }
-  }
 
-  function nextImage(event) {
-    event.stopPropagation();
-    if (currentIndex < imageElements.length - 1) {
-      showImage(currentIndex + 1);
+    window.showImage = function (index) {
+      if (index >= 0 && index < imageElements.length) {
+        currentIndex = index;
+        lightboxImg.src = imageElements[currentIndex].src;
+      }
     }
-  }
 
-  function prevImage(event) {
-    event.stopPropagation();
-    if (currentIndex > 0) {
-      showImage(currentIndex - 1);
+    window.nextImage = function (event) {
+      event.stopPropagation();
+      if (currentIndex < imageElements.length - 1) {
+        showImage(currentIndex + 1);
+      }
     }
-  }
+
+    window.prevImage = function (event) {
+      event.stopPropagation();
+      if (currentIndex > 0) {
+        showImage(currentIndex - 1);
+      }
+    }
+  };
 </script>
 
 </body>
