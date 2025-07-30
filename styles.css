@@ -476,6 +476,22 @@ body {
       margin: 2rem auto 4rem;
       padding: 0 2rem;
     }
+    
+    .cta-img-bottom {
+  width: 100%;
+  margin-top: 2rem;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.cta-img-bottom:hover {
+  transform: scale(1.01);
+}
+
+    
 
     /* Lightbox */
     .lightbox-modal {
