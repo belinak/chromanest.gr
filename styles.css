@@ -395,3 +395,44 @@ body {
 }
 
 /*------------------------------------------------------- Contact Section End -------------------------------------------------------*/
+
+/*------------------------------------------------------- Christening Page Start -------------------------------------------------------*/
+/* Christening Page */
+.cta-booking {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #fdf5f5;
+}
+
+.cta-booking h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.cta-booking p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.book-button {
+  background-color: #0077cc;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.book-button:hover {
+  background-color: #005fa3;
+}
+
+/* Optional: if needed to adjust spacing in grid */
+.christening-gallery .grid-photo img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+/*------------------------------------------------------- Christening Page End -------------------------------------------------------*/

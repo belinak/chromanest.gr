@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chromanest</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+</head>
+<body>
+
+<!------------------------------------------------------ NAVBAR1 ------------------------------------------------------>
+  <nav class="navbar">
+    <div class="logo"><a href="index.html">Chromanest</a></div>
+     <!-- Navigation Menu -->
+      <ul class="nav-menu">
+        <!-- Photography Dropdown -->
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link">Photography</a>
+          <ul class="dropdown-menu">
+            <li><a href="wedding.html">Wedding</a></li>
+            <li><a href="newborns.html">Newborns</a></li>
+             <li><a href="christening.html">Christening</a></li>
+            <li><a href="maternity.html">Maternity</a></li>
+            <li><a href="fashion.html">Fashion</a></li>
+            <li><a href="portraits.html">Portraits</a></li>
+          </ul>
+        </li>
+
+        <!-- Other Menu Items -->
+        
+        <li class="nav-item"><a href="workshops.html" class="nav-link">Workshops</a></li>
+        <li class="nav-item"><a href="https://chromanest.blogspot.com" class="nav-link">Blog</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+        </nav>
+<!------------------------------------------------------ NAVBAR1 ------------------------------------------------------>
+
+  <!-- HERO SECTION -->
+  <section class="titles" data-aos="fade-up">
+    <h1>Christening Photography</h1>
+    <p>Capturing the purity, joy, and spiritual beauty of your child's special day.</p>
+  </section>
+
+  <!-- IMAGE GALLERY -->
+  <section class="photo-grid christening-gallery" data-aos="fade-up">
+    <!-- Replace image sources with your own christening photos -->
+    <div class="left-side">
+      <div class="top-small">
+        <div class="grid-photo">
+          <img src="images/Christening-imgs/christening1.jpg" alt="Christening 1" />
+        </div>
+        <div class="grid-photo">
+          <img src="images/Christening-imgs/christening2.jpg" alt="Christening 2" />
+        </div>
+      </div>
+      <div class="bottom-small">
+        <div class="grid-photo">
+          <img src="images/Christening-imgs/christening3.jpg" alt="Christening 3" />
+        </div>
+      </div>
+    </div>
+    <div class="right-side">
+      <div class="grid-photo">
+        <img src="images/Christening-imgs/christening4.jpg" alt="Christening 4" />
+      </div>
+      <div class="bottom-small">
+        <div class="grid-photo">
+          <img src="images/Christening-imgs/christening5.jpg" alt="Christening 5" />
+        </div>
+        <div class="grid-photo">
+          <img src="images/Christening-imgs/christening6.jpg" alt="Christening 6" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section class="cta-booking" data-aos="fade-up">
+    <h2>Make Their Day Unforgettable</h2>
+    <p>Book us today to beautifully preserve your baby's christening — memories you'll cherish for a lifetime.</p>
+    <a href="contact.html" class="book-button">Book Now</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">Chromanest</div>
+    <div class="footer-copy">2025 Chromanest © All rights reserved.</div>
+    <div class="footer-top">
+      <button onclick="scrollToTop()">Back to Top</button>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000 });
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
