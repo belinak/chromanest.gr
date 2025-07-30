@@ -743,7 +743,7 @@ body {
 }
 
 /* CTA Button (reused) */
-.cta-button {
+.cta-button-maternity {
   display: inline-block;
   background: #000;
   color: #fff;
@@ -754,7 +754,7 @@ body {
   transition: background 0.3s;
 }
 
-.cta-button:hover {
+.cta-button-maternity:hover {
   background: #333;
 }
 
