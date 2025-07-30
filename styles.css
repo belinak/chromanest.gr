@@ -396,7 +396,7 @@ body {
 
 /*------------------------------------------------------- Contact Section End -------------------------------------------------------*/
 
-/*------------------------------------------------------- Christening Page Start -------------------------------------------------------*/
+/*-------------------------------------------------- Christening Page Start ----------------------------------------*/
 /* Christening CTA Split */
 .herotitles {
   text-align: center;
@@ -582,4 +582,121 @@ body {
       }
     }
 
-/*------------------------------------------------------- Christening Page End -------------------------------------------------------*/
+/*-------------------------------------------------- Christening Page End -----------------------------------------------*/
+
+
+/*-------------------------------------------------- Newborns Page Start ----------------------------------------*/
+.newborn-intro {
+  padding: 2rem;
+  background-color: #fdf8f8;
+  text-align: center;
+}
+
+.newborn-intro h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.newborn-intro p {
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto 1rem;
+  line-height: 1.6;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  background: #fff;
+}
+
+.gallery-grid img {
+  width: 100%;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.03);
+}
+
+.cta-section {
+  background: #ffeef2;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.cta-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cta-section p {
+  max-width: 650px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+}
+
+.cta-button {
+  background: #000;
+  color: #fff;
+  padding: 0.9rem 1.8rem;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 50px;
+  transition: background 0.3s;
+}
+
+.cta-button:hover {
+  background: #333;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 10px;
+}
+
+.lightbox .close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+.lightbox .close {
+  top: 20px;
+  right: 30px;
+  font-size: 2.5rem;
+}
+
+.lightbox-prev {
+  left: 30px;
+  transform: translateY(-50%);
+}
+
+.lightbox-next {
+  right: 30px;
+  transform: translateY(-50%);
+}
+/*-------------------------------------------------- Newborns Page End ----------------------------------------*/
