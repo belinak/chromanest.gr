@@ -466,7 +466,7 @@ body {
   margin-top: 1.5rem;
 }
 
-.cta-button {
+.cta-button-christening {
   background: #fff;
   color: #000;
   border: 2px solid #000;
@@ -478,7 +478,7 @@ body {
   display: inline-block;
 }
 
-.cta-button:hover {
+.cta-button-christening:hover {
   background: #000;
   color: #fff;
 }
@@ -640,7 +640,7 @@ body {
   font-size: 1.1rem;
 }
 
-.cta-button {
+.cta-button-newborn {
   background: #000;
   color: #fff;
   padding: 0.9rem 1.8rem;
@@ -650,7 +650,7 @@ body {
   transition: background 0.3s;
 }
 
-.cta-button:hover {
+.cta-button-newborn:hover {
   background: #333;
 }
 
