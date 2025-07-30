@@ -56,7 +56,10 @@
     <div class="cta-content">
       <h2>Book Your Christening Session</h2>
       <p>Christenings are full of emotion, family love, and meaningful moments. Let us capture your child's special day with artistry, sensitivity, and timeless style.</p>
-      <a href="contact.html" class="cta-button">Book Now</a>
+      <div class="cta-button-wrapper">
+  <a href="contact.html" class="cta-button">Book Now</a>
+</div>
+
       <img src="images/Christening-imgs/christening3.jpg" alt="Christening 3" class="cta-img-bottom" onclick="openLightbox(this.src)">
     </div>
   </div>
@@ -64,10 +67,14 @@
 
 
   <!-- LIGHTBOX MODAL -->
-  <div class="lightbox-modal" id="lightbox">
-    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-    <img id="lightbox-img" src="" alt="Preview" />
-  </div>
+ <!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+  <span class="close" onclick="closeLightbox(event)">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+  <span class="lightbox-prev" onclick="prevImage(event)">&#10094;</span>
+  <span class="lightbox-next" onclick="nextImage(event)">&#10095;</span>
+</div>
+
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -96,6 +103,45 @@
       document.getElementById('lightbox').style.display = 'none';
     }
   </script>
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const imageElements = Array.from(document.querySelectorAll('.cta-photos img, .cta-img-bottom'));
+  let currentIndex = 0;
+
+  function openLightbox(src) {
+    currentIndex = imageElements.findIndex(img => img.src === src);
+    lightboxImg.src = src;
+    lightbox.style.display = 'flex';
+  }
+
+  function closeLightbox(event) {
+    if (event.target === lightbox || event.target.classList.contains('close')) {
+      lightbox.style.display = 'none';
+    }
+  }
+
+  function showImage(index) {
+    if (index >= 0 && index < imageElements.length) {
+      currentIndex = index;
+      lightboxImg.src = imageElements[currentIndex].src;
+    }
+  }
+
+  function nextImage(event) {
+    event.stopPropagation();
+    if (currentIndex < imageElements.length - 1) {
+      showImage(currentIndex + 1);
+    }
+  }
+
+  function prevImage(event) {
+    event.stopPropagation();
+    if (currentIndex > 0) {
+      showImage(currentIndex - 1);
+    }
+  }
+</script>
 
 </body>
 </html>
