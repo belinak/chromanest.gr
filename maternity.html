@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chromanest</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+ <!----------------------------------------------- LOGO BOOKMARK START ---------------------------------------------------------------->
+
+
+<link rel="icon" type="image/png" href="/images/my-favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/images/my-favicon/favicon.svg" />
+<link rel="shortcut icon" href="/images/my-favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/my-favicon/apple-touch-icon.png" />
+<link rel="manifest" href="/images/my-favicon/site.webmanifest" />
+
+
+<!----------------------------------------------- LOGO BOOKMARK END ---------------------------------------------------------------->
+</head>
+<body>
+
+  <!-- NAVBAR1 -->
+  <nav class="navbar">
+    <div class="logo"><a href="index.html">Chromanest</a></div>
+     <!-- Navigation Menu -->
+      <ul class="nav-menu">
+        <!-- Photography Dropdown -->
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link">Photography</a>
+          <ul class="dropdown-menu">
+            <li><a href="wedding.html">Wedding</a></li>
+            <li><a href="newborns.html">Newborns</a></li>
+            <li><a href="christening.html">Christening</a></li>
+            <li><a href="maternity.html">Maternity</a></li>
+            <li><a href="fashion.html">Fashion</a></li>
+            <li><a href="portraits.html">Portraits</a></li>
+          </ul>
+        </li>
+
+        <!-- Other Menu Items -->
+        
+        <li class="nav-item"><a href="workshops.html" class="nav-link">Workshops</a></li>
+        <li class="nav-item"><a href="https://chromanest.blogspot.com" class="nav-link">Blog</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+        </nav>
+
+<!-- MATERNITY FEATURE SECTION -->
+<section class="maternity-hero" data-aos="fade-up">
+  <div class="maternity-wrapper">
+    <!-- TEXT LEFT -->
+    <div class="maternity-text">
+      <h1>Maternity Photography</h1>
+      <p>
+        Keep a photo of yourself like this forever. This is not just about the bump —
+        it’s about celebrating the most powerful, beautiful version of yourself.
+      </p>
+      <p>
+        Step into the spotlight. Experience what it feels like to be a model for a day —
+        pampered, styled, posed to perfection. Luxurious, cinematic, unforgettable.
+      </p>
+      <p>
+        This is your time. And you deserve to feel amazing in it.
+      </p>
+      <a href="contact.html" class="cta-button">Book Your Maternity Shoot</a>
+    </div>
+
+    <!-- IMAGE RIGHT -->
+    <div class="maternity-image">
+      <img src="images/Maternity/maternity1.jpg" alt="Elegant maternity photo" onclick="openLightbox(this.src)">
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+  <span class="close" onclick="closeLightbox(event)">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Chromanest</div>
+  <div class="footer-copy">2025 Chromanest © All rights reserved.</div>
+  <div class="footer-top">
+    <button onclick="scrollToTop()">Back to Top</button>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000 });
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  function openLightbox(src) {
+    lightboxImg.src = src;
+    lightbox.style.display = 'flex';
+  }
+
+  function closeLightbox(event) {
+    if (event.target === lightbox || event.target.classList.contains('close')) {
+      lightbox.style.display = 'none';
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -700,3 +700,90 @@ body {
   transform: translateY(-50%);
 }
 /*-------------------------------------------------- Newborns Page End ----------------------------------------*/
+/*-------------------------------------------------- Maternity Page End ----------------------------------------*/
+.maternity-hero {
+  padding: 3rem 2rem;
+  background-color: #fff7f9;
+}
+
+.maternity-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .maternity-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.maternity-text {
+  max-width: 600px;
+}
+
+.maternity-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.maternity-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.maternity-image img {
+  max-width: 100%;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* CTA Button (reused) */
+.cta-button {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  padding: 0.9rem 1.8rem;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 50px;
+  transition: background 0.3s;
+}
+
+.cta-button:hover {
+  background: #333;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 10px;
+}
+
+.lightbox .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+/*-------------------------------------------------- Maternity Page End ----------------------------------------*/
