@@ -586,52 +586,54 @@ body {
 
 
 /*-------------------------------------------------- Newborns Page Start ----------------------------------------*/
-.newborn-intro {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  padding: 2rem;
+/* Newborns Hero Section - same layout as Maternity */
+.newborn-hero {
+  padding: 3rem 2rem;
   background-color: #fdf8f8;
-  text-align: left;
 }
 
-.newborn-intro .intro-text {
-  flex: 1 1 60%;
-    justify-content: center;
-}
-
-.newborn-intro .babyboy-image {
-  flex: 1 1 35%;
+.newborn-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-  .newborn-intro {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .newborn-intro .intro-text,
-  .newborn-intro .babyboy-image {
-    flex: 1 1 100%;
+@media (min-width: 768px) {
+  .newborn-wrapper {
+    flex-direction: row;
+    justify-content: center;
   }
 }
 
-.newborn-intro h2 {
+.newborn-text {
+  max-width: 600px;
+  text-align: right;
+}
+
+.newborn-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
   text-align: center;
-  font-size: 2rem;
+}
+
+.newborn-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
   margin-bottom: 1rem;
 }
 
-.newborn-intro p {
-  font-size: 1.1rem;
-  max-width: 700px;
-  margin: 0 auto 1rem;
-  line-height: 1.6;
+.newborn-image img {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
+
+
 
 .gallery-grid {
   display: grid;
@@ -694,20 +696,6 @@ body {
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
-.babyboy-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.babyboy-image img {
-  max-height: 380px;  /* Set a reasonable height */
-  width: auto;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  object-fit: contain;
-}
 
 
 /* Lightbox */
