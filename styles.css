@@ -901,7 +901,7 @@ body {
 }
 
 .package-card {
-min-height: 420px; /* Increase height as needed */
+min-height: 250px; /* Increase height as needed */
    border: 1px solid #ddd;
   border-radius: 10px;
   background: #fff;
