@@ -599,6 +599,7 @@ body {
 
 .newborn-intro .intro-text {
   flex: 1 1 60%;
+    justify-content: center;
 }
 
 .newborn-intro .babyboy-image {
@@ -694,10 +695,10 @@ body {
 
 .babyboy-image img {
 
- max-width: 280px; /* smaller than before */
+ max-width: 350px; /* smaller than before */
   width: 100%;
   height: auto;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   
 /*  max-width: 400px;
