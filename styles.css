@@ -864,114 +864,92 @@ body {
 /*-------------------------------------------------- Maternity Page End ----------------------------------------*/
 
 /*-------------------------------------------------- Packages Start ----------------------------------------*/
+
+
+/* PACKAGES SECTION */
+
 .packages-hero {
   text-align: center;
-  padding: 3rem 1.5rem;
-  background-color: #fff8f5;
+  padding: 4rem 2rem 2rem;
+  background: #fff7f7;
 }
 
 .packages-hero h1 {
   font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .packages-hero p {
-  font-size: 1.1rem;
+  color: #666;
+  font-size: 1.2rem;
   max-width: 600px;
   margin: 0 auto;
 }
 
 .packages-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 2rem;
   padding: 3rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  background-color: #fff;
 }
 
 .package-card {
-  background: #fff;
+  background: #fafafa;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: start;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.package-card:hover {
+  transform: translateY(-5px);
+}
+
+.package-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
 }
 
 .package-card h2 {
   font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.package-card p {
+  font-size: 1rem;
+  color: #555;
   margin-bottom: 1rem;
 }
 
 .package-card ul {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
   margin-bottom: 1.5rem;
 }
 
-.package-card li {
+.package-card ul li {
   margin-bottom: 0.5rem;
-  position: relative;
-  padding-left: 1rem;
 }
 
-.package-card li::before {
-  content: "●";
-  position: absolute;
-  left: 0;
-  color: #ff69b4;
-  font-size: 0.8rem;
-}
-
-.package-card .price {
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-}
-
-.package-button {
-  margin-top: auto;
-  align-self: stretch;
-  text-align: center;
+.package-card .cta-button {
+  display: inline-block;
   background: #000;
   color: #fff;
-  padding: 0.8rem 1.2rem;
-  border-radius: 50px;
+  padding: 0.7rem 1.5rem;
+  border-radius: 30px;
   text-decoration: none;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
-.package-button:hover {
+.package-card .cta-button:hover {
   background: #333;
 }
 
-.packages-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding: 3rem 2rem;
-  background-color: #fff7f9;
+.package-card.featured {
+  background: #fff0f5;
+  border: 2px solid #ff80b5;
 }
-
-.packages-info h3 {
-  font-size: 1.4rem;
-  margin-bottom: 0.8rem;
-}
-
-.packages-info div {
-  flex: 1 1 250px;
-}
-
-.packages-info ol, .packages-info ul {
-  padding-left: 1.2rem;
-}
-
-@media (max-width: 600px) {
-  .packages-grid {
-    grid-template-columns: 1fr;
-  }
-  .packages-info {
-    flex-direction: column;
-  }
-}
-/*-------------------------------------------------- Packages End ----------------------------------------*/
+/*------------------------------------------------- Packages End ----------------------------------------*/
