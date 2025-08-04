@@ -1156,7 +1156,7 @@ min-height: 250px; /* Increase height as needed */
 
 .faq-answer {
   display: none;
-  background: #fdf6f0; /* light beige */
+  background: #f7f7f7; /* light gray */
   text-align: left;
   padding: 1rem;
   font-size: 0.95rem;
