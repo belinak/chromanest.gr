@@ -587,9 +587,36 @@ body {
 
 /*-------------------------------------------------- Newborns Page Start ----------------------------------------*/
 .newborn-intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
   padding: 2rem;
   background-color: #fdf8f8;
-  text-align: center;
+  text-align: left;
+}
+
+.newborn-intro .intro-text {
+  flex: 1 1 60%;
+}
+
+.newborn-intro .babyboy-image {
+  flex: 1 1 35%;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .newborn-intro {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .newborn-intro .intro-text,
+  .newborn-intro .babyboy-image {
+    flex: 1 1 100%;
+  }
 }
 
 .newborn-intro h2 {
