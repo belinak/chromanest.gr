@@ -917,6 +917,7 @@ min-height: 250px; /* Increase height as needed */
 
 .package-card img {
   width: calc(100% - 2rem); /* full width minus left/right padding */
+  max-height: calc(2 * 300px); /* Estimate .package-info height */
   margin: 1rem; /* white space top, left, right */
   margin-bottom: 0; /* no space below image */
   border-radius: 8px;
@@ -973,18 +974,20 @@ min-height: 250px; /* Increase height as needed */
   background: #fff;
 }
 
-.cta-button {
-  background: #000;
+.cta-button-packages {
+  background: #e8d8c3; /* light beige */
   color: #fff;
   padding: 0.9rem 2rem;
   text-decoration: none;
   font-size: 1rem;
-  border-radius: 30px;
-  transition: background 0.3s ease;
+  border-radius: 0; /* square edges */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cta-button:hover {
-  background: #333;
+.cta-button-packages:hover {
+  background: #d8c3a0; /* darker beige on hover */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
 
