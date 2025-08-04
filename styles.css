@@ -864,42 +864,50 @@ body {
 /*-------------------------------------------------- Maternity Page End ----------------------------------------*/
 
 /*-------------------------------------------------- Packages Start ----------------------------------------*/
+/* Services Hero Image */
+.services-hero img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
 
-
-/* PACKAGES SECTION */
-
-.packages-hero {
+/* Services Headings */
+.services-headings {
+  background: #fff;
   text-align: center;
-  padding: 4rem 2rem 2rem;
-  background: #fff7f7;
+  padding: 3rem 1rem 2rem;
 }
 
-.packages-hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+.services-headings h2 {
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  color: #777;
 }
 
-.packages-hero p {
-  color: #666;
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin: 0 auto;
+.services-headings h3 {
+  font-size: 2rem;
+  font-weight: 500;
 }
 
+/* Packages Grid */
 .packages-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   padding: 3rem 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  background-color: #fff;
+  background: #fff;
 }
 
 .package-card {
-  background: #fafafa;
-  border-radius: 16px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
-  padding: 2rem;
-  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
   transition: transform 0.3s ease;
 }
 
@@ -909,47 +917,71 @@ body {
 
 .package-card img {
   width: 100%;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
+  height: 200px;
+  object-fit: cover;
 }
 
-.package-card h2 {
-  font-size: 1.5rem;
+/* Info Box */
+.package-info {
+  background: #f8f8f8;
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.package-info h4 {
+  font-size: 1.2rem;
   margin-bottom: 0.8rem;
 }
 
-.package-card p {
-  font-size: 1rem;
+.package-info ul {
+  padding-left: 1rem;
+  margin: 0;
+  font-size: 0.95rem;
   color: #555;
-  margin-bottom: 1rem;
+  list-style: disc;
 }
 
-.package-card ul {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 1.5rem;
+.package-price {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  margin-top: 1.5rem;
 }
 
-.package-card ul li {
-  margin-bottom: 0.5rem;
+.starting-text {
+  font-size: 0.9rem;
+  color: #999;
+  margin-right: 0.4rem;
 }
 
-.package-card .cta-button {
-  display: inline-block;
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* CTA */
+.services-cta {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: #fff;
+}
+
+.cta-button {
   background: #000;
   color: #fff;
-  padding: 0.7rem 1.5rem;
-  border-radius: 30px;
+  padding: 0.9rem 2rem;
   text-decoration: none;
+  font-size: 1rem;
+  border-radius: 30px;
   transition: background 0.3s ease;
 }
 
-.package-card .cta-button:hover {
+.cta-button:hover {
   background: #333;
 }
 
-.package-card.featured {
-  background: #fff0f5;
-  border: 2px solid #ff80b5;
-}
+
 /*------------------------------------------------- Packages End ----------------------------------------*/
