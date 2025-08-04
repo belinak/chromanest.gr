@@ -1060,8 +1060,8 @@ min-height: 250px; /* Increase height as needed */
 
 /* STEP IMAGE */
 .process-step img {
-  width: 160px;
-  height: 120px;
+  width: 220px;
+  height: 160px;
   object-fit: cover;
   border-radius: 8px;
   flex-shrink: 0;
