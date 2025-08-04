@@ -1094,5 +1094,79 @@ min-height: 250px; /* Increase height as needed */
   margin: 0;
 }
 
+/* FAQ SECTION */
+.faq-section {
+  background: #fff;
+  padding: 4rem 1.5rem;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.faq-section h2 {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.faq-section h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #000;
+}
+
+.faq-item {
+  border-top: 1px solid #ccc;
+}
+
+.faq-item:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.faq-question {
+  width: 100%;
+  background: #fff;
+  border: none;
+  text-align: left;
+  padding: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+  transition: background 0.3s ease;
+}
+
+.faq-question:hover {
+  background: #f7f7f7;
+}
+
+.toggle-icon {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-answer {
+  display: none;
+  background: #fdf6f0; /* light beige */
+  text-align: left;
+  padding: 1rem;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Show answer when active */
+.faq-item.active .faq-answer {
+  display: block;
+}
+
+.faq-item.active .toggle-icon {
+  transform: rotate(45deg); /* turns + into × */
+}
 
 /*------------------------------------------------- Packages End ----------------------------------------*/
