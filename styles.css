@@ -1004,7 +1004,7 @@ min-height: 250px; /* Increase height as needed */
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.6);
+ /* filter: brightness(0.6);*/
 }
 
 .quote-banner .quote {
