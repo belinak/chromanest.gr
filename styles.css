@@ -917,7 +917,7 @@ min-height: 250px; /* Increase height as needed */
 
 .package-card img {
   width: calc(100% - 2rem); /* full width minus left/right padding */
-  height: 200px; /* Fixed height for visual consistency */
+  height: 400px; /* Fixed height for visual consistency */
   object-fit: cover; /* Crops the image to fill the space */
   margin: 1rem; /* white space top, left, right */
   margin-bottom: 0; /* no space below image */
