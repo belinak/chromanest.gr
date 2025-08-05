@@ -1267,15 +1267,16 @@ min-height: 250px; */
 
 /*------------------------------------------------- Retouching Start ----------------------------------------*/
  .retouching-banner {
-      background: #f7f7f7; /* light gray */
-   padding: 6rem 2rem;
+   background: #f7f7f7;
+  padding: 2rem 2rem; /* ↓ reduce vertical padding from 6rem to 2rem */
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
-  min-height: 70vh; /* center vertically on screen */
-    }
+  /* Remove or reduce this next line if it's making the banner too tall */
+  min-height: auto; /* or try 50vh if you still want some height */
+}
 
     .retouching-banner img {
       width: 200px;
