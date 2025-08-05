@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chromanest</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+ <!----------------------------------------------- LOGO BOOKMARK START ---------------------------------------------------------------->
+
+
+<link rel="icon" type="image/png" href="/images/my-favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/images/my-favicon/favicon.svg" />
+<link rel="shortcut icon" href="/images/my-favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/my-favicon/apple-touch-icon.png" />
+<link rel="manifest" href="/images/my-favicon/site.webmanifest" />
+
+
+<!----------------------------------------------- LOGO BOOKMARK END ---------------------------------------------------------------->
+</head>
+<body>
+
+  <!-- NAVBAR1 -->
+  <nav class="navbar">
+    <div class="logo"><a href="index.html">Chromanest</a></div>
+     <!-- Navigation Menu -->
+      <ul class="nav-menu">
+        <!-- Photography Dropdown -->
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link">Photography</a>
+          <ul class="dropdown-menu">
+            <li><a href="wedding.html">Wedding</a></li>
+            <li><a href="newborns.html">Newborns</a></li>
+            <li><a href="christening.html">Christening</a></li>
+            <li><a href="maternity.html">Maternity</a></li>
+            <li><a href="fashion.html">Fashion</a></li>
+            <li><a href="portraits.html">Portraits</a></li>
+          </ul>
+        </li>
+
+        <!-- Other Menu Items -->
+        <li class="nav-item"><a href="packages.html" class="nav-link">Packages</a></li>
+        <li class="nav-item"><a href="retouching.html" class="nav-link">Retouching</a></li>
+        <li class="nav-item"><a href="https://chromanest.blogspot.com" class="nav-link">Blog</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+        </nav>
+        
+        
+          <section class="portrait-gallery">
+    <div class="portrait-text">
+      <h1>Portraits</h1>
+      <p>Get your best portrait you have ever taken!</p>
+    </div>
+    <div class="portrait-grid">
+      <!-- 20 images (square) -->
+      <!-- Replace src/href with your image URLs -->
+      <!-- Lightbox links -->
+      <% for(let i = 1; i <= 20; i++) { %>
+      <a href="images/Portraits-imgs/portrait<%= i %>.jpg" data-lightbox="portraits">
+        <img src="images/Portraits-imgs/portrait<%= i %>.jpg" alt="Portrait <%= i %>" />
+      </a>
+      <% } %>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox-plus-jquery.min.js"></script>
+
+        
+        
+              <!-- FOOTER -->
+  <footer class="footer" >
+    <div class="footer-logo">Chromanest</div>
+    <div class="footer-copy">2025 Chromanest © All rights reserved.</div>
+    <div class="footer-top">
+      <button onclick="scrollToTop()">Back to Top</button>
+    </div>
+  </footer>
+  
+  </body>
+</html>
