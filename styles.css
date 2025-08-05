@@ -916,13 +916,20 @@ min-height: 250px; /* Increase height as needed */
 }
 
 .package-card img {
-  width: calc(100% - 2rem); /* full width minus left/right padding */
-  height: 400px; /* Fixed height for visual consistency */
-  object-fit: cover; /* Crops the image to fill the space */
-  margin: 1rem; /* white space top, left, right */
-  margin-bottom: 0; /* no space below image */
+  /*width: calc(100% - 2rem); 
+  height: 400px; 
+  object-fit: cover; 
+  margin: 1rem; 
+  margin-bottom: 0; 
   border-radius: 8px;
+  display: block;*/
+  
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0; /* Rounded top only */
   display: block;
+  margin: 0;
 }
 
 /* Info Box */
@@ -1172,5 +1179,69 @@ min-height: 250px; /* Increase height as needed */
 .faq-item.active .toggle-icon {
   transform: rotate(45deg); /* turns + into × */
 }
+
+
+.quality-section {
+  background: #fff;
+  padding: 4rem 1.5rem;
+}
+
+.quality-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.quality-left,
+.quality-right {
+  flex: 1 1 400px;
+}
+
+.vertical-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.quality-right h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.quality-right p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.quality-button {
+  display: inline-block;
+  background: #e8d8c3; /* light beige */
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  transition: background 0.3s ease;
+}
+
+.quality-button:hover {
+  background: #d8c3a0;
+}
+
+.horizontal-img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
 
 /*------------------------------------------------- Packages End ----------------------------------------*/
