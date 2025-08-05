@@ -901,14 +901,21 @@ body {
 }
 
 .package-card {
-min-height: 250px; /* Increase height as needed */
+border: 1px solid #ddd;
+  border-radius: 10px; /* Rounded corners for the whole card */
+  background: #fff;
+  overflow: hidden; /* Ensures corners are respected */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+/*min-height: 250px; 
    border: 1px solid #ddd;
   border-radius: 10px;
   background: #fff;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);*/
 }
 
 .package-card:hover {
@@ -924,12 +931,12 @@ min-height: 250px; /* Increase height as needed */
   border-radius: 8px;
   display: block;*/
   
-  width: 100%;
-  height: 300px;
+   width: 100%;
+  height: 200px;
   object-fit: cover;
-  border-radius: 8px 8px 0 0; /* Rounded top only */
   display: block;
-  margin: 0;
+  border-radius: 0; /* Remove rounding from image itself */
+  margin: 0; 
 }
 
 /* Info Box */
