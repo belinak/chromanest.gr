@@ -1286,7 +1286,7 @@ min-height: 250px; */
     }
 
     .retouching-banner-text h2 {
-       font-size: 2.2rem; /* Bigger */
+       font-size: 1.8rem; /* Bigger */
   font-weight: 700;
   letter-spacing: 2px;
   margin-bottom: 0.5rem;
@@ -1294,7 +1294,7 @@ min-height: 250px; */
     }
 
     .retouching-banner-text h3 {
-        font-size: 1.2rem; /* Smaller */
+        font-size: 1rem; /* Smaller */
   font-weight: 500;
   margin-bottom: 1rem;
   color: #555;
