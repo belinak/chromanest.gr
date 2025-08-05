@@ -901,21 +901,23 @@ body {
 }
 
 .package-card {
-border: 1px solid #ddd;
-  border-radius: 10px; /* Rounded corners for the whole card */
+/*border: 1px solid #ddd;
+  border-radius: 10px;
   background: #fff;
-  overflow: hidden; /* Ensures corners are respected */
+  overflow: hidden; 
   display: flex;
   flex-direction: column;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-/*min-height: 250px; 
+min-height: 250px; */
+
+
    border: 1px solid #ddd;
   border-radius: 10px;
   background: #fff;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);*/
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .package-card:hover {
@@ -923,20 +925,20 @@ border: 1px solid #ddd;
 }
 
 .package-card img {
-  /*width: calc(100% - 2rem); 
+  width: calc(100% - 2rem); 
   height: 400px; 
   object-fit: cover; 
   margin: 1rem; 
   margin-bottom: 0; 
   border-radius: 8px;
-  display: block;*/
+  display: block;
   
-   width: 100%;
+   /*width: 100%;
   height: 200px;
   object-fit: cover;
   display: block;
-  border-radius: 0; /* Remove rounding from image itself */
-  margin: 0; 
+  border-radius: 0; 
+  margin: 0; */
 }
 
 /* Info Box */
@@ -1255,12 +1257,14 @@ border: 1px solid #ddd;
 
 /*------------------------------------------------- Retouching Start ----------------------------------------*/
  .retouching-banner {
-      background: #f5eee6; /* light beige */
-      padding: 3rem 2rem;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
+      background: #f7f7f7; /* light gray */
+   padding: 6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  min-height: 70vh; /* center vertically on screen */
     }
 
     .retouching-banner img {
@@ -1271,17 +1275,18 @@ border: 1px solid #ddd;
     }
 
     .retouching-banner-text h2 {
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
-      color: #555;
+       font-size: 2.2rem; /* Bigger */
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  color: #222;
     }
 
     .retouching-banner-text h3 {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #222;
+        font-size: 1.2rem; /* Smaller */
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #555;
     }
 
     .retouching-banner-text p {
