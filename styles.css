@@ -1275,7 +1275,7 @@ min-height: 250px; */
   gap: 2rem;
   flex-wrap: wrap;
   /* Remove or reduce this next line if it's making the banner too tall */
-  min-height: auto; /* or try 50vh if you still want some height */
+  min-height: 30vh; /* or try 50vh if you still want some height */
 }
 
     .retouching-banner img {
