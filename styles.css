@@ -1208,7 +1208,7 @@ border: 1px solid #ddd;
 }
 
 .vertical-img {
-  width: 100%;
+  width: 70%;
   height: auto;
   border-radius: 10px;
   object-fit: cover;
