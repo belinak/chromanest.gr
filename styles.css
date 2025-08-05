@@ -1306,12 +1306,12 @@ min-height: 250px; */
       line-height: 1.6;
     }
 
-    .section {
+    .restoration-section {
       padding: 4rem 2rem;
       background: #fff;
     }
 
-    .section h2 {
+    .restoration-section h2 {
       font-size: 1.8rem;
       font-weight: 600;
       text-align: center;
@@ -1319,7 +1319,7 @@ min-height: 250px; */
       color: #222;
     }
 
-    .section hr {
+    .restoration-section hr {
       width: 50px;
       height: 3px;
       background: #ccc;
@@ -1327,7 +1327,7 @@ min-height: 250px; */
       margin: 0 auto 1.5rem;
     }
 
-    .section-text {
+    .restoration-section-text {
       text-align: center;
       max-width: 800px;
       margin: 0 auto 3rem;
@@ -1403,6 +1403,18 @@ min-height: 250px; */
       object-fit: cover;
       border-radius: 6px;
     }
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
     @media (max-width: 768px) {
       .retouching-banner,
