@@ -1474,12 +1474,10 @@ min-height: 250px; */
 }
 
 .portraits-right {
-  width: 66.6666%; /* 2/3 width */
+ width: 66.6666%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(4, 1fr);
   gap: 0;
-  overflow-y: auto;
 }
 
 .portraits-right a {
