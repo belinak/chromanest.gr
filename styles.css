@@ -1442,27 +1442,27 @@ min-height: 250px; */
 /*------------------------------------------------- Retouching End ----------------------------------------*/
 
 /*------------------------------------------------- Portraits Start ----------------------------------------*/
-/* PORTRAITS PAGE STYLING */
+/* ===== PORTRAITS PAGE ===== */
 .portraits-page {
   display: flex;
-  flex-wrap: wrap;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .portraits-left {
-  width: 100%;
-  max-width: 400px;
+  width: 33.33%;
   padding: 2rem;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  background: #fff;
   text-align: center;
 }
 
 .portraits-left h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
 }
 
@@ -1471,25 +1471,21 @@ min-height: 250px; */
   color: #555;
 }
 
-.portraits-gallery {
-  flex: 1;
+.portraits-right {
+  width: 66.66%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 1fr;
   gap: 0;
-  width: 100%;
 }
 
-.portraits-gallery a {
-  aspect-ratio: 1 / 1;
-  display: block;
-  overflow: hidden;
-}
-
-.portraits-gallery img {
+.portraits-right img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
 }
 
 /*------------------------------------------------- Portraits End ----------------------------------------*/
