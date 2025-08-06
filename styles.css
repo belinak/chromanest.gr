@@ -1443,7 +1443,7 @@ min-height: 250px; */
 
 /*------------------------------------------------- Portraits Start ----------------------------------------*/
 /* PORTRAITS PAGE STYLING */
-.portraits-section {
+.portraits-page {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -1451,77 +1451,45 @@ min-height: 250px; */
 }
 
 .portraits-left {
-  width: 33.33%;
-  padding: 3rem;
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
   box-sizing: border-box;
-  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   text-align: center;
 }
 
 .portraits-left h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #222;
 }
 
 .portraits-left p {
   font-size: 1.2rem;
   color: #555;
-  max-width: 300px;
 }
 
-.portraits-right {
+.portraits-gallery {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 0;
   width: 100%;
 }
 
-.portraits-right a {
-  width: 100%;
-  aspect-ratio: 1 / 1; /* Maintain square shape */
-  overflow: hidden;
+.portraits-gallery a {
+  aspect-ratio: 1 / 1;
   display: block;
+  overflow: hidden;
 }
 
-.portraits-right img {
+.portraits-gallery img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.3s ease;
-}
-
-.portraits-right img:hover {
-  transform: scale(1.05);
-}
-
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .portraits-left {
-    width: 100%;
-  }
-  .portraits-right {
-    width: 100%;
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .portraits-right {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .portraits-right {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 /*------------------------------------------------- Portraits End ----------------------------------------*/
