@@ -1475,16 +1475,17 @@ min-height: 250px; */
 }
 
 .portraits-right {
-  width: 66.66%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 0;
+  width: 100%;
 }
 
 .portraits-right a {
   width: 100%;
-  aspect-ratio: 1 / 1; /* ensures square image tiles */
+  aspect-ratio: 1 / 1; /* Maintain square shape */
   overflow: hidden;
+  display: block;
 }
 
 .portraits-right img {
@@ -1498,6 +1499,7 @@ min-height: 250px; */
 .portraits-right img:hover {
   transform: scale(1.05);
 }
+
 
 /* Responsive Design */
 @media (max-width: 1024px) {
