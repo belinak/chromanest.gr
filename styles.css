@@ -1442,7 +1442,7 @@ min-height: 250px; */
 /*------------------------------------------------- Retouching End ----------------------------------------*/
 
 /*------------------------------------------------- Portraits Start ----------------------------------------*/
-  /* Container holds left and right side */
+/* Container holds left and right side */
   .portraits-page {
     display: flex;
     height: 100vh;
