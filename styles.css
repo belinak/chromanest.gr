@@ -1444,8 +1444,8 @@ min-height: 250px; */
 /*------------------------------------------------- Portraits Start ----------------------------------------*/
 .portraits-page {
   display: flex;
-  width: 100vw;
-  height: 100vh; /* Full viewport height */
+  width: 100%;
+ /* height: 100vh; Full viewport height */
   overflow: hidden;
 }
 
@@ -1483,13 +1483,19 @@ min-height: 250px; */
 }
 
 .portraits-right a {
-  display: block;
+position: relative;
+  width: 100%;
+  padding-top: 100%; /* Make square using aspect ratio */
+  overflow: hidden;
 }
 
 .portraits-right img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* crop images to fill squares */
+  object-fit: cover; /* Crop image */
   display: block;
   cursor: pointer;
 }
