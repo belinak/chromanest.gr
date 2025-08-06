@@ -1442,95 +1442,89 @@ min-height: 250px; */
 /*------------------------------------------------- Retouching End ----------------------------------------*/
 
 /*------------------------------------------------- Portraits Start ----------------------------------------*/
-/* Container holds left and right side */
-  .portraits-page {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-  }
+/* PORTRAITS PAGE */
 
-  /* Left panel: 1/3 width, fixed min and max size */
-  .portraits-left {
-    flex: 0 0 300px; /* fixed basis */
-    min-width: 250px;
-    max-width: 350px;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    box-sizing: border-box;
-    text-align: center;
-    border-right: 1px solid #ddd;
-  }
+.portraits-page {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
 
-  .portraits-left h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: #222;
-  }
+.portraits-left {
+  flex: 0 0 33.33%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
 
-  .portraits-left p {
-    font-size: 1.2rem;
-    color: #555;
-    max-width: 300px;
-  }
+.portraits-left .text-wrapper {
+  text-align: center;
+}
 
-  /* Right panel: fills rest of space, max width capped */
+.portraits-left h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.portraits-left p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.portraits-right {
+  flex: 0 0 66.66%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.portraits-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+
+@media (max-width: 1200px) {
   .portraits-right {
-    flex: 1 1 auto; /* grow and shrink */
-    max-width: calc(100vw - 250px);
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: 150px;
-    gap: 0;
-    overflow-y: auto;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .portraits-page {
+    flex-direction: column;
   }
 
-  /* Images fill their grid cells */
-  .portraits-right img {
+  .portraits-left {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    padding: 1.5rem;
+    border-bottom: 1px solid #ddd;
   }
 
-  /* Responsive Breakpoints */
-  @media (max-width: 900px) {
-    .portraits-right {
-      grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: 140px;
-      max-width: calc(100vw - 250px);
-    }
+  .portraits-right {
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    height: auto;
   }
+}
 
-  @media (max-width: 700px) {
-    .portraits-page {
-      flex-direction: column;
-    }
-    .portraits-left {
-      border-right: none;
-      border-bottom: 1px solid #ddd;
-      max-width: 100%;
-      flex: 0 0 auto;
-      min-width: auto;
-    }
-    .portraits-right {
-      max-width: 100%;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 120px;
-      height: auto;
-    }
+@media (max-width: 600px) {
+  .portraits-right {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  @media (max-width: 480px) {
-    .portraits-right {
-      grid-template-columns: repeat(2, 1fr);
-      grid-auto-rows: 100px;
-    }
-  }
 
 
 
