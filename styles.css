@@ -1442,22 +1442,23 @@ min-height: 250px; */
 /*------------------------------------------------- Retouching End ----------------------------------------*/
 
 /*------------------------------------------------- Portraits Start ----------------------------------------*/
-.portraits-page {
+/* PORTRAITS PAGE STYLING */
+.portraits-section {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
- /* height: 100vh; Full viewport height */
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 .portraits-left {
-  width: 33.3333%; /* 1/3 width */
-  background: #fff;
+  width: 33.33%;
+  padding: 3rem;
+  box-sizing: border-box;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
-  box-sizing: border-box;
   text-align: center;
 }
 
@@ -1474,29 +1475,53 @@ min-height: 250px; */
 }
 
 .portraits-right {
- width: 66.6666%;
+  width: 66.66%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 0;
 }
 
 .portraits-right a {
-position: relative;
   width: 100%;
-  padding-top: 100%; /* Make square using aspect ratio */
+  aspect-ratio: 1 / 1; /* ensures square image tiles */
   overflow: hidden;
 }
 
 .portraits-right img {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Crop image */
+  object-fit: cover;
   display: block;
-  cursor: pointer;
+  transition: transform 0.3s ease;
 }
+
+.portraits-right img:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .portraits-left {
+    width: 100%;
+  }
+  .portraits-right {
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .portraits-right {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .portraits-right {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /*------------------------------------------------- Portraits End ----------------------------------------*/
 /*------------------------------------------------- Fashion Start ----------------------------------------*/
 .fashion-gallery {
