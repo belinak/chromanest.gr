@@ -4,23 +4,428 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chromanest | Newborn Photography</title>
-  <link rel="stylesheet" href="styles.css"/>
+
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
- <!----------------------------------------------- LOGO BOOKMARK START ---------------------------------------------------------------->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!----------------------------------------------- LOGO BOOKMARK START ---------------------------------------------------------------->
+  <link rel="icon" type="image/png" href="/images/my-favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/images/my-favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/images/my-favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/my-favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="/images/my-favicon/site.webmanifest" />
+  <!----------------------------------------------- LOGO BOOKMARK END ---------------------------------------------------------------->
+  
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+    
+    /* Navbar styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-item {
+      position: relative;
+      margin-left: 1.5rem;
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-link:hover {
+      color: #888;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      min-width: 180px;
+      padding: 0.5rem 0;
+      z-index: 1000;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-menu li {
+      padding: 0;
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 0.7rem 1.2rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    
+    .dropdown-menu a:hover {
+      background-color: #f5f5f5;
+    }
+    
+    /* HERO SECTION */
+    .herotitles {
+      text-align: center;
+      padding: 4rem 5%;
+      background-color: #f9f9f9;
+    }
+    
+    .herotitles h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #222;
+      font-weight: 300;
+    }
+    
+    .herotitles p {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* NEWBORNS INTRO SECTION */
+    .newborn-hero {
+      padding: 4rem 5%;
+      background-color: #fff;
+    }
+    
+    .newborn-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 4rem;
+    }
+    
+    .newborn-text {
+      flex: 1;
+    }
+    
+    .newborn-text h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #222;
+      font-weight: 300;
+    }
+    
+    .newborn-text p {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+    
+    .newborn-image {
+      flex: 1;
+      text-align: center;
+    }
+    
+    .newborn-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* IMAGE GALLERY */
+    .newborn-gallery {
+      padding: 4rem 5%;
+      background-color: #f9f9f9;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .gallery-grid img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    
+    .gallery-grid img:hover {
+      transform: scale(1.02);
+    }
+    
+    /* CALL TO ACTION */
+    .cta-section {
+      padding: 4rem 5%;
+      background-color: #fff;
+      text-align: center;
+    }
+    
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .cta-content h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #222;
+      font-weight: 300;
+    }
+    
+    .cta-content p {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+    
+    .cta-button-newborn {
+      display: inline-block;
+      background-color: #333;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    
+    .cta-button-newborn:hover {
+      background-color: #555;
+    }
+    
+    /* BABY FEET SECTION */
+    .babyfeet-section {
+      padding: 0 5% 4rem;
+      background-color: #fff;
+      text-align: center;
+    }
+    
+    .babyfeet-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+    
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .lightbox-prev, .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0 20px;
+    }
+    
+    .lightbox-prev {
+      left: 10px;
+    }
+    
+    .lightbox-next {
+      right: 10px;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: #eee;
+      color: #4f4f4f;
+      padding: 60px 5% 30px;
+    }
 
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
 
-<link rel="icon" type="image/png" href="/images/my-favicon/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/images/my-favicon/favicon.svg" />
-<link rel="shortcut icon" href="/images/my-favicon/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/images/my-favicon/apple-touch-icon.png" />
-<link rel="manifest" href="/images/my-favicon/site.webmanifest" />
+    .footer-column h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
 
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4f4f4f;
+    }
 
-<!----------------------------------------------- LOGO BOOKMARK END ---------------------------------------------------------------->
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #4f4f4f;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: #888;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+      color: #4f4f4f;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-size: 14px;
+      color: #888;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+      }
+      
+      .nav-menu {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .nav-item {
+        margin: 0.5rem;
+      }
+      
+      .newborn-wrapper {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- NAVBAR1 -->
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="logo"><a href="index.html">Chromanest</a></div>
      <!-- Navigation Menu -->
@@ -45,37 +450,36 @@
         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
-        </nav>
- <!-- HERO -->
-  <section class="herotitles" data-aos="fade-up" style="padding: 2rem 1rem;">
+  </nav>
+
+  <!-- HERO -->
+  <section class="herotitles" data-aos="fade-up">
     <h1>Newborn Photography</h1>
-    <p>Gentle, timeless memories of your baby’s very first days.</p>
+    <p>Gentle, timeless memories of your baby's very first days.</p>
   </section>
 
   <!-- NEWBORNS INTRO SECTION -->
-<section class="newborn-hero" data-aos="zoom-in">
-  <div class="newborn-wrapper">
-    <!-- TEXT LEFT -->
-    <div class="newborn-text">
-      <h2>We Photograph With Heart</h2>
-      <p>
-        At Chromanest, we understand how delicate and precious newborn moments are.
-        Our sessions are entirely baby-led — we allow ample time for feeding, snuggles, and sleep.
-        Your baby’s comfort is our #1 priority.
-      </p>
-      <p>
-        No stress. No rush. Just warmth, patience, and gentle artistry that turns your baby’s earliest days into unforgettable heirlooms.
-      </p>
+  <section class="newborn-hero" data-aos="zoom-in">
+    <div class="newborn-wrapper">
+      <!-- TEXT LEFT -->
+      <div class="newborn-text">
+        <h2>We Photograph With Heart</h2>
+        <p>
+          At Chromanest, we understand how delicate and precious newborn moments are.
+          Our sessions are entirely baby-led — we allow ample time for feeding, snuggles, and sleep.
+          Your baby's comfort is our #1 priority.
+        </p>
+        <p>
+          No stress. No rush. Just warmth, patience, and gentle artistry that turns your baby's earliest days into unforgettable heirlooms.
+        </p>
+      </div>
+
+      <!-- IMAGE RIGHT -->
+      <div class="newborn-image">
+        <img src="images/Newborns-imgs/baby-boy-blue.jpg" alt="Newborn boy in blue wrap" />
+      </div>
     </div>
-
-    <!-- IMAGE RIGHT -->
-    <div class="newborn-image">
-      <img src="images/Newborns-imgs/baby-boy-blue.jpg" alt="Newborn boy in blue wrap" />
-    </div>
-  </div>
-</section>
-
-
+  </section>
 
   <!-- IMAGE GALLERY -->
   <section class="newborn-gallery" data-aos="fade-up">
@@ -88,18 +492,19 @@
   <!-- CALL TO ACTION -->
   <section class="cta-section" data-aos="fade-up">
     <div class="cta-content">
-      <h2>Let’s Capture Your Baby’s First Story</h2>
+      <h2>Let's Capture Your Baby's First Story</h2>
       <p>
-        Your little one is growing already. Let’s preserve this fleeting time in a way that’s calm, artistic, and full of love.
-        Reach out today — we’ll take care of the rest.
+        Your little one is growing already. Let's preserve this fleeting time in a way that's calm, artistic, and full of love.
+        Reach out today — we'll take care of the rest.
       </p>
       <a href="contact.html" class="cta-button-newborn">Book Your Newborn Session</a>
     </div>
   </section>
-<!-- Baby feet image (moved below CTA) -->
-<section class="babyfeet-section" data-aos="fade-up">
-  <img src="images//Newborns-imgs/hands-feet.jpg" alt="Baby feet held by parents" class="babyfeet-img">
-</section>
+
+  <!-- Baby feet image (moved below CTA) -->
+  <section class="babyfeet-section" data-aos="fade-up">
+    <img src="images/Newborns-imgs/hands-feet.jpg" alt="Baby feet held by parents" class="babyfeet-img">
+  </section>
 
   <!-- LIGHTBOX -->
   <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
@@ -111,10 +516,50 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-logo">Chromanest</div>
-    <div class="footer-copy">2025 Chromanest © All rights reserved.</div>
-    <div class="footer-top">
-      <button onclick="scrollToTop()">Back to Top</button>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Chromanest</h3>
+        <p>Professional photography services specializing in fashion, portraits, and special events. Creating timeless memories through the art of photography.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+  
+      <div class="footer-column">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="wedding.html">Wedding Photography</a></li>
+          <li><a href="newborns.html">Newborn Photography</a></li>
+          <li><a href="christening.html">Christening Photography</a></li>
+          <li><a href="maternity.html">Maternity Photography</a></li>
+          <li><a href="fashion.html">Fashion Photography</a></li>
+          <li><a href="portraits.html">Portrait Photography</a></li>
+          <li><a href="facepainting.html">Face Painting</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="packages.html">Packages & Pricing</a></li>
+          <li><a href="retouching.html">Retouching Services</a></li>
+          <li><a href="https://chromanest.blogspot.com">Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
+          <li><i class="fas fa-phone"></i> +30 6973949986</li>
+          <li><i class="fas fa-envelope"></i> chromanest.creatives@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>2025 Chromanest &copy; All rights reserved.</p>
     </div>
   </footer>
 
@@ -123,49 +568,41 @@
   <script>
     AOS.init({ duration: 1000 });
 
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    let currentIndex = 0;
+    const imageElements = Array.from(document.querySelectorAll('.gallery-grid img'));
+
+    function openLightbox(src) {
+      currentIndex = imageElements.findIndex(img => img.src === src);
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
     }
 
-    window.onload = function () {
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      const imageElements = Array.from(document.querySelectorAll('.gallery-grid img'));
-      let currentIndex = 0;
-
-      window.openLightbox = function (src) {
-        currentIndex = imageElements.findIndex(img => img.src === src);
-        lightboxImg.src = src;
-        lightbox.style.display = 'flex';
+    function closeLightbox(event) {
+      if (event.target === document.getElementById('lightbox') || event.target.classList.contains('close')) {
+        document.getElementById('lightbox').style.display = 'none';
       }
+    }
 
-      window.closeLightbox = function (event) {
-        if (event.target === lightbox || event.target.classList.contains('close')) {
-          lightbox.style.display = 'none';
-        }
+    function showImage(index) {
+      if (index >= 0 && index < imageElements.length) {
+        currentIndex = index;
+        document.getElementById('lightbox-img').src = imageElements[currentIndex].src;
       }
+    }
 
-      window.showImage = function (index) {
-        if (index >= 0 && index < imageElements.length) {
-          currentIndex = index;
-          lightboxImg.src = imageElements[currentIndex].src;
-        }
+    function nextImage(event) {
+      event.stopPropagation();
+      if (currentIndex < imageElements.length - 1) {
+        showImage(currentIndex + 1);
       }
+    }
 
-      window.nextImage = function (event) {
-        event.stopPropagation();
-        if (currentIndex < imageElements.length - 1) {
-          showImage(currentIndex + 1);
-        }
+    function prevImage(event) {
+      event.stopPropagation();
+      if (currentIndex > 0) {
+        showImage(currentIndex - 1);
       }
-
-      window.prevImage = function (event) {
-        event.stopPropagation();
-        if (currentIndex > 0) {
-          showImage(currentIndex - 1);
-        }
-      }
-    };
+    }
   </script>
 </body>
 </html>
