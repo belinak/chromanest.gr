@@ -4,27 +4,587 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chromanest</title>
-  <link rel="stylesheet" href="styles.css"/>
+  
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
- <!----------------------------------------------- LOGO BOOKMARK START ---------------------------------------------------------------->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!----------------------------------------------- LOGO BOOKMARK START ---------------------------------------------------------------->
+  <link rel="icon" type="image/png" href="/images/my-favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/images/my-favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/images/my-favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/my-favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="/images/my-favicon/site.webmanifest" />
+  <!----------------------------------------------- LOGO BOOKMARK END ---------------------------------------------------------------->
 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
 
-<link rel="icon" type="image/png" href="/images/my-favicon/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/images/my-favicon/favicon.svg" />
-<link rel="shortcut icon" href="/images/my-favicon/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/images/my-favicon/apple-touch-icon.png" />
-<link rel="manifest" href="/images/my-favicon/site.webmanifest" />
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+    
+    /* Navbar styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-item {
+      position: relative;
+      margin-left: 1.5rem;
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-link:hover {
+      color: #888;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      min-width: 180px;
+      padding: 0.5rem 0;
+      z-index: 1000;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-menu li {
+      padding: 0;
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 0.7rem 1.2rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    
+    .dropdown-menu a:hover {
+      background-color: #f5f5f5;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: #eee;
+      color: #636363;
+      padding: 60px 5% 30px;
+    }
 
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
 
-<!----------------------------------------------- LOGO BOOKMARK END ---------------------------------------------------------------->
+    .footer-column h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #919191;
+    }
 
+    .footer-column ul {
+      list-style: none;
+    }
 
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #636363;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: #333;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+      color: #636363;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-size: 14px;
+      color: #636363;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+      }
+      
+      .nav-menu {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .nav-item {
+        margin: 0.5rem;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /*------------------------------------------------- Retouching Start ----------------------------------------*/
+    .retouching-banner {
+      background: #f7f7f7;
+      padding: 2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      min-height: 40vh;
+    }
+
+    .retouching-banner img {
+      width: 200px;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .retouching-banner-text h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    .retouching-banner-text h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: #555;
+    }
+
+    .retouching-banner-text p {
+      font-size: 1rem;
+      color: #444;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+    
+    /* ---------------------------------------------RESTORATIONS START--------------------------------------------*/
+    .restoration-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+    }
+
+    .restoration-text {
+      flex: 1 1 400px;
+      text-align: center;
+    }
+
+    .restoration-text h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    .restoration-text hr {
+      width: 50px;
+      height: 3px;
+      background: #ccc;
+      border: none;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .restoration-text p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .restoration-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      width: 300px;
+      flex: 1 1 400px;
+      justify-content: center;
+    }
+        
+    .restoration-gallery img {
+      width: 100%;
+      border-radius: 6px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    
+    /* ----------------------------------------PORTRAITS START--------------------------------------------*/
+    .portraits-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      background: #f7f7f7;
+    }
+
+    .portraits-text {
+      flex: 1 1 400px;
+      text-align: center;
+      order: 2; /* This places text on the right */
+    }
+
+    .portraits-text h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    .portraits-text hr {
+      width: 50px;
+      height: 3px;
+      background: #ccc;
+      border: none;
+      margin: 0 auto 1.5rem;
+    }
+
+    .portraits-text p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .portraits-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      width: 300px;
+      flex: 1 1 400px;
+      justify-content: center;
+      order: 1; /* This places gallery on the left */
+    }
+        
+    .portraits-gallery img {
+      width: 100%;
+      border-radius: 6px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    
+    /* ----------------------------------------FASHION START--------------------------------------------*/
+    .fashion-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+    }
+
+    .fashion-text {
+      flex: 1 1 400px;
+      text-align: center;
+    }
+
+    .fashion-text h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    .fashion-text hr {
+      width: 50px;
+      height: 3px;
+      background: #ccc;
+      border: none;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .fashion-text p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .fashion-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      width: 300px;
+      flex: 1 1 400px;
+      justify-content: center;
+    }
+        
+    .fashion-gallery img {
+      width: 100%;
+      height: auto; /* Changed from max-height: 200px */
+      border-radius: 6px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    
+    /* ----------------------------------------BEAUTY START --------------------------------------------*/
+    .beauty-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      background: #f7f7f7;
+    }
+
+    .beauty-text {
+      flex: 1 1 400px;
+      text-align: center;
+      order: 2; /* This places text on the right */
+    }
+
+    .beauty-text h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    .beauty-text hr {
+      width: 50px;
+      height: 3px;
+      background: #ccc;
+      border: none;
+      margin: 0 auto 1.5rem;
+    }
+
+    .beauty-text p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .beauty-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      width: 300px;
+      flex: 1 1 400px;
+      justify-content: center;
+      order: 1; /* This places gallery on the left */
+    }
+        
+    .beauty-gallery img {
+      width: 100%;
+      border-radius: 6px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-in-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .retouching-banner,
+      .beauty-section,
+      .portraits-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .restoration-gallery,
+      .portraits-gallery,
+      .fashion-gallery,
+      .beauty-gallery {
+        grid-template-columns: 1fr;
+      }
+      
+      /* Reset order for mobile */
+      .portraits-text,
+      .portraits-gallery,
+      .beauty-text,
+      .beauty-gallery {
+        order: initial;
+      }
+    }
+    
+    /* ===== RETOUCHING LIGHTBOX ===== */
+    .lightbox-retouching {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.9);
+      z-index: 999999 !important;
+    }
+
+    .lightbox-retouching[aria-hidden="false"] {
+      display: flex;
+    }
+
+    .lightbox-retouching img {
+      max-width: 92%;
+      max-height: 86%;
+      object-fit: contain;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      border-radius: 4px;
+    }
+
+    .lightbox-retouching .lr-close,
+    .lightbox-retouching .lr-prev,
+    .lightbox-retouching .lr-next {
+      position: absolute;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 36px;
+      cursor: pointer;
+      padding: 8px 12px;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .lightbox-retouching .lr-close {
+      top: 18px;
+      right: 26px;
+      font-size: 44px;
+    }
+
+    .lightbox-retouching .lr-prev {
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 48px;
+    }
+
+    .lightbox-retouching .lr-next {
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 48px;
+    }
+
+    .lightbox-retouching .lr-prev,
+    .lightbox-retouching .lr-next {
+      padding: 18px;
+      background: rgba(0,0,0,0.15);
+      border-radius: 8px;
+    }
+
+    .lightbox-retouching button:focus {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- NAVBAR1 -->
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="logo"><a href="index.html">Chromanest</a></div>
      <!-- Navigation Menu -->
@@ -49,234 +609,252 @@
         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
-        </nav>
+  </nav>
         
-         <!-- RETOUCHING BANNER -->
+  <!-- RETOUCHING BANNER -->
   <section class="retouching-banner">
     <img src="images/Retouching-imgs/retouching-banner.png" alt="Retouching Banner Photo">
     <div class="retouching-banner-text">
       <h2><center>RETOUCHING MATTERS</center></h2>
       <h3><center>SHOW YOUR WORK AT ITS BEST</center></h3>
-      <center><p>Wouldn’t you love to tell your client: “Don’t worry, I have the best retoucher for that"?<br>We love solving problems and making things better than when we found them.<br>If our work is never noticed, it means we’ve succeeded.<br>Our goal is to optimize your creative vision - on time and on budget.</p></center>
+      <center><p>Wouldn't you love to tell your client: "Don't worry, I have the best retoucher for that"?<br>We love solving problems and making things better than when we found them.<br>If our work is never noticed, it means we've succeeded.<br>Our goal is to optimize your creative vision - on time and on budget.</p></center>
     </div>
   </section>
 
   <!-- RESTORATIONS SECTION -->
-   <section class="fade-in-section">
-  <section class="restoration-section">
-  <section class="restoration-text">
-    <h2>RESTORATIONS</h2>
-    <hr>
-      Let’s collaborate to save the photos of all your loved ones. No matter the condition, we will preserve the memory of your loved ones in the condition it was always meant to be. We can fix missing parts, recolor the photos, fix fading, mold and water damage among others.</section>
-    <div class="restoration-gallery">
-      <!-- Replace these with actual before/after photos -->
-<img src="images/Retouching-imgs/restorations/before1.jpg" alt="Before 1">
-  <img src="images/Retouching-imgs/restorations/after1.jpg" alt="After 1">
-  <img src="images/Retouching-imgs/restorations/before2.jpg" alt="Before 2">
-  <img src="images/Retouching-imgs/restorations/after2.jpg" alt="After 2">
+  <section class="fade-in-section">
+    <section class="restoration-section">
+      <section class="restoration-text">
+        <h2>RESTORATIONS</h2>
+        <hr>
+        Let's collaborate to save the photos of all your loved ones. No matter the condition, we will preserve the memory of your loved ones in the condition it was always meant to be. We can fix missing parts, recolor the photos, fix fading, mold and water damage among others.
+      </section>
+      <div class="restoration-gallery">
+        <!-- Replace these with actual before/after photos -->
+        <img src="images/Retouching-imgs/restorations/before1.jpg" alt="Before 1">
+        <img src="images/Retouching-imgs/restorations/after1.jpg" alt="After 1">
+        <img src="images/Retouching-imgs/restorations/before2.jpg" alt="Before 2">
+        <img src="images/Retouching-imgs/restorations/after2.jpg" alt="After 2">
       </div>
-   </section>
+    </section>
   </section>
-  
-  
   
   <!-- PORTRAITS SECTION -->
   <section class="fade-in-section">
-  <section class="beauty-section">
-    <div class="beauty-text">
-      <h2>PORTRAITS</h2>
-      <hr>
-      <p>Are you just looking to zhuzh up your photos? <br>Clean someone from the background? <br>Fix those annoying fly away hairs? <br>Red eyes? <br>Let's see what we can do for you!</p>
-    </div>
-    <div class="portrait-gallery">
-      <img src="images/Retouching-imgs/portraits/before1.jpg" alt="Before Portrait 1">
-      <img src="images/Retouching-imgs/portraits/after1.jpg" alt="After Portrait 1">
-      <img src="images/Retouching-imgs/portraits/before2.jpg" alt="Before Portrait 2">
-      <img src="images/Retouching-imgs/portraits/after2.jpg" alt="After Portrait 2">
-    </div>
-     <div class="portrait-gallery">
-      <img src="images/Retouching-imgs/portraits/before4.jpg" alt="Before Portrait 4">
-      <img src="images/Retouching-imgs/portraits/after4.jpg" alt="After Portrait 4">
-      <img src="images/Retouching-imgs/portraits/before3.jpg" alt="Before Portrait 3">
-      <img src="images/Retouching-imgs/portraits/after3.jpg" alt="After Portrait 3">
-    </div>
+    <section class="portraits-section">
+      <div class="portraits-gallery">
+        <img src="images/Retouching-imgs/portraits/before1.jpg" alt="Before Portrait 1">
+        <img src="images/Retouching-imgs/portraits/after1.jpg" alt="After Portrait 1">
+        <img src="images/Retouching-imgs/portraits/before2.jpg" alt="Before Portrait 2">
+        <img src="images/Retouching-imgs/portraits/after2.jpg" alt="After Portrait 2">
+      </div>
+      <div class="portraits-text">
+        <h2>PORTRAITS</h2>
+        <hr>
+        <p>Are you just looking to zhuzh up your photos? <br>Clean someone from the background? <br>Fix those annoying fly away hairs? <br>Red eyes? <br>Let's see what we can do for you!</p>
+      </div>
+    </section>
   </section>
-</section>
 
-  
- 
-  <!-- Fashion SECTION -->
-   <section class="fade-in-section">
-  <section class="restoration-section">
-    <section class="restoration-text">
-    <h2>FASHION</h2>
-    <hr>
-    <div>
-      Are you a photographer and want to advance your photography without wasting time in retouching? Let us take on the heavy load and follow your artistic vision.
-    </div>
-   </section>
-    <div class="fashion-gallery">
-      <!-- Replace these with actual before/after photos -->
-      <img src="images/Retouching-imgs/fashion/before1.jpg" alt="Before 1">
-      <img src="images/Retouching-imgs/fashion/after1.jpg" alt="After 1">
-      <img src="images/Retouching-imgs/fashion/before2.jpg" alt="Before 2">
-      <img src="images/Retouching-imgs/fashion/after2.jpg" alt="After 2">
-      <img src="images/Retouching-imgs/fashion/before3.jpg" alt="Before 3">
-      <img src="images/Retouching-imgs/fashion/after3.jpg" alt="After 3">
-    </div>
-   
+  <!-- FASHION SECTION -->
+  <section class="fade-in-section">
+    <section class="fashion-section">
+      <section class="fashion-text">
+        <h2>FASHION</h2>
+        <hr>
+        <div>
+          Are you a photographer and want to advance your photography without wasting time in retouching? Let us take on the heavy load and follow your artistic vision.
+        </div>
+      </section>
+      <div class="fashion-gallery">
+        <!-- Replace these with actual before/after photos -->
+        <img src="images/Retouching-imgs/fashion/before1.jpg" alt="Before 1">
+        <img src="images/Retouching-imgs/fashion/after1.jpg" alt="After 1">
+        <img src="images/Retouching-imgs/fashion/before2.jpg" alt="Before 2">
+        <img src="images/Retouching-imgs/fashion/after2.jpg" alt="After 2">
+          <img src="images/Retouching-imgs/fashion/before3.jpg" alt="Before 3">
+        <img src="images/Retouching-imgs/fashion/after3.jpg" alt="After 3">
+      </div>
+    </section>
   </section>
   
   <!-- BEAUTY SECTION -->
   <section class="fade-in-section">
-  <section class="beauty-section">
-    <div class="beauty-text">
-      <h2>BEAUTY</h2>
-      <hr>
-      <p>Are you a photographer and want to advance your photography without wasting time in retouching? Let us take on the heavy load and follow your artistic vision.</p>
-    </div>
-    <div class="beauty-images">
-      <img src="images/Retouching-imgs/beauty/before.jpg" alt="Before Beauty">
-      <img src="images/Retouching-imgs/beauty/after.jpg" alt="After Beauty">
-    </div>
+    <section class="beauty-section">
+      <div class="beauty-gallery">
+        <img src="images/Retouching-imgs/beauty/before1.jpg" alt="Before Beauty 1">
+        <img src="images/Retouching-imgs/beauty/after1.jpg" alt="After Beauty 1">
+        <!--<img src="images/Retouching-imgs/beauty/before2.jpg" alt="Before Beauty 2">-->
+        <!--<img src="images/Retouching-imgs/beauty/after2.jpg" alt="After Beauty 2">-->
+      </div>
+      <div class="beauty-text">
+        <h2>BEAUTY</h2>
+        <hr>
+        <p>Are you a photographer and want to advance your photography without wasting time in retouching? Let us take on the heavy load and follow your artistic vision.</p>
+      </div>
+    </section>
   </section>
-</section>
 
-
-
-
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Chromanest</h3>
+        <p>Professional photography services specializing in fashion, portraits, and special events. Creating timeless memories through the art of photography.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
   
-
-
-         <!-- FOOTER -->
-  <footer class="footer" >
-    <div class="footer-logo">Chromanest</div>
-    <div class="footer-copy">2025 Chromanest © All rights reserved.</div>
-    <div class="footer-top">
-      <button onclick="scrollToTop()">Back to Top</button>
+      <div class="footer-column">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="wedding.html">Wedding Photography</a></li>
+          <li><a href="newborns.html">Newborn Photography</a></li>
+          <li><a href="christening.html">Christening Photography</a></li>
+          <li><a href="maternity.html">Maternity Photography</a></li>
+          <li><a href="fashion.html">Fashion Photography</a></li>
+          <li><a href="portraits.html">Portrait Photography</a></li>
+          <li><a href="facepainting.html">Face Painting</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="packages.html">Packages & Pricing</a></li>
+          <li><a href="retouching.html">Retouching Services</a></li>
+          <li><a href="https://chromanest.blogspot.com">Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
+          <li><i class="fas fa-phone"></i> +30 6973949986</li>
+          <li><i class="fas fa-envelope"></i> chromanest.creatives@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>2025 Chromanest &copy; All rights reserved.</p>
     </div>
   </footer>
   
-  
-<!-- RETOUCHING LIGHTBOX (place once, before </body>) -->
-<div id="lightbox-retouching" class="lightbox-retouching" aria-hidden="true">
-  <button class="lr-close" aria-label="Close">&times;</button>
-  <button class="lr-prev" aria-label="Previous">&#10094;</button>
-  <img id="lightbox-retouching-img" src="" alt="">
-  <button class="lr-next" aria-label="Next">&#10095;</button>
-</div>
-
-  
+  <!-- RETOUCHING LIGHTBOX -->
+  <div id="lightbox-retouching" class="lightbox-retouching" aria-hidden="true">
+    <button class="lr-close" aria-label="Close">&times;</button>
+    <button class="lr-prev" aria-label="Previous">&#10094;</button>
+    <img id="lightbox-retouching-img" src="" alt="">
+    <button class="lr-next" aria-label="Next">&#10095;</button>
+  </div>
   
   <script>
-  const sections = document.querySelectorAll('.fade-in-section');
+    const sections = document.querySelectorAll('.fade-in-section');
 
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target); // Optional: remove after first load
-      }
-    });
-  }, {
-    threshold: 0.15
-  });
-
-  sections.forEach(section => {
-    observer.observe(section);
-  });
-</script>
-
- <!-- SCRIPTS -->
-<script>
-(function () {
-  document.addEventListener('DOMContentLoaded', () => {
-
-    // Elements
-    const lb = document.getElementById('lightbox-retouching');
-    const lbImg = document.getElementById('lightbox-retouching-img');
-    const btnClose = lb.querySelector('.lr-close');
-    const btnPrev = lb.querySelector('.lr-prev');
-    const btnNext = lb.querySelector('.lr-next');
-
-    // Query all images you want included in *this* lightbox
-    const imageElements = Array.from(document.querySelectorAll('.restoration-gallery img'));
-    if (!imageElements.length) return;
-
-    let currentIndex = 0;
-
-    // Open when any gallery image clicked
-    imageElements.forEach((img, idx) => {
-      img.style.cursor = 'pointer';
-      img.addEventListener('click', (e) => {
-        currentIndex = idx;
-        openLightbox();
-      });
-    });
-
-    function openLightbox() {
-      lbImg.src = imageElements[currentIndex].src;
-      lb.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden'; // prevent background scroll
-      // ensure focus on close button for accessibility
-      btnClose.focus();
-    }
-
-    function closeLightbox() {
-      lb.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = ''; // restore
-      lbImg.src = '';
-    }
-
-    function showNext() {
-      currentIndex = (currentIndex + 1) % imageElements.length;
-      lbImg.src = imageElements[currentIndex].src;
-    }
-    function showPrev() {
-      currentIndex = (currentIndex - 1 + imageElements.length) % imageElements.length;
-      lbImg.src = imageElements[currentIndex].src;
-    }
-
-    // Button handlers
-    btnClose.addEventListener('click', closeLightbox);
-    btnNext.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
-    btnPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
-
-    // Click on backdrop (outside image) closes lightbox
-    lb.addEventListener('click', (e) => {
-      // if click target is the overlay itself (not the img or buttons)
-      if (e.target === lb || e.target === lbImg) {
-        // if clicked directly on image, DO NOT close. If you want clicks on image to close, adjust here.
-        // Here we only close when overlay background clicked:
-        if (e.target === lb) closeLightbox();
-      }
-    });
-
-    // Keyboard: ESC to close, arrows to navigate
-    document.addEventListener('keydown', (e) => {
-      if (lb.getAttribute('aria-hidden') === 'false') {
-        if (e.key === 'Escape') {
-          closeLightbox();
-        } else if (e.key === 'ArrowRight') {
-          showNext();
-        } else if (e.key === 'ArrowLeft') {
-          showPrev();
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Optional: remove after first load
         }
-      }
+      });
+    }, {
+      threshold: 0.15
     });
 
-    // Prevent image dragging from moving the page
-    lbImg.addEventListener('dragstart', (e) => e.preventDefault());
+    sections.forEach(section => {
+      observer.observe(section);
+    });
 
-  });
-})();
-</script>
+    // Lightbox functionality
+    (function () {
+      document.addEventListener('DOMContentLoaded', () => {
 
+        // Elements
+        const lb = document.getElementById('lightbox-retouching');
+        const lbImg = document.getElementById('lightbox-retouching-img');
+        const btnClose = lb.querySelector('.lr-close');
+        const btnPrev = lb.querySelector('.lr-prev');
+        const btnNext = lb.querySelector('.lr-next');
 
+        // Query all images you want included in *this* lightbox
+        const imageElements = Array.from(document.querySelectorAll('.restoration-gallery img, .portraits-gallery img, .fashion-gallery img, .beauty-gallery img'));
+        if (!imageElements.length) return;
 
+        let currentIndex = 0;
 
+        // Open when any gallery image clicked
+        imageElements.forEach((img, idx) => {
+          img.style.cursor = 'pointer';
+          img.addEventListener('click', (e) => {
+            currentIndex = idx;
+            openLightbox();
+          });
+        });
 
+        function openLightbox() {
+          lbImg.src = imageElements[currentIndex].src;
+          lb.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden'; // prevent background scroll
+          // ensure focus on close button for accessibility
+          btnClose.focus();
+        }
 
+        function closeLightbox() {
+          lb.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = ''; // restore
+          lbImg.src = '';
+        }
 
+        function showNext() {
+          currentIndex = (currentIndex + 1) % imageElements.length;
+          lbImg.src = imageElements[currentIndex].src;
+        }
+        
+        function showPrev() {
+          currentIndex = (currentIndex - 1 + imageElements.length) % imageElements.length;
+          lbImg.src = imageElements[currentIndex].src;
+        }
+
+        // Button handlers
+        btnClose.addEventListener('click', closeLightbox);
+        btnNext.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+        btnPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+
+        // Click on backdrop (outside image) closes lightbox
+        lb.addEventListener('click', (e) => {
+          // if click target is the overlay itself (not the img or buttons)
+          if (e.target === lb || e.target === lbImg) {
+            // if clicked directly on image, DO NOT close. If you want clicks on image to close, adjust here.
+            // Here we only close when overlay background clicked:
+            if (e.target === lb) closeLightbox();
+          }
+        });
+
+        // Keyboard: ESC to close, arrows to navigate
+        document.addEventListener('keydown', (e) => {
+          if (lb.getAttribute('aria-hidden') === 'false') {
+            if (e.key === 'Escape') {
+              closeLightbox();
+            } else if (e.key === 'ArrowRight') {
+              showNext();
+            } else if (e.key === 'ArrowLeft') {
+              showPrev();
+            }
+          }
+        });
+
+        // Prevent image dragging from moving the page
+        lbImg.addEventListener('dragstart', (e) => e.preventDefault());
+
+      });
+    })();
+  </script>
 </body>
 </html>
