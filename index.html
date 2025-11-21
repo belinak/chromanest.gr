@@ -4,23 +4,450 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chromanest</title>
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
- <!----------------------------------------------- LOGO BOOKMARK START ---------------------------------------------------------------->
+  
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+    
+    /* Navbar styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-item {
+      position: relative;
+      margin-left: 1.5rem;
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-link:hover {
+      color: #888;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      min-width: 180px;
+      padding: 0.5rem 0;
+      z-index: 1000;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-menu li {
+      padding: 0;
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 0.7rem 1.2rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    
+    .dropdown-menu a:hover {
+      background-color: #f5f5f5;
+    }
+    
+    /* LARGER CAROUSEL */
+    .carousel-container {
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .carousel {
+      position: relative;
+      height: 75vh;
+      min-height: 600px;
+    }
+    
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    .slide.active {
+      opacity: 1;
+    }
+    
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 16px 20px;
+      cursor: pointer;
+      font-size: 24px;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+      z-index: 10;
+    }
+    
+    .carousel-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+    
+    .prev {
+      left: 30px;
+    }
+    
+    .next {
+      right: 30px;
+    }
+    
+    .carousel-dots {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+    
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    
+    .dot.active {
+      background: white;
+      transform: scale(1.2);
+    }
+    
+    /* TITLES */
+    .titles {
+      text-align: center;
+      padding: 4rem 5%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .titles h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: #222;
+      font-weight: 300;
+    }
+    
+    .titles p {
+      font-size: 1.3rem;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    /* CATEGORIES GRID */
+    .categories-section {
+      padding: 3rem 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .categories-section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: #222;
+      font-weight: 300;
+    }
+    
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .category-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.4s, box-shadow 0.4s;
+      height: 350px;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s, opacity 0.5s;
+      opacity: 0.3;
+    }
+    
+    .category-card:hover img {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+    
+    .category-title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 500;
+      text-align: center;
+      width: 100%;
+      padding: 0 20px;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      transition: font-size 0.3s;
+    }
+    
+    .category-card:hover .category-title {
+      font-size: 2rem;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: #eee;
+      color: #4f4f4f;
+      padding: 60px 5% 30px;
+      margin-top: 4rem;
+    }
 
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
 
-<link rel="icon" type="image/png" href="/images/my-favicon/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/images/my-favicon/favicon.svg" />
-<link rel="shortcut icon" href="/images/my-favicon/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/images/my-favicon/apple-touch-icon.png" />
-<link rel="manifest" href="/images/my-favicon/site.webmanifest" />
+    .footer-column h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
 
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4f4f4f;
+    }
 
-<!----------------------------------------------- LOGO BOOKMARK END ---------------------------------------------------------------->
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #4f4f4f;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: #888;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+      color: #4f4f4f;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-size: 14px;
+      color: #888;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 1024px) {
+      .carousel {
+        height: 60vh;
+        min-height: 500px;
+      }
+      
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+      }
+      
+      .nav-menu {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .nav-item {
+        margin: 0.5rem;
+      }
+      
+      .carousel {
+        height: 50vh;
+        min-height: 400px;
+      }
+      
+      .carousel-btn {
+        width: 50px;
+        height: 50px;
+        padding: 12px 16px;
+        font-size: 20px;
+      }
+      
+      .prev {
+        left: 15px;
+      }
+      
+      .next {
+        right: 15px;
+      }
+      
+      .titles h1 {
+        font-size: 2.5rem;
+      }
+      
+      .titles p {
+        font-size: 1.1rem;
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .carousel {
+        height: 40vh;
+        min-height: 300px;
+      }
+      
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .titles h1 {
+        font-size: 2rem;
+      }
+      
+      .titles p {
+        font-size: 1rem;
+      }
+      
+      .categories-section h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- NAVBAR1 -->
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="logo"><a href="index.html">Chromanest</a></div>
      <!-- Navigation Menu -->
@@ -45,21 +472,21 @@
         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
-        </nav>
+  </nav>
 
-  <!-- CAROUSEL -->
-  <section class="carousel-container">
+  <!-- LARGER CAROUSEL -->
+  <section class="carousel-container" data-aos="fade-up">
     <div class="carousel">
-      <div class="slide active"><img src="images/slide1.jpg" alt="Slide 1"></div>
-      <div class="slide"><img src="images/slide2.jpg" alt="Slide 2"></div>
-      <div class="slide"><img src="images/slide3.jpg" alt="Slide 3"></div>
+      <div class="slide active"><img src="images/Home/slide1.jpg" alt="Portrait Photography"></div>
+      <div class="slide"><img src="images/Home/slide2.jpg" alt="Wedding Photography"></div>
+      <div class="slide"><img src="images/Home/slide3.jpg" alt="Fashion Photography"></div>
       
-        <!-- 🔽 NEW DOTS -->
-  <div class="carousel-dots">
-    <span class="dot" data-index="0"></span>
-    <span class="dot" data-index="1"></span>
-    <span class="dot" data-index="2"></span>
-  </div>
+      <!-- Dots -->
+      <div class="carousel-dots">
+        <span class="dot active" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+      </div>
       
       <button class="carousel-btn prev">&#10094;</button>
       <button class="carousel-btn next">&#10095;</button>
@@ -69,102 +496,134 @@
   <!-- TITLES -->
   <section class="titles" data-aos="fade-up">
     <h1>Welcome to Chromanest</h1>
-    <p>Capturing life's most precious moments with artful precision</p>
+    <p>Capturing life's most precious moments with artful precision. Our professional photography services specialize in creating timeless memories through the art of photography.</p>
   </section>
 
-  <!-- PHOTO GRID -->
-  <section class="photo-grid" data-aos="fade-up">
-    <div class="left-side">
-      <div class="top-small">
-        <a href="wedding.html" class="grid-photo">
-          <img src="images/wedding.jpg" alt="Wedding"/>
-          <div class="photo-title">Wedding</div>
-        </a>
-        <a href="newborns.html" class="grid-photo">
-          <img src="images/newborns.jpg" alt="Newborns"/>
-          <div class="photo-title">Newborns</div>
-        </a>
-      </div>
-      <div class="bottom-small">
-        <a href="maternity.html" class="grid-photo">
-          <img src="images/maternity.jpg" alt="Maternity"/>
-          <div class="photo-title">Maternity</div>
-        </a>
-      </div>
-    </div>
-    <div class="right-side">
-      <a href="fashion.html" class="grid-photo">
-        <img src="images/fashion.jpg" alt="Fashion"/>
-        <div class="photo-title">Fashion</div>
+  <!-- CATEGORIES GRID -->
+  <section class="categories-section" data-aos="fade-up">
+    <h2>Our Photography Services</h2>
+    <div class="categories-grid">
+      <a href="wedding.html" class="category-card">
+        <img src="images/Home/wedding.jpg" alt="Wedding Photography">
+        <div class="category-title">Wedding</div>
       </a>
-      <div class="bottom-small">
-        <a href="portraits.html" class="grid-photo">
-          <img src="images/portraits1.jpg" alt="Portrait 1"/>
-          <div class="photo-title">Portraits</div>
-        </a>
-        <a href="portraits.html" class="grid-photo">
-          <img src="images/portraits2.jpg" alt="Portrait 2"/>
-          <div class="photo-title">Portraits</div>
-        </a>
-      </div>
+      <a href="newborns.html" class="category-card">
+        <img src="images/Home/newborns.jpg" alt="Newborn Photography">
+        <div class="category-title">Newborns</div>
+      </a>
+      <a href="christening.html" class="category-card">
+        <img src="images/Home/christening.jpg" alt="Christening Photography">
+        <div class="category-title">Christening</div>
+      </a>
+      <a href="maternity.html" class="category-card">
+        <img src="images/Home/maternity.jpg" alt="Maternity Photography">
+        <div class="category-title">Maternity</div>
+      </a>
+      <a href="fashion.html" class="category-card">
+        <img src="images/Home/fashion.jpg" alt="Fashion Photography">
+        <div class="category-title">Fashion</div>
+      </a>
+      <a href="portraits.html" class="category-card">
+        <img src="images/Home/portrait.jpg" alt="Portrait Photography">
+        <div class="category-title">Portraits</div>
+      </a>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer" >
-    <div class="footer-logo">Chromanest</div>
-    <div class="footer-copy">2025 Chromanest © All rights reserved.</div>
-    <div class="footer-top">
-      <button onclick="scrollToTop()">Back to Top</button>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Chromanest</h3>
+        <p>Professional photography services specializing in fashion, portraits, and special events. Creating timeless memories through the art of photography.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+  
+      <div class="footer-column">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="wedding.html">Wedding Photography</a></li>
+          <li><a href="newborns.html">Newborn Photography</a></li>
+          <li><a href="christening.html">Christening Photography</a></li>
+          <li><a href="maternity.html">Maternity Photography</a></li>
+          <li><a href="fashion.html">Fashion Photography</a></li>
+          <li><a href="portraits.html">Portrait Photography</a></li>
+          <li><a href="facepainting.html">Face Painting</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="packages.html">Packages & Pricing</a></li>
+          <li><a href="retouching.html">Retouching Services</a></li>
+          <li><a href="https://chromanest.blogspot.com">Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
+          <li><i class="fas fa-phone"></i> +30 6973949986</li>
+          <li><i class="fas fa-envelope"></i> chromanest.creatives@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>2025 Chromanest &copy; All rights reserved.</p>
     </div>
   </footer>
 
   <!-- SCRIPTS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-   AOS.init({ duration: 1000 });
+    AOS.init({ duration: 1000 });
 
-  const slides = document.querySelectorAll('.slide');
-  const prevBtn = document.querySelector('.prev');
-  const nextBtn = document.querySelector('.next');
-  const dots = document.querySelectorAll('.dot');
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    const dots = document.querySelectorAll('.dot');
 
-  let current = 0;
+    let current = 0;
 
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
-    });
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === index);
-    });
-  }
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
 
-  prevBtn.addEventListener('click', () => {
-    current = (current === 0) ? slides.length - 1 : current - 1;
-    showSlide(current);
-  });
-
-  nextBtn.addEventListener('click', () => {
-    current = (current + 1) % slides.length;
-    showSlide(current);
-  });
-
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      current = parseInt(dot.getAttribute('data-index'));
+    prevBtn.addEventListener('click', () => {
+      current = (current === 0) ? slides.length - 1 : current - 1;
       showSlide(current);
     });
-  });
 
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+    nextBtn.addEventListener('click', () => {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    });
 
-  showSlide(current); // Initialize
-    </script>
-  
- 
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        current = parseInt(dot.getAttribute('data-index'));
+        showSlide(current);
+      });
+    });
 
+    // Auto slide every 5 seconds
+    setInterval(() => {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }, 5000);
+
+    showSlide(current); // Initialize
+  </script>
 </body>
 </html>
