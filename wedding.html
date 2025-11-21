@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chromanest | Wedding Photography</title>
+ 
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+    
+    /* Navbar styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-item {
+      position: relative;
+      margin-left: 1.5rem;
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-link:hover {
+      color: #888;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      min-width: 180px;
+      padding: 0.5rem 0;
+      z-index: 1000;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-menu li {
+      padding: 0;
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 0.7rem 1.2rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    
+    .dropdown-menu a:hover {
+      background-color: #f5f5f5;
+    }
+    
+    /* COMING SOON SECTION */
+    .coming-soon-container {
+      max-width: 800px;
+      margin: 5rem auto;
+      padding: 0 5%;
+      text-align: center;
+    }
+    
+    .coming-soon-container h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: #222;
+      font-weight: 300;
+    }
+    
+    .coming-soon-container p {
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+    
+    .explore-section {
+      margin-top: 3rem;
+      padding: 2rem;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+    
+    .explore-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: #333;
+      font-weight: 400;
+    }
+    
+    .explore-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    .explore-link {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background-color: #333;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    
+    .explore-link:hover {
+      background-color: #555;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: #eee;
+      color: #4f4f4f;
+      padding: 60px 5% 30px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4f4f4f;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #4f4f4f;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: #888;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+      color: #4f4f4f;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-size: 14px;
+      color: #888;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+      }
+      
+      .nav-menu {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .nav-item {
+        margin: 0.5rem;
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .coming-soon-container h1 {
+        font-size: 2.5rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .coming-soon-container h1 {
+        font-size: 2rem;
+      }
+      
+      .explore-links {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+   <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo"><a href="index.html">Chromanest</a></div>
+     <!-- Navigation Menu -->
+      <ul class="nav-menu">
+        <!-- Photography Dropdown -->
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link">Photography</a>
+          <ul class="dropdown-menu">
+            <li><a href="wedding.html">Wedding</a></li>
+            <li><a href="newborns.html">Newborns</a></li>
+            <li><a href="christening.html">Christening</a></li>
+            <li><a href="maternity.html">Maternity</a></li>
+            <li><a href="fashion.html">Fashion</a></li>
+            <li><a href="portraits.html">Portraits</a></li>
+          </ul>
+        </li>
+
+        <!-- Other Menu Items -->
+         <li class="nav-item"><a href="packages.html" class="nav-link">Packages</a></li>
+        <li class="nav-item"><a href="retouching.html" class="nav-link">Retouching</a></li>
+        <li class="nav-item"><a href="https://chromanest.blogspot.com" class="nav-link">Blog</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+  </nav>
+
+  <!-- COMING SOON SECTION -->
+  <section class="coming-soon-container" data-aos="fade-up">
+    <h1>Wedding Photography</h1>
+    <p>We're working on something beautiful for your special day. <br>Our wedding photography portfolio will be available soon.</p>
+    
+    <div class="explore-section">
+      <h2>Explore Our Other Services</h2>
+      <div class="explore-links">
+        <a href="newborns.html" class="explore-link">Newborn Photography</a>
+        <a href="maternity.html" class="explore-link">Maternity Photography</a>
+        <a href="portraits.html" class="explore-link">Portrait Photography</a>
+        <a href="fashion.html" class="explore-link">Fashion Photography</a>
+        <a href="packages.html" class="explore-link">Packages & Pricing</a>
+        <a href="contact.html" class="explore-link">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Chromanest</h3>
+        <p>Professional photography services specializing in fashion, portraits, and special events. Creating timeless memories through the art of photography.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+  
+      <div class="footer-column">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="wedding.html">Wedding Photography</a></li>
+          <li><a href="newborns.html">Newborn Photography</a></li>
+          <li><a href="christening.html">Christening Photography</a></li>
+          <li><a href="maternity.html">Maternity Photography</a></li>
+          <li><a href="fashion.html">Fashion Photography</a></li>
+          <li><a href="portraits.html">Portrait Photography</a></li>
+          <li><a href="facepainting.html">Face Painting</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="packages.html">Packages & Pricing</a></li>
+          <li><a href="retouching.html">Retouching Services</a></li>
+          <li><a href="https://chromanest.blogspot.com">Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
+          <li><i class="fas fa-phone"></i> +30 6973949986</li>
+          <li><i class="fas fa-envelope"></i> chromanest.creatives@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>2025 Chromanest &copy; All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000 });
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

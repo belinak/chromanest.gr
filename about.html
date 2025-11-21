@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Us - Chromanest</title>
+  <title>Chromanest | About Us</title>
     <!----------------------------------------------- LOGO BOOKMARK START ---------------------------------------------------------------->
   <link rel="icon" type="image/png" href="/images/my-favicon/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/images/my-favicon/favicon.svg" />
@@ -11,8 +11,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/my-favicon/apple-touch-icon.png" />
   <link rel="manifest" href="/images/my-favicon/site.webmanifest" />
   <!----------------------------------------------- LOGO BOOKMARK END ---------------------------------------------------------------->
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     /* Reset and base styles */
@@ -158,10 +158,10 @@
       max-width: 540px;
     }
     
-     /* Footer */
+      /* Footer */
     .footer {
       background-color: #eee;
-      color: #636363;
+      color: #4f4f4f;
       padding: 60px 5% 30px;
     }
 
@@ -186,7 +186,7 @@
       left: 0;
       width: 40px;
       height: 2px;
-      background-color: #919191;
+      background-color: #4f4f4f;
     }
 
     .footer-column ul {
@@ -198,11 +198,13 @@
     }
 
     .footer-column a {
+      color: #4f4f4f;
+      text-decoration: none;
       transition: color 0.3s;
     }
 
     .footer-column a:hover {
-      color: #ccc;
+      color: #888;
     }
 
     .social-icons {
@@ -218,20 +220,22 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background-color: rgba(255,255,255,0.1);
+      background-color: rgba(0,0,0,0.1);
       transition: background-color 0.3s;
+      color: #4f4f4f;
+      text-decoration: none;
     }
 
     .social-icons a:hover {
-      background-color: rgba(255,255,255,0.2);
+      background-color: rgba(0,0,0,0.2);
     }
 
     .copyright {
       text-align: center;
       padding-top: 30px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(0,0,0,0.1);
       font-size: 14px;
-      color: #aaa;
+      color: #888;
     }
     
     /* Responsive styles */
@@ -251,6 +255,10 @@
         margin: 0.5rem;
       }
       
+       .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
       .about-container {
         flex-direction: column;
       }
@@ -261,11 +269,6 @@
     }
     
     @media (max-width: 576px) {
-      .footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.5rem;
-      }
       
       .footer-content {
         grid-template-columns: 1fr;
@@ -379,8 +382,8 @@ Let us help you make a statement, tell your story, and brighten your world—one
         <h3>Chromanest</h3>
         <p>Professional photography services specializing in fashion, portraits, and special events. Creating timeless memories through the art of photography.</p>
           <div class="social-icons">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
           <a href="#"><i class="fab fa-pinterest-p"></i></a>
         </div>
       </div>
