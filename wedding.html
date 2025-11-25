@@ -100,8 +100,8 @@
     
     /* COMING SOON SECTION */
     .coming-soon-container {
-      max-width: 800px;
-      margin: 5rem auto;
+      max-width: 1200px;
+      margin: 2rem auto;
       padding: 0 5%;
       text-align: center;
     }
@@ -116,14 +116,51 @@
     .coming-soon-container p {
       font-size: 1.2rem;
       color: #666;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    /* Two-column layout for image and explore section */
+    .content-section {
+      display: flex;
+      gap: 3rem;
+      align-items: flex-start;
+      margin-top: 2rem;
+    }
+    
+    .vertical-photo-section {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .photo-container {
+      max-width: 100%;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    
+    .photo-container:hover {
+      transform: translateY(-5px);
+    }
+    
+    .vertical-photo {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
     }
     
     .explore-section {
-      margin-top: 3rem;
+      flex: 1;
+      margin-top: 0;
       padding: 2rem;
-      background-color: #f9f9f9;
+      background-color: #f9f9f8;
       border-radius: 8px;
+      text-align: left;
+      height: fit-content;
     }
     
     .explore-section h2 {
@@ -131,27 +168,28 @@
       margin-bottom: 1.5rem;
       color: #333;
       font-weight: 400;
+      text-align: center;
     }
     
     .explore-links {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
       gap: 1rem;
     }
     
     .explore-link {
       display: inline-block;
       padding: 0.8rem 1.5rem;
-      background-color: #333;
-      color: white;
+      background-color: #e8d8c3;
+      color: #fff;
       text-decoration: none;
       border-radius: 4px;
       transition: background-color 0.3s;
+      text-align: center;
     }
     
     .explore-link:hover {
-      background-color: #555;
+      background-color: #d8c3a0;
     }
     
     /* Footer */
@@ -258,6 +296,15 @@
       .coming-soon-container h1 {
         font-size: 2.5rem;
       }
+      
+      .content-section {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      
+      .explore-section {
+        text-align: center;
+      }
     }
     
     @media (max-width: 576px) {
@@ -272,6 +319,10 @@
       .explore-links {
         flex-direction: column;
         align-items: center;
+      }
+      
+      .photo-container {
+        max-width: 100%;
       }
     }
   </style>
@@ -299,9 +350,9 @@
         <!-- Other Menu Items -->
          <li class="nav-item"><a href="packages.html" class="nav-link">Packages</a></li>
         <li class="nav-item"><a href="retouching.html" class="nav-link">Retouching</a></li>
-        <li class="nav-item"><a href="https://chromanest.blogspot.com" class="nav-link">Blog</a></li>
         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+          <li class="nav-item"><a href="https://chromanest.blogspot.com" class="nav-link">Blog</a></li>
       </ul>
   </nav>
 
@@ -310,15 +361,29 @@
     <h1>Wedding Photography</h1>
     <p>We're working on something beautiful for your special day. <br>Our wedding photography portfolio will be available soon.</p>
     
-    <div class="explore-section">
-      <h2>Explore Our Other Services</h2>
-      <div class="explore-links">
-        <a href="newborns.html" class="explore-link">Newborn Photography</a>
-        <a href="maternity.html" class="explore-link">Maternity Photography</a>
-        <a href="portraits.html" class="explore-link">Portrait Photography</a>
-        <a href="fashion.html" class="explore-link">Fashion Photography</a>
-        <a href="packages.html" class="explore-link">Packages & Pricing</a>
-        <a href="contact.html" class="explore-link">Contact Us</a>
+    <!-- Two-column layout for image and explore section -->
+    <div class="content-section">
+      <!-- VERTICAL PHOTO SECTION -->
+      <div class="vertical-photo-section" data-aos="fade-right">
+        <div class="photo-container">
+          <!-- Replace with your actual image path -->
+          <img src="images/Wedding-imgs/wedding1.jpg" 
+               alt="Elegant wedding couple portrait" 
+               class="vertical-photo">
+        </div>
+      </div>
+      
+      <!-- EXPLORE SECTION -->
+      <div class="explore-section" data-aos="fade-left">
+        <h2>Explore Our Other Services</h2>
+        <div class="explore-links">
+          <a href="newborns.html" class="explore-link">Newborn Photography</a>
+          <a href="maternity.html" class="explore-link">Maternity Photography</a>
+          <a href="portraits.html" class="explore-link">Portrait Photography</a>
+          <a href="fashion.html" class="explore-link">Fashion Photography</a>
+          <a href="packages.html" class="explore-link">Packages & Pricing</a>
+          <a href="contact.html" class="explore-link">Contact Us</a>
+        </div>
       </div>
     </div>
   </section>
