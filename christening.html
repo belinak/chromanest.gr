@@ -5,12 +5,421 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chromanest | Christening Photography</title>
   
-  <link rel="stylesheet" href="styles.css"/>
+  <!-- AOS CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* ========== CONTACT PAGE EXACT STYLES ========== */
+    /* These are the EXACT styles from your contact page */
+    
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+    
+    /* ====== NAVBAR - EXACT COPY FROM CONTACT PAGE ====== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-item {
+      position: relative;
+      margin-left: 1.5rem;
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-link:hover {
+      color: #888;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      min-width: 180px;
+      padding: 0.5rem 0;
+      z-index: 1000;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-menu li {
+      padding: 0;
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 0.7rem 1.2rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    
+    .dropdown-menu a:hover {
+      background-color: #f5f5f5;
+    }
+    
+    /* ====== CHRISTENING PAGE CONTENT STYLES ====== */
+    .cta-photo-split {
+      padding: 4rem 2rem;
+      background-color: #f9f9f9;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cta-split-inner {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-photos {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      flex: 1;
+    }
+
+    .cta-photos img,
+    .cta-bottom img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .cta-photos img:hover,
+    .cta-bottom img:hover {
+      transform: scale(1.01);
+    }
+
+    .cta-content {
+      flex: 1;
+    }
+
+    .cta-content h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #222;
+    }
+
+    .cta-content p {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .cta-button-wrapper {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .cta-button-christening {
+      background: #fff;
+      color: #000;
+      border: 2px solid #000;
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .cta-button-christening:hover {
+      background: #000;
+      color: #fff;
+    }
+    
+    .cta-img-bottom {
+      display: block;
+      margin: 2rem auto 0 auto;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .cta-img-bottom:hover {
+      transform: scale(1.02);
+    }
+
+    /* ====== LIGHTBOX STYLES ====== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+    }
+
+    .lightbox .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2.5rem;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      z-index: 1001;
+    }
+
+    .lightbox-prev, .lightbox-next {
+      position: absolute;
+      top: 50%;
+      font-size: 2.5rem;
+      color: white;
+      padding: 0.5rem;
+      cursor: pointer;
+      user-select: none;
+      z-index: 1001;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-prev {
+      left: 10px;
+    }
+
+    .lightbox-next {
+      right: 10px;
+    }
+
+    .lightbox-prev:hover, .lightbox-next:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    /* ====== FOOTER - EXACT COPY FROM CONTACT PAGE ====== */
+    .footer {
+      background-color: #eee;
+      color: #4f4f4f;
+      padding: 60px 5% 30px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4f4f4f;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #4f4f4f;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: #888;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+      color: #4f4f4f;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-size: 14px;
+      color: #888;
+    }
+    
+    /* ====== RESPONSIVE STYLES ====== */
+    @media (max-width: 768px) {
+      /* Navbar Responsive - EXACT from contact page */
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+      }
+      
+      .nav-menu {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .nav-item {
+        margin: 0.5rem;
+      }
+      
+      /* Footer Responsive - EXACT from contact page */
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      /* Christening content responsive */
+      .cta-split-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cta-photos {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .cta-photos img {
+        width: 48%;
+      }
+
+      .cta-content {
+        margin-top: 2rem;
+      }
+
+      .cta-img-bottom {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .cta-photos {
+        flex-direction: column;
+      }
+      
+      .cta-photos img {
+        width: 100%;
+      }
+    }
+
+    /* Additional responsive for very small screens */
+    @media (max-width: 480px) {
+      .cta-content h2 {
+        font-size: 2rem;
+      }
+      
+      .cta-content p {
+        font-size: 1rem;
+      }
+      
+      .nav-menu {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .nav-item {
+        margin: 0.3rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!------------------------------------------------------ NAVBAR1 ------------------------------------------------------>
+  <!-- NAVBAR - EXACT COPY FROM CONTACT PAGE -->
   <nav class="navbar">
     <div class="logo"><a href="index.html">Chromanest</a></div>
      <!-- Navigation Menu -->
@@ -21,7 +430,7 @@
           <ul class="dropdown-menu">
             <li><a href="wedding.html">Wedding</a></li>
             <li><a href="newborns.html">Newborns</a></li>
-             <li><a href="christening.html">Christening</a></li>
+            <li><a href="christening.html">Christening</a></li>
             <li><a href="maternity.html">Maternity</a></li>
             <li><a href="fashion.html">Fashion</a></li>
             <li><a href="portraits.html">Portraits</a></li>
@@ -29,22 +438,15 @@
         </li>
 
         <!-- Other Menu Items -->
-          <li class="nav-item"><a href="packages.html" class="nav-link">Packages</a></li>
+         <li class="nav-item"><a href="packages.html" class="nav-link">Packages</a></li>
         <li class="nav-item"><a href="retouching.html" class="nav-link">Retouching</a></li>
         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
         <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
           <li class="nav-item"><a href="https://chromanest.blogspot.com" class="nav-link">Blog</a></li>
       </ul>
-        </nav>
-<!------------------------------------------------------ NAVBAR1 END ------------------------------------------------------>
+  </nav>
 
-  <!-- HERO SECTION -->
-  <!--  <section class="herotitles" data-aos="fade-up">
-    <h1>Christening Photography</h1>
-    <p>Capturing the purity, joy, and spiritual beauty of your child's special day.</p>
-  </section> -->
-
-  <!-- MAIN CTA SECTION -->
+  <!-- CHRISTENING CONTENT -->
   <section class="cta-photo-split" data-aos="fade-up">
     <div class="cta-split-inner">
       <!-- Left: 2 Photos -->
@@ -54,88 +456,139 @@
       </div>
 
       <!-- Right: CTA -->
-    <div class="cta-content">
-      <h2>My christening!</h2>
-      <p>Baptism is a day full of emotions, family love and meaningful moments. Let us capture the special day of your child with artistry, sensitivity and timeless style.</p>
-      <div class="cta-button-wrapper">
-  <a href="contact.html" class="cta-button-christening">Contact us!</a>
-</div>
-
-      <img src="images/Christening-imgs/christening3.jpg" alt="Christening 3" class="cta-img-bottom" onclick="openLightbox(this.src)">
+      <div class="cta-content">
+        <h2>My christening!</h2>
+        <p>Baptism is a day full of emotions, family love and meaningful moments. Let us capture the special day of your child with artistry, sensitivity and timeless style.</p>
+        <div class="cta-button-wrapper">
+          <a href="contact.html" class="cta-button-christening">Contact us!</a>
+        </div>
+        <img src="images/Christening-imgs/christening3.jpg" alt="Christening 3" class="cta-img-bottom" onclick="openLightbox(this.src)">
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- LIGHTBOX MODAL -->
- <!-- Lightbox Modal -->
-<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
-  <span class="close" onclick="closeLightbox(event)">&times;</span>
-  <img id="lightbox-img" src="" alt="">
-  <span class="lightbox-prev" onclick="prevImage(event)">&#10094;</span>
-  <span class="lightbox-next" onclick="nextImage(event)">&#10095;</span>
-</div>
+  <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+    <span class="close" onclick="closeLightbox(event)">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+    <span class="lightbox-prev" onclick="prevImage(event)">&#10094;</span>
+    <span class="lightbox-next" onclick="nextImage(event)">&#10095;</span>
+  </div>
 
-
-  <!-- FOOTER -->
+  <!-- FOOTER - EXACT COPY FROM CONTACT PAGE -->
   <footer class="footer">
-    <div class="footer-logo">Chromanest</div>
-    <div class="footer-copy">2025 Chromanest © All rights reserved.</div>
-    <div class="footer-top">
-      <button onclick="scrollToTop()">Back to Top</button>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Chromanest</h3>
+        <p>Professional photography services specializing in fashion, portraits, and special events. Creating timeless memories through the art of photography.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+  
+      <div class="footer-column">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="wedding.html">Wedding Photography</a></li>
+          <li><a href="newborns.html">Newborn Photography</a></li>
+          <li><a href="christening.html">Christening Photography</a></li>
+          <li><a href="maternity.html">Maternity Photography</a></li>
+          <li><a href="fashion.html">Fashion Photography</a></li>
+          <li><a href="portraits.html">Portrait Photography</a></li>
+          <li><a href="facepainting.html">Face Painting</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="packages.html">Packages & Pricing</a></li>
+          <li><a href="retouching.html">Retouching Services</a></li>
+          <li><a href="https://chromanest.blogspot.com">Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
+          <li><i class="fas fa-phone"></i> +30 6973949986</li>
+          <li><i class="fas fa-envelope"></i> chromanest.creatives@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>2025 Chromanest &copy; All rights reserved.</p>
     </div>
   </footer>
 
- <!-- SCRIPTS -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init({ duration: 1000 });
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({ 
+      duration: 1000,
+      once: true
+    });
 
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+    // Lightbox functionality
+    window.onload = function () {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const imageElements = Array.from(document.querySelectorAll('.cta-photos img, .cta-img-bottom'));
+      let currentIndex = 0;
 
-  window.onload = function () {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const imageElements = Array.from(document.querySelectorAll('.cta-photos img, .cta-img-bottom'));
-    let currentIndex = 0;
-
-    // Make functions global so they work from inline HTML
-    window.openLightbox = function (src) {
-      currentIndex = imageElements.findIndex(img => img.src === src);
-      lightboxImg.src = src;
-      lightbox.style.display = 'flex';
-    }
-
-    window.closeLightbox = function (event) {
-      if (event.target === lightbox || event.target.classList.contains('close')) {
-        lightbox.style.display = 'none';
+      // Make functions global so they work from inline HTML
+      window.openLightbox = function (src) {
+        currentIndex = imageElements.findIndex(img => img.src === src);
+        if (currentIndex === -1) currentIndex = 0;
+        lightboxImg.src = src;
+        lightbox.style.display = 'flex';
       }
-    }
 
-    window.showImage = function (index) {
-      if (index >= 0 && index < imageElements.length) {
-        currentIndex = index;
-        lightboxImg.src = imageElements[currentIndex].src;
+      window.closeLightbox = function (event) {
+        if (event.target === lightbox || event.target.classList.contains('close')) {
+          lightbox.style.display = 'none';
+        }
       }
-    }
 
-    window.nextImage = function (event) {
-      event.stopPropagation();
-      if (currentIndex < imageElements.length - 1) {
-        showImage(currentIndex + 1);
+      window.showImage = function (index) {
+        if (index >= 0 && index < imageElements.length) {
+          currentIndex = index;
+          lightboxImg.src = imageElements[currentIndex].src;
+        }
       }
-    }
 
-    window.prevImage = function (event) {
-      event.stopPropagation();
-      if (currentIndex > 0) {
-        showImage(currentIndex - 1);
+      window.nextImage = function (event) {
+        event.stopPropagation();
+        if (currentIndex < imageElements.length - 1) {
+          showImage(currentIndex + 1);
+        }
       }
-    }
-  };
-</script>
+
+      window.prevImage = function (event) {
+        event.stopPropagation();
+        if (currentIndex > 0) {
+          showImage(currentIndex - 1);
+        }
+      }
+
+      // Add keyboard navigation
+      document.addEventListener('keydown', function(event) {
+        if (lightbox.style.display === 'flex') {
+          if (event.key === 'Escape') {
+            lightbox.style.display = 'none';
+          } else if (event.key === 'ArrowRight') {
+            nextImage(event);
+          } else if (event.key === 'ArrowLeft') {
+            prevImage(event);
+          }
+        }
+      });
+    };
+  </script>
 
 </body>
 </html>

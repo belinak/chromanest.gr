@@ -4,11 +4,665 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chromanest | Services</title>
-  <link rel="stylesheet" href="styles.css"/>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* ========== CONTACT PAGE EXACT STYLES ========== */
+    /* These are the EXACT styles from your contact page */
+    
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+    
+    /* ====== NAVBAR - EXACT COPY FROM CONTACT PAGE ====== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-item {
+      position: relative;
+      margin-left: 1.5rem;
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-link:hover {
+      color: #888;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      min-width: 180px;
+      padding: 0.5rem 0;
+      z-index: 1000;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-menu li {
+      padding: 0;
+    }
+    
+    .dropdown-menu a {
+      display: block;
+      padding: 0.7rem 1.2rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    
+    .dropdown-menu a:hover {
+      background-color: #f5f5f5;
+    }
+    
+    /* ====== PACKAGES PAGE CONTENT STYLES ====== */
+    /* Services Hero Image */
+    .services-hero img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Services Headings */
+    .services-headings {
+      background: #fff;
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+    }
+
+    .services-headings h2 {
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      color: #777;
+    }
+
+    .services-headings h3 {
+      font-size: 2rem;
+      font-weight: 500;
+    }
+
+    /* Packages Grid */
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 3rem 2rem;
+      background: #fff;
+    }
+
+    .package-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #fff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .package-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .package-card img {
+      width: calc(100% - 2rem); 
+      height: 400px; 
+      object-fit: cover; 
+      margin: 1rem; 
+      margin-bottom: 0; 
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* Info Box */
+    .package-info {
+      background: #f8f8f8;
+      padding: 1.5rem;
+      margin: 1rem;
+      border-radius: 8px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .package-info h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      color: #222;
+    }
+
+    .package-info ul {
+      padding-left: 1rem;
+      margin: 0;
+      font-size: 0.95rem;
+      color: #555;
+      list-style: disc;
+    }
+
+    .package-price {
+      display: flex;
+      justify-content: flex-end;
+      align-items: baseline;
+      margin-top: 1.5rem;
+    }
+
+    .starting-text {
+      font-size: 0.9rem;
+      color: #999;
+      margin-right: 0.4rem;
+    }
+
+    .price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #222;
+    }
+
+    /* CTA */
+    .services-cta {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: #fff;
+    }
+
+    .cta-button-packages {
+      background: #e8d8c3; /* light beige */
+      color: #fff;
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      font-size: 1rem;
+      border-radius: 0; /* square edges */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      display: inline-block;
+    }
+
+    .cta-button-packages:hover {
+      background: #d8c3a0; /* darker beige on hover */
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    }
+
+
+    /* BANNER WITH QUOTE */
+    .quote-banner {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      overflow: hidden;
+      margin: 3rem 0;
+    }
+
+    .quote-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .quote-banner .quote {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 2rem;
+      font-style: italic;
+      font-weight: 500;
+      max-width: 70%;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* PROCESS TITLES */
+    .process-titles {
+      background: #fff;
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      color: #222;
+    }
+
+    .process-titles h2 {
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .process-titles h3 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-top: 0;
+    }
+
+    /* PROCESS STEPS CONTAINER */
+    .process-steps {
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      padding: 0 1rem;
+    }
+
+    /* EACH PROCESS STEP */
+    .process-step {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 2.5rem;
+      gap: 1.5rem;
+    }
+
+    /* STEP IMAGE */
+    .process-step img {
+      width: 220px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    /* TEXT SIDE */
+    .process-text h4 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 0.2rem 0;
+      color: #000;
+    }
+
+    .process-text h5 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0 0 0.6rem 0;
+      color: #555;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .process-text hr {
+      border: none;
+      border-top: 2px solid #ddd;
+      width: 40px;
+      margin: 0 0 1rem 0;
+    }
+
+    .process-text p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #444;
+      margin: 0;
+    }
+
+    /* FAQ SECTION */
+    .faq-section {
+      background: #fff;
+      padding: 4rem 1.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .faq-section h2 {
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      color: #444;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-section h3 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: #000;
+    }
+
+    .faq-item {
+      border-top: 1px solid #ccc;
+    }
+
+    .faq-item:last-child {
+      border-bottom: 1px solid #ccc;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: #fff;
+      border: none;
+      text-align: left;
+      padding: 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #333;
+      transition: background 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: #f7f7f7;
+    }
+
+    .toggle-icon {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-answer {
+      display: none;
+      background: #f7f7f7; /* light gray */
+      text-align: left;
+      padding: 1rem;
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    /* Show answer when active */
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-item.active .toggle-icon {
+      transform: rotate(45deg); /* turns + into × */
+    }
+
+    .quality-section {
+      background: #fff;
+      padding: 4rem 1.5rem;
+    }
+
+    .quality-container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 0 auto;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .quality-left {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: flex-end; /* align bottom of image */
+    }
+
+    .quality-right {
+      flex: 1 1 400px;
+    }
+
+    .vertical-img {
+      width: 70%;
+      height: auto;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .quality-right h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #222;
+    }
+
+    .quality-right p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .quality-button {
+      display: inline-block;
+      background: #e8d8c3; /* light beige */
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      font-size: 1rem;
+      border-radius: 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+      transition: background 0.3s ease;
+    }
+
+    .quality-button:hover {
+      background: #d8c3a0;
+    }
+
+    .horizontal-img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    /* ====== FOOTER - EXACT COPY FROM CONTACT PAGE ====== */
+    .footer {
+      background-color: #eee;
+      color: #4f4f4f;
+      padding: 60px 5% 30px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4f4f4f;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #4f4f4f;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: #888;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+      color: #4f4f4f;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-size: 14px;
+      color: #888;
+    }
+    
+    /* ====== RESPONSIVE STYLES ====== */
+    @media (max-width: 768px) {
+      /* Navbar Responsive - EXACT from contact page */
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+      }
+      
+      .nav-menu {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .nav-item {
+        margin: 0.5rem;
+      }
+      
+      /* Footer Responsive - EXACT from contact page */
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      /* Packages content responsive */
+      .packages-grid {
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem;
+      }
+      
+      .process-step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .process-step img {
+        width: 100%;
+        max-width: 300px;
+        height: 200px;
+      }
+      
+      .quality-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .vertical-img {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+      
+      .quality-left {
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .quote-banner .quote {
+        font-size: 1.5rem;
+      }
+      
+      .services-headings h3 {
+        font-size: 1.5rem;
+      }
+      
+      .process-titles h3 {
+        font-size: 2rem;
+      }
+    }
+
+    /* Additional responsive for very small screens */
+    @media (max-width: 480px) {
+      .nav-menu {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .nav-item {
+        margin: 0.3rem;
+      }
+      
+      .package-card img {
+        height: 300px;
+      }
+      
+      .faq-section h3 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR - EXACT COPY FROM CONTACT PAGE -->
   <nav class="navbar">
     <div class="logo"><a href="index.html">Chromanest</a></div>
     <ul class="nav-menu">
@@ -46,7 +700,7 @@
   <!-- PACKAGES GRID -->
   <section class="packages-grid">
     <!-- CARD 1 -->
-    <div class="package-card">
+    <a href="https://calendly.com/chromanest-creatives/1hour" class="package-card" target="_blank">
       <img src="images/Packages-imgs/wedding.jpg" alt="Wedding">
       <div class="package-info">
         <h4>Wedding</h4>
@@ -60,10 +714,10 @@
           <span class="price">€650</span>
         </div>
       </div>
-    </div>
+    </a>
 
     <!-- CARD 2 -->
-    <div class="package-card">
+    <a href="https://calendly.com/chromanest-creatives/1hour" class="package-card" target="_blank">
       <img src="images/Packages-imgs/portrait.jpg" alt="Portrait">
       <div class="package-info">
         <h4>Portrait</h4>
@@ -77,10 +731,10 @@
           <span class="price">€100</span>
         </div>
       </div>
-    </div>
+    </a>
 
     <!-- CARD 3 -->
-    <div class="package-card">
+    <a href="https://calendly.com/chromanest-creatives/1hour" class="package-card" target="_blank">
       <img src="images/Packages-imgs/christening.jpg" alt="Christening">
       <div class="package-info">
         <h4>Christening</h4>
@@ -94,155 +748,215 @@
           <span class="price">€300</span>
         </div>
       </div>
-    </div>
+    </a>
   </section>
 
   <!-- CTA -->
   <div class="services-cta">
-    <a href="contact.html" class="cta-button-packages">Book Now</a>
+    <a href="https://calendly.com/chromanest-creatives/1hour" class="cta-button-packages" target="_blank">Book Now</a>
   </div>
-  
-  
   
   <!-- BANNER WITH QUOTE -->
-<section class="quote-banner">
-  <img src="images/Packages-imgs/banner-photo.jpg" alt="Beautiful Wedding Moment" />
-  <blockquote class="quote">
-    "Turning Your Love Story Into Beautiful, Lasting Memories One Click At A Time."
-  </blockquote>
-</section>
+  <section class="quote-banner">
+    <img src="images/Packages-imgs/banner-photo.jpg" alt="Beautiful Wedding Moment" />
+    <blockquote class="quote">
+      "Turning Your Love Story Into Beautiful, Lasting Memories One Click At A Time."
+    </blockquote>
+  </section>
 
-<!-- PROCESS TITLES -->
-<section class="process-titles">
-  <h2>PROCESS</h2>
-  <h3>What To Expect</h3>
-</section>
+  <!-- PROCESS TITLES -->
+  <section class="process-titles">
+    <h2>PROCESS</h2>
+    <h3>What To Expect</h3>
+  </section>
 
-<!-- PROCESS STEPS -->
-<section class="process-steps">
+  <!-- PROCESS STEPS -->
+  <section class="process-steps">
 
-  <div class="process-step">
-    <img src="images/Packages-imgs/process/step1.jpg" alt="Initial Consultation" />
-    <div class="process-text">
-      <h4>01</h4>
-      <h5>INITIAL CONSULTATION</h5>
-      <hr />
-      <p>We’ll discuss your vision, style preferences, and key moments. This meeting helps build a relationship, allowing me to capture your love story authentically.</p>
+    <div class="process-step">
+      <img src="images/Packages-imgs/process/step1.jpg" alt="Initial Consultation" />
+      <div class="process-text">
+        <h4>01</h4>
+        <h5>INITIAL CONSULTATION</h5>
+        <hr />
+        <p>We'll discuss your vision, style preferences, and key moments. This meeting helps build a relationship, allowing me to capture your love story authentically.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="process-step">
-    <img src="images/Packages-imgs/process/step2.jpg" alt="Planning & Preparations" />
-    <div class="process-text">
-      <h4>02</h4>
-      <h5>PLANNING & PREPARATIONS</h5>
-      <hr />
-      <p>Create a detailed photography timeline and finalize locations and special requests. This thorough planning ensures a smooth and beautifully captured wedding day.</p>
+    <div class="process-step">
+      <img src="images/Packages-imgs/process/step2.jpg" alt="Planning & Preparations" />
+      <div class="process-text">
+        <h4>02</h4>
+        <h5>PLANNING & PREPARATIONS</h5>
+        <hr />
+        <p>Create a detailed photography timeline and finalize locations and special requests. This thorough planning ensures a smooth and beautifully captured wedding day.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="process-step">
-    <img src="images/Packages-imgs/process/step3.jpg" alt="Event Day" />
-    <div class="process-text">
-      <h4>03</h4>
-      <h5>EVENT DAY</h5>
-      <hr />
-      <p>On your wedding day, I’ll unobtrusively capture every special moment, from candid emotions to posed portraits. My goal is to document your love story as it naturally unfolds.</p>
+    <div class="process-step">
+      <img src="images/Packages-imgs/process/step3.jpg" alt="Event Day" />
+      <div class="process-text">
+        <h4>03</h4>
+        <h5>EVENT DAY</h5>
+        <hr />
+        <p>On your wedding day, I'll unobtrusively capture every special moment, from candid emotions to posed portraits. My goal is to document your love story as it naturally unfolds.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="process-step">
-    <img src="images/Packages-imgs/process/step4.jpg" alt="Post-Production Delivery" />
-    <div class="process-text">
-      <h4>04</h4>
-      <h5>POST-PRODUCTION DELIVERY</h5>
-      <hr />
-      <p>I will meticulously edit and enhance your photos so that you’ll receive a curated collection of high-quality images to cherish forever.</p>
+    <div class="process-step">
+      <img src="images/Packages-imgs/process/step4.jpg" alt="Post-Production Delivery" />
+      <div class="process-text">
+        <h4>04</h4>
+        <h5>POST-PRODUCTION DELIVERY</h5>
+        <hr />
+        <p>I will meticulously edit and enhance your photos so that you'll receive a curated collection of high-quality images to cherish forever.</p>
+      </div>
     </div>
-  </div>
 
-</section>
+  </section>
 
   <!-- FAQ SECTION -->
-<section class="faq-section">
-  <h2>FAQ</h2>
-  <h3>Any Queries?</h3>
+  <section class="faq-section">
+    <h2>FAQ</h2>
+    <h3>Any Queries?</h3>
 
-  <div class="faq-item">
-    <button class="faq-question">Do you travel for events? <span class="toggle-icon">+</span></button>
-    <div class="faq-answer">
-      Yes, I will be happy to travel anywhere in Europe to capture your special day. Travel fees may apply.
+    <div class="faq-item">
+      <button class="faq-question">Do you travel for events? <span class="toggle-icon">+</span></button>
+      <div class="faq-answer">
+        Yes, I will be happy to travel anywhere in Europe to capture your special day. Travel fees may apply.
+      </div>
     </div>
-  </div>
 
-  <div class="faq-item">
-    <button class="faq-question">How do I secure a booking? <span class="toggle-icon">+</span></button>
-    <div class="faq-answer">
-      To secure a booking, a signed contract and a 25% non-refundable deposit is required. The remaining balance is due 2 weeks before the event.
+    <div class="faq-item">
+      <button class="faq-question">How do I secure a booking? <span class="toggle-icon">+</span></button>
+      <div class="faq-answer">
+        To secure a booking, a signed contract and a 25% non-refundable deposit is required. The remaining balance is due 2 weeks before the event.
+      </div>
     </div>
-  </div>
 
-  <div class="faq-item">
-    <button class="faq-question">How far in advance should I book you? <span class="toggle-icon">+</span></button>
-    <div class="faq-answer">
-      It's best to book as soon as you have your date and venue confirmed. Popular dates can fill up quickly, sometimes a year or more in advance.
+    <div class="faq-item">
+      <button class="faq-question">How far in advance should I book you? <span class="toggle-icon">+</span></button>
+      <div class="faq-answer">
+        It's best to book as soon as you have your date and venue confirmed. Popular dates can fill up quickly, sometimes a year or more in advance.
+      </div>
     </div>
-  </div>
 
-  <div class="faq-item">
-    <button class="faq-question">What happens if you are unable to attend on the day of the event? <span class="toggle-icon">+</span></button>
-    <div class="faq-answer">
-      In the unlikely event that I cannot attend, I have a network of professional photographers I can call upon. I will ensure a qualified replacement is found.
+    <div class="faq-item">
+      <button class="faq-question">What happens if you are unable to attend on the day of the event? <span class="toggle-icon">+</span></button>
+      <div class="faq-answer">
+        In the unlikely event that I cannot attend, I have a network of professional photographers I can call upon. I will ensure a qualified replacement is found.
+      </div>
     </div>
-  </div>
 
-  <div class="faq-item">
-    <button class="faq-question">How long will it take to receive the photos? <span class="toggle-icon">+</span></button>
-    <div class="faq-answer">
-      You will receive the fully edited photos within 6 weeks after your wedding or engagement. For portrait sessions, you will receive the photos within 1 week.
+    <div class="faq-item">
+      <button class="faq-question">How long will it take to receive the photos? <span class="toggle-icon">+</span></button>
+      <div class="faq-answer">
+        You will receive the fully edited photos within 6 weeks after your wedding or engagement. For portrait sessions, you will receive the photos within 1 week.
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-<section class="quality-section">
-  <div class="quality-container">
-    <div class="quality-left">
-      <img src="images/Packages-imgs/quality/quality-vertical.jpg" alt="Quality Vertical Photo" class="vertical-img">
+  <section class="quality-section">
+    <div class="quality-container">
+      <div class="quality-left">
+        <img src="images/Packages-imgs/quality/quality-vertical.jpg" alt="Quality Vertical Photo" class="vertical-img">
+      </div>
+      <div class="quality-right">
+        <h3>Quality Guaranteed</h3>
+        <p>On your big day, you can count on me to turn fleeting moments into timeless treasures you will cherish for generations.</p>
+        <a href="https://chromanest.blogspot.com" class="quality-button" target="_blank">Visit my Blog</a>
+        <img src="images/Packages-imgs/quality/quality-horizontal.jpg" alt="Quality Horizontal Photo" class="horizontal-img">
+      </div>
     </div>
-    <div class="quality-right">
-      <h3>Quality Guaranteed</h3>
-      <p>On your big day, you can count on me to turn fleeting moments into timeless treasures you will cherish for generations.</p>
-      <a href="https://chromanest.blogspot.com" class="quality-button">Visit my Blog</a>
-      <img src="images/Packages-imgs/quality/quality-horizontal.jpg" alt="Quality Horizontal Photo" class="horizontal-img">
-    </div>
-  </div>
-</section>
+  </section>
 
-
-
-
-  <!-- FOOTER -->
+  <!-- FOOTER - EXACT COPY FROM CONTACT PAGE -->
   <footer class="footer">
-    <div class="footer-logo">Chromanest</div>
-    <div class="footer-copy">2025 Chromanest © All rights reserved.</div>
-    <div class="footer-top">
-      <button onclick="scrollToTop()">Back to Top</button>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Chromanest</h3>
+        <p>Professional photography services specializing in fashion, portraits, and special events. Creating timeless memories through the art of photography.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+  
+      <div class="footer-column">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="wedding.html">Wedding Photography</a></li>
+          <li><a href="newborns.html">Newborn Photography</a></li>
+          <li><a href="christening.html">Christening Photography</a></li>
+          <li><a href="maternity.html">Maternity Photography</a></li>
+          <li><a href="fashion.html">Fashion Photography</a></li>
+          <li><a href="portraits.html">Portrait Photography</a></li>
+          <li><a href="facepainting.html">Face Painting</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="packages.html">Packages & Pricing</a></li>
+          <li><a href="retouching.html">Retouching Services</a></li>
+          <li><a href="https://chromanest.blogspot.com">Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
+          <li><i class="fas fa-phone"></i> +30 6973949986</li>
+          <li><i class="fas fa-envelope"></i> chromanest.creatives@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>2025 Chromanest &copy; All rights reserved.</p>
     </div>
   </footer>
 
+  <script>
+    // FAQ functionality
+    const faqItems = document.querySelectorAll('.faq-item');
 
-<script>
-  const faqItems = document.querySelectorAll('.faq-item');
-
-  faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    question.addEventListener('click', () => {
-      item.classList.toggle('active');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
     });
-  });
-</script>
 
+    // Smooth scroll to top function
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Add click indication for package cards
+    document.addEventListener('DOMContentLoaded', function() {
+      const packageCards = document.querySelectorAll('.package-card');
+      
+      packageCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+          // Add a visual feedback on click
+          this.style.transform = 'translateY(-2px)';
+          setTimeout(() => {
+            this.style.transform = 'translateY(-8px)';
+          }, 150);
+        });
+      });
+      
+      // Also update the main Book Now button to go to Calendly
+      const bookNowButton = document.querySelector('.cta-button-packages');
+      if (bookNowButton) {
+        bookNowButton.href = 'https://calendly.com/chromanest-creatives/1hour';
+        bookNowButton.target = '_blank';
+      }
+    });
+  </script>
 
 </body>
 </html>
