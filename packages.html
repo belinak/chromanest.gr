@@ -54,6 +54,18 @@
       letter-spacing: 1px;
     }
     
+     .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      height: 50px; /* 1 unit */
+      width: 200px; /* 4 units (1:4 ratio) */
+      object-fit: contain;
+    }
+
+    
     .nav-menu {
       display: flex;
       list-style: none;
@@ -626,6 +638,11 @@
       .quality-left {
         justify-content: center;
       }
+         .logo img {
+        height: 40px;
+        width: 160px;
+      }
+      
     }
     
     @media (max-width: 576px) {
@@ -644,6 +661,11 @@
       .process-titles h3 {
         font-size: 2rem;
       }
+        .logo img {
+        height: 35px;
+        width: 140px;
+      }
+      
     }
 
     /* Additional responsive for very small screens */
@@ -671,7 +693,9 @@
 
   <!-- NAVBAR - EXACT COPY FROM CONTACT PAGE -->
   <nav class="navbar">
-    <div class="logo"><a href="index.html">Chromanest</a></div>
+    <div class="logo"><a href="index.html">
+        <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
+      </a></div>
     <ul class="nav-menu">
       <li class="nav-item dropdown">
         <a href="index.html" class="nav-link">Photography</a>

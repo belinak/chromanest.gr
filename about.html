@@ -158,6 +158,19 @@
       max-width: 540px;
     }
     
+      /* logo */
+    .logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px; /* Changed from text to image */
+  width: 200px; /* Changed from text to image */
+  object-fit: contain;
+}
+     /* -logo */ 
+    
       /* Footer */
     .footer {
       background-color: #eee;
@@ -266,6 +279,12 @@
       .about-text h2 {
         font-size: 2rem;
       }
+      
+       .logo img {
+    height: 40px;
+    width: 160px;
+  }
+      
     }
     
     @media (max-width: 576px) {
@@ -273,6 +292,11 @@
       .footer-content {
         grid-template-columns: 1fr;
       }
+       .logo img {
+    height: 35px;
+    width: 140px;
+  }
+      
     }
     
     
@@ -290,7 +314,9 @@
 
  <!-- NAVBAR1 -->
   <nav class="navbar">
-    <div class="logo"><a href="index.html">Chromanest</a></div>
+    <div class="logo"> <a href="index.html">
+        <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
+      </a></div>
      <!-- Navigation Menu -->
       <ul class="nav-menu">
         <!-- Photography Dropdown -->
