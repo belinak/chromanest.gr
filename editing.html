@@ -1,134 +1,401 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chromanest | Retouching Services</title>
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chromanest | Editing</title>
+
+  <!-- favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/Favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/Favicon/apple-touch-icon.png">
   <link rel="shortcut icon" href="images/Favicon/favicon.ico">
-  
-  
-  
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!----------------------------------------------- LOGO BOOKMARK START ---------------------------------------------------------------->
-  <!----------------------------------------------- LOGO BOOKMARK END ---------------------------------------------------------------->
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+  <!-- AOS & Font Awesome -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* Reset and base styles */
+    /* ----- RESET & BASE ----- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
-      color: #333;
+      color: #2c2c2c;
       background-color: #fff;
     }
-    
-    /* Navbar styles */
+
+    /* ----- NAVBAR (unchanged) ----- */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1.5rem 5%;
-      background-color: #fff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
       position: sticky;
       top: 0;
       z-index: 1000;
     }
-    
+
     .logo a {
       font-size: 1.8rem;
       font-weight: 700;
-      color: #333;
+      color: #1e1e1e;
       text-decoration: none;
       letter-spacing: 1px;
     }
-    
-    
-     .logo {
+
+    .logo {
       display: flex;
       align-items: center;
     }
-    
+
     .logo img {
-      height: 50px; /* 1 unit */
-      width: 200px; /* 4 units (1:4 ratio) */
+      height: 50px;
+      width: 200px;
       object-fit: contain;
     }
 
-    
-    
     .nav-menu {
       display: flex;
       list-style: none;
     }
-    
+
     .nav-item {
       position: relative;
       margin-left: 1.5rem;
     }
-    
+
     .nav-link {
       text-decoration: none;
-      color: #333;
+      color: #2c2c2c;
       font-weight: 500;
-      transition: color 0.3s;
+      transition: color 0.2s;
     }
-    
+
     .nav-link:hover {
-      color: #888;
+      color: #6b6b6b;
     }
-    
+
     .dropdown-menu {
       display: none;
       position: absolute;
       top: 100%;
       left: 0;
-      background-color: #fff;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      background-color: #ffffff;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
       list-style: none;
       min-width: 180px;
       padding: 0.5rem 0;
       z-index: 1000;
+      border-radius: 0; /* square dropdown to match aesthetic */
     }
-    
+
     .dropdown:hover .dropdown-menu {
       display: block;
     }
-    
+
     .dropdown-menu li {
       padding: 0;
     }
-    
+
     .dropdown-menu a {
       display: block;
       padding: 0.7rem 1.2rem;
-      color: #333;
+      color: #2c2c2c;
       text-decoration: none;
-      transition: background-color 0.3s;
+      transition: background-color 0.2s;
     }
-    
+
     .dropdown-menu a:hover {
-      background-color: #f5f5f5;
+      background-color: #f2f2f2;
     }
-    
-    /* Footer */
+
+    /* ----- HEADER SECTION ----- */
+    .page-header {
+      max-width: 900px;
+      margin: 2rem auto 1rem;
+      padding: 0 5%;
+      text-align: center;
+    }
+
+    .discreet-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #2a2a2a;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid #d0d0d0;
+      padding-bottom: 0.4rem;
+      font-family: 'Courier New', Courier, monospace;
+      display: inline-block;
+    }
+
+    .intro-text {
+      max-width: 750px;
+      margin: 0 auto 1.5rem auto;
+      color: #4f4f4f;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .block-quote {
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #3a3a3a;
+      background-color: #f6f6f6;
+      padding: 1.5rem 2rem;
+      max-width: 650px;
+      margin: 2rem auto;
+      border-left: 6px solid #b3b3b3;
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    /* ----- EDITING GRID (4 columns, hover swap) ----- */
+    .editing-grid-section {
+      max-width: 1300px;
+      margin: 3rem auto;
+      padding: 0 5%;
+    }
+
+    .grid-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      color: #2a2a2a;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #dbdbdb;
+      padding-bottom: 0.8rem;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .grid-card {
+      position: relative;
+      background-color: #f4f4f4;
+      /* SQUARE CORNERS — no border-radius */
+      border-radius: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s;
+      aspect-ratio: 1 / 1;
+      cursor: default;
+    }
+
+    .grid-card:hover {
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+
+    .image-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.25s ease;
+    }
+
+    .before-img, .after-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .after-img {
+      opacity: 0;
+    }
+
+    .grid-card:hover .after-img {
+      opacity: 1;
+    }
+
+    .grid-card:hover .before-img {
+      opacity: 0;
+    }
+
+    /* LABEL — multi-line, full text visible, background adjusted */
+    .card-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(20,20,20,0.85), rgba(20,20,20,0.4) 70%, transparent);
+      color: #f0f0f0;
+      padding: 25px 12px 15px 12px;  /* more top padding to reveal multi-line */
+      font-size: 0.9rem;
+      font-weight: 500;
+      line-height: 1.4;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+      pointer-events: none;
+      z-index: 5;
+      white-space: normal;        /* allow wrapping */
+      word-break: break-word;     /* prevent overflow */
+      text-align: left;
+      display: flex;
+      align-items: flex-end;      /* text sits at bottom */
+    }
+
+    /* responsive for smaller screens */
+    @media (max-width: 900px) {
+      .image-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      .card-label {
+        font-size: 0.8rem;
+        padding: 20px 8px 10px 8px;
+      }
+    }
+    @media (max-width: 500px) {
+      .image-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ----- SECTIONS (fixed culling layout) ----- */
+    .content-section {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 5%;
+    }
+
+    .section-heading {
+      font-size: 2rem;
+      font-weight: 400;
+      color: #222;
+      border-left: 6px solid #aaaaaa;
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .pros-list {
+      background: #f8f8f8;
+      padding: 2.5rem;
+      /* square corners, because we like squares now */
+      border-radius: 0;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.02);
+    }
+
+    .pros-list p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: #2e2e2e;
+    }
+
+    .pros-list ul {
+      list-style: none;
+      columns: 2;
+      column-gap: 2.5rem;
+    }
+
+    .pros-list li {
+      margin-bottom: 1rem;
+      padding-left: 1.8rem;
+      position: relative;
+      break-inside: avoid;
+      color: #3a3a3a;
+      line-height: 1.5;
+    }
+
+    .pros-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #6b6b6b;
+      font-size: 1.2rem;
+    }
+
+    /* nested list (culling) — FIXED INDENTATION & BULLETS */
+    .nested-wrapper {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+    .culling-nested {
+      list-style: disc;
+      margin-left: 1.8rem;
+      margin-top: 0.4rem;
+      columns: 1;               /* override parent columns */
+      display: block;
+    }
+    .culling-nested li {
+      padding-left: 0.3rem;
+      margin-bottom: 0.4rem;
+      columns: auto;            /* ensure no column break */
+      break-inside: avoid;
+    }
+    .culling-nested li::before {
+      display: none;            /* remove extra pseudo bullet */
+    }
+
+    /* extra spacing for the "culling" parent li */
+    .culling-parent {
+      margin-bottom: 0.8rem;
+    }
+
+    .trust-section {
+      background-color: #f3f3f3;
+      padding: 3rem 5%;
+      margin-top: 3rem;
+      /* square corners, no rounding */
+      border-radius: 0;
+    }
+
+    .trust-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;           /* center all text in trust section */
+    }
+
+    .trust-content p {
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+      color: #3a3a3a;
+      text-align: center;
+    }
+
+    .trust-content strong {
+      color: #2c2c2c;
+      font-size: 1.2rem;
+      display: block;
+      margin: 1.5rem 0 0.5rem;
+      font-weight: 600;
+    }
+
+    .signature-line {
+      font-style: italic;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      color: #4a4a4a;
+      border-top: 1px dashed #bdbdbd;
+      padding-top: 1.5rem;
+      text-align: center;          /* centered as requested */
+    }
+
+    /* ----- FOOTER (unchanged, but squares everywhere) ----- */
     .footer {
-      background-color: #eee;
-      color: #636363;
+      background-color: #eaeaea;
+      color: #3f3f3f;
       padding: 60px 5% 30px;
+      margin-top: 3rem;
     }
 
     .footer-content {
@@ -143,6 +410,7 @@
       margin-bottom: 20px;
       position: relative;
       padding-bottom: 10px;
+      color: #2d2d2d;
     }
 
     .footer-column h3::after {
@@ -152,7 +420,7 @@
       left: 0;
       width: 40px;
       height: 2px;
-      background-color: #919191;
+      background-color: #7e7e7e;
     }
 
     .footer-column ul {
@@ -164,13 +432,13 @@
     }
 
     .footer-column a {
-      color: #636363;
+      color: #3f3f3f;
       text-decoration: none;
-      transition: color 0.3s;
+      transition: color 0.2s;
     }
 
     .footer-column a:hover {
-      color: #333;
+      color: #111;
     }
 
     .social-icons {
@@ -185,442 +453,43 @@
       justify-content: center;
       width: 36px;
       height: 36px;
-      border-radius: 50%;
-      background-color: rgba(0,0,0,0.1);
-      transition: background-color 0.3s;
-      color: #636363;
+      border-radius: 0;    /* square social buttons to match */
+      background-color: rgba(0,0,0,0.06);
+      transition: background-color 0.2s;
+      color: #3f3f3f;
       text-decoration: none;
     }
 
     .social-icons a:hover {
-      background-color: rgba(0,0,0,0.2);
+      background-color: rgba(0,0,0,0.15);
     }
 
     .copyright {
       text-align: center;
       padding-top: 30px;
-      border-top: 1px solid rgba(0,0,0,0.1);
+      border-top: 1px solid rgba(0,0,0,0.08);
       font-size: 14px;
-      color: #636363;
+      color: #6f6f6f;
     }
-    
-    /* Responsive styles */
+
     @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        padding: 1rem 5%;
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
       }
-      
-      .nav-menu {
-        margin-top: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
+      .pros-list ul {
+        columns: 1;
       }
-      
-      .nav-item {
-        margin: 0.5rem;
-      }
-      
+    }
+    @media (max-width: 576px) {
       .footer-content {
         grid-template-columns: 1fr;
       }
-      
-        .logo img {
-        height: 40px;
-        width: 160px;
-      }
-      
-      
     }
-    
-    
-     @media (max-width: 576px){ 
-    
-     .logo img {
-        height: 35px;
-        width: 140px;
-      }
-      
-    }
-    
-    
-    /*------------------------------------------------- Retouching Start ----------------------------------------*/
-    .retouching-banner {
-      background: #f7f7f7;
-      padding: 2rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      min-height: 40vh;
-    }
-
-    .retouching-banner img {
-      width: 200px;
-      height: auto;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-
-    .retouching-banner-text h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
-      color: #222;
-    }
-
-    .retouching-banner-text h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 1rem;
-      color: #555;
-    }
-
-    .retouching-banner-text p {
-      font-size: 1rem;
-      color: #444;
-      max-width: 700px;
-      line-height: 1.6;
-    }
-    
-    /* ---------------------------------------------RESTORATIONS START--------------------------------------------*/
-    .restoration-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-    }
-
-    .restoration-text {
-      flex: 1 1 400px;
-      text-align: center;
-    }
-
-    .restoration-text h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #222;
-    }
-
-    .restoration-text hr {
-      width: 50px;
-      height: 3px;
-      background: #ccc;
-      border: none;
-      margin: 0 auto 1.5rem;
-    }
-    
-    .restoration-text p {
-      font-size: 1rem;
-      color: #444;
-      line-height: 1.6;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .restoration-gallery {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      width: 300px;
-      flex: 1 1 400px;
-      justify-content: center;
-    }
-        
-    .restoration-gallery img {
-      width: 100%;
-      border-radius: 6px;
-      object-fit: cover;
-      cursor: pointer;
-    }
-    
-    /* ----------------------------------------PORTRAITS START--------------------------------------------*/
-    .portraits-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-      background: #f7f7f7;
-    }
-
-    .portraits-text {
-      flex: 1 1 400px;
-      text-align: center;
-      order: 2; /* This places text on the right */
-    }
-
-    .portraits-text h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #222;
-    }
-
-    .portraits-text hr {
-      width: 50px;
-      height: 3px;
-      background: #ccc;
-      border: none;
-      margin: 0 auto 1.5rem;
-    }
-
-    .portraits-text p {
-      font-size: 1rem;
-      color: #444;
-      line-height: 1.6;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .portraits-gallery {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      width: 300px;
-      flex: 1 1 400px;
-      justify-content: center;
-      order: 1; /* This places gallery on the left */
-    }
-        
-    .portraits-gallery img {
-      width: 100%;
-      border-radius: 6px;
-      object-fit: cover;
-      cursor: pointer;
-    }
-    
-    /* ----------------------------------------FASHION START--------------------------------------------*/
-    .fashion-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-    }
-
-    .fashion-text {
-      flex: 1 1 400px;
-      text-align: center;
-    }
-
-    .fashion-text h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #222;
-    }
-
-    .fashion-text hr {
-      width: 50px;
-      height: 3px;
-      background: #ccc;
-      border: none;
-      margin: 0 auto 1.5rem;
-    }
-    
-    .fashion-text p {
-      font-size: 1rem;
-      color: #444;
-      line-height: 1.6;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .fashion-gallery {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      width: 300px;
-      flex: 1 1 400px;
-      justify-content: center;
-    }
-        
-    .fashion-gallery img {
-      width: 100%;
-      height: auto; /* Changed from max-height: 200px */
-      border-radius: 6px;
-      object-fit: cover;
-      cursor: pointer;
-    }
-    
-    /* ----------------------------------------BEAUTY START --------------------------------------------*/
-    .beauty-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-      background: #f7f7f7;
-    }
-
-    .beauty-text {
-      flex: 1 1 400px;
-      text-align: center;
-      order: 2; /* This places text on the right */
-    }
-
-    .beauty-text h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #222;
-    }
-
-    .beauty-text hr {
-      width: 50px;
-      height: 3px;
-      background: #ccc;
-      border: none;
-      margin: 0 auto 1.5rem;
-    }
-
-    .beauty-text p {
-      font-size: 1rem;
-      color: #444;
-      line-height: 1.6;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .beauty-gallery {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      width: 300px;
-      flex: 1 1 400px;
-      justify-content: center;
-      order: 1; /* This places gallery on the left */
-    }
-        
-    .beauty-gallery img {
-      width: 100%;
-      border-radius: 6px;
-      object-fit: cover;
-      cursor: pointer;
-    }
-    
-    .fade-in-section {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .fade-in-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 768px) {
-      .retouching-banner,
-      .beauty-section,
-      .portraits-section {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .restoration-gallery,
-      .portraits-gallery,
-      .fashion-gallery,
-      .beauty-gallery {
-        grid-template-columns: 1fr;
-      }
-      
-      /* Reset order for mobile */
-      .portraits-text,
-      .portraits-gallery,
-      .beauty-text,
-      .beauty-gallery {
-        order: initial;
-      }
-    }
-    
-    /* ===== RETOUCHING LIGHTBOX ===== */
-    .lightbox-retouching {
-      position: fixed !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      background: rgba(0,0,0,0.9);
-      z-index: 999999 !important;
-    }
-
-    .lightbox-retouching[aria-hidden="false"] {
-      display: flex;
-    }
-
-    .lightbox-retouching img {
-      max-width: 92%;
-      max-height: 86%;
-      object-fit: contain;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-      border-radius: 4px;
-    }
-
-    .lightbox-retouching .lr-close,
-    .lightbox-retouching .lr-prev,
-    .lightbox-retouching .lr-next {
-      position: absolute;
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 36px;
-      cursor: pointer;
-      padding: 8px 12px;
-      line-height: 1;
-      user-select: none;
-    }
-
-    .lightbox-retouching .lr-close {
-      top: 18px;
-      right: 26px;
-      font-size: 44px;
-    }
-
-    .lightbox-retouching .lr-prev {
-      left: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 48px;
-    }
-
-    .lightbox-retouching .lr-next {
-      right: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 48px;
-    }
-
-    .lightbox-retouching .lr-prev,
-    .lightbox-retouching .lr-next {
-      padding: 18px;
-      background: rgba(0,0,0,0.15);
-      border-radius: 8px;
-    }
-
-    .lightbox-retouching button:focus {
-      outline: 2px solid #fff;
-      outline-offset: 2px;
-    }
-    
-    
   </style>
 </head>
 <body>
 
- <!-- NAVBAR (identical) -->
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="logo">
       <a href="index.html">
@@ -658,92 +527,62 @@
       <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
     </ul>
   </nav>
-        
-  <!-- RETOUCHING BANNER -->
-  <section class="retouching-banner">
-    <img src="images/Retouching-imgs/retouching-banner.png" alt="Retouching Banner Photo">
-    <div class="retouching-banner-text">
-      <h2><center>RETOUCHING MATTERS</center></h2>
-      <h3><center>SHOW YOUR WORK AT ITS BEST</center></h3>
-      <center><p>Wouldn't you love to tell your client: "Don't worry, I have the best retoucher for that"?<br>We love solving problems and making things better than when we found them.<br>If our work is never noticed, it means we've succeeded.<br>Our goal is to optimize your creative vision - on time and on budget.</p></center>
+
+  <!-- HEADER -->
+  <section class="page-header" data-aos="fade-up">
+    <div class="discreet-title">Η επεξεργασία μετράει!</div>
+    <div class="intro-text">
+      <p style="font-size:1.3rem; font-weight:300;">Η φωτογραφία δεν τελειώνει τη στιγμή που πατιέται το κλικ!</p>
+      <p style="margin-top:1.2rem;">Είτε είστε ιδιώτης που θέλει οι προσωπικές του φωτογραφίες να δείχνουν πραγματικά ξεχωριστές, είτε επαγγελματίας που χρειάζεται αξιόπιστη υποστήριξη στην επεξεργασία των galleries του, η επαγγελματική επεξεργασία κάνει την διαφορά ανάμεσα σε μια "καλή" εικόνα και σε μια εικόνα που εντυπωσιάζει.</p>
+    </div>
+    <div class="block-quote">
+      “Εάν η δουλειά μας δεν μπορεί να εντοπιστεί, τότε σημαίνει για εμάς ότι έχουμε κάνει καλά την δουλειά μας.”
     </div>
   </section>
 
-  <!-- RESTORATIONS SECTION -->
-  <section class="fade-in-section">
-    <section class="restoration-section">
-      <section class="restoration-text">
-        <h2>RESTORATIONS</h2>
-        <hr>
-        Let's collaborate to save the photos of all your loved ones. No matter the condition, we will preserve the memory of your loved ones in the condition it was always meant to be. We can fix missing parts, recolor the photos, fix fading, mold and water damage among others.
-      </section>
-      <div class="restoration-gallery">
-        <!-- Replace these with actual before/after photos -->
-        <img src="images/Retouching-imgs/restorations/before1.jpg" alt="Before 1">
-        <img src="images/Retouching-imgs/restorations/after1.jpg" alt="After 1">
-        <img src="images/Retouching-imgs/restorations/before2.jpg" alt="Before 2">
-        <img src="images/Retouching-imgs/restorations/after2.jpg" alt="After 2">
-      </div>
-    </section>
-  </section>
-  
-  <!-- PORTRAITS SECTION -->
-  <section class="fade-in-section">
-    <section class="portraits-section">
-      <div class="portraits-gallery">
-        <img src="images/Retouching-imgs/portraits/before1.jpg" alt="Before Portrait 1">
-        <img src="images/Retouching-imgs/portraits/after1.jpg" alt="After Portrait 1">
-        <img src="images/Retouching-imgs/portraits/before2.jpg" alt="Before Portrait 2">
-        <img src="images/Retouching-imgs/portraits/after2.jpg" alt="After Portrait 2">
-      </div>
-      <div class="portraits-text">
-        <h2>PORTRAITS</h2>
-        <hr>
-        <p>Are you just looking to zhuzh up your photos? <br>Clean someone from the background? <br>Fix those annoying fly away hairs? <br>Red eyes? <br>Let's see what we can do for you!</p>
-      </div>
-    </section>
+  <!-- GRID 28 items -->
+  <section class="editing-grid-section" data-aos="fade-up">
+    <h2 class="grid-title">Ενδεικτικές υπηρεσίες επεξεργασίας</h2>
+    <div class="image-grid" id="editingGrid"></div>
   </section>
 
-  <!-- FASHION SECTION -->
-  <section class="fade-in-section">
-    <section class="fashion-section">
-      <section class="fashion-text">
-        <h2>FASHION</h2>
-        <hr>
-        <div>
-          Are you a photographer and want to advance your photography without wasting time in retouching? Let us take on the heavy load and follow your artistic vision.
-        </div>
-      </section>
-      <div class="fashion-gallery">
-        <!-- Replace these with actual before/after photos -->
-        <img src="images/Retouching-imgs/fashion/before1.jpg" alt="Before 1">
-        <img src="images/Retouching-imgs/fashion/after1.jpg" alt="After 1">
-        <img src="images/Retouching-imgs/fashion/before2.jpg" alt="Before 2">
-        <img src="images/Retouching-imgs/fashion/after2.jpg" alt="After 2">
-          <img src="images/Retouching-imgs/fashion/before3.jpg" alt="Before 3">
-        <img src="images/Retouching-imgs/fashion/after3.jpg" alt="After 3">
-      </div>
-    </section>
-  </section>
-  
-  <!-- BEAUTY SECTION -->
-  <section class="fade-in-section">
-    <section class="beauty-section">
-      <div class="beauty-gallery">
-        <img src="images/Retouching-imgs/beauty/before1.jpg" alt="Before Beauty 1">
-        <img src="images/Retouching-imgs/beauty/after1.jpg" alt="After Beauty 1">
-        <!--<img src="images/Retouching-imgs/beauty/before2.jpg" alt="Before Beauty 2">-->
-        <!--<img src="images/Retouching-imgs/beauty/after2.jpg" alt="After Beauty 2">-->
-      </div>
-      <div class="beauty-text">
-        <h2>BEAUTY</h2>
-        <hr>
-        <p>Are you a photographer and want to advance your photography without wasting time in retouching? Let us take on the heavy load and follow your artistic vision.</p>
-      </div>
-    </section>
+  <!-- ΓΙΑ ΤΟΝ ΕΠΑΓΓΕΛΜΑΤΙΑ (fixed culling) -->
+  <section class="content-section" data-aos="fade-up">
+    <h2 class="section-heading">Για τον επαγγελματία</h2>
+    <div class="pros-list">
+      <p>Ξέρουμε πόσο απαιτητική είναι η διαχείρηση πολλών galleries, σφιχτών deadlines και πελατών με υψηλές προσδοκίες. Η συνεργασία με έναν ειδικευμένο editor από την ομάδα μας σας προσφέρει:</p>
+      <ul>
+        <li>Σταθερό και συνεπές χρωματικό ύφος (consistent style)</li>
+        <li>Ταχύτερη παράδοση galleries</li>
+        <li>Περισσότερο χρόνο για φωτογράφηση και ανάπτυξη πελατολογίου</li>
+        <li>Μείωση άγχους σε περιόδους υψηλής ζήτησης</li>
+        <li>Επαγγελματικό retouch υψηλών προδιαγραφών</li>
+        <li>Δυνατότητα υπερ-εξειδικευμένης επεξεργασίας φωτογραφιών</li>
+        <li class="culling-parent">
+          Υπηρεσίες culling:
+          <ul class="culling-nested">
+            <li>Επιλογή των πιο δυνατών καρέ</li>
+            <li>Αφαίρεση διπλών, εκτός εστίασης ή τεχνικά αδύναμων λήψεων</li>
+            <li>Διατήρηση ροής και αφήγησης σε weddings και event galleries</li>
+            <li>Μείωση χρόνου παράδοσης έως και 50%.</li>
+          </ul>
+        </li>
+      </ul>
+      <p style="margin-top:1.5rem; font-style:italic;">Δεν είναι απλώς outsourcing. Είναι στρατηγική συνεργασία που αναβαθμίζει το brand σας και σας επιτρέπει να εστιάσετε σε αυτό που κάνετε καλύτερα: την λήψη.</p>
+    </div>
   </section>
 
- <!-- FOOTER (identical) -->
+  <!-- ΓΙΑΤΙ ΝΑ ΜΑΣ ΕΜΠΙΣΤΕΥΤΕΙΤΕ (centered final lines) -->
+  <section class="trust-section" data-aos="fade-up">
+    <div class="trust-content">
+      <h2 class="section-heading" style="border-left-color:#9e9e9e;">Γιατί να μας εμπιστευθείτε;</h2>
+      <p>Δουλεύουμε με ακρίβεια, διακριτικότητα και σεβασμό στο προσωπικό σας ύφος και στυλ. Δεν "διορθώνουμε" απλώς τις φωτογραφίες σας - τις τελειοποιούμε ώστε να φτάσουν στο επίπεδο που τους αξίζει.</p>
+      <p>Είτε θέλετε να τελειοποιήσετε τις δικές σας εικόνες, είτε να αναθέσετε την επιμέλεια ολόκληρων galleries είμαστε εδώ για να σας προσφέρουμε αποτέλεσμα που ξεχωρίζει.</p>
+      <p class="signature-line">Γιατί η λεπτομέρεια δεν είναι υπερβολή. <br> Είναι αυτό που κάνει μια εικόνα να ξεχωρίζει.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-column">
@@ -787,115 +626,88 @@
       <p>2025 Chromanest &copy; All rights reserved.</p>
     </div>
   </footer>
-  
-  <!-- RETOUCHING LIGHTBOX -->
-  <div id="lightbox-retouching" class="lightbox-retouching" aria-hidden="true">
-    <button class="lr-close" aria-label="Close">&times;</button>
-    <button class="lr-prev" aria-label="Previous">&#10094;</button>
-    <img id="lightbox-retouching-img" src="" alt="">
-    <button class="lr-next" aria-label="Next">&#10095;</button>
-  </div>
-  
+
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    const sections = document.querySelectorAll('.fade-in-section');
+    AOS.init({ duration: 600, once: true });
 
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // Optional: remove after first load
-        }
-      });
-    }, {
-      threshold: 0.15
-    });
+    (function() {
+      const titles = [
+        "1. Επαναχρωματισμός παλιών φωτογραφιών - Recoloring",
+        "2. Αποκατάσταση ζημιάς από μούχλα/νερό - Mold/water damage restoration",
+        "3. Καθαρισμός λεκέδων - Stain removal",
+        "4. Ανασύνθεση χαμένων τμημάτων εικόνας - Reconstruction of missing parts",
+        "5. Αφαίρεση ανεπιθύμητων στοιχείων - Unwanted object removal",
+        "6. Κόκκινα μάτια - Red eyes",
+        "7. Αλλαγή φόντου - Background change",
+        "8. Αφαίρεση φόντου - Background removal",
+        "9. Επέκταση φωτογραφίας - Expand",
+        "10. Διόρθωση ατίθασων τριχών - Hair fly-aways removal",
+        "11. Αλλαγή χρωμάτων - Color changes",
+        "12. Ενίσχυση μακιγιάζ/Ψηφιακό μακιγιάζ - Makeup enhancement/ Digital makeup",
+        "13. Αφαίρεση θορύβου - Noise removal",
+        "14. Καθάρισμα δέρματος/ατελειών - Skin cleanup/blemish removal",
+        "15. Σμίλευση σώματος - Body Sculpting",
+        "16. Ρετουσάρισμα ρούχων/υφασμάτων - Clothing/Textile retouching",
+        "17. Ρυτίδες - Wrinkles",
+        "18. Λεύκανση/διόρθωση δοντιών - Teeth whitening & correction",
+        "19. Φωτεινότητα βλέμματος - Eye brightening",
+        "20. Χρωματική επεξεργασία - Color grading",
+        "21. Δημιουργία κολάζ - Collage creation",
+        "22. Διπλή έκθεση - Double exposure",
+        "23. Δημιουργική σύνθεση - Conceptual creative composition",
+        "24. Ρετουσάρισμα υψηλού επιπέδου - High end retouching",
+        "25. Αποκατάσταση/ βελτίωση προϊόντος - Product cleanup/enhancement",
+        "26. Ρύθμιση φωτισμού/έκθεσης - Lighting/Exposure adjustment",
+        "27. Δημιουργία και διόρθωση σκιών και αντανακλάσεων - Shadow & reflection creation and retouch",
+        "28. Ειδικά εφέ - Special effects"
+      ];
 
-    sections.forEach(section => {
-      observer.observe(section);
-    });
+      const grid = document.getElementById('editingGrid');
+      if (!grid) return;
 
-    // Lightbox functionality
-    (function () {
-      document.addEventListener('DOMContentLoaded', () => {
+      for (let i = 1; i <= 28; i++) {
+        const card = document.createElement('div');
+        card.className = 'grid-card';
 
-        // Elements
-        const lb = document.getElementById('lightbox-retouching');
-        const lbImg = document.getElementById('lightbox-retouching-img');
-        const btnClose = lb.querySelector('.lr-close');
-        const btnPrev = lb.querySelector('.lr-prev');
-        const btnNext = lb.querySelector('.lr-next');
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'image-container';
 
-        // Query all images you want included in *this* lightbox
-        const imageElements = Array.from(document.querySelectorAll('.restoration-gallery img, .portraits-gallery img, .fashion-gallery img, .beauty-gallery img'));
-        if (!imageElements.length) return;
-
-        let currentIndex = 0;
-
-        // Open when any gallery image clicked
-        imageElements.forEach((img, idx) => {
-          img.style.cursor = 'pointer';
-          img.addEventListener('click', (e) => {
-            currentIndex = idx;
-            openLightbox();
-          });
-        });
-
-        function openLightbox() {
-          lbImg.src = imageElements[currentIndex].src;
-          lb.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden'; // prevent background scroll
-          // ensure focus on close button for accessibility
-          btnClose.focus();
-        }
-
-        function closeLightbox() {
-          lb.setAttribute('aria-hidden', 'true');
-          document.body.style.overflow = ''; // restore
-          lbImg.src = '';
-        }
-
-        function showNext() {
-          currentIndex = (currentIndex + 1) % imageElements.length;
-          lbImg.src = imageElements[currentIndex].src;
-        }
+        const indexStr = i.toString().padStart(2, '0');
         
-        function showPrev() {
-          currentIndex = (currentIndex - 1 + imageElements.length) % imageElements.length;
-          lbImg.src = imageElements[currentIndex].src;
-        }
+        const beforeDiv = document.createElement('div');
+        beforeDiv.className = 'before-img';
+        const beforeImg = document.createElement('img');
+        beforeImg.src = `images/Editing/${indexStr}before.jpg`;
+        beforeImg.alt = `before-${i}`;
+        beforeDiv.appendChild(beforeImg);
 
-        // Button handlers
-        btnClose.addEventListener('click', closeLightbox);
-        btnNext.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
-        btnPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+        const afterDiv = document.createElement('div');
+        afterDiv.className = 'after-img';
+        const afterImg = document.createElement('img');
+        afterImg.src = `images/Editing/${indexStr}after.jpg`;
+        afterImg.alt = `after-${i}`;
+        afterDiv.appendChild(afterImg);
 
-        // Click on backdrop (outside image) closes lightbox
-        lb.addEventListener('click', (e) => {
-          // if click target is the overlay itself (not the img or buttons)
-          if (e.target === lb || e.target === lbImg) {
-            // if clicked directly on image, DO NOT close. If you want clicks on image to close, adjust here.
-            // Here we only close when overlay background clicked:
-            if (e.target === lb) closeLightbox();
-          }
+        imgContainer.appendChild(beforeDiv);
+        imgContainer.appendChild(afterDiv);
+
+        const label = document.createElement('div');
+        label.className = 'card-label';
+        label.textContent = titles[i-1];
+
+        card.appendChild(imgContainer);
+        card.appendChild(label);
+        grid.appendChild(card);
+
+        [beforeImg, afterImg].forEach(img => {
+          img.onerror = function() {
+            this.style.backgroundColor = '#e0e0e0';
+            this.style.opacity = '0.7';
+          };
         });
-
-        // Keyboard: ESC to close, arrows to navigate
-        document.addEventListener('keydown', (e) => {
-          if (lb.getAttribute('aria-hidden') === 'false') {
-            if (e.key === 'Escape') {
-              closeLightbox();
-            } else if (e.key === 'ArrowRight') {
-              showNext();
-            } else if (e.key === 'ArrowLeft') {
-              showPrev();
-            }
-          }
-        });
-
-        // Prevent image dragging from moving the page
-        lbImg.addEventListener('dragstart', (e) => e.preventDefault());
-
-      });
+      }
     })();
   </script>
 </body>
