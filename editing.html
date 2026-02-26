@@ -15,6 +15,9 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <!-- Google Font for a minimal headline -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
     /* ----- RESET & BASE ----- */
     * {
@@ -94,7 +97,7 @@
       min-width: 180px;
       padding: 0.5rem 0;
       z-index: 1000;
-      border-radius: 0; /* square dropdown to match aesthetic */
+      border-radius: 0;
     }
 
     .dropdown:hover .dropdown-menu {
@@ -117,7 +120,7 @@
       background-color: #f2f2f2;
     }
 
-    /* ----- HEADER SECTION ----- */
+    /* ----- HEADER SECTION (minimal font for title) ----- */
     .page-header {
       max-width: 900px;
       margin: 2rem auto 1rem;
@@ -126,15 +129,16 @@
     }
 
     .discreet-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      letter-spacing: 3px;
+      font-size: 1.4rem;           /* slightly larger for impact */
+      font-weight: 300;           /* light weight minimal */
+      letter-spacing: 4px;
       text-transform: uppercase;
-      color: #2a2a2a;
+      color: #1a1a1a;
       margin-bottom: 1.2rem;
       border-bottom: 1px solid #d0d0d0;
-      padding-bottom: 0.4rem;
-      font-family: 'Courier New', Courier, monospace;
+      padding-bottom: 0.6rem;
+      /* Inter font for clean minimal look */
+      font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
       display: inline-block;
     }
 
@@ -158,9 +162,9 @@
       font-family: Georgia, 'Times New Roman', serif;
     }
 
-    /* ----- EDITING GRID (4 columns, hover swap) ----- */
+    /* ----- EDITING GRID (bigger photos) ----- */
     .editing-grid-section {
-      max-width: 1300px;
+      max-width: 1400px;          /* increased to allow larger cards */
       margin: 3rem auto;
       padding: 0 5%;
     }
@@ -179,13 +183,12 @@
     .image-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 24px;                  /* slightly more breathing room */
     }
 
     .grid-card {
       position: relative;
       background-color: #f4f4f4;
-      /* SQUARE CORNERS — no border-radius */
       border-radius: 0;
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0,0,0,0.04);
@@ -195,7 +198,7 @@
     }
 
     .grid-card:hover {
-      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+      box-shadow: 0 16px 28px rgba(0,0,0,0.12); /* deeper shadow */
     }
 
     .image-container {
@@ -232,37 +235,37 @@
       opacity: 0;
     }
 
-    /* LABEL — multi-line, full text visible, background adjusted */
+    /* LABEL — numbering removed, multi-line, bigger text */
     .card-label {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      background: linear-gradient(to top, rgba(20,20,20,0.85), rgba(20,20,20,0.4) 70%, transparent);
+      background: linear-gradient(to top, rgba(20,20,20,0.9), rgba(20,20,20,0.5) 70%, transparent);
       color: #f0f0f0;
-      padding: 25px 12px 15px 12px;  /* more top padding to reveal multi-line */
-      font-size: 0.9rem;
+      padding: 28px 14px 16px 14px;  /* more top padding for multi-line */
+      font-size: 1rem;               /* slightly larger */
       font-weight: 500;
       line-height: 1.4;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
       pointer-events: none;
       z-index: 5;
-      white-space: normal;        /* allow wrapping */
-      word-break: break-word;     /* prevent overflow */
+      white-space: normal;
+      word-break: break-word;
       text-align: left;
       display: flex;
-      align-items: flex-end;      /* text sits at bottom */
+      align-items: flex-end;
     }
 
     /* responsive for smaller screens */
     @media (max-width: 900px) {
       .image-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        gap: 18px;
       }
       .card-label {
-        font-size: 0.8rem;
-        padding: 20px 8px 10px 8px;
+        font-size: 0.9rem;
+        padding: 22px 10px 12px 10px;
       }
     }
     @media (max-width: 500px) {
@@ -271,7 +274,7 @@
       }
     }
 
-    /* ----- SECTIONS (fixed culling layout) ----- */
+    /* ----- SECTIONS (culling fixed, unchanged from good state) ----- */
     .content-section {
       max-width: 1100px;
       margin: 3rem auto;
@@ -290,7 +293,6 @@
     .pros-list {
       background: #f8f8f8;
       padding: 2.5rem;
-      /* square corners, because we like squares now */
       border-radius: 0;
       box-shadow: inset 0 0 0 1px rgba(0,0,0,0.02);
     }
@@ -324,29 +326,23 @@
       font-size: 1.2rem;
     }
 
-    /* nested list (culling) — FIXED INDENTATION & BULLETS */
-    .nested-wrapper {
-      margin-top: 0.25rem;
-      margin-bottom: 0.25rem;
-    }
     .culling-nested {
       list-style: disc;
       margin-left: 1.8rem;
       margin-top: 0.4rem;
-      columns: 1;               /* override parent columns */
+      columns: 1;
       display: block;
     }
     .culling-nested li {
       padding-left: 0.3rem;
       margin-bottom: 0.4rem;
-      columns: auto;            /* ensure no column break */
+      columns: auto;
       break-inside: avoid;
     }
     .culling-nested li::before {
-      display: none;            /* remove extra pseudo bullet */
+      display: none;
     }
 
-    /* extra spacing for the "culling" parent li */
     .culling-parent {
       margin-bottom: 0.8rem;
     }
@@ -355,14 +351,13 @@
       background-color: #f3f3f3;
       padding: 3rem 5%;
       margin-top: 3rem;
-      /* square corners, no rounding */
       border-radius: 0;
     }
 
     .trust-content {
       max-width: 900px;
       margin: 0 auto;
-      text-align: center;           /* center all text in trust section */
+      text-align: center;
     }
 
     .trust-content p {
@@ -387,10 +382,10 @@
       color: #4a4a4a;
       border-top: 1px dashed #bdbdbd;
       padding-top: 1.5rem;
-      text-align: center;          /* centered as requested */
+      text-align: center;
     }
 
-    /* ----- FOOTER (unchanged, but squares everywhere) ----- */
+    /* ----- FOOTER (unchanged) ----- */
     .footer {
       background-color: #eaeaea;
       color: #3f3f3f;
@@ -453,7 +448,7 @@
       justify-content: center;
       width: 36px;
       height: 36px;
-      border-radius: 0;    /* square social buttons to match */
+      border-radius: 0;
       background-color: rgba(0,0,0,0.06);
       transition: background-color 0.2s;
       color: #3f3f3f;
@@ -528,25 +523,25 @@
     </ul>
   </nav>
 
-  <!-- HEADER -->
+  <!-- HEADER with minimal font -->
   <section class="page-header" data-aos="fade-up">
-    <div class="discreet-title">Η επεξεργασία μετράει!</div>
+    <div class="discreet-title">Η ΕΠΕΞΕΡΓΑΣΙΑ ΜΕΤΡΑΕΙ!</div>
     <div class="intro-text">
-      <p style="font-size:1.3rem; font-weight:300;">Η φωτογραφία δεν τελειώνει τη στιγμή που πατιέται το κλικ!</p>
-      <p style="margin-top:1.2rem;">Είτε είστε ιδιώτης που θέλει οι προσωπικές του φωτογραφίες να δείχνουν πραγματικά ξεχωριστές, είτε επαγγελματίας που χρειάζεται αξιόπιστη υποστήριξη στην επεξεργασία των galleries του, η επαγγελματική επεξεργασία κάνει την διαφορά ανάμεσα σε μια "καλή" εικόνα και σε μια εικόνα που εντυπωσιάζει.</p>
+      <p style="font-size:1.2rem; font-weight:300;">Η φωτογραφία δεν τελειώνει τη στιγμή που πατιέται το κλικ!</p>
+      <p style="margin-top:0.9rem;">Είτε είστε ιδιώτης που θέλει οι προσωπικές του φωτογραφίες να δείχνουν πραγματικά ξεχωριστές, είτε επαγγελματίας που χρειάζεται αξιόπιστη υποστήριξη στην επεξεργασία των galleries του, η επαγγελματική επεξεργασία κάνει την διαφορά ανάμεσα σε μια "καλή" εικόνα και σε μια εικόνα που εντυπωσιάζει.</p>
     </div>
     <div class="block-quote">
       “Εάν η δουλειά μας δεν μπορεί να εντοπιστεί, τότε σημαίνει για εμάς ότι έχουμε κάνει καλά την δουλειά μας.”
     </div>
   </section>
 
-  <!-- GRID 28 items -->
+  <!-- GRID 28 items (no numbering, bigger photos) -->
   <section class="editing-grid-section" data-aos="fade-up">
     <h2 class="grid-title">Ενδεικτικές υπηρεσίες επεξεργασίας</h2>
     <div class="image-grid" id="editingGrid"></div>
   </section>
 
-  <!-- ΓΙΑ ΤΟΝ ΕΠΑΓΓΕΛΜΑΤΙΑ (fixed culling) -->
+  <!-- ΓΙΑ ΤΟΝ ΕΠΑΓΓΕΛΜΑΤΙΑ -->
   <section class="content-section" data-aos="fade-up">
     <h2 class="section-heading">Για τον επαγγελματία</h2>
     <div class="pros-list">
@@ -561,10 +556,10 @@
         <li class="culling-parent">
           Υπηρεσίες culling:
           <ul class="culling-nested">
-            <li>Επιλογή των πιο δυνατών καρέ</li>
-            <li>Αφαίρεση διπλών, εκτός εστίασης ή τεχνικά αδύναμων λήψεων</li>
-            <li>Διατήρηση ροής και αφήγησης σε weddings και event galleries</li>
-            <li>Μείωση χρόνου παράδοσης έως και 50%.</li>
+            <li>• Επιλογή των πιο δυνατών καρέ</li>
+            <li>• Αφαίρεση διπλών, εκτός εστίασης ή τεχνικά αδύναμων λήψεων</li>
+            <li>• Διατήρηση ροής και αφήγησης σε weddings και event galleries</li>
+            <li>• Μείωση χρόνου παράδοσης έως και 50%.</li>
           </ul>
         </li>
       </ul>
@@ -633,35 +628,36 @@
     AOS.init({ duration: 600, once: true });
 
     (function() {
+      // Titles without numbering
       const titles = [
-        "1. Επαναχρωματισμός παλιών φωτογραφιών - Recoloring",
-        "2. Αποκατάσταση ζημιάς από μούχλα/νερό - Mold/water damage restoration",
-        "3. Καθαρισμός λεκέδων - Stain removal",
-        "4. Ανασύνθεση χαμένων τμημάτων εικόνας - Reconstruction of missing parts",
-        "5. Αφαίρεση ανεπιθύμητων στοιχείων - Unwanted object removal",
-        "6. Κόκκινα μάτια - Red eyes",
-        "7. Αλλαγή φόντου - Background change",
-        "8. Αφαίρεση φόντου - Background removal",
-        "9. Επέκταση φωτογραφίας - Expand",
-        "10. Διόρθωση ατίθασων τριχών - Hair fly-aways removal",
-        "11. Αλλαγή χρωμάτων - Color changes",
-        "12. Ενίσχυση μακιγιάζ/Ψηφιακό μακιγιάζ - Makeup enhancement/ Digital makeup",
-        "13. Αφαίρεση θορύβου - Noise removal",
-        "14. Καθάρισμα δέρματος/ατελειών - Skin cleanup/blemish removal",
-        "15. Σμίλευση σώματος - Body Sculpting",
-        "16. Ρετουσάρισμα ρούχων/υφασμάτων - Clothing/Textile retouching",
-        "17. Ρυτίδες - Wrinkles",
-        "18. Λεύκανση/διόρθωση δοντιών - Teeth whitening & correction",
-        "19. Φωτεινότητα βλέμματος - Eye brightening",
-        "20. Χρωματική επεξεργασία - Color grading",
-        "21. Δημιουργία κολάζ - Collage creation",
-        "22. Διπλή έκθεση - Double exposure",
-        "23. Δημιουργική σύνθεση - Conceptual creative composition",
-        "24. Ρετουσάρισμα υψηλού επιπέδου - High end retouching",
-        "25. Αποκατάσταση/ βελτίωση προϊόντος - Product cleanup/enhancement",
-        "26. Ρύθμιση φωτισμού/έκθεσης - Lighting/Exposure adjustment",
-        "27. Δημιουργία και διόρθωση σκιών και αντανακλάσεων - Shadow & reflection creation and retouch",
-        "28. Ειδικά εφέ - Special effects"
+        "Επαναχρωματισμός παλιών φωτογραφιών - Recoloring",
+        "Αποκατάσταση ζημιάς από μούχλα/νερό - Mold/water damage restoration",
+        "Καθαρισμός λεκέδων - Stain removal",
+        "Ανασύνθεση χαμένων τμημάτων εικόνας - Reconstruction of missing parts",
+        "Αφαίρεση ανεπιθύμητων στοιχείων - Unwanted object removal",
+        "Κόκκινα μάτια - Red eyes",
+        "Αλλαγή φόντου - Background change",
+        "Αφαίρεση φόντου - Background removal",
+        "Επέκταση φωτογραφίας - Expand",
+        "Διόρθωση ατίθασων τριχών - Hair fly-aways removal",
+        "Αλλαγή χρωμάτων - Color changes",
+        "Ενίσχυση μακιγιάζ/Ψηφιακό μακιγιάζ - Makeup enhancement/ Digital makeup",
+        "Αφαίρεση θορύβου - Noise removal",
+        "Καθάρισμα δέρματος/ατελειών - Skin cleanup/blemish removal",
+        "Σμίλευση σώματος - Body Sculpting",
+        "Ρετουσάρισμα ρούχων/υφασμάτων - Clothing/Textile retouching",
+        "Ρυτίδες - Wrinkles",
+        "Λεύκανση/διόρθωση δοντιών - Teeth whitening & correction",
+        "Φωτεινότητα βλέμματος - Eye brightening",
+        "Χρωματική επεξεργασία - Color grading",
+        "Δημιουργία κολάζ - Collage creation",
+        "Διπλή έκθεση - Double exposure",
+        "Δημιουργική σύνθεση - Conceptual creative composition",
+        "Ρετουσάρισμα υψηλού επιπέδου - High end retouching",
+        "Αποκατάσταση/ βελτίωση προϊόντος - Product cleanup/enhancement",
+        "Ρύθμιση φωτισμού/έκθεσης - Lighting/Exposure adjustment",
+        "Δημιουργία και διόρθωση σκιών και αντανακλάσεων - Shadow & reflection creation and retouch",
+        "Ειδικά εφέ - Special effects"
       ];
 
       const grid = document.getElementById('editingGrid');
