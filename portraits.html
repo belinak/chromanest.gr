@@ -15,12 +15,12 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Masonry & imagesLoaded (CDN) -->
+  <!-- Masonry & imagesLoaded -->
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
   <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 
   <style>
-    /* ----- RESET & BASE (unchanged) ----- */
+    /* ----- RESET & BASE ----- */
     * {
       margin: 0;
       padding: 0;
@@ -34,7 +34,7 @@
       background-color: #fff;
     }
 
-    /* ----- NAVBAR (exactly as your commercial page) ----- */
+    /* ----- NAVBAR ----- */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -120,7 +120,7 @@
       background-color: #f5f5f5;
     }
 
-    /* ----- CENTERED TEXT SECTION (with CTA inside box) ----- */
+    /* ----- CENTERED TEXT SECTION ----- */
     .portrait-container {
       max-width: 1000px;
       margin: 2rem auto 1rem;
@@ -200,47 +200,54 @@
       background-color: #d8c3a0;
     }
 
-    /* ===== MASONRY GALLERY (exactly like reference site) ===== */
+    /* ===== MASONRY GALLERY - FIXED VERSION ===== */
     .masonry__gallery {
       max-width: 1600px;
       margin: 3rem auto 2rem;
       padding: 0 5%;
-      position: relative;   /* required for Masonry absolute positioning */
     }
 
-    .masonry__sizer,
-    .masonry__item {
+    /* IMPORTANT: Masonry needs this to position items absolutely */
+    .grid {
+      position: relative;
+      margin-left: -2px;  /* Compensate for item padding */
+      margin-right: -2px;
+    }
+
+    .grid-sizer,
+    .grid-item {
       width: 33.333%;
-      padding: 2px;          /* tiny gap between images */
+      padding: 2px;
       box-sizing: border-box;
     }
 
-    .masonry__item {
+    .grid-item {
+      float: left;  /* Fallback, Masonry will override with absolute */
+      margin-bottom: 0;
       cursor: pointer;
       transition: transform 0.2s;
-      /* No float – Masonry handles positioning */
     }
 
-    .masonry__item:hover {
+    .grid-item:hover {
       transform: scale(1.01);
       z-index: 10;
     }
 
-    .masonry__item img {
+    .grid-item img {
       width: 100%;
       height: auto;
       display: block;
       background: #f0f0f0;
     }
 
-    /* clearfix for the container (safe fallback) */
-    .masonry__gallery:after {
+    /* Clearfix */
+    .grid:after {
       content: '';
-      display: table;
+      display: block;
       clear: both;
     }
 
-    /* ----- LIGHTBOX (simple modal) ----- */
+    /* ----- LIGHTBOX ----- */
     .lightbox {
       display: none;
       position: fixed;
@@ -325,7 +332,7 @@
       font-size: 14px;
     }
 
-    /* ----- FOOTER (exactly as your commercial page) ----- */
+    /* ----- FOOTER ----- */
     .footer {
       background-color: #eee;
       color: #4f4f4f;
@@ -406,11 +413,11 @@
       color: #888;
     }
 
-    /* ----- RESPONSIVE (for masonry columns) ----- */
+    /* ----- RESPONSIVE ----- */
     @media (max-width: 768px) {
-      .masonry__sizer,
-      .masonry__item {
-        width: 50%; /* 2 columns on tablets/mobile */
+      .grid-sizer,
+      .grid-item {
+        width: 50%;
       }
 
       .navbar {
@@ -442,16 +449,12 @@
         height: 35px;
         width: 140px;
       }
-      .lightbox-nav button {
-        font-size: 30px;
-        padding: 5px 10px;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR (identical to your commercial page) -->
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="logo">
       <a href="index.html">
@@ -461,29 +464,27 @@
     <ul class="nav-menu">
       <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
       <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-
       <li class="nav-item dropdown">
-        <a href="commercial.html" class="nav-link">Commercial</a>
+        <a href="photography.html" class="nav-link">Commercial</a>
         <ul class="dropdown-menu">
-          <li><a href="portraits.html">Portraits</a></li>
-          <li><a href="proportraits.html">Pro Portraits</a></li>
-          <li><a href="weddingdresses.html">Wedding Dresses</a></li>
-          <li><a href="editorial.html">Editorial</a></li>
-          <li><a href="product.html">Product</a></li>
-          <li><a href="packaging.html">Packaging</a></li>
-          <li><a href="food.html">Food</a></li>
-          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
-          <li><a href="familyportraits.html">Family portraits</a></li>
-          <li><a href="newborns.html">Newborns</a></li>
-          <li><a href="couples.html">Couples</a></li>
-          <li><a href="maternity.html">Maternity</a></li>
-          <li><a href="conceptual.html">Conceptual</a></li>
-          <li><a href="events.html">Events</a></li>
-          <li><a href="hotels.html">Hotels</a></li>
-          <li><a href="airbnb.html">Airbnb</a></li>
+          <li><a href="commercial/portraits.html">Portraits</a></li>
+          <li><a href="commercial/proportraits.html">Pro Portraits</a></li>
+          <li><a href="commercial/weddingdresses.html">Wedding Dresses</a></li>
+          <li><a href="commercial/editorial.html">Editorial</a></li>
+          <li><a href="commercial/product.html">Product</a></li>
+          <li><a href="commercial/packaging.html">Packaging</a></li>
+          <li><a href="commercial/food.html">Food</a></li>
+          <li><a href="commercial/fashioneshops.html">Fashion e-shops</a></li>
+          <li><a href="commercial/familyportraits.html">Family portraits</a></li>
+          <li><a href="commercial/newborns.html">Newborns</a></li>
+          <li><a href="commercial/couples.html">Couples</a></li>
+          <li><a href="commercial/maternity.html">Maternity</a></li>
+          <li><a href="commercial/conceptual.html">Conceptual</a></li>
+          <li><a href="commercial/events.html">Events</a></li>
+          <li><a href="commercial/hotels.html">Hotels</a></li>
+          <li><a href="commercial/airbnb.html">Airbnb</a></li>
         </ul>
       </li>
-
       <li class="nav-item"><a href="wedding.html" class="nav-link">Wedding</a></li>
       <li class="nav-item"><a href="christening.html" class="nav-link">Baptism</a></li>
       <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
@@ -492,10 +493,9 @@
     </ul>
   </nav>
 
-  <!-- MAIN CONTENT – PORTRAIT PAGE (centered text, CTA inside box) -->
+  <!-- TEXT SECTION -->
   <section class="portrait-container" data-aos="fade-up">
     <div class="discreet-title">Πορτραίτα</div>
-
     <div class="portrait-description">
       <p>Κανένας δεν έχει φωτο-αγένεια. Όλοι οι άνθρωποι έχουν φωτογένεια με τον κατάλληλο φωτογράφο.</p>
       <p><strong>Οι υπηρεσίες μας περιλαμβάνουν:</strong></p>
@@ -508,8 +508,6 @@
         <li>Επαγγελματικό retouch</li>
       </ul>
     </div>
-
-    <!-- target box with CTA inside -->
     <div class="target-box">
       <strong>Σε ποιους απευθύνεται:</strong>
       Ιδιώτες που επιθυμούν ένα σύγχρονο ποιοτικό πορτραίτο<br>
@@ -521,10 +519,12 @@
     </div>
   </section>
 
-  <!-- MASONRY GALLERY – 3 columns, tiny gaps, exactly like reference site -->
+  <!-- MASONRY GALLERY - FIXED -->
   <section class="masonry__gallery" data-aos="fade-up">
-    <div class="masonry__sizer"></div>
-    <!-- 35 items will be generated by JavaScript -->
+    <div class="grid js-masonry">
+      <div class="grid-sizer"></div>
+      <!-- Items will be inserted here by JavaScript -->
+    </div>
   </section>
 
   <!-- LIGHTBOX -->
@@ -540,7 +540,7 @@
     </div>
   </div>
 
-  <!-- FOOTER (identical) -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-column">
@@ -585,44 +585,49 @@
     </div>
   </footer>
 
-  <!-- AOS & main scripts -->
+  <!-- SCRIPTS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 600, once: true });
 
     (function() {
-      const container = document.querySelector('.masonry__gallery');
+      const grid = document.querySelector('.grid');
+      const sizer = document.querySelector('.grid-sizer');
       const totalImages = 35;
       const basePath = 'images/01Portraits-imgs/portrait';
 
-      // Create 35 masonry items
+      // Create all items
       for (let i = 1; i <= totalImages; i++) {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'masonry__item';
-        itemDiv.setAttribute('data-index', i - 1);
-
+        const item = document.createElement('div');
+        item.className = 'grid-item';
+        
         const img = document.createElement('img');
         img.src = `${basePath}${i}.jpg`;
         img.alt = `Πορτραίτο ${i}`;
         img.loading = 'lazy';
-        itemDiv.appendChild(img);
-        container.appendChild(itemDiv);
+        
+        item.appendChild(img);
+        grid.appendChild(item);
       }
 
-      // Initialize Masonry after all images are loaded
-      imagesLoaded(container, function() {
-        const msnry = new Masonry(container, {
-          itemSelector: '.masonry__item',
-          columnWidth: '.masonry__sizer',
+      // Wait for images to load, then init Masonry
+      imagesLoaded(grid, function() {
+        const msnry = new Masonry(grid, {
+          itemSelector: '.grid-item',
+          columnWidth: '.grid-sizer',
           percentPosition: true,
-          transitionDuration: 0
+          transitionDuration: 0,
+          initLayout: true
         });
-        // Extra layout call after a tiny delay to ensure perfect positioning
-        setTimeout(() => msnry.layout(), 100);
+        
+        // Force layout after a tiny delay
+        setTimeout(() => {
+          msnry.layout();
+        }, 50);
       });
 
-      // ----- LIGHTBOX -----
-      const items = Array.from(document.querySelectorAll('.masonry__item'));
+      // Lightbox functionality
+      const items = document.querySelectorAll('.grid-item');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
       const counter = document.getElementById('lightbox-counter');
