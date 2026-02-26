@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chromanest | FAQ</title>
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/Favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/Favicon/apple-touch-icon.png">
+  <link rel="shortcut icon" href="images/Favicon/favicon.ico">
+
+  <!-- AOS & Font Awesome -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Masonry & imagesLoaded (kept for structural consistency, but not used in FAQ) -->
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+
+    /* ----- NAVBAR (identical) ----- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+      width: 200px;
+      object-fit: contain;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-item {
+      position: relative;
+      margin-left: 1.5rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #888;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      min-width: 180px;
+      padding: 0.5rem 0;
+      z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu li {
+      padding: 0;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.7rem 1.2rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f5f5f5;
+    }
+
+    /* ----- CENTERED TEXT SECTION (adapted for FAQ) ----- */
+    .portrait-container {
+      max-width: 1000px;
+      margin: 2rem auto 1rem;
+      padding: 0 5%;
+      text-align: center;
+    }
+
+    .discreet-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #2a2a2a;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.4rem;
+      font-family: 'Courier New', Courier, monospace;
+      display: inline-block;
+    }
+
+    .portrait-description {
+      max-width: 750px;
+      margin: 0 auto 0.8rem auto;
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* ----- FAQ SECTION (instead of gallery) ----- */
+    .faq-section {
+      max-width: 900px;
+      margin: 3rem auto 4rem;
+      padding: 0 5%;
+    }
+
+    .faq-item {
+      background-color: #fafafa;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border: 1px solid #eaeaea;
+      transition: box-shadow 0.2s;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .faq-question {
+      padding: 1.2rem 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 600;
+      color: #1e1e1e;
+      font-size: 1.1rem;
+      background-color: #ffffff;
+      border-radius: 8px;
+      transition: background-color 0.15s;
+    }
+
+    .faq-question:hover {
+      background-color: #f5f0eb; /* subtle warm tone */
+    }
+
+    .faq-question .plus-icon {
+      font-size: 1.8rem;
+      font-weight: 300;
+      line-height: 1;
+      color: #b0977a;
+      transition: transform 0.2s;
+    }
+
+    .faq-question.active .plus-icon {
+      transform: rotate(45deg);
+      color: #7f5e40;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      background-color: #fcfcfc;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      border-top: 1px solid transparent;
+    }
+
+    .faq-answer.show {
+      max-height: 600px; /* enough for long answers */
+      padding: 1.2rem 1.8rem 1.5rem;
+      border-top-color: #e0d6cc;
+    }
+
+    .faq-answer p {
+      margin-bottom: 0.8rem;
+      color: #3e3e3e;
+      font-size: 0.98rem;
+    }
+
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-answer a {
+      color: #b0977a;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .faq-answer a:hover {
+      color: #7f5e40;
+    }
+
+    /* small adjustment for any list inside answers */
+    .faq-answer ul {
+      margin-left: 1.5rem;
+      margin-top: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .faq-answer li {
+      margin-bottom: 0.3rem;
+    }
+
+    /* optional subtle note */
+    .note-link {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      color: #777;
+    }
+
+    /* hide masonry gallery on this page */
+    .masonry__gallery {
+      display: none;
+    }
+
+    /* ----- FOOTER (identical) ----- */
+    .footer {
+      background-color: #eee;
+      color: #4f4f4f;
+      padding: 60px 5% 30px;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4f4f4f;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #4f4f4f;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: #888;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+      color: #4f4f4f;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-size: 14px;
+      color: #888;
+    }
+
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+      }
+      .nav-menu {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .nav-item {
+        margin: 0.5rem;
+      }
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .logo img {
+        height: 40px;
+        width: 160px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      .logo img {
+        height: 35px;
+        width: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR (identical) -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
+      </a>
+    </div>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+      <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+      <li class="nav-item dropdown">
+        <a href="commercial.html" class="nav-link">Commercial</a>
+        <ul class="dropdown-menu">
+          <li><a href="portraits.html">Portraits</a></li>
+          <li><a href="proportraits.html">Pro Portraits</a></li>
+          <li><a href="weddingdresses.html">Wedding Dresses</a></li>
+          <li><a href="editorial.html">Editorial</a></li>
+          <li><a href="product.html">Product</a></li>
+          <li><a href="packaging.html">Packaging</a></li>
+          <li><a href="food.html">Food</a></li>
+          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
+          <li><a href="familyportraits.html">Family portraits</a></li>
+          <li><a href="newborns.html">Newborns</a></li>
+          <li><a href="couples.html">Couples</a></li>
+          <li><a href="maternity.html">Maternity</a></li>
+          <li><a href="conceptual.html">Conceptual</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="hotels.html">Hotels</a></li>
+          <li><a href="airbnb.html">Airbnb</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="wedding.html" class="nav-link">Wedding</a></li>
+      <li class="nav-item"><a href="christening.html" class="nav-link">Baptism</a></li>
+      <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
+      <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- TEXT SECTION (adapted title) -->
+  <section class="portrait-container" data-aos="fade-up">
+    <div class="discreet-title">Συχνές Ερωτήσεις</div>
+    <div class="portrait-description">
+      <p>Όλες οι απαντήσεις που χρειάζεστε για τις υπηρεσίες μας, σε ένα σημείο.</p>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION (interactive) -->
+  <section class="faq-section" data-aos="fade-up">
+    <!-- FAQ items will be injected via JavaScript -->
+    <div id="faq-container"></div>
+  </section>
+
+  <!-- FOOTER (identical) -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Chromanest</h3>
+        <p>Επαγγελματικές υπηρεσίες φωτογραφίας με έδρα την Αθήνα με ειδίκευση στα πορτρέτα, προϊόντα και τις ειδικές εκδηλώσεις.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="commercial.html">Commercial Photography</a></li>
+          <li><a href="00commercial/portraits.html">Portraits</a></li>
+          <li><a href="wedding.html">Weddings</a></li>
+          <li><a href="baptism.html">Christenings</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="packages.html">Packages & Pricing</a></li>
+          <li><a href="editing.html">Editing Services</a></li>
+          <li><a href="https://chromanest.blogspot.com">Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
+          <li><i class="fas fa-phone"></i> +30 6973949986</li>
+          <li><i class="fas fa-envelope"></i> chromanest.creatives@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>2025 Chromanest &copy; All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 600, once: true });
+
+    (function() {
+      // FAQ data: array of objects { q, a } (a can be HTML string)
+      const faqData = [
+        { q: "1. Τι είδους υπηρεσίες προσφέρετε;", 
+          a: "<p>Η ομάδα μας μπορεί να εξυπηρετήσει φωτογράφηση γάμου, βάπτισης, αρραβώνα, επαγγελματικών πορτραίτων, προϊοντική φωτογράφηση για e-shop και διαφημιστική χρήση, και καλλιτεχνικών και ιδιαίτερων φωτογραφιών (conceptual photography). Προσφέρουμε επίσης, υπηρεσίες επεξεργασίας φωτογραφιών είτε για ιδιώτες (αναπαλαιώσεις φωτογραφιών, ρετουζ κτλ), είτε για επαγγελματίες (culling και επεξεργασία φωτογραφιών).</p>" },
+        
+        { q: "2. Σε ποιες περιοχές δραστηριοποιείστε;", 
+          a: "<p>Η έδρα μας βρίσκεται στην Αθήνα, αλλά αναλαμβάνουμε φωτογραφίσεις σε όλη την Ελλάδα, τα νησιά και το εξωτερικό. Σε περίπτωση μετακίνησης εκτός Αττικής, ενδέχεται να υπάρχουν έξοδα μεταφοράς και μετακίνησης. Σε αυτή τη περίπτωση υπάρχουν δύο επιλογές: μπορούν να συμπεριληφθούν στην τιμή, είτε εναλλακτικά να κανονιστούν όλα απευθείας από την πλευρά του πελάτη.</p>" },
+        
+        { q: "3. Πόσες φωτογραφίες παραδίδετε;", 
+          a: "<p>Κάθε φωτογράφιση είναι διαφορετική και ο αριθμός των εικόνων εξαρτάται από αρκετούς παράγοντες. Για τους γάμους στοχεύουμε για περίπου 700 επεξεργασμένες φωτογραφίες, 50 περίπου εκ των οποίων θα επιλεγούν ξεχωριστά για την δημιουργία ενός στοχευμένου ψηφιακού άλμπουμ. Για τα πορτραίτα στοχεύουμε για 10 επεξεργασμένες φωτογραφίες στα mini-sessions με προσαύξηση 10 φωτογραφιών για κάθε επιπλέον ώρα. Για όλες τις άλλες περιπτώσεις παραδίδουμε τον ανάλογο αριθμό φωτογραφιών με τις ανάγκες σας. Όλες οι φωτογραφίες είναι 4Κ, υψηλής ανάλυσης επεξεργασμένες και χωρίς λογότυπο.</p>" },
+        
+        { q: "4. Πότε θα πάρω τις φωτογραφίες;", 
+          a: "<p>Για τους γάμους θα πάρετε την πρώτη εβδομάδα ένα sneak peak 10 φωτογραφιών και τις υπόλοιπες εντός 2 μηνών. Για τα πορτραίτα θα λάβετε τις φωτογραφίες σας εντός 2 εβδομάδων. Σε κάθε περίπτωση θα υπάρχει προφορική και γραπτή επικοινωνία των ημερομηνιών παράδοσης.</p>" },
+        
+        { q: "5. Ποιο είναι το κόστος;", 
+          a: "<p>Αν και εξαρτάται από το είδος, ενδεικτικά το κόστος για έναν ολοήμερο γάμο (από την προετοιμασία έως και την δεξίωση) ανέρχεται συνήθως στα 1000€ και για τα πορτραίτα τα mini-sessions ξεκινάνε από 100€ και αυξάνονται ανάλογα με τις υπηρεσίες που απαιτεί η φωτογράφηση. Για όλες τις υπηρεσίες δίνεται αναλυτικά προσφορά κατόπιν συνεννόησης.</p>" },
+        
+        { q: "6. Από ποιους παράγοντες εξαρτάται η τιμή;", 
+          a: "<p>Η τιμή εξαρτάται από αρκετούς παράγοντες όπως η εποχή, η ημερομηνία, η τοποθεσία, οι υπηρεσία, τα άλμπουμ κτλ. Μπορούμε πάντα να δημιουργήσουμε μαζί ένα πακέτο σύμφωνα με τις δικές σας ανάγκες. Παραλαμβάνεται εγγράφως και ενυπόγραφα την οικονομική μας πρόταση η οποία αναφέρει αναλυτικά το κόστος κάθε παρεχόμενης και συμφωνημένης υπηρεσίας, χωρίς \"κρυφές\" χρεώσεις και σε εύλογο χρονικό διάστημα. Η επεξεργασία των φωτογραφιών συγκαταλέγεται σε όλες μας τις υπηρεσίες. *Εάν δεν επιθυμείτε επεξεργασία φωτογραφιών, μπορούμε να σχεδιάσουμε ένα αντίστοιχο οικονομικότερο πακέτο που δεν περιλαμβάνει επεξεργασία φωτογραφιών. Αυτή η επιλογή δεν συνίσταται για ιδιώτες διότι δεν θα λάβουν αποτελέσματα φωτογραφιών όπως αυτά που βλέπουν στην ιστοσελίδα μας. Απευθύνεται κυρίως σε επαγγελματίες/εταιρίες που έχουν δικές τους ομάδες γραφιστικής και επεξεργασίας φωτογραφιών όπου θα αναλάβουν την μετέπειτα επεξεργασία.</p>" },
+        
+        { q: "7. Γίνεται επεξεργασία φωτογραφιών;", 
+          a: "<p>Ναι, όλες οι φωτογραφίες παραδίδονται με επαγγελματική επεξεργασία (χρωματική διόρθωση, φωτισμός, βασικό ρετούς). Σε κάθε επεξεργασία που κάνουμε προσφέρουμε δωρεάν μια επαν-επεξεργασία σύμφωνα με τις υποδείξεις τις οποίες θέλετε, ώστε να λάβετε το καλύτερο δυνατό αποτέλεσμα. Κατόπιν αιτήματος, παρέχονται και επιπλέον υπηρεσίες ρετούς και επεξεργασίας φωτογραφιών όπως η αφαίρεση ανεπιθύμητων στοιχείων, η αλλαγή ή αφαίρεση φόντου, αλλαγές χρωμάτων, δημιουργία κολάζ και πολλές άλλες υπηρεσίες. Δείτε παραπάνω λεπτομέρειες στην κατηγορία <a href=\"editing.html\">Editing</a>.</p>" },
+        
+        { q: "8. Πότε πρέπει να σας κλείσουμε;", 
+          a: "<p>Για γάμους και βαπτίσεις ο καλύτερος χρόνος να εξασφαλίσετε την ημερομηνία είναι 6-12 μήνες πριν. Στόχος μας είναι η ποιότητα και όχι η ποσότητα, οπότε φωτογραφίζουμε λίγους γάμους τον χρόνο. Για εταιρικές ή προσωπικές φωτογραφήσεις 2-4 εβδομάδες επαρκούν.</p>" },
+        
+        { q: "9. Πώς μπορούμε να σας κλείσουμε;", 
+          a: "<p>Μπορείτε να επικοινωνήσετε μαζί μας είτε τηλεφωνικά στο 6973949986, είτε με e-mail στο chromanest.creatives@gmail.com ή από την <a href=\"contact.html\">φόρμα επικοινωνίας</a> μας.</p>" },
+        
+        { q: "10. Πώς γίνεται η πληρωμή;", 
+          a: "<p>Η κράτηση επιβεβαιώνεται με προκαταβολή και υπογραφή συμφωνητικού. Θα λάβετε εγγράφως την προσφορά που έχουμε συμφωνήσει, στην οποία θα αναγράφονται αναλυτικά όλες οι παροχές σε προϊόντα και υπηρεσίες. Το 90% του συνολικού ποσού προκαταβάλλεται 1 εβδομάδα πριν την φωτογράφηση και η εξόφληση πραγματοποιείται με την παράδοση όλου του συμφωνηθέντος υλικού.</p>" },
+        
+        { q: "11. Τι θα συμβεί αν για κάποιο λόγο δεν μπορείτε να παρευρεθείτε την ημέρα της φωτογράφησης;", 
+          a: "<p>Είμαστε ομάδα άρτια καταρτισμένων φωτογράφων οπότε εάν κάποιος αδυνατεί να παρευρεθεί την συμφωνημένη ημερομηνία για λόγους ανωτέρας βίας, κάποιος άλλος από την ομάδα μας μπορεί να τον αντικαταστήσει. Εάν δεν υπάρχει διαθεσιμότητα από την ομάδα μας, διαθέτουμε ένα δίκτυο επαγγελματιών φωτογράφων που μπορούμε να απευθυνθούμε που εμπιστευόμαστε πλήρως ότι θα σας δώσουν ένα άρτιο αποτέλεσμα. Σε κάθε περίπτωση για εσάς δεν πρόκειται να υπάρξει οποιαδήποτε αλλαγή στα συμφωνηθέντα.</p>" },
+        
+        { q: "12. Τι συμβαίνει σε περίπτωση που θέλω να ακυρώσω;", 
+          a: "<p>Σε περίπτωση ακύρωσης, ισχύουν οι όροι που αναγράφονται στο συμφωνητικό συνεργασίας. Η προκαταβολή δεν επιστρέφεται, εκτός αν οριστεί διαφορετικά στην σύμβαση.</p>" },
+        
+        { q: "13. Πώς παραδίδονται οι φωτογραφίες;", 
+          a: "<p>Οι φωτογραφίες παραδίδονται μέσω ιδιωτικής γκαλερί υψηλής ποιότητας με δυνατότητα λήψης (download) και κοινοποίηση. Μπορούν να δοθούν και σε εξωτερικό μέσο αποθήκευσης. Εάν υπάρχουν εκτυπωμένες φωτογραφίες, δίνονται από κοντά είτε αποστέλλονται ταχυδρομικώς.</p>" },
+        
+        { q: "14. Τι ισχύει με την χρήση των φωτογραφιών και τα πνευματικά δικαιώματα;", 
+          a: "<p>Σύμφωνα με τον νόμο ο φωτογράφος διατηρεί τα πνευματικά δικαιώματα και μπορεί να χρησιμοποιήσει τις εικόνες με οποιοδήποτε τρόπο με σκοπό την διαφήμιση και την γνωστοποίηση της δουλειάς του.</p>" },
+        
+        { q: "15. Χρησιμοποιείτε Τεχνητή Νοημοσύνη (AI);", 
+          a: "<p>Αν και έχουμε την δυνατότητα χρήσης ΑΙ, γίνεται μόνο κατόπιν αιτήματος του πελάτη. Θεωρούμε ότι παρ'ότι η Τεχνητή Νοημοσύνη έχει βελτιωθεί δραματικά, δεν μπορεί να αντικαταστήσει τα αποτελέσματα που μπορεί να παράγει ένας αληθινός άνθρωπος.</p>" }
+      ];
+
+      const container = document.getElementById('faq-container');
+      if (!container) return;
+
+      // Build FAQ HTML
+      faqData.forEach((item, index) => {
+        const faqDiv = document.createElement('div');
+        faqDiv.className = 'faq-item';
+
+        // Question with plus icon
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'faq-question';
+        questionDiv.setAttribute('role', 'button');
+        questionDiv.setAttribute('tabindex', '0');
+        questionDiv.setAttribute('aria-expanded', 'false');
+        questionDiv.innerHTML = `<span>${item.q}</span><span class="plus-icon">+</span>`;
+
+        // Answer
+        const answerDiv = document.createElement('div');
+        answerDiv.className = 'faq-answer';
+        answerDiv.innerHTML = item.a;
+
+        faqDiv.appendChild(questionDiv);
+        faqDiv.appendChild(answerDiv);
+        container.appendChild(faqDiv);
+
+        // Toggle functionality
+        questionDiv.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const isActive = this.classList.contains('active');
+          const answer = this.nextElementSibling;
+
+          // Close all others (optional: remove this loop to allow multiple open)
+          document.querySelectorAll('.faq-question').forEach(q => {
+            if (q !== questionDiv && q.classList.contains('active')) {
+              q.classList.remove('active');
+              q.setAttribute('aria-expanded', 'false');
+              q.nextElementSibling.classList.remove('show');
+            }
+          });
+
+          // Toggle current
+          if (!isActive) {
+            this.classList.add('active');
+            this.setAttribute('aria-expanded', 'true');
+            answer.classList.add('show');
+          } else {
+            this.classList.remove('active');
+            this.setAttribute('aria-expanded', 'false');
+            answer.classList.remove('show');
+          }
+        });
+
+        // optional keyboard support
+        questionDiv.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            questionDiv.click();
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
