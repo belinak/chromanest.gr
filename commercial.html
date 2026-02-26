@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chromanest | Commercial</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/Favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/Favicon/apple-touch-icon.png">
+  <link rel="shortcut icon" href="images/Favicon/favicon.ico">
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ===== RESET & BASE (unchased from original) ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+
+    /* ===== NAVBAR (exactly as provided) ===== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px; /* 1 unit */
+      width: 200px; /* 4 units (1:4 ratio) */
+      object-fit: contain;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-item {
+      position: relative;
+      margin-left: 1.5rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #888;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      min-width: 180px;
+      padding: 0.5rem 0;
+      z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu li {
+      padding: 0;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.7rem 1.2rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f5f5f5;
+    }
+
+    /* ===== MAIN PHOTO GRID SECTION ===== */
+    .photography-grid-section {
+      max-width: 1400px;
+      margin: 3rem auto;
+      padding: 0 5%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      color: #222;
+      letter-spacing: 1px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Two‑column grid */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    /* Card / tile styling */
+    .photo-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      aspect-ratio: 615 / 369; /* base ratio 615x369 */
+      width: 100%;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+    }
+
+    .photo-card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: filter 0.4s ease;
+    }
+
+    /* overlay & title */
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+      
+    }
+
+    .card-title {
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 500;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+      letter-spacing: 1px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform: translateY(0);
+      opacity: 1;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    
+    .photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+    /* hover effect: title moves up a bit and becomes slightly larger */
+    .photo-card:hover .card-title {
+      transform: translateY(-8px);
+  
+    }
+
+    .photo-card:hover .card-overlay {
+       
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    /* placeholder image style (soft gradient to indicate placeholder) */
+    .placeholder-img {
+      background: linear-gradient(135deg, #b8b8b8, #e0e0e0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    /* ===== FOOTER (identical) ===== */
+    .footer {
+      background-color: #eee;
+      color: #4f4f4f;
+      padding: 60px 5% 30px;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4f4f4f;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #4f4f4f;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: #888;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+      color: #4f4f4f;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-size: 14px;
+      color: #888;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .grid-2col {
+        gap: 1.5rem;
+      }
+      .card-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+      }
+
+      .nav-menu {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav-item {
+        margin: 0.5rem;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .logo img {
+        height: 40px;
+        width: 160px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .grid-2col {
+        grid-template-columns: 1fr; /* single column on small */
+        gap: 1.2rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+
+      .logo img {
+        height: 35px;
+        width: 140px;
+      }
+
+      .card-title {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* tiny screens */
+    @media (max-width: 400px) {
+      .card-title {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR (identical to original, except Photography link now points to this page itself) -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
+      </a>
+    </div>
+    <ul class="nav-menu">
+       <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+      <!-- Photography dropdown — but we want "Photography" to be clickable and land here.
+           We keep the dropdown items, but the main link now goes to this page (commercial.html) -->
+      <li class="nav-item dropdown">
+        <a href="commercial.html" class="nav-link">Commercial</a>
+        <ul class="dropdown-menu">
+        <li><a href="portraits.html">Portraits</a></li>
+        <li><a href="proportraits.html">Pro Portraits</a></li>
+        <li><a href="weddingdresses.html">Wedding Dresses</a></li>
+        <li><a href="editorial.html">Editorial</a></li>
+        <li><a href="product.html">Product</a></li>
+          <li><a href="packaging.html">Packaging</a></li>
+          <li><a href="food.html">Food</a></li>
+          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
+          <li><a href="familyportraits.html">Family portraits</a></li>
+          <li><a href="newborns.html">Newborns</a></li>
+          <li><a href="couples.html">Couples</a></li>
+           <li><a href="maternity.html">Maternity</a></li>
+            <li><a href="conceptual.html">Conceptual</a></li>
+             <li><a href="events.html">Events</a></li>
+              <li><a href="hotels.html">Hotels</a></li>
+               <li><a href="/airbnb.html">Airbnb</a></li>
+        </ul>
+      </li>
+<li class="nav-item"><a href="wedding.html" class="nav-link">Wedding</a></li>
+<li class="nav-item"><a href="christening.html" class="nav-link">Baptism</a></li>
+      <!--<li class="nav-item"><a href="packages.html" class="nav-link">Packages</a></li>-->
+      <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
+         <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      <!-- <li class="nav-item"><a href="https://chromanest.blogspot.com" class="nav-link">Blog</a></li>-->
+    </ul>
+  </nav>
+
+  <!-- MAIN PHOTO GRID SECTION (2 columns, 16 tiles with title on hover) -->
+  <section class="photography-grid-section" data-aos="fade-up">
+    <h2 class="section-title">·Commercial Works·</h2>
+    <div class="grid-2col">
+      <!-- We'll generate 16 cards using an array of titles. Each card links to a relevant page (placeholder). 
+           For demo, all links point to "#" but you can later replace with actual URLs. 
+           Titles exactly as requested. -->
+
+      <!-- 1. Portraits -->
+     <div class="photo-card" data-aos="zoom-in">
+  <a href="portraits.html">
+    <img src="images/00commercial/portrait6.jpg" alt="Portraits" class="photo-img">
+    <div class="card-overlay">
+      <span class="card-title">Portraits</span>
+    </div>
+  </a>
+</div>
+      <!-- 2. Professional Portraits -->
+      <div class="photo-card" data-aos="zoom-in" data-aos-delay="50">
+        <a href="professional-portraits.html">
+         <img src="images/00commercial/portrait13.jpg" alt="Professional Portraits" class="photo-img">
+                   <div class="card-overlay">
+            <span class="card-title">Professional Portraits</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 3. Wedding Dresses -->
+      <div class="photo-card" data-aos="zoom-in" data-aos-delay="100">
+        <a href="wedding-dresses.html">
+         <img src="images/00commercial/wedding1.jpg" alt="Wedding Dresses" class="photo-img">          <div class="card-overlay">
+            <span class="card-title">Wedding Dresses</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 4. Editorial -->
+      <div class="photo-card" data-aos="zoom-in" data-aos-delay="150">
+        <a href="editorial.html">
+           <img src="images/00commercial/fashion1.jpg" alt="Editorial" class="photo-img">
+          <div class="card-overlay">
+            <span class="card-title">Editorial</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 5. Products -->
+      <div class="photo-card" data-aos="zoom-in">
+        <a href="products.html">
+          <img src="images/00commercial/product1smalll.jpg" alt="Products" class="photo-img">
+          <div class="card-overlay">
+            <span class="card-title">Products</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 6. Packaging -->
+      <div class="photo-card" data-aos="zoom-in" data-aos-delay="50">
+        <a href="packaging.html">
+           <img src="images/00commercial/packaging1.jpg" alt="Packaging" class="photo-img">
+          <div class="card-overlay">
+            <span class="card-title">Packaging</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 7. Food -->
+      <div class="photo-card" data-aos="zoom-in" data-aos-delay="100">
+        <a href="food.html">
+           <img src="images/00commercial/food1.jpg" alt="Food" class="photo-img">
+          <div class="card-overlay">
+            <span class="card-title">Food</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 8. Fashion e-shops -->
+      <div class="photo-card" data-aos="zoom-in" data-aos-delay="150">
+        <a href="fashion-eshop.html">
+           <img src="images/00commercial/20130924_Anel_01.jpg" alt="ashion e-shops" class="photo-img">
+          <div class="card-overlay">
+            <span class="card-title">Fashion e-shops</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 9. Family portraits -->
+      <div class="photo-card" data-aos="zoom-in">
+        <a href="family-portraits.html">
+          <img src="images/00commercial/family1.jpg" alt="Family portraits" class="photo-img">
+          <div class="card-overlay">
+            <span class="card-title">Family portraits</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 10. Newborns -->
+      <div class="photo-card" data-aos="zoom-in" data-aos-delay="50">
+        <a href="newborns.html">
+           <img src="images/00commercial/baby-girl-pink1.jpg" alt="Newborns" class="photo-img">
+          <div class="card-overlay">
+            <span class="card-title">Newborns</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 11. Couples -->
+      <div class="photo-card" data-aos="zoom-in" data-aos-delay="100">
+        <a href="couples.html">
+          <img src="images/00commercial/20140926_Damn_your_eyes_05.jpg" alt="Couples" class="photo-img">
+          <div class="card-overlay">
+            <span class="card-title">Couples</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 12. Maternity -->
+      <div class="photo-card" data-aos="zoom-in" data-aos-delay="150">
+        <a href="maternity.html">
+           <img src="images/00commercial/maternity1.jpg" alt="Maternity" class="photo-img">
+          <div class="card-overlay">
+            <span class="card-title">Maternity</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 13. Conceptual -->
+      <div class="photo-card" data-aos="zoom-in">
+        <a href="conceptual.html">
+          <img src="images/00commercial/20120402-DSC_0025READY.gif" alt="Conceptual" class="photo-img">
+                    <div class="card-overlay">
+            <span class="card-title">Conceptual</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 14. Events -->
+      <div class="photo-card" data-aos="zoom-in" data-aos-delay="50">
+        <a href="events.html">
+         <img src="images/00commercial/Reworks_Festival_04.jpg" alt="Events" class="photo-img">
+                   <div class="card-overlay">
+            <span class="card-title">Events</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 15. Hotels -->
+      <div class="photo-card" data-aos="zoom-in" data-aos-delay="100">
+        <a href="hotels.html">
+          <img src="images/00commercial/hotel1.jpg" alt="Hotels" class="photo-img">
+          <div class="card-overlay">
+            <span class="card-title">Hotels</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 16. Airbnb -->
+      <div class="photo-card" data-aos="zoom-in" data-aos-delay="150">
+        <a href="airbnb.html">
+          <img src="images/00commercial/airbnb1.jpg" alt="Airbnb" class="photo-img">
+                    <div class="card-overlay">
+            <span class="card-title">Airbnb</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (exactly as original) -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Chromanest</h3>
+        <p>Επαγγελματικές υπηρεσίες φωτογραφίας με έδρα την Αθήνα με ειδίκευση στα πορτρέτα, προϊόντα και τις ειδικές εκδηλώσεις.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="commercial.html">Commercial Photography</a></li>
+           <li><a href="00commercial/portraits.html">Portraits</a></li>
+          <li><a href="wedding.html">Weddings</a></li>
+          <li><a href="baptism.html">Christenings</a></li>
+                          </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="packages.html">Packages & Pricing</a></li>
+          <li><a href="editing.html">Editing Services</a></li>
+          <li><a href="https://chromanest.blogspot.com">Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
+          <li><i class="fas fa-phone"></i> +30 6973949986</li>
+          <li><i class="fas fa-envelope"></i> chromanest.creatives@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>2025 Chromanest &copy; All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+  </script>
+</body>
+</html>

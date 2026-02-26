@@ -1,37 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chromanest | Portraits</title>
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chromanest | Πορτραίτα</title>
+
+  <!-- favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/Favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/Favicon/apple-touch-icon.png">
   <link rel="shortcut icon" href="images/Favicon/favicon.ico">
-  
-  
-  
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+
+  <!-- AOS & Font Awesome -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  
+
+  <!-- Masonry & imagesLoaded (CDN) -->
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
   <style>
-    /* Reset and base styles */
+    /* ----- RESET & BASE (unchanged) ----- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
       color: #333;
-      background-color: #f9f9f9;
+      background-color: #fff;
     }
-    
-    /* Navbar styles */
+
+    /* ----- NAVBAR (exactly as your commercial page) ----- */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -43,7 +46,7 @@
       top: 0;
       z-index: 1000;
     }
-    
+
     .logo a {
       font-size: 1.8rem;
       font-weight: 700;
@@ -51,14 +54,15 @@
       text-decoration: none;
       letter-spacing: 1px;
     }
-     .logo {
+
+    .logo {
       display: flex;
       align-items: center;
     }
-    
+
     .logo img {
-      height: 50px; /* 1 unit */
-      width: 200px; /* 4 units (1:4 ratio) */
+      height: 50px;
+      width: 200px;
       object-fit: contain;
     }
 
@@ -66,23 +70,23 @@
       display: flex;
       list-style: none;
     }
-    
+
     .nav-item {
       position: relative;
       margin-left: 1.5rem;
     }
-    
+
     .nav-link {
       text-decoration: none;
       color: #333;
       font-weight: 500;
       transition: color 0.3s;
     }
-    
+
     .nav-link:hover {
       color: #888;
     }
-    
+
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -95,15 +99,15 @@
       padding: 0.5rem 0;
       z-index: 1000;
     }
-    
+
     .dropdown:hover .dropdown-menu {
       display: block;
     }
-    
+
     .dropdown-menu li {
       padding: 0;
     }
-    
+
     .dropdown-menu a {
       display: block;
       padding: 0.7rem 1.2rem;
@@ -111,87 +115,132 @@
       text-decoration: none;
       transition: background-color 0.3s;
     }
-    
+
     .dropdown-menu a:hover {
       background-color: #f5f5f5;
     }
-    
-    /* Page header section */
-    .portraits-page {
-      padding: 3rem 5%;
-    }
-    
-    .page-header {
+
+    /* ----- CENTERED TEXT SECTION (with CTA inside box) ----- */
+    .portrait-container {
+      max-width: 1000px;
+      margin: 2rem auto 1rem;
+      padding: 0 5%;
       text-align: center;
-      margin-bottom: 3rem;
     }
-    
-    .page-header h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1.5rem;
-      font-weight: 300;
-      color: #222;
+
+    .discreet-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #2a2a2a;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.4rem;
+      font-family: 'Courier New', Courier, monospace;
+      display: inline-block;
     }
-    
-    .page-header p {
-      font-size: 1.2rem;
-      color: #666;
-      max-width: 600px;
-      margin: 0 auto;
+
+    .portrait-description {
+      max-width: 750px;
+      margin: 0 auto 0.8rem auto;
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.5;
     }
-    
-    /* Photo grid section - NO GAPS */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      grid-auto-rows: 150px;
-      grid-auto-flow: dense;
-      gap: 0; /* No gaps between images */
+
+    .portrait-description p {
+      margin-bottom: 0.8rem;
     }
-    
-    .photo-item {
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
+
+    .services-list {
+      list-style: none;
+      margin: 0.8rem 0;
+      padding: 0;
+    }
+
+    .services-list li {
+      margin-bottom: 0.3rem;
+    }
+
+    .target-box {
+      background-color: #f5f5f5;
+      padding: 1.5rem 1.5rem 0.8rem 1.5rem;
+      border-radius: 6px;
+      max-width: 700px;
+      margin: 1rem auto 0.5rem;
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    .target-box strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-style: normal;
+      font-size: 1rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #e8d8c3;
+      color: #fff;
+      font-size: 1.1rem;
+      padding: 0.5rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      margin: 0.8rem 0 0.2rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      border: none;
       cursor: pointer;
     }
-    
-    .photo-item:hover {
-      transform: scale(1.02);
-      z-index: 100;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+
+    .cta-button:hover {
+      background-color: #d8c3a0;
     }
-    
-    .photo-item img {
+
+    /* ===== MASONRY GALLERY (exactly like reference site) ===== */
+    .masonry__gallery {
+      max-width: 1600px;
+      margin: 3rem auto 2rem;
+      padding: 0 5%;
+      position: relative;   /* required for Masonry absolute positioning */
+    }
+
+    .masonry__sizer,
+    .masonry__item {
+      width: 33.333%;
+      padding: 2px;          /* tiny gap between images */
+      box-sizing: border-box;
+    }
+
+    .masonry__item {
+      cursor: pointer;
+      transition: transform 0.2s;
+      /* No float – Masonry handles positioning */
+    }
+
+    .masonry__item:hover {
+      transform: scale(1.01);
+      z-index: 10;
+    }
+
+    .masonry__item img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       display: block;
-      transition: transform 0.5s;
+      background: #f0f0f0;
     }
-    
-    .photo-item:hover img {
-      transform: scale(1.05);
+
+    /* clearfix for the container (safe fallback) */
+    .masonry__gallery:after {
+      content: '';
+      display: table;
+      clear: both;
     }
-    
-    /* Size variations - NO GAPS */
-    .photo-item.small {
-      grid-row: span 1;
-    }
-    
-    .photo-item.medium {
-      grid-row: span 2;
-    }
-    
-    .photo-item.large {
-      grid-row: span 3;
-    }
-    
-    .photo-item.wide {
-      grid-column: span 2;
-    }
-    
-    /* Lightbox styles */
+
+    /* ----- LIGHTBOX (simple modal) ----- */
     .lightbox {
       display: none;
       position: fixed;
@@ -199,83 +248,89 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
+      background-color: rgba(0, 0, 0, 0.95);
       z-index: 2000;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .lightbox.active {
-      display: flex;
       justify-content: center;
       align-items: center;
-      opacity: 1;
+      flex-direction: column;
     }
-    
+
+    .lightbox.active {
+      display: flex;
+    }
+
     .lightbox-content {
-      max-width: 90%;
-      max-height: 90%;
+      max-width: 90vw;
+      max-height: 85vh;
       position: relative;
     }
-    
+
     .lightbox-img {
       max-width: 100%;
-      max-height: 90vh;
-      border-radius: 8px;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+      max-height: 85vh;
+      display: block;
+      border: 2px solid #333;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
     }
-    
-    .lightbox-caption {
-      color: white;
-      text-align: center;
-      margin-top: 15px;
-      font-size: 1.2rem;
-    }
-    
+
     .lightbox-close {
       position: absolute;
-      top: 20px;
-      right: 30px;
-      color: white;
+      top: 25px;
+      right: 35px;
+      color: #fff;
       font-size: 40px;
-      font-weight: bold;
       cursor: pointer;
-      transition: color 0.3s;
-      z-index: 2001;
+      z-index: 2010;
+      transition: color 0.2s;
     }
-    
+
     .lightbox-close:hover {
-      color: #ccc;
+      color: #e8d8c3;
     }
-    
+
     .lightbox-nav {
       position: absolute;
       top: 50%;
+      transform: translateY(-50%);
       width: 100%;
       display: flex;
       justify-content: space-between;
-      transform: translateY(-50%);
       padding: 0 20px;
-      z-index: 2001;
+      pointer-events: none;
     }
-    
-    .lightbox-prev, .lightbox-next {
+
+    .lightbox-nav button {
+      background: rgba(255,255,255,0.1);
+      border: none;
       color: white;
-      font-size: 50px;
+      font-size: 40px;
+      padding: 10px 20px;
       cursor: pointer;
-      transition: color 0.3s;
-      user-select: none;
+      pointer-events: auto;
+      transition: background 0.2s;
+      border-radius: 4px;
     }
-    
-    .lightbox-prev:hover, .lightbox-next:hover {
-      color: #ccc;
+
+    .lightbox-nav button:hover {
+      background: rgba(255,255,255,0.3);
     }
-    
-   /* Footer */
+
+    .lightbox-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    /* ----- FOOTER (exactly as your commercial page) ----- */
     .footer {
       background-color: #eee;
       color: #4f4f4f;
       padding: 60px 5% 30px;
+      margin-top: 3rem;
     }
 
     .footer-content {
@@ -350,266 +405,160 @@
       font-size: 14px;
       color: #888;
     }
-    
-    /* Responsive styles */
+
+    /* ----- RESPONSIVE (for masonry columns) ----- */
     @media (max-width: 768px) {
+      .masonry__sizer,
+      .masonry__item {
+        width: 50%; /* 2 columns on tablets/mobile */
+      }
+
       .navbar {
         flex-direction: column;
         padding: 1rem 5%;
       }
-      
       .nav-menu {
         margin-top: 1rem;
         flex-wrap: wrap;
         justify-content: center;
       }
-      
       .nav-item {
         margin: 0.5rem;
       }
-      
       .footer-content {
         grid-template-columns: repeat(2, 1fr);
       }
-      
-      .photo-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        grid-auto-rows: 120px;
-      }
-      
-      .page-header h1 {
-        font-size: 2.5rem;
-      }
-      
-      .lightbox-prev, .lightbox-next {
-        font-size: 40px;
-      }
-      
-       .logo img {
+      .logo img {
         height: 40px;
         width: 160px;
       }
-      
     }
-    
+
     @media (max-width: 576px) {
-        .footer-content {
+      .footer-content {
         grid-template-columns: 1fr;
       }
-      
-      .photo-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        grid-auto-rows: 100px;
-      }
-      
-      .lightbox-prev, .lightbox-next {
-        font-size: 30px;
-      }
-      
-      .lightbox-close {
-        font-size: 30px;
-        top: 10px;
-        right: 15px;
-      }
-      
-        .logo img {
+      .logo img {
         height: 35px;
         width: 140px;
+      }
+      .lightbox-nav button {
+        font-size: 30px;
+        padding: 5px 10px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="logo"><a href="index.html">
-        <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
-      </a></div>
-     <!-- Navigation Menu -->
-      <ul class="nav-menu">
-        <!-- Photography Dropdown -->
-        <li class="nav-item dropdown">
-          <a href="index.html" class="nav-link">Photography</a>
-          <ul class="dropdown-menu">
-            <li><a href="wedding.html">Wedding</a></li>
-            <li><a href="newborns.html">Newborns</a></li>
-            <li><a href="christening.html">Christening</a></li>
-            <li><a href="maternity.html">Maternity</a></li>
-            <li><a href="fashion.html">Fashion</a></li>
-            <li><a href="portraits.html">Portraits</a></li>
-          </ul>
-        </li>
 
-        <!-- Other Menu Items -->
-        <li class="nav-item"><a href="packages.html" class="nav-link">Packages</a></li>
-        <li class="nav-item"><a href="retouching.html" class="nav-link">Retouching</a></li>
-        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-          <li class="nav-item"><a href="https://chromanest.blogspot.com" class="nav-link">Blog</a></li>
-      </ul>
+  <!-- NAVBAR (identical to your commercial page) -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
+      </a>
+    </div>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+      <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+
+      <li class="nav-item dropdown">
+        <a href="commercial.html" class="nav-link">Commercial</a>
+        <ul class="dropdown-menu">
+          <li><a href="portraits.html">Portraits</a></li>
+          <li><a href="proportraits.html">Pro Portraits</a></li>
+          <li><a href="weddingdresses.html">Wedding Dresses</a></li>
+          <li><a href="editorial.html">Editorial</a></li>
+          <li><a href="product.html">Product</a></li>
+          <li><a href="packaging.html">Packaging</a></li>
+          <li><a href="food.html">Food</a></li>
+          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
+          <li><a href="familyportraits.html">Family portraits</a></li>
+          <li><a href="newborns.html">Newborns</a></li>
+          <li><a href="couples.html">Couples</a></li>
+          <li><a href="maternity.html">Maternity</a></li>
+          <li><a href="conceptual.html">Conceptual</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="hotels.html">Hotels</a></li>
+          <li><a href="airbnb.html">Airbnb</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item"><a href="wedding.html" class="nav-link">Wedding</a></li>
+      <li class="nav-item"><a href="christening.html" class="nav-link">Baptism</a></li>
+      <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
+      <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
   </nav>
-        
-  <!-- PORTRAITS SECTION -->
-  <section class="portraits-page">
-    <div class="page-header">
-      <h1>Portraits</h1>
-      <p>Get your best portrait you have ever taken!</p>
+
+  <!-- MAIN CONTENT – PORTRAIT PAGE (centered text, CTA inside box) -->
+  <section class="portrait-container" data-aos="fade-up">
+    <div class="discreet-title">Πορτραίτα</div>
+
+    <div class="portrait-description">
+      <p>Κανένας δεν έχει φωτο-αγένεια. Όλοι οι άνθρωποι έχουν φωτογένεια με τον κατάλληλο φωτογράφο.</p>
+      <p><strong>Οι υπηρεσίες μας περιλαμβάνουν:</strong></p>
+      <ul class="services-list">
+        <li>Κλασσικά και καλλιτεχνικά πορτραίτα</li>
+        <li>Επιλογή στούντιο ή φυσικού χώρου</li>
+        <li>Lifestyle φωτογράφηση</li>
+        <li>Καθοδήγηση σε στάση σώματος</li>
+        <li>Φωτισμό που αναδεικνύει τα χαρακτηριστικά</li>
+        <li>Επαγγελματικό retouch</li>
+      </ul>
     </div>
-    
-    <!-- Photo Grid - NO GAPS -->
-    <div class="photo-grid">
-      <!-- Original images -->
-      <div class="photo-item small" data-index="0">
-        <img src="images/Portraits-imgs/portrait1.jpg" alt="Portrait 1">
+
+    <!-- target box with CTA inside -->
+    <div class="target-box">
+      <strong>Σε ποιους απευθύνεται:</strong>
+      Ιδιώτες που επιθυμούν ένα σύγχρονο ποιοτικό πορτραίτο<br>
+      Ηθοποιούς, μοντέλα & καλλιτέχνες που χρειάζονται portfolio<br>
+      Δημιουργούς & freelancers που επενδύουν στο personal brand τους.
+      <div>
+        <a href="contact.html" class="cta-button">Κλείσε τώρα</a>
       </div>
-      <div class="photo-item medium" data-index="1">
-        <img src="images/Portraits-imgs/portrait2.jpg" alt="Portrait 2">
-      </div>
-      <div class="photo-item large" data-index="2">
-        <img src="images/Portraits-imgs/portrait3.jpg" alt="Portrait 3">
-      </div>
-      <div class="photo-item medium wide" data-index="3">
-        <img src="images/Portraits-imgs/portrait4.jpg" alt="Portrait 4">
-      </div>
-      <div class="photo-item small" data-index="4">
-        <img src="images/Portraits-imgs/portrait5.jpg" alt="Portrait 5">
-      </div>
-      <div class="photo-item large" data-index="5">
-        <img src="images/Portraits-imgs/portrait6.jpg" alt="Portrait 6">
-      </div>
-      <div class="photo-item small" data-index="6">
-        <img src="images/Portraits-imgs/portrait7.jpg" alt="Portrait 7">
-      </div>
-      <div class="photo-item medium" data-index="7">
-        <img src="images/Portraits-imgs/portrait8.jpg" alt="Portrait 8">
-      </div>
-      <div class="photo-item large" data-index="8">
-        <img src="images/Portraits-imgs/portrait9.jpg" alt="Portrait 9">
-      </div>
-      <div class="photo-item small" data-index="9">
-        <img src="images/Portraits-imgs/portrait10.jpg" alt="Portrait 10">
-      </div>
-      <div class="photo-item medium wide" data-index="10">
-        <img src="images/Portraits-imgs/portrait11.jpg" alt="Portrait 11">
-      </div>
-      <div class="photo-item large" data-index="11">
-        <img src="images/Portraits-imgs/portrait12.jpg" alt="Portrait 12">
-      </div>
-      <div class="photo-item small" data-index="12">
-        <img src="images/Portraits-imgs/portrait13.jpg" alt="Portrait 13">
-      </div>
-      <div class="photo-item medium" data-index="13">
-        <img src="images/Portraits-imgs/portrait14.jpg" alt="Portrait 14">
-      </div>
-      <div class="photo-item large" data-index="14">
-        <img src="images/Portraits-imgs/portrait15.jpg" alt="Portrait 15">
-      </div>
-      
-      <!-- Doubled images (additional images) -->
-      <div class="photo-item small" data-index="15">
-        <img src="images/Portraits-imgs/portrait16.jpg" alt="Portrait 16">
-      </div>
-      <div class="photo-item medium" data-index="16">
-        <img src="images/Portraits-imgs/portrait17.jpg" alt="Portrait 17">
-      </div>
-      <div class="photo-item large" data-index="17">
-        <img src="images/Portraits-imgs/portrait18.jpg" alt="Portrait 18">
-      </div>
-      <div class="photo-item medium wide" data-index="18">
-        <img src="images/Portraits-imgs/portrait19.jpg" alt="Portrait 19">
-      </div>
-      <div class="photo-item small" data-index="19">
-        <img src="images/Portraits-imgs/portrait20.jpg" alt="Portrait 20">
-      </div>
-      <div class="photo-item large" data-index="20">
-        <img src="images/Portraits-imgs/portrait21.jpg" alt="Portrait 21">
-      </div>
-      <div class="photo-item small" data-index="21">
-        <img src="images/Portraits-imgs/portrait22.jpg" alt="Portrait 22">
-      </div>
-      <div class="photo-item medium" data-index="22">
-        <img src="images/Portraits-imgs/portrait23.jpg" alt="Portrait 23">
-      </div>
-      <div class="photo-item large" data-index="23">
-        <img src="images/Portraits-imgs/portrait24.jpg" alt="Portrait 24">
-      </div>
-      <div class="photo-item small" data-index="24">
-        <img src="images/Portraits-imgs/portrait25.jpg" alt="Portrait 25">
-      </div>
-      <div class="photo-item medium wide" data-index="25">
-        <img src="images/Portraits-imgs/portrait26.jpg" alt="Portrait 26">
-      </div>
-      <div class="photo-item large" data-index="26">
-        <img src="images/Portraits-imgs/portrait27.jpg" alt="Portrait 27">
-      </div>
-      <div class="photo-item small" data-index="27">
-        <img src="images/Portraits-imgs/portrait28.jpg" alt="Portrait 28">
-      </div>
-      <div class="photo-item medium" data-index="28">
-        <img src="images/Portraits-imgs/portrait29.jpg" alt="Portrait 29">
-      </div>
-      <div class="photo-item large" data-index="29">
-        <img src="images/Portraits-imgs/portrait30.jpg" alt="Portrait 30">
-      </div>
-      
-        <!-- Add these additional images after the existing ones in the photo-grid -->
-<div class="photo-item medium" data-index="30">
-  <img src="images/Portraits-imgs/portrait31.jpg" alt="Portrait 31">
-</div>
-<div class="photo-item medium" data-index="31">
-  <img src="images/Portraits-imgs/portrait32.jpg" alt="Portrait 32">
-</div>
-<div class="photo-item large" data-index="32">
-  <img src="images/Portraits-imgs/portrait33.jpg" alt="Portrait 33">
-</div>
-    <div class="photo-item small" data-index="33">
-        <img src="images/Portraits-imgs/portrait34.jpg" alt="Portrait 34">
-      </div>
-      <div class="photo-item small" data-index="34">
-        <img src="images/Portraits-imgs/portrait35.jpg" alt="Portrait 35">
-      </div>  
     </div>
-    
-  
-    
-  </section> 
-  
-  <!-- Lightbox -->
+  </section>
+
+  <!-- MASONRY GALLERY – 3 columns, tiny gaps, exactly like reference site -->
+  <section class="masonry__gallery" data-aos="fade-up">
+    <div class="masonry__sizer"></div>
+    <!-- 35 items will be generated by JavaScript -->
+  </section>
+
+  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
     <span class="lightbox-close" id="lightbox-close">&times;</span>
     <div class="lightbox-nav">
-      <span class="lightbox-prev" id="lightbox-prev">&#10094;</span>
-      <span class="lightbox-next" id="lightbox-next">&#10095;</span>
+      <button id="lightbox-prev">&#10094;</button>
+      <button id="lightbox-next">&#10095;</button>
     </div>
     <div class="lightbox-content">
       <img class="lightbox-img" id="lightbox-img" src="" alt="">
-      <div class="lightbox-caption" id="lightbox-caption"></div>
+      <div class="lightbox-counter" id="lightbox-counter"></div>
     </div>
   </div>
-        
- <!-- FOOTER -->
+
+  <!-- FOOTER (identical) -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-column">
         <h3>Chromanest</h3>
-        <p>Professional photography services specializing in fashion, portraits, and special events. Creating timeless memories through the art of photography.</p>
+        <p>Επαγγελματικές υπηρεσίες φωτογραφίας με έδρα την Αθήνα με ειδίκευση στα πορτρέτα, προϊόντα και τις ειδικές εκδηλώσεις.</p>
         <div class="social-icons">
           <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
           <a href="#"><i class="fab fa-pinterest-p"></i></a>
         </div>
       </div>
-  
       <div class="footer-column">
         <h3>Services</h3>
         <ul>
-          <li><a href="wedding.html">Wedding Photography</a></li>
-          <li><a href="newborns.html">Newborn Photography</a></li>
-          <li><a href="christening.html">Christening Photography</a></li>
-          <li><a href="maternity.html">Maternity Photography</a></li>
-          <li><a href="fashion.html">Fashion Photography</a></li>
-          <li><a href="portraits.html">Portrait Photography</a></li>
-          <li><a href="facepainting.html">Face Painting</a></li>
+          <li><a href="commercial.html">Commercial Photography</a></li>
+          <li><a href="00commercial/portraits.html">Portraits</a></li>
+          <li><a href="wedding.html">Weddings</a></li>
+          <li><a href="baptism.html">Christenings</a></li>
         </ul>
       </div>
       <div class="footer-column">
@@ -617,7 +566,7 @@
         <ul>
           <li><a href="about.html">About Us</a></li>
           <li><a href="packages.html">Packages & Pricing</a></li>
-          <li><a href="retouching.html">Retouching Services</a></li>
+          <li><a href="editing.html">Editing Services</a></li>
           <li><a href="https://chromanest.blogspot.com">Blog</a></li>
           <li><a href="contact.html">Contact Us</a></li>
         </ul>
@@ -635,94 +584,108 @@
       <p>2025 Chromanest &copy; All rights reserved.</p>
     </div>
   </footer>
-  
+
+  <!-- AOS & main scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Lightbox functionality
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-    const lightboxClose = document.getElementById('lightbox-close');
-    const lightboxPrev = document.getElementById('lightbox-prev');
-    const lightboxNext = document.getElementById('lightbox-next');
-    const photoItems = document.querySelectorAll('.photo-item');
-    
-    let currentIndex = 0;
-    
-    // Open lightbox
-    function openLightbox(index) {
-      currentIndex = index;
-      updateLightbox();
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
-    }
-    
-    // Update lightbox content
-    function updateLightbox() {
-      const currentItem = photoItems[currentIndex];
-      const imgSrc = currentItem.querySelector('img').src;
-      const imgAlt = currentItem.querySelector('img').alt;
-      
-      lightboxImg.src = imgSrc;
-      lightboxCaption.textContent = imgAlt;
-    }
-    
-    // Close lightbox
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = 'auto'; // Re-enable scrolling
-    }
-    
-    // Navigate to next image
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % photoItems.length;
-      updateLightbox();
-    }
-    
-    // Navigate to previous image
-    function prevImage() {
-      currentIndex = (currentIndex - 1 + photoItems.length) % photoItems.length;
-      updateLightbox();
-    }
-    
-    // Add event listeners to all photo items
-    photoItems.forEach((item, index) => {
-      item.addEventListener('click', () => {
-        openLightbox(index);
-      });
-    });
-    
-    // Lightbox controls
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightboxNext.addEventListener('click', nextImage);
-    lightboxPrev.addEventListener('click', prevImage);
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('active')) return;
-      
-      if (e.key === 'Escape') {
-        closeLightbox();
-      } else if (e.key === 'ArrowRight') {
-        nextImage();
-      } else if (e.key === 'ArrowLeft') {
-        prevImage();
+    AOS.init({ duration: 600, once: true });
+
+    (function() {
+      const container = document.querySelector('.masonry__gallery');
+      const totalImages = 35;
+      const basePath = 'images/01Portraits-imgs/portrait';
+
+      // Create 35 masonry items
+      for (let i = 1; i <= totalImages; i++) {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'masonry__item';
+        itemDiv.setAttribute('data-index', i - 1);
+
+        const img = document.createElement('img');
+        img.src = `${basePath}${i}.jpg`;
+        img.alt = `Πορτραίτο ${i}`;
+        img.loading = 'lazy';
+        itemDiv.appendChild(img);
+        container.appendChild(itemDiv);
       }
-    });
-    
-    // Close lightbox when clicking outside the image
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
-        closeLightbox();
-      }
-    });
-    
-    // Scroll to top function
-    function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+
+      // Initialize Masonry after all images are loaded
+      imagesLoaded(container, function() {
+        const msnry = new Masonry(container, {
+          itemSelector: '.masonry__item',
+          columnWidth: '.masonry__sizer',
+          percentPosition: true,
+          transitionDuration: 0
+        });
+        // Extra layout call after a tiny delay to ensure perfect positioning
+        setTimeout(() => msnry.layout(), 100);
       });
-    }
+
+      // ----- LIGHTBOX -----
+      const items = Array.from(document.querySelectorAll('.masonry__item'));
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const counter = document.getElementById('lightbox-counter');
+      const closeBtn = document.getElementById('lightbox-close');
+      const prevBtn = document.getElementById('lightbox-prev');
+      const nextBtn = document.getElementById('lightbox-next');
+      let currentIndex = 0;
+
+      function openLightbox(index) {
+        currentIndex = index;
+        updateLightbox();
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function updateLightbox() {
+        const img = items[currentIndex].querySelector('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        counter.textContent = (currentIndex + 1) + ' / ' + items.length;
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      items.forEach((item, idx) => {
+        item.addEventListener('click', () => openLightbox(idx));
+      });
+
+      closeBtn.addEventListener('click', closeLightbox);
+
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        updateLightbox();
+      });
+
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % items.length;
+        updateLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') {
+          currentIndex = (currentIndex - 1 + items.length) % items.length;
+          updateLightbox();
+        }
+        if (e.key === 'ArrowRight') {
+          currentIndex = (currentIndex + 1) % items.length;
+          updateLightbox();
+        }
+      });
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+    })();
   </script>
 </body>
 </html>
