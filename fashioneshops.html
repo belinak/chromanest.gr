@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chromanest | Fashion e-shops</title>
+  <title>Chromanest | Φωτογράφηση ρούχων για e-shops</title>
 
   <!-- favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
@@ -129,7 +129,7 @@
     }
 
     .discreet-title {
-        font-size: 1.4rem;
+      font-size: 1.2rem;
       font-weight: 300;
       letter-spacing: 1px;
       text-transform: none;
@@ -145,7 +145,7 @@
       max-width: 750px;
       margin: 0 auto 0.8rem auto;
       color: #555;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       line-height: 1.5;
     }
 
@@ -157,60 +157,77 @@
       list-style: none;
       margin: 0.8rem 0;
       padding: 0;
+      text-align: left;
+      display: inline-block;
     }
 
     .services-list li {
       margin-bottom: 0.3rem;
+      text-align: left;
     }
 
-    .target-box {
-      background-color: #f5f5f5;
-      padding: 1.5rem 1.5rem 0.8rem 1.5rem;
-      border-radius: 6px;
-      max-width: 700px;
-      margin: 1rem auto 0.5rem;
-      font-size: 0.95rem;
-      font-style: italic;
-    }
-
-    .target-box strong {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-style: normal;
-      font-size: 1rem;
-    }
-
-    .cta-button {
+    /* smaller gap after "πως δουλεύουμε" title */
+    .portrait-description p strong {
       display: inline-block;
-      background-color: #000;
-      color: #fff;
+      margin-top: 0.2rem;
+      margin-bottom: 0.2rem;
+    }
+
+    /* NEW CTA SECTION: inline motivation + black&white button */
+    .cta-motivation-wrapper {
+      background-color: #f5f5f5;
+      padding: 1.2rem 1.5rem;
+      border-radius: 6px;
+      max-width: 750px;
+      margin: 1rem auto 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .motivation-text {
+      font-size: 1rem;
+      color: #1f1f1f;
+      font-style: italic;
+      line-height: 1.4;
+      flex: 2 1 300px;
+      text-align: left;
+    }
+
+    .cta-button-bw {
+      display: inline-block;
+      background-color: #1f1f1f;  /* black */
+      color: #ffffff;
       font-size: 1.1rem;
+      font-weight: 500;
       padding: 0.5rem 2rem;
       border-radius: 4px;
       text-decoration: none;
-      transition: background-color 0.3s;
-      margin: 0.8rem 0 0.2rem;
-      font-weight: 500;
+      transition: background-color 0.2s, color 0.2s;
       letter-spacing: 1px;
-      border: none;
-      cursor: pointer;
+      border: 1px solid #1f1f1f;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    .cta-button:hover {
-      background-color: #586b80;
+    .cta-button-bw:hover {
+      background-color: #ffffff;
+      color: #1f1f1f;
+      border: 1px solid #1f1f1f;
     }
 
-    /* ===== MASONRY GALLERY - FIXED VERSION ===== */
+    /* ===== MASONRY GALLERY ===== */
     .masonry__gallery {
       max-width: 1600px;
       margin: 3rem auto 2rem;
       padding: 0 5%;
     }
 
-    /* IMPORTANT: Masonry needs this to position items absolutely */
     .grid {
       position: relative;
-      margin-left: -2px;  /* Compensate for item padding */
+      margin-left: -2px;
       margin-right: -2px;
     }
 
@@ -222,7 +239,7 @@
     }
 
     .grid-item {
-      float: left;  /* Fallback, Masonry will override with absolute */
+      float: left;
       margin-bottom: 0;
       cursor: pointer;
       transition: transform 0.2s;
@@ -240,7 +257,6 @@
       background: #f0f0f0;
     }
 
-    /* Clearfix */
     .grid:after {
       content: '';
       display: block;
@@ -439,6 +455,11 @@
         height: 40px;
         width: 160px;
       }
+
+      .cta-motivation-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     @media (max-width: 576px) {
@@ -493,38 +514,38 @@
     </ul>
   </nav>
 
-  <!-- TEXT SECTION -->
+  <!-- TEXT SECTION (customized for Fashion e-shops) -->
   <section class="portrait-container" data-aos="fade-up">
-    <div class="discreet-title">Φωτογράφηση για e-shops ρουχισμού</div>
+    <div class="discreet-title">Φωτογράφηση ρούχων για e-shops</div>
     <div class="portrait-description">
-      <p>χχχ</p>
-      <p><strong>Οι υπηρεσίες μας περιλαμβάνουν:</strong></p>
+      <p>Πριν ο πελάτης πατήσει το "ΑΓΟΡΑ", θέλει να "αγγίξει" το ύφασμα, να νιώσει την υφή και να ταυτιστεί με το στυλ σας μέσα από την οθόνη του. Δημιουργούμε εικόνες που αναδεικνύουν τη ραπτική, την ποιότητα και την ταυτότητα του brand σας — από σύνολα καθημερινής χρήσης και επαγγελματική ένδυση, μέχρι αξεσουάρ και total looks.</p>
+      
       <ul class="services-list">
-        <li>Studio λήψεις με ελεγχόμενο φωτισμό</li>
-        <li>Hero shots & διαφημιστικές συνθέσεις</li>
-        <li>Καθαρό background ή δημιουργικά set-ups</li>
-        <li>Προσεγμένο retouch υψηλών προδιαγραφών</li>
-        <li>Αρχεία έτοιμα για e-commerce, διαφήμιση και εκτύπωση</li>
+       <p style="text-align:center"><strong>Πως δουλεύουμε:</strong></p>
+        <li>✓ Φωτογράφηση με <strong>μοντέλα</strong>, αποκλειστικά προϊόντος (<strong>flat lays</strong>) ή <strong>ghost mannequin</strong></li>
+        <li>✓ Καθοδήγηση για φυσική ροή, κίνηση και ανάδειξη της εφαρμογής των ρούχων</li>
+        <li>✓ Φωτισμός προσαρμοσμένος στο ύφος σας — από μινιμαλιστικό studio μέχρι street style εικόνες</li>
+        <li>✓ Ενιαίο στυλ για όλη τη συλλογή (<strong>consistent brand aesthetic</strong>)</li>
+        <li>✓ Διακριτική επεξεργασία που σέβεται τα χρώματα και την υφή των υφασμάτων</li>
+        <li>✓ Γρήγορη και οργανωμένη παράδοση αρχείων, έτοιμων για το e-shop σας</li>
       </ul>
     </div>
-    <div class="target-box">
-      <strong>Κατάλληλο για:</strong>
-            <ul class="services-list">
-      <li>Καλλυντικά και skincare</li>
- <li>Τρόφιμα και ποτά </li>
- <li>Premium & Luxury Brands</li>
- </ul>
-      <div>
-        <a href="contact.html" class="cta-button">Επικοινωνήστε μαζί μας</a>
-      </div>
+    
+    <!-- NEW: motivation + black/white CTA inline -->
+    <div class="cta-motivation-wrapper">
+      <span class="motivation-text">
+        <strong>Αναβαθμίστε την ψηφιακή σας βιτρίνα</strong><br>
+        με φωτογραφίες που δεν δείχνουν απλά το ρούχο, αλλά αφηγούνται την ιστορία του.
+      </span>
+      <a href="contact.html" class="cta-button-bw">Κλείσε τώρα</a>
     </div>
   </section>
 
-  <!-- MASONRY GALLERY - FIXED -->
+  <!-- MASONRY GALLERY -->
   <section class="masonry__gallery" data-aos="fade-up">
     <div class="grid js-masonry">
       <div class="grid-sizer"></div>
-      <!-- Items will be inserted here by JavaScript -->
+      <!-- Items will be inserted by JavaScript -->
     </div>
   </section>
 
@@ -557,9 +578,9 @@
         <h3>Services</h3>
         <ul>
           <li><a href="commercial.html">Commercial Photography</a></li>
-          <li><a href="00commercial/portraits.html">Portraits</a></li>
+          <li><a href="portraits.html">Portraits</a></li>
           <li><a href="wedding.html">Weddings</a></li>
-          <li><a href="baptism.html">Christenings</a></li>
+          <li><a href="christening.html">Christenings</a></li>
         </ul>
       </div>
       <div class="footer-column">
@@ -594,8 +615,10 @@
     (function() {
       const grid = document.querySelector('.grid');
       const sizer = document.querySelector('.grid-sizer');
-      const totalImages = 4;
-      const basePath = 'images/08fashioneshops/fashioneshops';
+      
+      // Image settings
+      const totalImages = 12;  // adjust as needed
+      const basePath = 'images/08fashioneshops/fashioneshops'; // leads to fashioneshops1.jpg, fashioneshops2.jpg, ...
 
       // Create all items
       for (let i = 1; i <= totalImages; i++) {
@@ -604,7 +627,7 @@
         
         const img = document.createElement('img');
         img.src = `${basePath}${i}.jpg`;
-        img.alt = `Fashioneshop ${i}`;
+        img.alt = `Φωτογράφηση ρούχων ${i}`;
         img.loading = 'lazy';
         
         item.appendChild(img);
