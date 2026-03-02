@@ -572,23 +572,33 @@
     (function() {
       const grid = document.querySelector('.grid');
       const sizer = document.querySelector('.grid-sizer');
-      const totalImages = 10;
+      const totalImages = 82;
       const basePath = 'images/13conceptual/conceptual';
 
       // Create all items
-      for (let i = 1; i <= totalImages; i++) {
-        const item = document.createElement('div');
-        item.className = 'grid-item';
-        
-        const img = document.createElement('img');
-        img.src = `${basePath}${i}.jpg`;
-        img.alt = `Conceptual ${i}`;
-        img.loading = 'lazy';
-        
-        item.appendChild(img);
-        grid.appendChild(item);
-      }
+      // Define special cases for GIFs
+const gifImages = [82]; // Add more numbers here if you want other GIFs (e.g., [77, 45, 23])
 
+// Create all items
+for (let i = 1; i <= totalImages; i++) {
+  const item = document.createElement('div');
+  item.className = 'grid-item';
+  
+  const img = document.createElement('img');
+  
+  // Check if current index should be GIF
+  if (gifImages.includes(i)) {
+    img.src = `${basePath}${i}.gif`;  // Use GIF for specified images
+  } else {
+    img.src = `${basePath}${i}.jpg`;  // Use JPG for all others
+  }
+  
+  img.alt = `Conceptual ${i}`;
+  img.loading = 'lazy';
+  
+  item.appendChild(img);
+  grid.appendChild(item);
+}
       // Wait for images to load, then init Masonry
       imagesLoaded(grid, function() {
         const msnry = new Masonry(grid, {
