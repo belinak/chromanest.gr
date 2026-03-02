@@ -119,7 +119,7 @@
     /* === FILM-STRIP CAROUSEL === */
     .carousel-section {
       max-width: 1400px;
-      margin: 3rem auto 4rem;
+      margin: 2rem auto 3rem;  /* Reduced top margin from 3rem to 2rem */
       padding: 0 5%;
     }
 
@@ -127,19 +127,20 @@
       text-align: center;
       font-size: 2.8rem;
       font-weight: 300;
-      margin-bottom: 0rem;
+      margin-bottom: 0.25rem;  /* Reduced from 0.5rem */
       color: #222;
       letter-spacing: 1px;
       font-family: 'Courier New', Courier, monospace;
+      line-height: 1.2;        /* Tighter line height */
     }
 
     .project-sub {
       text-align: center;
       font-size: 1.1rem;
       color: #6f6f6f;
-      margin-bottom: 0rem;
+      margin-bottom: 1.5rem;    /* Reduced from 2.5rem */
       border-bottom: 1px solid #eee;
-      padding-bottom: 1.2rem;
+      padding-bottom: 1rem;      /* Reduced from 1.2rem */
     }
 
     .strip-wrapper {
@@ -147,7 +148,7 @@
       width: 100%;
       background: #fff;
       border-radius: 0px;
-      padding: 0.2rem 0;
+      padding: 0.5rem 0 0 0;     /* Reduced top padding */
     }
 
     .strip-scroll {
@@ -155,22 +156,30 @@
       overflow-x: auto;
       gap: 1.2rem;
       scroll-behavior: smooth;
-      padding: 1rem 0.2rem 1.5rem 0.2rem;
+      padding: 0.5rem 0.2rem 1rem 0.2rem;  /* Reduced vertical padding */
       cursor: grab;
-      scrollbar-width: thin;
       align-items: center;
-      min-height: 70vh;
+      /* Remove min-height - let content determine height */
     }
 
+    /* Remove the vertical scrollbar completely */
     .strip-scroll::-webkit-scrollbar {
-      height: 8px;
+      height: 6px;  /* Slightly thinner */
     }
+    
     .strip-scroll::-webkit-scrollbar-track {
       background: #eaeaea;
     }
+    
     .strip-scroll::-webkit-scrollbar-thumb {
       background-color: #b0b0b0;
       border-radius: 0px;
+    }
+    
+    /* For Firefox */
+    .strip-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: #b0b0b0 #eaeaea;
     }
 
     .strip-item {
@@ -181,12 +190,12 @@
       box-shadow: 0 6px 14px rgba(0,0,0,0.04);
       transition: box-shadow 0.2s, transform 0.2s;
       height: auto;
-      cursor: pointer;  /* Indicates clickable for lightbox */
+      cursor: pointer;
     }
     
     .strip-item:hover {
       box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-      transform: scale(1.02);  /* Subtle zoom on hover */
+      transform: scale(1.02);
     }
 
     .strip-item img {
@@ -198,14 +207,50 @@
       object-fit: contain;
       background: #f2f2f2;
       border-radius: 0px;
-      pointer-events: none;  /* Prevents image from stealing click from parent */
+      pointer-events: none;
+    }
+
+    /* Mobile-specific adjustments */
+    @media (max-width: 768px) {
+      .strip-item img {
+        max-height: 50vh;  /* Slightly smaller on mobile */
+      }
+      
+      .project-title {
+        font-size: 2.2rem;
+        margin-top: 0.5rem;
+      }
+      
+      .carousel-section {
+        margin: 1.5rem auto 2rem;  /* Even smaller margins on mobile */
+      }
+    }
+
+    @media (max-width: 576px) {
+      .strip-item img {
+        max-height: 45vh;  /* Smaller on phones */
+      }
+      
+      .project-title {
+        font-size: 1.9rem;
+      }
+      
+      .project-sub {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.8rem;
+      }
+      
+      .strip-scroll {
+        gap: 0.8rem;  /* Smaller gap on mobile */
+      }
     }
 
     .scroll-arrows {
       display: flex;
       justify-content: center;
       gap: 2rem;
-      margin: 1.5rem 0 2rem;
+      margin: 1rem 0 1.5rem;  /* Reduced from 1.5rem 0 2rem */
     }
 
     .scroll-arrow {
@@ -233,7 +278,7 @@
       text-align: center;
       font-size: 0.95rem;
       color: #777;
-      margin-top: 0.5rem;
+      margin-top: 0.25rem;  /* Reduced from 0.5rem */
     }
 
     /* === LIGHTBOX / BLACKBOX STYLES === */
@@ -336,7 +381,7 @@
       background-color: #eee;
       color: #4f4f4f;
       padding: 60px 5% 30px;
-      margin-top: 3rem;
+      margin-top: 2rem;  /* Reduced from 3rem */
     }
 
     .footer-content {
@@ -412,7 +457,7 @@
       color: #888;
     }
 
-    /* === RESPONSIVE === */
+    /* === RESPONSIVE (updated) === */
     @media (max-width: 768px) {
       .navbar {
         flex-direction: column;
@@ -437,19 +482,17 @@
         height: 40px;
         width: 160px;
       }
-
-      .project-title {
-        font-size: 2.2rem;
-      }
-
-      .strip-item {
-        max-height: 280px;
-      }
       
       .lightbox-nav button {
         width: 40px;
         height: 40px;
         font-size: 1.8rem;
+      }
+      
+      .scroll-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.6rem;
       }
     }
 
@@ -462,19 +505,15 @@
         height: 35px;
         width: 140px;
       }
-
-      .project-title {
-        font-size: 1.9rem;
-      }
-
-      .strip-item {
-        max-height: 220px;
-      }
       
       .lightbox-close {
         top: 10px;
         right: 15px;
         font-size: 2.5rem;
+      }
+      
+      .scroll-arrows {
+        gap: 1.5rem;
       }
     }
   </style>
@@ -523,7 +562,7 @@
   <!-- ========== DEMIS S/S – FILM STRIP CAROUSEL ========== -->
   <section class="carousel-section" data-aos="fade-up">
     <h1 class="project-title">Demis S/S</h1>
-    <div class="project-sub">·spring / summer lookbook·</div>
+    <div class="project-sub">spring / summer lookbook · strip feature</div>
 
     <div class="strip-wrapper" data-aos="fade-up" data-aos-delay="80">
       <!-- scrollable strip with gap -->
