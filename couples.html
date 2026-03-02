@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chromanest | Ζευγάρια · Μαζί</title>
+  <title>Chromanest | Ζευγάρια</title>
 
   <!-- favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
@@ -173,25 +173,39 @@
       margin-bottom: 0.2rem;
     }
 
-    /* CTA area */
-    .cta-motivation-wrapper {
-      background-color: #fbf6f2;  /* very soft, romantic tone */
-      padding: 1.2rem 1.5rem;
-      border-radius: 6px;
-      max-width: 750px;
-      margin: 1rem auto 0.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
+    /* ===== UPDATED CTA / MOTIVATION WRAPPER ===== */
+    /* full width background (grey covers entire viewport width) */
+    .cta-motivation-wrapper {   
+  background-color: #f5f5f5;
+  padding: 1.5rem 0;           /* vertical padding only, no horizontal padding */
+  margin: 1.5rem 0 0.5rem 0;   /* remove side margins */
+  width: 100%;                  /* full width of parent */
+  box-sizing: border-box;
+  position: relative;
+  left: 0;                      /* reset any positioning */
+  right: 0;
+  /* This creates a full-width background that extends beyond any parent constraints */
+  box-shadow: 0 0 0 100vmax #f5f5f5;
+  clip-path: inset(0 -100vmax);
+}
+
+/* inner container to restore content alignment */
+.cta-motivation-inner {
+  max-width: 1000px;            /* same as .portrait-container */
+  margin: 0 auto;
+  padding: 0 5%;                /* add padding here instead of wrapper */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
 
     .motivation-text {
       font-size: 1rem;
       color: #3a2e2a;
       font-style: italic;
-      line-height: 1.4;
+      line-height: 1.6;
       flex: 2 1 300px;
       text-align: left;
     }
@@ -213,9 +227,29 @@
     }
 
     .cta-button-bw:hover {
-      background-color: #ffffff;
-      color: #1f1f1f;
+      background-color: #a6a6a6;
+      color: #ffffff;
       border: 1px solid #1f1f1f;
+    }
+
+    /* on smaller screens: button goes below text with minimal gap */
+    @media (max-width: 700px) {
+               
+               .cta-motivation-wrapper {
+                    flex-direction: column;
+                  align-items: stretch; 
+                  }
+               
+      .cta-motivation-inner {
+               gap: 1rem;               /* smaller gap between stacked elements */
+           margin-bottom: 0;
+      }
+      .cta-button-bw {
+        white-space: normal;       /* allow button text to wrap if extremely narrow */
+        align-self: flex-start;    
+      }
+      
+    
     }
 
     /* ===== MASONRY GALLERY ===== */
@@ -456,10 +490,6 @@
         width: 160px;
       }
 
-      .cta-motivation-wrapper {
-        flex-direction: column;
-        align-items: flex-start;
-      }
     }
 
     @media (max-width: 576px) {
@@ -518,24 +548,26 @@
   <section class="portrait-container" data-aos="fade-up">
     <div class="discreet-title">· Ζευγάρια ·</div>
     <div class="portrait-description">
-      <p>Η αγάπη δεν χρειάζεται σκηνοθεσία. Χρειάζεται απλά δύο ανθρώπους που είναι αληθινοί ο ένας απέναντι στον άλλο. Εμείς απλά είμαστε εκεί — διακριτικά — για να το δούμε και να το κρατήσουμε.</p>
-      <p><strong>Μια φωτογράφηση για δύο:</strong></p>
+      <p>Η αγάπη δεν χρειάζεται σκηνοθεσία. <br>Χρειάζεται απλά δύο ανθρώπους που είναι αληθινοί ο ένας απέναντι στον άλλο. <br>Εμείς απλά είμαστε εκεί — διακριτικά — για να το δούμε και να το κρατήσουμε.</p>
       <ul class="services-list">
+      <p><strong>Μια φωτογράφηση για δύο:</strong></p>
         <li>✓ Χωρίς άγχος και στημένες πόζες — ό,τι γίνεται, γίνεται φυσικά</li>
         <li>✓ Μαζί διαλέγουμε ένα μέρος που σας πάει: στην πόλη, δίπλα στη θάλασσα, ή εκεί που πρωτογνωριστήκατε</li>
-        <li>✓ Περπατάμε, γελάμε, αγκαλιαζόμαστε — εσείς απλά είστε εσείς</li>
+        <li>✓ Περπατάτε, γελάτε, αγκαλιάζεστε — εσείς απλά είστε εσείς</li>
         <li>✓ Φως απαλό, διακριτικό, σαν τις ματιές που ανταλλάσσετε</li>
         <li>✓ Κι αν θέλετε να είστε εσείς οι δυο σας χωρίς περίεργα βλέμματα, κανονίζουμε κάτι πιο ιδιωτικό</li>
       </ul>
     </div>
     
-    <!-- CTA with warm, couples-oriented message -->
+    <!-- UPDATED CTA: edge-to-edge grey, inner flex container, smaller gap on mobile -->
     <div class="cta-motivation-wrapper">
-      <span class="motivation-text">
-        <strong>Η ιστορία σας, όπως είναι.</strong><br>
-        Κανένα ψεύτικο χαμόγελο. Κανένα "κοίτα εδώ". Μόνο εσείς, μαζί, όπως είστε πάντα.
-      </span>
-      <a href="contact.html" class="cta-button-bw">Κλείστε ραντεβού</a>
+      <div class="cta-motivation-inner">
+        <span class="motivation-text">
+          <strong>Φωτογράφιση πρότασης γάμου</strong><br>
+          Είτε σχεδιάζετε μια μεγάλη έκπληξη είτε θέλετε να είστε κι οι δύο προετοιμασμένοι, εμείς είμαστε εκεί για να καταγράψουμε κάθε συναίσθημα, κάθε δάκρυ χαράς και το μεγάλο "Ναι". <br>Μιλήστε μας για το όραμά σας και κάντε τη στιγμή σας αληθινά αξέχαστη!
+        </span>
+        <a href="contact.html" class="cta-button-bw">Κλείστε ραντεβού</a>
+      </div>
     </div>
   </section>
 
@@ -615,7 +647,7 @@
       const sizer = document.querySelector('.grid-sizer');
       
       // --- IMAGES FOR COUPLES ---
-      // folder: images/10couples/  filename: couples1.jpg, couples2.jpg, ... (adjust count)
+      // folder: images/11couples/ couple-photography-athens-01.jpg etc.
       const totalImages = 6; // change based on available images
       const basePath = 'images/11couples/couple-photography-athens-0'; 
 
