@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chromanest · Demis S/S (strip carousel)</title>
+
+  <!-- favicon (exactly as original) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/Favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/Favicon/apple-touch-icon.png">
+  <link rel="shortcut icon" href="images/Favicon/favicon.ico">
+
+  <!-- AOS + Font Awesome (kept from original) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* === RESET & BASE (identical to your original) === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+
+    /* === NAVBAR (exactly as provided) === */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+      width: 200px;
+      object-fit: contain;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-item {
+      position: relative;
+      margin-left: 1.5rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #888;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      min-width: 180px;
+      padding: 0.5rem 0;
+      z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu li {
+      padding: 0;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.7rem 1.2rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f5f5f5;
+    }
+
+    /* === FILM-STRIP CAROUSEL === */
+    .carousel-section {
+      max-width: 1400px;
+      margin: 3rem auto 4rem;
+      padding: 0 5%;
+    }
+
+    .project-title {
+      text-align: center;
+      font-size: 2.8rem;
+      font-weight: 300;
+      margin-bottom: 0rem;
+      color: #222;
+      letter-spacing: 1px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .project-sub {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #6f6f6f;
+      margin-bottom: 0rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1.2rem;
+    }
+
+    .strip-wrapper {
+      position: relative;
+      width: 100%;
+      background: #fff;
+      border-radius: 0px;
+      padding: 0.2rem 0;
+    }
+
+    .strip-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 1.2rem;
+      scroll-behavior: smooth;
+      padding: 1rem 0.2rem 1.5rem 0.2rem;
+      cursor: grab;
+      scrollbar-width: thin;
+      align-items: center;
+      min-height: 70vh;
+    }
+
+    .strip-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+    .strip-scroll::-webkit-scrollbar-track {
+      background: #eaeaea;
+    }
+    .strip-scroll::-webkit-scrollbar-thumb {
+      background-color: #b0b0b0;
+      border-radius: 0px;
+    }
+
+    .strip-item {
+      flex: 0 0 auto;
+      width: auto;
+      max-width: none;
+      background: #f2f2f2;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s, transform 0.2s;
+      height: auto;
+      cursor: pointer;  /* Indicates clickable for lightbox */
+    }
+    
+    .strip-item:hover {
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+      transform: scale(1.02);  /* Subtle zoom on hover */
+    }
+
+    .strip-item img {
+      display: block;
+      height: auto;
+      width: auto;
+      max-height: 65vh;
+      max-width: 90vw;
+      object-fit: contain;
+      background: #f2f2f2;
+      border-radius: 0px;
+      pointer-events: none;  /* Prevents image from stealing click from parent */
+    }
+
+    .scroll-arrows {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .scroll-arrow {
+      background: transparent;
+      border: 1px solid #ccc;
+      border-radius: 0px;
+      width: 50px;
+      height: 50px;
+      font-size: 2rem;
+      color: #4f4f4f;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scroll-arrow:hover {
+      background: #eee;
+      color: #1e1e1e;
+      border-color: #999;
+    }
+
+    .carousel-footnote {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #777;
+      margin-top: 0.5rem;
+    }
+
+    /* === LIGHTBOX / BLACKBOX STYLES === */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-image {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 0px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 3rem;
+      color: #fff;
+      cursor: pointer;
+      transition: color 0.2s;
+      z-index: 10000;
+    }
+
+    .lightbox-close:hover {
+      color: #ccc;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      pointer-events: none;
+    }
+
+    .lightbox-nav button {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 0px;
+      width: 60px;
+      height: 60px;
+      font-size: 2.5rem;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-nav button:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .lightbox-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 1rem;
+      background: rgba(0,0,0,0.5);
+      padding: 5px 15px;
+      border-radius: 0px;
+      letter-spacing: 1px;
+    }
+
+    /* === FOOTER (identical to original) === */
+    .footer {
+      background-color: #eee;
+      color: #4f4f4f;
+      padding: 60px 5% 30px;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4f4f4f;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #4f4f4f;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: #888;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+      color: #4f4f4f;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-size: 14px;
+      color: #888;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+      }
+
+      .nav-menu {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav-item {
+        margin: 0.5rem;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .logo img {
+        height: 40px;
+        width: 160px;
+      }
+
+      .project-title {
+        font-size: 2.2rem;
+      }
+
+      .strip-item {
+        max-height: 280px;
+      }
+      
+      .lightbox-nav button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+
+      .logo img {
+        height: 35px;
+        width: 140px;
+      }
+
+      .project-title {
+        font-size: 1.9rem;
+      }
+
+      .strip-item {
+        max-height: 220px;
+      }
+      
+      .lightbox-close {
+        top: 10px;
+        right: 15px;
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== EXACT NAVBAR (from your original) ========== -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
+      </a>
+    </div>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+      <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+      <li class="nav-item dropdown">
+        <a href="commercial.html" class="nav-link">Commercial</a>
+        <ul class="dropdown-menu">
+          <li><a href="portraits.html">Portraits</a></li>
+          <li><a href="proportraits.html">Pro Portraits</a></li>
+          <li><a href="weddingdresses.html">Wedding Dresses</a></li>
+          <li><a href="editorial.html">Editorial</a></li>
+          <li><a href="product.html">Product</a></li>
+          <li><a href="packaging.html">Packaging</a></li>
+          <li><a href="food.html">Food</a></li>
+          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
+          <li><a href="familyportraits.html">Family portraits</a></li>
+          <li><a href="newborns.html">Newborns</a></li>
+          <li><a href="couples.html">Couples</a></li>
+          <li><a href="maternity.html">Maternity</a></li>
+          <li><a href="conceptual.html">Conceptual</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="hotels.html">Hotels</a></li>
+          <li><a href="/airbnb.html">Airbnb</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="wedding.html" class="nav-link">Wedding</a></li>
+      <li class="nav-item"><a href="christening.html" class="nav-link">Baptism</a></li>
+      <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
+      <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== DEMIS S/S – FILM STRIP CAROUSEL ========== -->
+  <section class="carousel-section" data-aos="fade-up">
+    <h1 class="project-title">Demis S/S</h1>
+    <div class="project-sub">·spring / summer lookbook·</div>
+
+    <div class="strip-wrapper" data-aos="fade-up" data-aos-delay="80">
+      <!-- scrollable strip with gap -->
+      <div class="strip-scroll" id="stripScroll">
+        <!-- image 1 – horizontal (16:9) -->
+        <div class="strip-item" data-index="0">
+          <img src="images/04editorial/1demis/demis1.jpg" alt="Demis horizontal 1">
+        </div>
+        <!-- image 2 – vertical (3:4) -->
+        <div class="strip-item" data-index="1">
+          <img src="images/04editorial/1demis/demis2.jpg" alt="Demis vertical 2">
+        </div>
+        <!-- image 3 – horizontal (16:9) -->
+        <div class="strip-item" data-index="2">
+          <img src="images/04editorial/1demis/demis3.jpg" alt="Demis horizontal 3">
+        </div>
+        <!-- image 4 – vertical (2:3) -->
+        <div class="strip-item" data-index="3">
+          <img src="images/04editorial/1demis/demis4.jpg" alt="Demis vertical 4">
+        </div>
+        <!-- image 5 – horizontal (3:2) -->
+        <div class="strip-item" data-index="4">
+          <img src="images/04editorial/1demis/demis5.jpg" alt="Demis horizontal 5">
+        </div>
+        <!-- image 6 – vertical (4:5) -->
+        <div class="strip-item" data-index="5">
+          <img src="images/04editorial/1demis/demis6.jpg" alt="Demis vertical 6">
+        </div>
+        <!-- image 7 – horizontal (16:9) -->
+        <div class="strip-item" data-index="6">
+          <img src="images/04editorial/1demis/demis7.jpg" alt="Demis horizontal 7">
+        </div>
+        <!-- image 8 – vertical (9:16) slim -->
+        <div class="strip-item" data-index="7">
+          <img src="images/04editorial/1demis/demis8.jpg" alt="Demis vertical 8">
+        </div>
+        <!-- image 9 – vertical (9:16) slim -->
+        <div class="strip-item" data-index="8">
+          <img src="images/04editorial/1demis/demis9.jpg" alt="Demis vertical 9">
+        </div>
+        <!-- image 10 – vertical (9:16) slim -->
+        <div class="strip-item" data-index="9">
+          <img src="images/04editorial/1demis/demis10.jpg" alt="Demis vertical 10">
+        </div>
+      </div>
+
+      <!-- left / right arrow buttons to scroll -->
+      <div class="scroll-arrows">
+        <button class="scroll-arrow" id="scrollLeft" aria-label="scroll left"><i class="fas fa-chevron-left"></i></button>
+        <button class="scroll-arrow" id="scrollRight" aria-label="scroll right"><i class="fas fa-chevron-right"></i></button>
+      </div>
+
+      <div class="carousel-footnote">
+        <p>〈 click any image for fullscreen view · scroll or use arrows 〉</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LIGHTBOX / BLACKBOX ========== -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <div class="lightbox-content">
+      <img class="lightbox-image" id="lightboxImage" src="" alt="">
+    </div>
+    <div class="lightbox-nav">
+      <button id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+      <button id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <!-- ========== FOOTER (identical to original) ========== -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Chromanest</h3>
+        <p>Επαγγελματικές υπηρεσίες φωτογραφίας με έδρα την Αθήνα με ειδίκευση στα πορτρέτα, προϊόντα και τις ειδικές εκδηλώσεις.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="commercial.html">Commercial Photography</a></li>
+          <li><a href="00commercial/portraits.html">Portraits</a></li>
+          <li><a href="wedding.html">Weddings</a></li>
+          <li><a href="baptism.html">Christenings</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="packages.html">Packages & Pricing</a></li>
+          <li><a href="editing.html">Editing Services</a></li>
+          <li><a href="https://chromanest.blogspot.com">Blog</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
+          <li><i class="fas fa-phone"></i> +30 6973949986</li>
+          <li><i class="fas fa-envelope"></i> chromanest.creatives@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>2025 Chromanest &copy; All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- AOS script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <!-- Combined script for arrow scrolling + lightbox -->
+  <script>
+    (function() {
+      AOS.init({ duration: 800, once: true });
+
+      // ===== SCROLL ARROWS =====
+      const strip = document.getElementById('stripScroll');
+      const leftBtn = document.getElementById('scrollLeft');
+      const rightBtn = document.getElementById('scrollRight');
+
+      const scrollAmount = () => {
+        if (window.innerWidth < 600) return 220;
+        if (window.innerWidth < 900) return 340;
+        return 480;
+      };
+
+      leftBtn.addEventListener('click', () => {
+        strip.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+      });
+
+      rightBtn.addEventListener('click', () => {
+        strip.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+      });
+
+      // ===== LIGHTBOX / BLACKBOX =====
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const lightboxClose = document.getElementById('lightboxClose');
+      const lightboxPrev = document.getElementById('lightboxPrev');
+      const lightboxNext = document.getElementById('lightboxNext');
+      const lightboxCounter = document.getElementById('lightboxCounter');
+      
+      // Get all strip items (which contain the images)
+      const items = Array.from(document.querySelectorAll('.strip-item'));
+      const imageSources = items.map(item => {
+        const img = item.querySelector('img');
+        return {
+          src: img.src,
+          alt: img.alt
+        };
+      });
+
+      let currentIndex = 0;
+
+      // Open lightbox
+      items.forEach((item, index) => {
+        item.addEventListener('click', () => {
+          currentIndex = index;
+          updateLightboxImage();
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+      });
+
+      // Update lightbox image and counter
+      function updateLightboxImage() {
+        lightboxImage.src = imageSources[currentIndex].src;
+        lightboxImage.alt = imageSources[currentIndex].alt;
+        lightboxCounter.textContent = `${currentIndex + 1} / ${imageSources.length}`;
+      }
+
+      // Close lightbox
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+
+      lightboxClose.addEventListener('click', closeLightbox);
+
+      // Click outside to close (click on lightbox background)
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      // Previous image
+      lightboxPrev.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + imageSources.length) % imageSources.length;
+        updateLightboxImage();
+      });
+
+      // Next image
+      lightboxNext.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % imageSources.length;
+        updateLightboxImage();
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        
+        if (e.key === 'Escape') {
+          closeLightbox();
+        } else if (e.key === 'ArrowLeft') {
+          currentIndex = (currentIndex - 1 + imageSources.length) % imageSources.length;
+          updateLightboxImage();
+          e.preventDefault();
+        } else if (e.key === 'ArrowRight') {
+          currentIndex = (currentIndex + 1) % imageSources.length;
+          updateLightboxImage();
+          e.preventDefault();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
