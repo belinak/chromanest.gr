@@ -142,17 +142,84 @@
     }
     
     .maternity-text h1 {
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       margin-bottom: 1.5rem;
       color: #222;
       font-weight: 300;
     }
     
     .maternity-text p {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #666;
       margin-bottom: 1.5rem;
       line-height: 1.8;
+    }
+    
+    /* New styles for lists and formatted content */
+    .info-section {
+      margin: 1.5rem 0;
+    }
+    
+    .info-block {
+      margin-bottom: 2rem;
+    }
+    
+    .info-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 1rem;
+      border-left: 4px solid #e4acb2;
+      padding-left: 1rem;
+    }
+    
+    .styled-list {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+    
+    .styled-list li {
+      margin-bottom: 0.8rem;
+      padding-left: 1.8rem;
+      position: relative;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    
+    .styled-list li:before {
+      content: "•";
+      color: #e4acb2;
+      font-weight: bold;
+      font-size: 1.3rem;
+      position: absolute;
+      left: 0;
+      top: -5px;
+    }
+    
+    .companion-note {
+      background-color: #f0f0f0;
+      padding: 1.2rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      font-style: italic;
+      border-left: 4px solid #e4acb2;
+    }
+    
+    .companion-note i {
+      color: #e4acb2;
+      margin-right: 0.5rem;
+    }
+    
+    .contact-note {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #ccc;
+      font-weight: 500;
+    }
+    
+    .contact-note i {
+      color: #e4acb2;
+      margin-right: 0.5rem;
     }
     
     .cta-button-maternity {
@@ -170,7 +237,7 @@
     }
     
     .cta-button-maternity:hover {
-      background-color: #555;
+      background-color: #a6a6a6;
     }
     
     .maternity-image {
@@ -393,19 +460,39 @@
     <div class="maternity-wrapper">
       <!-- TEXT RIGHT -->
       <div class="maternity-text">
-        <h1>Maternity Photography</h1>
-        <p>
-          <br>Keep a photo of yourself like this forever. <br>This is not just about the bump —
-          it's about celebrating the most powerful, beautiful version of yourself.
-        </p>
-        <p>
-          <br>Step into the spotlight.<br>Experience what it feels like to be a model for a day —
-          pampered, styled, posed to perfection. <br>Luxurious, cinematic, unforgettable.
-        </p>
-        <p>
-          This is your time. <br>And you deserve to feel amazing in it.<br><br>
-        </p>
-        <a href="contact.html" class="cta-button-maternity">Book Your Maternity Shoot</a>
+        <h1>Φωτογράφηση εγκυμοσύνης - Maternity Photography</h1>
+        
+        <div class="info-section">
+          <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Η φωτογράφιση διαρκεί περίπου 1-2 ώρες και ιδανικά προγραμματίζεται γύρω στον 7ο ή 8ο μήνα.</p>
+          
+          <div class="info-block">
+            <div class="info-title">Για το ρούχο:</div>
+            <ul class="styled-list">
+              <li>Φορέματα που αγκαλιάζουν απαλά πάνω από την κοιλιά και πέφτουν πιο φαρδιά προς τα κάτω</li>
+              <li>Απαλά χρώματα (τα πολύ σκούρα κρύβουν την κοιλιά)</li>
+              <li>Ρευστά υφάσματα με κίνηση – τούλι, σατέν, γάζα, κρεπ, δαντέλα</li>
+            </ul>
+          </div>
+          
+          <div class="info-block">
+            <div class="info-title">Μπορείς να φέρεις μαζί σου:</div>
+            <ul class="styled-list">
+              <li>Την υπερηχογραφική εικόνα (ultrasound)</li>
+              <li>Ένα ζευγαράκι παπουτσάκια</li>
+              <li>Κάτι μικρό που έχει συναισθηματική αξία για σένα</li>
+            </ul>
+          </div>
+          
+          <div class="companion-note">
+            <i class="fas fa-heart"></i> <strong>Παρέα:</strong> Αν θέλεις, στη φωτογράφιση μπορούν να είναι μαζί σου ο σύντροφος ή τα παιδιά σας.
+          </div>
+          
+          <div class="contact-note">
+            <i class="fas fa-phone-alt"></i> Και για οποιαδήποτε απορία, μην διστάσεις <a href="https://chromanest.gr/contact.html">να επικοινωνήσεις μαζί μας</a>.
+          </div>
+        </div>
+        
+        <a href="contact.html" class="cta-button-maternity">Κλείσε τώρα την φωτογράφηση σου</a>
       </div>
 
       <!-- IMAGE LEFT -->
