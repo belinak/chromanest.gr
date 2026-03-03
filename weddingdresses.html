@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chromanest | Νυφικά</title>
+  <title>ChromaNest | Νυφικά</title>
 
   <!-- favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
@@ -102,7 +102,29 @@
       padding: 0.5rem 0;
       z-index: 1000;
       border-radius: 0;
+       /* NEW: Scroll functionality */
+  max-height: 80vh;        /* Limits height to 80% of viewport */
+  overflow-y: auto;        /* Enables vertical scrolling when needed */
+  scrollbar-width: thin;   /* Makes scrollbar thinner (Firefox) */
+  scrollbar-color: #888 #f0f0f0; /* Scrollbar colors (Firefox) */
     }
+    /* NEW: Webkit scrollbar styling */
+.dropdown-menu::-webkit-scrollbar {
+  width: 6px;              /* Scrollbar width */
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+  background: #f0f0f0;     /* Track background */
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background-color: #888;  /* Scrollbar handle color */
+  border-radius: 6px;      /* Rounded corners */
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background-color: #555;  /* Darker color on hover */
+}
 
     .dropdown:hover .dropdown-menu {
       display: block;
@@ -118,6 +140,7 @@
       color: #2c2c2c;
       text-decoration: none;
       transition: background-color 0.2s;
+      white-space: nowrap;      /* NEW: Prevents text wrapping on desktop */
     }
 
     .dropdown-menu a:hover {
@@ -458,6 +481,18 @@
       .service-item:last-child {
         border-bottom: none;
       }
+       /* NEW: Mobile dropdown styles */
+  .dropdown-menu {
+    position: static;       /* Removes absolute positioning on mobile */
+    max-height: 300px;      /* Fixed max height for mobile */
+    width: 100%;            /* Full width */
+    box-shadow: none;       /* Removes shadow */
+    background-color: #f9f9f9; /* Lighter background */
+  }
+  
+  .dropdown-menu a {
+    white-space: normal;    /* Allows text wrapping on mobile */
+  }
     }
 
     @media (max-width: 576px) {
@@ -484,34 +519,35 @@
       </a>
     </div>
     <ul class="nav-menu">
-      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-      <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+      <li class="nav-item"><a href="index.html" class="nav-link">Αρχική</a></li>
+      <li class="nav-item"><a href="about.html" class="nav-link">Σχετικά</a></li>
       <li class="nav-item dropdown">
         <a href="commercial.html" class="nav-link">Commercial</a>
         <ul class="dropdown-menu">
-          <li><a href="portraits.html">Portraits</a></li>
-          <li><a href="proportraits.html">Pro Portraits</a></li>
-          <li><a href="weddingdresses.html">Wedding Dresses</a></li>
-          <li><a href="editorial.html">Editorial</a></li>
+         <li><a href="portraits.html">Πορτραίτα</a></li>
+          <li><a href="proportraits.html">Επαγγελματικά πορτραίτα</a></li>
+          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
+          <li><a href="familyportraits.html">Οικογενειακά πορτραίτα</a></li>
+          <li><a href="newborns.html">Νεογέννητα</a></li>
+          <li><a href="maternity.html">Εγκυμοσύνη</a></li>
+          <li><a href="couples.html">Ζευγάρια</a></li>
+          <li><a href="weddingdresses.html">Νυφικά</a></li>
           <li><a href="product.html">Product</a></li>
           <li><a href="packaging.html">Packaging</a></li>
           <li><a href="food.html">Food</a></li>
-          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
-          <li><a href="familyportraits.html">Family portraits</a></li>
-          <li><a href="newborns.html">Newborns</a></li>
-          <li><a href="couples.html">Couples</a></li>
-          <li><a href="maternity.html">Maternity</a></li>
+          <li><a href="editorial.html">Editorial</a></li>
           <li><a href="conceptual.html">Conceptual</a></li>
           <li><a href="events.html">Events</a></li>
           <li><a href="hotels.html">Hotels</a></li>
-          <li><a href="airbnb.html">Airbnb</a></li>
+          <li><a href="airbnb.html">Airbnb-Real Estate</a></li>
+
         </ul>
       </li>
-      <li class="nav-item"><a href="wedding.html" class="nav-link">Wedding</a></li>
-      <li class="nav-item"><a href="christening.html" class="nav-link">Baptism</a></li>
+      <li class="nav-item"><a href="wedding.html" class="nav-link">Γάμος</a></li>
+      <li class="nav-item"><a href="christening.html" class="nav-link">Βάπτιση</a></li>
       <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
       <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
-      <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link">Επικοινωνία</a></li>
     </ul>
   </nav>
 
@@ -579,35 +615,34 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-column">
-        <h3>Chromanest</h3>
+        <h3>ChromaNest</h3>
         <p>Επαγγελματικές υπηρεσίες φωτογραφίας με έδρα την Αθήνα με ειδίκευση στα πορτρέτα, προϊόντα και τις ειδικές εκδηλώσεις.</p>
         <div class="social-icons">
           <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+          <a href="https://gr.pinterest.com/chromanestcreatives/"><i class="fab fa-pinterest-p"></i></a>
         </div>
       </div>
       <div class="footer-column">
-        <h3>Services</h3>
+        <h3>Υπηρεσίες</h3>
         <ul>
-          <li><a href="commercial.html">Commercial Photography</a></li>
-          <li><a href="00commercial/portraits.html">Portraits</a></li>
-          <li><a href="wedding.html">Weddings</a></li>
-          <li><a href="baptism.html">Christenings</a></li>
+           <li><a href="commercial.html">Commercial Φωτογραφία</a></li>
+          <li><a href="portraits.html">Πορτραίτα</a></li>
+          <li><a href="wedding.html">Γάμος</a></li>
+          <li><a href="baptism.html">Βάπτιση</a></li>
         </ul>
       </div>
       <div class="footer-column">
-        <h3>Information</h3>
+        <h3>Πληροφορίες</h3>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="packages.html">Packages & Pricing</a></li>
-          <li><a href="editing.html">Editing Services</a></li>
+         <li><a href="about.html">Σχετικά με εμάς</a></li>
+          <li><a href="packages.html">Πακέτα & Τιμές</a></li>
+          <li><a href="editing.html">Υπηρεσίες Editing</a></li>
           <li><a href="https://chromanest.blogspot.com">Blog</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
       <div class="footer-column">
-        <h3>Contact</h3>
+        <h3>Επικοινωνία</h3>
         <ul>
           <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
           <li><i class="fas fa-phone"></i> +30 6973949986</li>
@@ -616,7 +651,7 @@
       </div>
     </div>
     <div class="copyright">
-      <p>2025 Chromanest &copy; All rights reserved.</p>
+      <p>2025-2045 ChromaNest &copy; All rights reserved.</p>
     </div>
   </footer>
 

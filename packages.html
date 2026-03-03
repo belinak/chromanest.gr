@@ -1,24 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chromanest | Services</title>
+  <title>ChromaNest | Σύντομα Διαθέσιμο</title>
   
   <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/Favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/Favicon/apple-touch-icon.png">
   <link rel="shortcut icon" href="images/Favicon/favicon.ico">
   
-  
-  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     /* ========== CONTACT PAGE EXACT STYLES ========== */
-    /* These are the EXACT styles from your contact page */
-    
+
     /* Reset and base styles */
     * {
       margin: 0;
@@ -31,6 +28,9 @@
       line-height: 1.6;
       color: #333;
       background-color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
     
     /* ====== NAVBAR - EXACT COPY FROM CONTACT PAGE ====== */
@@ -54,17 +54,16 @@
       letter-spacing: 1px;
     }
     
-     .logo {
+    .logo {
       display: flex;
       align-items: center;
     }
     
     .logo img {
-      height: 50px; /* 1 unit */
-      width: 200px; /* 4 units (1:4 ratio) */
+      height: 50px;
+      width: 200px;
       object-fit: contain;
     }
-
     
     .nav-menu {
       display: flex;
@@ -98,6 +97,29 @@
       min-width: 180px;
       padding: 0.5rem 0;
       z-index: 1000;
+      /* Scroll functionality */
+      max-height: 80vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #888 #f0f0f0;
+    }
+    
+    /* Webkit scrollbar styling */
+    .dropdown-menu::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .dropdown-menu::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+    
+    .dropdown-menu::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 6px;
+    }
+    
+    .dropdown-menu::-webkit-scrollbar-thumb:hover {
+      background-color: #555;
     }
     
     .dropdown:hover .dropdown-menu {
@@ -114,416 +136,118 @@
       color: #333;
       text-decoration: none;
       transition: background-color 0.3s;
+      white-space: nowrap;
     }
     
     .dropdown-menu a:hover {
       background-color: #f5f5f5;
     }
     
-    /* ====== PACKAGES PAGE CONTENT STYLES ====== */
-    /* Services Hero Image */
-    .services-hero img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* Services Headings */
-    .services-headings {
-      background: #fff;
-      text-align: center;
-      padding: 3rem 1rem 2rem;
-    }
-
-    .services-headings h2 {
-      font-size: 1.1rem;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
-      color: #777;
-    }
-
-    .services-headings h3 {
-      font-size: 2rem;
-      font-weight: 500;
-    }
-
-    /* Packages Grid */
-    .packages-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 3rem 2rem;
-      background: #fff;
-    }
-
-    .package-card {
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      background: #fff;
-      overflow: hidden;
+    /* ====== COMING SOON SECTION ====== */
+    .coming-soon-container {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-
-    .package-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    }
-
-    .package-card img {
-      width: calc(100% - 2rem); 
-      height: 400px; 
-      object-fit: cover; 
-      margin: 1rem; 
-      margin-bottom: 0; 
-      border-radius: 8px;
-      display: block;
-    }
-
-    /* Info Box */
-    .package-info {
-      background: #f8f8f8;
-      padding: 1.5rem;
-      margin: 1rem;
-      border-radius: 8px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .package-info h4 {
-      font-size: 1.2rem;
-      margin-bottom: 0.8rem;
-      color: #222;
-    }
-
-    .package-info ul {
-      padding-left: 1rem;
-      margin: 0;
-      font-size: 0.95rem;
-      color: #555;
-      list-style: disc;
-    }
-
-    .package-price {
-      display: flex;
-      justify-content: flex-end;
-      align-items: baseline;
-      margin-top: 1.5rem;
-    }
-
-    .starting-text {
-      font-size: 0.9rem;
-      color: #999;
-      margin-right: 0.4rem;
-    }
-
-    .price {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #222;
-    }
-
-    /* CTA */
-    .services-cta {
-      text-align: center;
-      padding: 3rem 1rem;
-      background: #fff;
-    }
-
-    .cta-button-packages {
-      background: #e8d8c3; /* light beige */
-      color: #fff;
-      padding: 0.9rem 2rem;
-      text-decoration: none;
-      font-size: 1rem;
-      border-radius: 0; /* square edges */
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      display: inline-block;
-    }
-
-    .cta-button-packages:hover {
-      background: #d8c3a0; /* darker beige on hover */
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-    }
-
-
-    /* BANNER WITH QUOTE */
-    .quote-banner {
-      position: relative;
-      width: 100%;
-      height: 350px;
-      overflow: hidden;
-      margin: 3rem 0;
-    }
-
-    .quote-banner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .quote-banner .quote {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #fff;
-      font-size: 2rem;
-      font-style: italic;
-      font-weight: 500;
-      max-width: 70%;
-      text-align: center;
-      line-height: 1.4;
-    }
-
-    /* PROCESS TITLES */
-    .process-titles {
-      background: #fff;
-      text-align: center;
-      padding: 3rem 1rem 2rem;
-      color: #222;
-    }
-
-    .process-titles h2 {
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .process-titles h3 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-top: 0;
-    }
-
-    /* PROCESS STEPS CONTAINER */
-    .process-steps {
-      max-width: 900px;
-      margin: 0 auto 4rem;
-      padding: 0 1rem;
-    }
-
-    /* EACH PROCESS STEP */
-    .process-step {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 2.5rem;
-      gap: 1.5rem;
-    }
-
-    /* STEP IMAGE */
-    .process-step img {
-      width: 220px;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 8px;
-      flex-shrink: 0;
-    }
-
-    /* TEXT SIDE */
-    .process-text h4 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin: 0 0 0.2rem 0;
-      color: #000;
-    }
-
-    .process-text h5 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 0 0 0.6rem 0;
-      color: #555;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-    }
-
-    .process-text hr {
-      border: none;
-      border-top: 2px solid #ddd;
-      width: 40px;
-      margin: 0 0 1rem 0;
-    }
-
-    .process-text p {
-      font-size: 0.95rem;
-      line-height: 1.4;
-      color: #444;
-      margin: 0;
-    }
-
-    /* FAQ SECTION */
-    .faq-section {
-      background: #fff;
-      padding: 4rem 1.5rem;
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .faq-section h2 {
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-      color: #444;
-      margin-bottom: 0.5rem;
-    }
-
-    .faq-section h3 {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      color: #000;
-    }
-
-    .faq-item {
-      border-top: 1px solid #ccc;
-    }
-
-    .faq-item:last-child {
-      border-bottom: 1px solid #ccc;
-    }
-
-    .faq-question {
-      width: 100%;
-      background: #fff;
-      border: none;
-      text-align: left;
-      padding: 1rem;
-      font-size: 1rem;
-      cursor: pointer;
-      position: relative;
-      display: flex;
-      justify-content: space-between;
       align-items: center;
-      color: #333;
-      transition: background 0.3s ease;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+      min-height: 60vh;
     }
-
-    .faq-question:hover {
-      background: #f7f7f7;
-    }
-
-    .toggle-icon {
-      font-size: 1.5rem;
-      transition: transform 0.3s ease;
-    }
-
-    .faq-answer {
-      display: none;
-      background: #f7f7f7; /* light gray */
-      text-align: left;
-      padding: 1rem;
-      font-size: 0.95rem;
-      color: #555;
-      line-height: 1.5;
-    }
-
-    /* Show answer when active */
-    .faq-item.active .faq-answer {
-      display: block;
-    }
-
-    .faq-item.active .toggle-icon {
-      transform: rotate(45deg); /* turns + into × */
-    }
-
-    .quality-section {
-      background: #fff;
-      padding: 4rem 1.5rem;
-    }
-
-    .quality-container {
-      display: flex;
-      flex-wrap: wrap;
-      max-width: 1100px;
-      margin: 0 auto;
-      gap: 2rem;
-      align-items: flex-start;
-    }
-
-    .quality-left {
-      flex: 0 0 auto;
-      display: flex;
-      align-items: flex-end; /* align bottom of image */
-    }
-
-    .quality-right {
-      flex: 1 1 400px;
-    }
-
-    .vertical-img {
-      width: 70%;
-      height: auto;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-
-    .quality-right h3 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #222;
-    }
-
-    .quality-right p {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-      color: #444;
-      line-height: 1.5;
-    }
-
-    .quality-button {
-      display: inline-block;
-      background: #e8d8c3; /* light beige */
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      text-decoration: none;
-      font-size: 1rem;
-      border-radius: 0;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    
+    .coming-soon-icon {
+      font-size: 5rem;
+      color: #888;
       margin-bottom: 2rem;
-      transition: background 0.3s ease;
+      animation: pulse 2s infinite ease-in-out;
     }
-
-    .quality-button:hover {
-      background: #d8c3a0;
+    
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.7; }
     }
-
-    .horizontal-img {
-      width: 100%;
-      border-radius: 10px;
-      object-fit: cover;
+    
+    .coming-soon-title {
+      font-size: 3.5rem;
+      font-weight: 300;
+      letter-spacing: 4px;
+      color: #1f1f1f;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 1rem;
+      display: inline-block;
     }
-
+    
+    .coming-soon-subtitle {
+      font-size: 1.3rem;
+      color: #666;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+    
+    .coming-soon-divider {
+      width: 100px;
+      height: 3px;
+      background-color: #888;
+      margin: 2rem auto;
+    }
+    
+    .coming-soon-text {
+      font-size: 1.1rem;
+      color: #777;
+      max-width: 500px;
+      font-style: italic;
+    }
+    
+    .coming-soon-contact {
+      margin-top: 3rem;
+    }
+    
+    .coming-soon-button {
+      display: inline-block;
+      background-color: #1f1f1f;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 0.8rem 2.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      letter-spacing: 1px;
+      border: 1px solid #1f1f1f;
+    }
+    
+    .coming-soon-button:hover {
+      background-color: #444;
+      border-color: #444;
+    }
+    
     /* ====== FOOTER - EXACT COPY FROM CONTACT PAGE ====== */
     .footer {
       background-color: #eee;
       color: #4f4f4f;
       padding: 60px 5% 30px;
+      margin-top: auto;
     }
-
+    
     .footer-content {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 40px;
       margin-bottom: 40px;
     }
-
+    
     .footer-column h3 {
       font-size: 18px;
       margin-bottom: 20px;
       position: relative;
       padding-bottom: 10px;
     }
-
+    
     .footer-column h3::after {
       content: '';
       position: absolute;
@@ -533,31 +257,31 @@
       height: 2px;
       background-color: #4f4f4f;
     }
-
+    
     .footer-column ul {
       list-style: none;
     }
-
+    
     .footer-column ul li {
       margin-bottom: 10px;
     }
-
+    
     .footer-column a {
       color: #4f4f4f;
       text-decoration: none;
       transition: color 0.3s;
     }
-
+    
     .footer-column a:hover {
       color: #888;
     }
-
+    
     .social-icons {
       display: flex;
       gap: 15px;
       margin-top: 20px;
     }
-
+    
     .social-icons a {
       display: flex;
       align-items: center;
@@ -570,11 +294,11 @@
       color: #4f4f4f;
       text-decoration: none;
     }
-
+    
     .social-icons a:hover {
       background-color: rgba(0,0,0,0.2);
     }
-
+    
     .copyright {
       text-align: center;
       padding-top: 30px;
@@ -585,7 +309,6 @@
     
     /* ====== RESPONSIVE STYLES ====== */
     @media (max-width: 768px) {
-      /* Navbar Responsive - EXACT from contact page */
       .navbar {
         flex-direction: column;
         padding: 1rem 5%;
@@ -601,48 +324,36 @@
         margin: 0.5rem;
       }
       
-      /* Footer Responsive - EXACT from contact page */
       .footer-content {
         grid-template-columns: repeat(2, 1fr);
       }
       
-      /* Packages content responsive */
-      .packages-grid {
-        grid-template-columns: 1fr;
-        padding: 2rem 1rem;
-      }
-      
-      .process-step {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-      
-      .process-step img {
-        width: 100%;
-        max-width: 300px;
-        height: 200px;
-      }
-      
-      .quality-container {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .vertical-img {
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-      }
-      
-      .quality-left {
-        justify-content: center;
-      }
-         .logo img {
+      .logo img {
         height: 40px;
         width: 160px;
       }
       
+      .coming-soon-title {
+        font-size: 2.5rem;
+      }
+      
+      .coming-soon-subtitle {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+      }
+      
+      /* Mobile dropdown styles */
+      .dropdown-menu {
+        position: static;
+        max-height: 300px;
+        width: 100%;
+        box-shadow: none;
+        background-color: #f9f9f9;
+      }
+      
+      .dropdown-menu a {
+        white-space: normal;
+      }
     }
     
     @media (max-width: 576px) {
@@ -650,25 +361,20 @@
         grid-template-columns: 1fr;
       }
       
-      .quote-banner .quote {
-        font-size: 1.5rem;
-      }
-      
-      .services-headings h3 {
-        font-size: 1.5rem;
-      }
-      
-      .process-titles h3 {
-        font-size: 2rem;
-      }
-        .logo img {
+      .logo img {
         height: 35px;
         width: 140px;
       }
       
+      .coming-soon-title {
+        font-size: 2rem;
+      }
+      
+      .coming-soon-icon {
+        font-size: 4rem;
+      }
     }
-
-    /* Additional responsive for very small screens */
+    
     @media (max-width: 480px) {
       .nav-menu {
         flex-direction: column;
@@ -678,20 +384,12 @@
       .nav-item {
         margin: 0.3rem;
       }
-      
-      .package-card img {
-        height: 300px;
-      }
-      
-      .faq-section h3 {
-        font-size: 1.5rem;
-      }
     }
   </style>
 </head>
 <body>
 
- <!-- NAVBAR (identical) -->
+  <!-- NAVBAR (identical) -->
   <nav class="navbar">
     <div class="logo">
       <a href="index.html">
@@ -699,214 +397,86 @@
       </a>
     </div>
     <ul class="nav-menu">
-      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-      <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+      <li class="nav-item"><a href="index.html" class="nav-link">Αρχική</a></li>
+      <li class="nav-item"><a href="about.html" class="nav-link">Σχετικά</a></li>
       <li class="nav-item dropdown">
         <a href="commercial.html" class="nav-link">Commercial</a>
         <ul class="dropdown-menu">
-          <li><a href="portraits.html">Portraits</a></li>
-          <li><a href="proportraits.html">Pro Portraits</a></li>
-          <li><a href="weddingdresses.html">Wedding Dresses</a></li>
-          <li><a href="editorial.html">Editorial</a></li>
+          <li><a href="portraits.html">Πορτραίτα</a></li>
+          <li><a href="proportraits.html">Επαγγελματικά πορτραίτα</a></li>
+          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
+          <li><a href="familyportraits.html">Οικογενειακά πορτραίτα</a></li>
+          <li><a href="newborns.html">Νεογέννητα</a></li>
+          <li><a href="maternity.html">Εγκυμοσύνη</a></li>
+          <li><a href="couples.html">Ζευγάρια</a></li>
+          <li><a href="weddingdresses.html">Νυφικά</a></li>
           <li><a href="product.html">Product</a></li>
           <li><a href="packaging.html">Packaging</a></li>
           <li><a href="food.html">Food</a></li>
-          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
-          <li><a href="familyportraits.html">Family portraits</a></li>
-          <li><a href="newborns.html">Newborns</a></li>
-          <li><a href="couples.html">Couples</a></li>
-          <li><a href="maternity.html">Maternity</a></li>
+          <li><a href="editorial.html">Editorial</a></li>
           <li><a href="conceptual.html">Conceptual</a></li>
           <li><a href="events.html">Events</a></li>
           <li><a href="hotels.html">Hotels</a></li>
-          <li><a href="airbnb.html">Airbnb</a></li>
+          <li><a href="airbnb.html">Airbnb-Real Estate</a></li>
         </ul>
       </li>
-      <li class="nav-item"><a href="wedding.html" class="nav-link">Wedding</a></li>
-      <li class="nav-item"><a href="christening.html" class="nav-link">Baptism</a></li>
+      <li class="nav-item"><a href="wedding.html" class="nav-link">Γάμος</a></li>
+      <li class="nav-item"><a href="christening.html" class="nav-link">Βάπτιση</a></li>
       <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
       <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
-      <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link">Επικοινωνία</a></li>
     </ul>
   </nav>
 
-  <!-- HERO IMAGE -->
-  <div class="services-hero">
-    <img src="images/Packages-imgs/services-banner.jpg" alt="Services Banner">
-  </div>
-
-  <!-- HEADINGS -->
-  <section class="services-headings">
-    <h2>SERVICES</h2>
-    <h3>Photography Packages</h3>
-  </section>
-
-  <!-- PACKAGES GRID -->
-  <section class="packages-grid">
-    <!-- CARD 1 -->
-    <a href="https://calendly.com/chromanest-creatives/1hour" class="package-card" target="_blank">
-      <img src="images/Packages-imgs/wedding.jpg" alt="Wedding">
-      <div class="package-info">
-        <h4>Wedding</h4>
-        <ul>
-          <li>Full day coverage</li>
-          <li>Pre-wedding consultation</li>
-          <li>Private gallery</li>
-        </ul>
-        <div class="package-price">
-          <span class="starting-text">Starting</span>
-          <span class="price">€650</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- CARD 2 -->
-    <a href="https://calendly.com/chromanest-creatives/1hour" class="package-card" target="_blank">
-      <img src="images/Packages-imgs/portrait.jpg" alt="Portrait">
-      <div class="package-info">
-        <h4>Portrait</h4>
-        <ul>
-          <li>1 hour session</li>
-          <li>2 outfit changes</li>
-          <li>10 high-res edits</li>
-        </ul>
-        <div class="package-price">
-          <span class="starting-text">Starting</span>
-          <span class="price">€100</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- CARD 3 -->
-    <a href="https://calendly.com/chromanest-creatives/1hour" class="package-card" target="_blank">
-      <img src="images/Packages-imgs/christening.jpg" alt="Christening">
-      <div class="package-info">
-        <h4>Christening</h4>
-        <ul>
-          <li>Church ceremony + reception</li>
-          <li>Family group photos</li>
-          <li>Full digital gallery</li>
-        </ul>
-        <div class="package-price">
-          <span class="starting-text">Starting</span>
-          <span class="price">€300</span>
-        </div>
-      </div>
-    </a>
-  </section>
-
-  <!-- CTA -->
-  <div class="services-cta">
-    <a href="https://calendly.com/chromanest-creatives/1hour" class="cta-button-packages" target="_blank">Book Now</a>
-  </div>
-  
-  <!-- BANNER WITH QUOTE -->
-  <section class="quote-banner">
-    <img src="images/Packages-imgs/banner-photo.jpg" alt="Beautiful Wedding Moment" />
-    <blockquote class="quote">
-      "Turning Your Love Story Into Beautiful, Lasting Memories One Click At A Time."
-    </blockquote>
-  </section>
-
-  <!-- PROCESS TITLES -->
-  <section class="process-titles">
-    <h2>PROCESS</h2>
-    <h3>What To Expect</h3>
-  </section>
-
-  <!-- PROCESS STEPS -->
-  <section class="process-steps">
-
-    <div class="process-step">
-      <img src="images/Packages-imgs/process/step1.jpg" alt="Initial Consultation" />
-      <div class="process-text">
-        <h4>01</h4>
-        <h5>INITIAL CONSULTATION</h5>
-        <hr />
-        <p>We'll discuss your vision, style preferences, and key moments. This meeting helps build a relationship, allowing me to capture your love story authentically.</p>
-      </div>
+  <!-- COMING SOON SECTION (in Greek) -->
+  <section class="coming-soon-container">
+    <div class="coming-soon-icon">
+      <i class="fas fa-camera"></i>
     </div>
-
-    <div class="process-step">
-      <img src="images/Packages-imgs/process/step2.jpg" alt="Planning & Preparations" />
-      <div class="process-text">
-        <h4>02</h4>
-        <h5>PLANNING & PREPARATIONS</h5>
-        <hr />
-        <p>Create a detailed photography timeline and finalize locations and special requests. This thorough planning ensures a smooth and beautifully captured wedding day.</p>
-      </div>
-    </div>
-
-    <div class="process-step">
-      <img src="images/Packages-imgs/process/step3.jpg" alt="Event Day" />
-      <div class="process-text">
-        <h4>03</h4>
-        <h5>EVENT DAY</h5>
-        <hr />
-        <p>On your wedding day, I'll unobtrusively capture every special moment, from candid emotions to posed portraits. My goal is to document your love story as it naturally unfolds.</p>
-      </div>
-    </div>
-
-    <div class="process-step">
-      <img src="images/Packages-imgs/process/step4.jpg" alt="Post-Production Delivery" />
-      <div class="process-text">
-        <h4>04</h4>
-        <h5>POST-PRODUCTION DELIVERY</h5>
-        <hr />
-        <p>I will meticulously edit and enhance your photos so that you'll receive a curated collection of high-quality images to cherish forever.</p>
-      </div>
-    </div>
-
-  </section>
-
-
-  <section class="quality-section">
-    <div class="quality-container">
-      <div class="quality-left">
-        <img src="images/Packages-imgs/quality/quality-vertical.jpg" alt="Quality Vertical Photo" class="vertical-img">
-      </div>
-      <div class="quality-right">
-        <h3>Quality Guaranteed</h3>
-        <p>On your big day, you can count on me to turn fleeting moments into timeless treasures you will cherish for generations.</p>
-        <a href="https://chromanest.blogspot.com" class="quality-button" target="_blank">Visit my Blog</a>
-        <img src="images/Packages-imgs/quality/quality-horizontal.jpg" alt="Quality Horizontal Photo" class="horizontal-img">
-      </div>
+    <h1 class="coming-soon-title">ΣΥΝΤΟΜΑ</h1>
+    <div class="coming-soon-divider"></div>
+    <h2 class="coming-soon-subtitle">Προετοιμάζουμε κάτι υπέροχο για εσάς</h2>
+    <p class="coming-soon-text">
+      Η σελίδα με τα πακέτα και τις τιμές μας είναι υπό κατασκευή.<br>
+      Σύντομα θα είναι διαθέσιμη με όλες τις πληροφορίες που χρειάζεστε.
+    </p>
+    <div class="coming-soon-contact">
+      <a href="contact.html" class="coming-soon-button">Επικοινωνήστε μαζί μας</a>
     </div>
   </section>
 
-   <!-- FOOTER (identical) -->
+  <!-- FOOTER (identical) -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-column">
-        <h3>Chromanest</h3>
+        <h3>ChromaNest</h3>
         <p>Επαγγελματικές υπηρεσίες φωτογραφίας με έδρα την Αθήνα με ειδίκευση στα πορτρέτα, προϊόντα και τις ειδικές εκδηλώσεις.</p>
         <div class="social-icons">
           <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+          <a href="https://gr.pinterest.com/chromanestcreatives/"><i class="fab fa-pinterest-p"></i></a>
         </div>
       </div>
       <div class="footer-column">
-        <h3>Services</h3>
+        <h3>Υπηρεσίες</h3>
         <ul>
-          <li><a href="commercial.html">Commercial Photography</a></li>
-          <li><a href="00commercial/portraits.html">Portraits</a></li>
-          <li><a href="wedding.html">Weddings</a></li>
-          <li><a href="baptism.html">Christenings</a></li>
+          <li><a href="commercial.html">Commercial Φωτογραφία</a></li>
+          <li><a href="portraits.html">Πορτραίτα</a></li>
+          <li><a href="wedding.html">Γάμος</a></li>
+          <li><a href="baptism.html">Βάπτιση</a></li>
         </ul>
       </div>
       <div class="footer-column">
-        <h3>Information</h3>
+        <h3>Πληροφορίες</h3>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="packages.html">Packages & Pricing</a></li>
-          <li><a href="editing.html">Editing Services</a></li>
+          <li><a href="about.html">Σχετικά με εμάς</a></li>
+          <li><a href="packages.html">Πακέτα & Τιμές</a></li>
+          <li><a href="editing.html">Υπηρεσίες Editing</a></li>
           <li><a href="https://chromanest.blogspot.com">Blog</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
       <div class="footer-column">
-        <h3>Contact</h3>
+        <h3>Επικοινωνία</h3>
         <ul>
           <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
           <li><i class="fas fa-phone"></i> +30 6973949986</li>
@@ -915,48 +485,16 @@
       </div>
     </div>
     <div class="copyright">
-      <p>2025 Chromanest &copy; All rights reserved.</p>
+      <p>2025-2045 ChromaNest &copy; All rights reserved.</p>
     </div>
   </footer>
 
   <script>
-    // FAQ functionality
-    const faqItems = document.querySelectorAll('.faq-item');
-
-    faqItems.forEach(item => {
-      const question = item.querySelector('.faq-question');
-      question.addEventListener('click', () => {
-        item.classList.toggle('active');
-      });
-    });
-
     // Smooth scroll to top function
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    // Add click indication for package cards
-    document.addEventListener('DOMContentLoaded', function() {
-      const packageCards = document.querySelectorAll('.package-card');
-      
-      packageCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-          // Add a visual feedback on click
-          this.style.transform = 'translateY(-2px)';
-          setTimeout(() => {
-            this.style.transform = 'translateY(-8px)';
-          }, 150);
-        });
-      });
-      
-      // Also update the main Book Now button to go to Calendly
-      const bookNowButton = document.querySelector('.cta-button-packages');
-      if (bookNowButton) {
-        bookNowButton.href = 'https://calendly.com/chromanest-creatives/1hour';
-        bookNowButton.target = '_blank';
-      }
-    });
   </script>
-
+  
 </body>
 </html>

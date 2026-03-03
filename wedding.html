@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chromanest | Wedding Photography</title>
+  <title>ChromaNest | Wedding Photography</title>
  
- <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/Favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/Favicon/apple-touch-icon.png">
   <link rel="shortcut icon" href="images/Favicon/favicon.ico">
   
- 
- 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -57,8 +55,8 @@
     }
     
     .logo img {
-      height: 50px; /* 1 unit */
-      width: 200px; /* 4 units (1:4 ratio) */
+      height: 50px;
+      width: 200px;
       object-fit: contain;
     }
 
@@ -94,7 +92,29 @@
       min-width: 180px;
       padding: 0.5rem 0;
       z-index: 1000;
+      /* NEW: Scroll functionality */
+  max-height: 80vh;        /* Limits height to 80% of viewport */
+  overflow-y: auto;        /* Enables vertical scrolling when needed */
+  scrollbar-width: thin;   /* Makes scrollbar thinner (Firefox) */
+  scrollbar-color: #888 #f0f0f0; /* Scrollbar colors (Firefox) */
     }
+    /* NEW: Webkit scrollbar styling */
+.dropdown-menu::-webkit-scrollbar {
+  width: 6px;              /* Scrollbar width */
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+  background: #f0f0f0;     /* Track background */
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background-color: #888;  /* Scrollbar handle color */
+  border-radius: 6px;      /* Rounded corners */
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background-color: #555;  /* Darker color on hover */
+}
     
     .dropdown:hover .dropdown-menu {
       display: block;
@@ -110,6 +130,7 @@
       color: #333;
       text-decoration: none;
       transition: background-color 0.3s;
+      white-space: nowrap;      /* NEW: Prevents text wrapping on desktop */
     }
     
     .dropdown-menu a:hover {
@@ -137,7 +158,7 @@
       margin-bottom: 3rem;
     }
     
-    /* Two-column layout for image and explore section */
+    /* Two-column layout */
     .content-section {
       display: flex;
       gap: 3rem;
@@ -151,6 +172,7 @@
       justify-content: center;
     }
     
+    /* Restored original photo container */
     .photo-container {
       max-width: 100%;
       width: 100%;
@@ -171,11 +193,12 @@
       object-fit: cover;
     }
     
+    /* EXPLORE SECTION — image appears with plenty of space above */
     .explore-section {
       flex: 1;
       margin-top: 0;
       padding: 2rem;
-      background-color: #f9f9f8;
+      background-color: #f5f5f5;
       border-radius: 8px;
       text-align: left;
       height: fit-content;
@@ -189,28 +212,114 @@
       text-align: center;
     }
     
+    /* List container: use flex column with overflow visible */
     .explore-links {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.6rem; /* base gap between items */
+      overflow: visible;
     }
     
-    .explore-link {
-      display: inline-block;
-      padding: 0.8rem 1.5rem;
-      background-color: #242323;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: background-color 0.3s;
+    /* Each item wrapper */
+    .list-item {
+      position: relative;
+      width: 100%;
+      transition: margin-top 0.35s ease, margin-bottom 0.35s ease;
+      overflow: visible;
       text-align: center;
     }
     
-    .explore-link:hover {
-      background-color: #d8c3a0;
+    .list-item2 {
+      position: relative;
+      width: 100%;
+      transition: margin-top 0.35s ease, margin-bottom 0.35s ease;
+      overflow: visible;
+      text-align: center;
     }
     
-    /* Footer */
+    /* The actual link */
+    .explore-link {
+      display: inline-block;
+      padding: 0.4rem 0;
+      color: #2c2c2c;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+      font-weight: 450;
+      font-size: 1.1rem;
+      background: transparent;
+      border-radius: 0;
+      width: auto;
+      pointer-events: auto;
+    }
+    
+    .explore-link i {
+      margin-right: 12px;
+      color: #a17f5f;
+      width: 1.6rem;
+      font-size: 1.2rem;
+      pointer-events: none;
+    }
+    
+    /* Image container: sits above the link */
+    .hover-image {
+      position: absolute;
+      top: 100%;           /* directly above the link */
+      left: 0;
+      width: 100%;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.45s ease, opacity 0.35s ease, margin 0.35s ease;
+      background: transparent;
+      z-index: 20;
+      pointer-events: none;
+    }
+    
+    .hover-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 140px;      /* horizontal image height */
+      object-fit: cover;
+      object-position: center 30%;
+      border-radius: 0;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      background: #fff;
+    }
+    
+    /* ----- AMPLE SPACING: push the item down so image fits without overlap ----- */
+    .list-item:hover {
+      /* create enough space above for the image + some air */
+      margin-bottom: 150px;       /* image ~140px + 10px gap */
+      margin-top: 0px;     /* extra breathing room below */
+    }
+    
+    /* reveal the image */
+    .list-item:hover .hover-image {
+      max-height: 150px;       /* allow full image height */
+      opacity: 1;
+      margin-bottom: 12px;     /* gap between image and link */
+    }
+    
+    /* underline effect */
+    .list-item:hover .explore-link {
+     /* border-bottom: 1px solid #e0e0e0;*/
+     /* color: #000;*/
+     /* margin-bottom: 2px;*/
+    }
+    
+    /* First item needs extra margin-top to appear below the heading */
+    .list-item:first-child:hover {
+      margin-bottom: 150px;       /* image appears between H2 and first link */
+    }
+    
+    /* ensure nothing gets clipped */
+    .explore-section, .explore-links, .list-item {
+      overflow: visible;
+    }
+    
+    /* Footer unchanged */
     .footer {
       background-color: #eee;
       color: #4f4f4f;
@@ -290,7 +399,7 @@
       color: #888;
     }
     
-    /* Responsive styles */
+    /* Responsive */
     @media (max-width: 768px) {
       .navbar {
         flex-direction: column;
@@ -311,10 +420,6 @@
         grid-template-columns: repeat(2, 1fr);
       }
       
-      .coming-soon-container h1 {
-        font-size: 2.5rem;
-      }
-      
       .content-section {
         flex-direction: column;
         gap: 2rem;
@@ -324,44 +429,57 @@
         text-align: center;
       }
       
-       .logo img {
+      .explore-links {
+        align-items: center;
+      }
+      
+      .list-item {
+        width: fit-content;
+      }
+      
+      .hover-image {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 85vw;
+      }
+      
+      .list-item:hover {
+        margin-top: 160px;    /* a bit more on mobile */
+      }
+      
+      .logo img {
         height: 40px;
         width: 160px;
       }
       
+      /* NEW: Mobile dropdown styles */
+  .dropdown-menu {
+    position: static;       /* Removes absolute positioning on mobile */
+    max-height: 300px;      /* Fixed max height for mobile */
+    width: 100%;            /* Full width */
+    box-shadow: none;       /* Removes shadow */
+    background-color: #f9f9f9; /* Lighter background */
+  }
+  
+  .dropdown-menu a {
+    white-space: normal;    /* Allows text wrapping on mobile */
+  }
     }
-    
     
     @media (max-width: 576px) {
       .footer-content {
         grid-template-columns: 1fr;
       }
-      
-      .coming-soon-container h1 {
-        font-size: 2rem;
-      }
-      
-      .explore-links {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .photo-container {
-        max-width: 100%;
-      }
-      
-         .logo img {
+      .logo img {
         height: 35px;
         width: 140px;
       }
-      
-      
     }
   </style>
 </head>
 <body>
 
- <!-- NAVBAR (identical) -->
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="logo">
       <a href="index.html">
@@ -369,34 +487,34 @@
       </a>
     </div>
     <ul class="nav-menu">
-      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-      <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+      <li class="nav-item"><a href="index.html" class="nav-link">Αρχική</a></li>
+      <li class="nav-item"><a href="about.html" class="nav-link">Σχετικά</a></li>
       <li class="nav-item dropdown">
         <a href="commercial.html" class="nav-link">Commercial</a>
         <ul class="dropdown-menu">
-          <li><a href="portraits.html">Portraits</a></li>
-          <li><a href="proportraits.html">Pro Portraits</a></li>
-          <li><a href="weddingdresses.html">Wedding Dresses</a></li>
-          <li><a href="editorial.html">Editorial</a></li>
+         <li><a href="portraits.html">Πορτραίτα</a></li>
+          <li><a href="proportraits.html">Επαγγελματικά πορτραίτα</a></li>
+          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
+          <li><a href="familyportraits.html">Οικογενειακά πορτραίτα</a></li>
+          <li><a href="newborns.html">Νεογέννητα</a></li>
+          <li><a href="maternity.html">Εγκυμοσύνη</a></li>
+          <li><a href="couples.html">Ζευγάρια</a></li>
+          <li><a href="weddingdresses.html">Νυφικά</a></li>
           <li><a href="product.html">Product</a></li>
           <li><a href="packaging.html">Packaging</a></li>
           <li><a href="food.html">Food</a></li>
-          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
-          <li><a href="familyportraits.html">Family portraits</a></li>
-          <li><a href="newborns.html">Newborns</a></li>
-          <li><a href="couples.html">Couples</a></li>
-          <li><a href="maternity.html">Maternity</a></li>
+          <li><a href="editorial.html">Editorial</a></li>
           <li><a href="conceptual.html">Conceptual</a></li>
           <li><a href="events.html">Events</a></li>
           <li><a href="hotels.html">Hotels</a></li>
-          <li><a href="airbnb.html">Airbnb</a></li>
-        </ul>
+          <li><a href="airbnb.html">Airbnb-Real Estate</a></li>
+                  </ul>
       </li>
-      <li class="nav-item"><a href="wedding.html" class="nav-link">Wedding</a></li>
-      <li class="nav-item"><a href="christening.html" class="nav-link">Baptism</a></li>
+      <li class="nav-item"><a href="wedding.html" class="nav-link">Γάμος</a></li>
+      <li class="nav-item"><a href="christening.html" class="nav-link">Βάπτιση</a></li>
       <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
       <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
-      <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link">Επικοινωνία</a></li>
     </ul>
   </nav>
 
@@ -404,66 +522,122 @@
   <section class="coming-soon-container" data-aos="fade-up">
     <h1>Φωτογράφηση Γάμου</h1>
     <p>Δουλεύουμε πάνω σε κάτι όμορφο για την ξεχωριστή σας ημέρα. <br>Το portfolio γαμήλιας φωτογραφίας μας θα είναι σύντομα διαθέσιμο.</p>    
-    <!-- Two-column layout for image and explore section -->
+    
     <div class="content-section">
-      <!-- VERTICAL PHOTO SECTION -->
+      <!-- LEFT: original photo container (exactly as first code) -->
       <div class="vertical-photo-section" data-aos="fade-right">
         <div class="photo-container">
-          <!-- Replace with your actual image path -->
           <img src="images/Wedding-imgs/wedding1.jpg" 
+               alt="Elegant wedding couple portrait" 
+               class="vertical-photo">
+          <img src="images/Wedding-imgs/wedding2.jpg" 
                alt="Elegant wedding couple portrait" 
                class="vertical-photo">
         </div>
       </div>
       
-      <!-- EXPLORE SECTION -->
+      <!-- RIGHT: list with ample space above each hovered item -->
       <div class="explore-section" data-aos="fade-left">
-   <h2>Ανακαλύψτε περισσότερες υπηρεσίες</h2>
+        <h2>Ανακαλύψτε περισσότερες υπηρεσίες:</h2>
         <div class="explore-links">
-          <a href="newborns.html" class="explore-link">Newborn Photography</a>
-          <a href="maternity.html" class="explore-link">Maternity Photography</a>
-          <a href="portraits.html" class="explore-link">Portrait Photography</a>
-          <a href="fashion.html" class="explore-link">Fashion Photography</a>
-          <a href="packages.html" class="explore-link">Packages & Pricing</a>
-          <a href="contact.html" class="explore-link">Contact Us</a>
+          
+          <!-- Baptism -->
+          <div class="list-item">
+            <div class="hover-image">
+              <img src="images/Wedding-imgs/listitems/1baptism.jpg" alt="baptism">
+            </div>
+            <a href="baptism.html" class="explore-link"><i class="fa-regular fa-dove" style="color: #e0e0e0;"></i>Βάπτιση</a>
+          </div>
+          
+          <!-- Maternity -->
+          <div class="list-item">
+            <div class="hover-image">
+              <img src="images/Wedding-imgs/listitems/2maternity.jpg" alt="maternity">
+            </div>
+            <a href="maternity.html" class="explore-link"><i class="fa-regular fa-person-pregnant" style="color: #e0e0e0;"></i>Εγκυμοσύνη</a>
+          </div>
+          
+          <!-- Newborns -->
+          <div class="list-item">
+            <div class="hover-image">
+              <img src="images/Wedding-imgs/listitems/3newborns.jpg" alt="newborns">
+            </div>
+            <a href="newborns.html" class="explore-link"><i class="fa-regular fa-baby" style="color: #e0e0e0;"></i>Νεογέννητα</a>
+          </div>
+          
+          <!-- Family portraits -->
+          <div class="list-item">
+            <div class="hover-image">
+              <img src="images/Wedding-imgs/listitems/4family.jpg" alt="family">
+            </div>
+            <a href="familyportraits.html" class="explore-link"><i class="fa-regular fa-users" style="color: #e0e0e0;"></i>Οικογενειακά Πορτραίτα</a>
+          </div>
+          
+          <!-- Portraits -->
+          <div class="list-item">
+            <div class="hover-image">
+              <img src="images/Wedding-imgs/listitems/5portraits.jpg" alt="portrait">
+            </div>
+            <a href="portraits.html" class="explore-link"><i class="fa fa-user" aria-hidden="true" style="color: #e0e0e0;"></i>Πορτραίτα</a>
+          </div>
+          
+          <!-- Couples -->
+          <div class="list-item">
+            <div class="hover-image">
+              <img src="images/Wedding-imgs/listitems/6couples.jpg" alt="couples">
+            </div>
+            <a href="couples.html" class="explore-link"><i class="fa fa-heart" aria-hidden="true" style="color: #e0e0e0;"></i>Ζευγάρια</a>
+          </div>
+          
+          <!-- Wedding dresses -->
+          <div class="list-item">
+            <div class="hover-image">
+              <img src="images/Wedding-imgs/listitems/7weddingdresses.jpg" alt="wedding dress">
+            </div>
+            <a href="weddingdresses.html" class="explore-link"><i class="fa-regular fa-gem" style="color: #e0e0e0;"></i>Νυφικά</a>
+          </div>
+          
+          <!-- Contact -->
+          <div class="list-item2">
+            <a href="contact.html" class="explore-link"><i class="fa-regular fa-phone" style="color: #e0e0e0;"></i>Επικοινωνία</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-   <!-- FOOTER (identical) -->
+  <!-- FOOTER (identical) -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-column">
-        <h3>Chromanest</h3>
+        <h3>ChromaNest</h3>
         <p>Επαγγελματικές υπηρεσίες φωτογραφίας με έδρα την Αθήνα με ειδίκευση στα πορτρέτα, προϊόντα και τις ειδικές εκδηλώσεις.</p>
         <div class="social-icons">
           <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+          <a href="https://gr.pinterest.com/chromanestcreatives/"><i class="fab fa-pinterest-p"></i></a>
         </div>
       </div>
       <div class="footer-column">
-        <h3>Services</h3>
+        <h3>Υπηρεσίες</h3>
         <ul>
-          <li><a href="commercial.html">Commercial Photography</a></li>
-          <li><a href="00commercial/portraits.html">Portraits</a></li>
-          <li><a href="wedding.html">Weddings</a></li>
-          <li><a href="baptism.html">Christenings</a></li>
-        </ul>
+         <li><a href="commercial.html">Commercial Φωτογραφία</a></li>
+          <li><a href="portraits.html">Πορτραίτα</a></li>
+          <li><a href="wedding.html">Γάμος</a></li>
+          <li><a href="baptism.html">Βάπτιση</a></li>
+                  </ul>
       </div>
       <div class="footer-column">
-        <h3>Information</h3>
+        <h3>Πληροφορίες</h3>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="packages.html">Packages & Pricing</a></li>
-          <li><a href="editing.html">Editing Services</a></li>
+          <li><a href="about.html">Σχετικά με εμάς</a></li>
+          <li><a href="packages.html">Πακέτα & Τιμές</a></li>
+          <li><a href="editing.html">Υπηρεσίες Editing</a></li>
           <li><a href="https://chromanest.blogspot.com">Blog</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-        </ul>
+                  </ul>
       </div>
       <div class="footer-column">
-        <h3>Contact</h3>
+        <h3>Επικοινωνία</h3>
         <ul>
           <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
           <li><i class="fas fa-phone"></i> +30 6973949986</li>
@@ -472,13 +646,13 @@
       </div>
     </div>
     <div class="copyright">
-      <p>2025 Chromanest &copy; All rights reserved.</p>
+      <p>2025-2045 ChromaNest &copy; All rights reserved.</p>
     </div>
   </footer>
+  
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000 });
-
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }

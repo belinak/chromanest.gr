@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chromanest | About Us</title>
-    <!----------------------------------------------- LOGO BOOKMARK START ---------------------------------------------------------------->
+  <title>ChromaNest | About Us</title>
+  <!-- LOGO BOOKMARK START -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/Favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/Favicon/apple-touch-icon.png">
   <link rel="shortcut icon" href="images/Favicon/favicon.ico">
-  
-  <!----------------------------------------------- LOGO BOOKMARK END ---------------------------------------------------------------->
+  <!-- LOGO BOOKMARK END -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -26,7 +25,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
       color: #333;
-      background-color: ;
     }
     
     /* Navbar styles */
@@ -42,12 +40,15 @@
       z-index: 1000;
     }
     
-    .logo a {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #333;
-      text-decoration: none;
-      letter-spacing: 1px;
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+      width: 200px;
+      object-fit: contain;
     }
     
     .nav-menu {
@@ -82,7 +83,29 @@
       min-width: 180px;
       padding: 0.5rem 0;
       z-index: 1000;
+      /* NEW: Scroll functionality */
+  max-height: 80vh;        /* Limits height to 80% of viewport */
+  overflow-y: auto;        /* Enables vertical scrolling when needed */
+  scrollbar-width: thin;   /* Makes scrollbar thinner (Firefox) */
+  scrollbar-color: #888 #f0f0f0; /* Scrollbar colors (Firefox) */
     }
+    /* NEW: Webkit scrollbar styling */
+.dropdown-menu::-webkit-scrollbar {
+  width: 6px;              /* Scrollbar width */
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+  background: #f0f0f0;     /* Track background */
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background-color: #888;  /* Scrollbar handle color */
+  border-radius: 6px;      /* Rounded corners */
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background-color: #555;  /* Darker color on hover */
+}
     
     .dropdown:hover .dropdown-menu {
       display: block;
@@ -98,13 +121,14 @@
       color: #333;
       text-decoration: none;
       transition: background-color 0.3s;
+      white-space: nowrap;      /* NEW: Prevents text wrapping on desktop */
     }
     
     .dropdown-menu a:hover {
       background-color: #f5f5f5;
     }
     
-    /* ABOUT SECTION */
+    /* ========= UPDATED ABOUT SECTION ========= */
     .about-intro {
       padding: 3rem 5%;
     }
@@ -123,34 +147,107 @@
     
     .about-image img {
       width: 100%;
-    
+      border-radius: 4px; /* subtle softness */
     }
     
     .about-text {
       flex: 1;
-       
     }
     
     .about-text h2 {
-      font-size: 2.5rem;
+      font-size: 1.6rem;
       margin-bottom: 1.5rem;
       color: #222;
-      font-weight: 300;
+      font-weight: 400;      /* slightly heavier than 300 */
+      
+      
     }
     
     .about-text p {
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       color: #555;
       line-height: 1.8;
     }
     
-    /* Instagram section */
+    /* ===== NEW QUOTE SECTION (centered, photo left + text right) ===== */
+    .quote-section {
+      padding: 4rem 5%;
+      background-color: #fafafa;
+    }
+    
+    .quote-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2.5rem 3rem;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    }
+    
+    .quote-image {
+      flex: 1;
+      text-align: center;
+    }
+    
+    .quote-image img {
+      max-width: 100%;
+      width: 260px;
+      height: auto;
+      border-radius: 50%;    /* circular portrait style */
+      object-fit: cover;
+      border: 4px solid #eee;
+    }
+    
+    .quote-text {
+      flex: 2;
+    }
+    
+    .quote-text h3 {
+      font-size: 1.3rem;
+      font-weight: 350;
+      color: #2c2c2c;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+    
+    .quote-text p {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: #4f4f4f;
+      line-height: 1.7;
+      position: relative;
+    
+    }
+    
+    /* Follow us title (centered) */
+    .follow-title {
+      text-align: center;
+      font-size: 1.7rem;
+      font-weight: 350;
+      margin: 3rem 0 1rem 0;
+      letter-spacing: 2px;
+      color: #2c2c2c;
+    }
+    
+    /* Separator line (identical to original) */
+    .insta-separator {
+      width: 20%;
+      height: 1px;
+      background-color: #aaa;
+      margin: 1rem auto;
+    }
+    
+    /* Instagram row */
     .insta-row {
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
       justify-content: center;
-      padding: 3rem 5%;
+      padding: 2rem 5% 4rem 5%;
     }
     
     .insta-row blockquote {
@@ -158,20 +255,7 @@
       max-width: 540px;
     }
     
-      /* logo */
-    .logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo img {
-  height: 50px; /* Changed from text to image */
-  width: 200px; /* Changed from text to image */
-  object-fit: contain;
-}
-     /* -logo */ 
-    
-      /* Footer */
+    /* Footer */
     .footer {
       background-color: #eee;
       color: #4f4f4f;
@@ -268,7 +352,7 @@
         margin: 0.5rem;
       }
       
-       .footer-content {
+      .footer-content {
         grid-template-columns: repeat(2, 1fr);
       }
       
@@ -280,39 +364,50 @@
         font-size: 2rem;
       }
       
-       .logo img {
-    height: 40px;
-    width: 160px;
+      .logo img {
+        height: 40px;
+        width: 160px;
+      }
+
+      .quote-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
+      .quote-text p {
+        padding-left: 0;
+        border-left: none;
+      }
+      .dropdown-menu {
+    position: static;       /* Removes absolute positioning on mobile */
+    max-height: 300px;      /* Fixed max height for mobile */
+    width: 100%;            /* Full width */
+    box-shadow: none;       /* Removes shadow */
+    background-color: #f9f9f9; /* Lighter background */
   }
-      
+  
+  .dropdown-menu a {
+    white-space: normal;    /* Allows text wrapping on mobile */
+  }
     }
     
     @media (max-width: 576px) {
-      
       .footer-content {
         grid-template-columns: 1fr;
       }
-       .logo img {
-    height: 35px;
-    width: 140px;
-  }
-      
+      .logo img {
+        height: 35px;
+        width: 140px;
+      }
+      .quote-image img {
+        width: 200px;
+      }
     }
-    
-    
- /* Separator line */
-.insta-separator {
-  width: 20%;
-  height: 1px;
-  background-color: #aaa;
-  margin: 1rem auto;
-}
-}
   </style>
 </head>
 <body>
 
- <!-- NAVBAR (identical) -->
+  <!-- NAVBAR (identical) -->
   <nav class="navbar">
     <div class="logo">
       <a href="index.html">
@@ -320,129 +415,142 @@
       </a>
     </div>
     <ul class="nav-menu">
-      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-      <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+      <li class="nav-item"><a href="index.html" class="nav-link">Αρχική</a></li>
+      <li class="nav-item"><a href="about.html" class="nav-link">Σχετικά</a></li>
       <li class="nav-item dropdown">
         <a href="commercial.html" class="nav-link">Commercial</a>
         <ul class="dropdown-menu">
-          <li><a href="portraits.html">Portraits</a></li>
-          <li><a href="proportraits.html">Pro Portraits</a></li>
-          <li><a href="weddingdresses.html">Wedding Dresses</a></li>
-          <li><a href="editorial.html">Editorial</a></li>
+          <li><a href="portraits.html">Πορτραίτα</a></li>
+          <li><a href="proportraits.html">Επαγγελματικά πορτραίτα</a></li>
+          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
+          <li><a href="familyportraits.html">Οικογενειακά πορτραίτα</a></li>
+          <li><a href="newborns.html">Νεογέννητα</a></li>
+          <li><a href="maternity.html">Εγκυμοσύνη</a></li>
+          <li><a href="couples.html">Ζευγάρια</a></li>
+          <li><a href="weddingdresses.html">Νυφικά</a></li>
           <li><a href="product.html">Product</a></li>
           <li><a href="packaging.html">Packaging</a></li>
           <li><a href="food.html">Food</a></li>
-          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
-          <li><a href="familyportraits.html">Family portraits</a></li>
-          <li><a href="newborns.html">Newborns</a></li>
-          <li><a href="couples.html">Couples</a></li>
-          <li><a href="maternity.html">Maternity</a></li>
+          <li><a href="editorial.html">Editorial</a></li>
           <li><a href="conceptual.html">Conceptual</a></li>
           <li><a href="events.html">Events</a></li>
           <li><a href="hotels.html">Hotels</a></li>
-          <li><a href="airbnb.html">Airbnb</a></li>
+          <li><a href="airbnb.html">Airbnb-Real Estate</a></li>
         </ul>
       </li>
-      <li class="nav-item"><a href="wedding.html" class="nav-link">Wedding</a></li>
-      <li class="nav-item"><a href="christening.html" class="nav-link">Baptism</a></li>
+      <li class="nav-item"><a href="wedding.html" class="nav-link">Γάμος</a></li>
+      <li class="nav-item"><a href="christening.html" class="nav-link">Βάπτιση</a></li>
       <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
       <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
-      <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link">Επικοινωνία</a></li>
     </ul>
   </nav>
 
-  <!-- ABOUT SECTION -->
+  <!-- UPDATED ABOUT SECTION (new photo & greek title + full text) -->
   <section class="about-intro" data-aos="fade-up">
     <div class="about-container">
-      <div class="about-image">
-        <img src="images/About/about.png" alt="About Chromanest">
-      </div>
+     
       <div class="about-text">
-        <h2>About Us</h2>
-        <p>Welcome to ChromaNest, a creative hub where artistry and innovation come together to bring your visions to life.<br>
-        Based in the heart of <i>Athens</i>, we specialize in transforming everyday moments and spaces into vibrant, memorable experiences.
-<br><br>
-Our services include:
-<br>
-✴<b> Photography:</b> Capturing the essence of your events, products, and personal milestones with a keen eye for detail.<br>
-✴<b> Face Painting Art:</b> Vibrant colours and bold designs, transforming every moment into a masterpiece that sparks joy and imagination for all ages.<br>
-✴<b> Fashion & Styling:</b> Collaborating with designers and individuals to curate striking looks.<br><br>
-<!--✴<b> Event Planning:</b> Crafting unforgettable celebrations infused with artistic flair and meticulous attention to detail.<br><br>-->
-
-At ChromaNest, we believe every project is a canvas for creativity. Whether it's adding a splash of color to a face, curating a bespoke event, or immortalizing a special moment, our team brings passion, precision, and a personal touch to everything we do.
-
-Let us help you make a statement, tell your story, and brighten your world—one brushstroke, photo, or plan at a time.</p>
+        <h2>Σχετικά με εμάς</h2>   <!-- updated Greek title -->
+        <p>
+          Καλώς ήρθατε στο ChromaNest, έναν δημιουργικό κόμβο όπου η τέχνη και η καινοτομία ενώνονται για να ζωντανέψουν το όραμά σας.
+          <br>
+          Με έδρα στην καρδιά της Αθήνας, ειδικευόμαστε στη δημιουργία οπτικά εντυπωσιακών εικόνων.
+          <br><br>
+          Οι κύριες υπηρεσίες μας επικεντρώνονται σε δύο τομείς:
+          <br>
+          <b>· Φωτογραφία:</b> Απαθανατίζουμε την ουσία των γεγονότων, των προϊόντων και των προσωπικών σας στιγμών με μάτι πάντα λεπτομερές και καλλιτεχνικό.
+          <br>
+          <b>· Επεξεργασία & Ρετούς:</b> Αναβαθμίζουμε την εικόνα σας μέσω άρτιας τεχνικής επεξεργασίας και ρετούς. Από την τελειοποίηση πορτρέτων και την αποκατάσταση παλαιών φωτογραφιών, μέχρι το χρωματικό διορθωτικό grading και το δημιουργικό μοντάζ για επαγγελματικές χρήσεις, δίνουμε πνοή και τελειότητα σε κάθε pixel.
+          <br><br>
+          Στο ChromaNest, πιστεύουμε ότι κάθε εικόνα είναι ένας καμβάς για δημιουργία. Είτε θέλετε να αναδείξετε μια επαγγελματική λήψη, είτε να διορθώσετε και να τελειοποιήσετε ένα προσωπικό στιγμιότυπο, είτε να συνθέσετε κάτι εντελώς νέο, η ομάδα μας φέρνει πάθος, ακρίβεια και προσωπική πινελιά σε κάθε έργο.
+          <br>
+          Αφήστε μας να σας βοηθήσουμε να κάνετε τη δήλωση που θέλετε, να πείτε την ιστορία σας και να φωτίσουμε τον κόσμο σας.
+        </p>
       </div>
     </div>
   </section>
   
+  <!-- NEW QUOTE SECTION (photo left + title & text right) -->
+  <section class="quote-section" data-aos="fade-up">
+    <div class="quote-container">
+      <div class="quote-image">
+        <!-- replace with your actual quote image -->
+        <img src="images/About/profilepic.jpg" alt="team or portrait" onerror="">
+      </div>
+      <div class="quote-text">
+        <h3>Μπελίνα Κορτότσι</h3>
+        <p>Καλώς ήρθατε! Είμαι η Μπελίνα, η φωτογράφος και retoucher πίσω από το φακό. Με σπουδές και εμπειρία ως μηχανικός, προσεγγίζω τη φωτογραφία συνδυάζοντας την τεχνική αρτιότητα με το καλλιτεχνικό μάτι. Από την λήψη μέχρι την τελική επεξεργασία, το ζητούμενο για μένα είναι πάντα το ίδιο: εικόνες με διάρκεια. Εικόνες που δεν εντυπωσιάζουν μόνο με την πρώτη ματιά, αλλά μένουν χαραγμένες.
+        <br><br>
+        Επικοινωνήστε μαζί μου για να συζητήσουμε τη δική σας ανάγκη.
+        </p>
+      </div>
+    </div>
+  </section>
   
-   <!-- Separator line -->
+
+  
+  <!-- FOLLOW US TITLE (centered) + INSTAGRAM FEEDS exactly as before -->
+  <h2 class="follow-title" data-aos="fade-up">FOLLOW US</h2>
+  
+    <!-- Separator line (identical) -->
   <div class="insta-separator"></div>
   
-<!------------------------------------------- Instagram Slider START ------------------------------------------------------------>
-
-<div class="insta-row">
-
+  
+  <div class="insta-row" data-aos="fade-up">
     <!-- Embed: Belina -->
-  <blockquote class="instagram-media" 
-    data-instgrm-permalink="https://www.instagram.com/p/BNGQpYIhUF7/" 
-    data-instgrm-version="14">
-  </blockquote>
-
-  <!-- Embed: Chromanest Creatives -->
-  <blockquote class="instagram-media" 
-    data-instgrm-permalink="https://www.instagram.com/p/DO-ooB5jZ-4/" 
-    data-instgrm-version="14">
-  </blockquote>
+    <blockquote class="instagram-media" 
+      data-instgrm-permalink="https://www.instagram.com/p/BNGQpYIhUF7/" 
+      data-instgrm-version="14">
+    </blockquote>
   
+    <!-- Embed: Chromanest Creatives -->
+    <blockquote class="instagram-media" 
+      data-instgrm-permalink="https://www.instagram.com/p/DO-ooB5jZ-4/" 
+      data-instgrm-version="14">
+    </blockquote>
+    
     <!-- Embed: Chromanest Facepainting -->
-  <blockquote class="instagram-media" 
-    data-instgrm-permalink="https://www.instagram.com/p/DRCJU0yjR4E/" 
-    data-instgrm-version="14">
-  </blockquote>
-  
+    <blockquote class="instagram-media" 
+      data-instgrm-permalink="https://www.instagram.com/p/DRCJU0yjR4E/" 
+      data-instgrm-version="14">
+    </blockquote>
+  </div>
 
-</div>
-
-<script async src="https://www.instagram.com/embed.js"></script>
-
-
-<!--------------------------------------------- Instagram Slider END -------------------------------------------------------------->
+  <script async src="https://www.instagram.com/embed.js"></script>
 
   <!-- FOOTER (identical) -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-column">
-        <h3>Chromanest</h3>
+        <h3>ChromaNest</h3>
         <p>Επαγγελματικές υπηρεσίες φωτογραφίας με έδρα την Αθήνα με ειδίκευση στα πορτρέτα, προϊόντα και τις ειδικές εκδηλώσεις.</p>
         <div class="social-icons">
           <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+          <a href="https://gr.pinterest.com/chromanestcreatives/"><i class="fab fa-pinterest-p"></i></a>
         </div>
       </div>
       <div class="footer-column">
-        <h3>Services</h3>
+        <h3>Υπηρεσίες</h3>
         <ul>
-          <li><a href="commercial.html">Commercial Photography</a></li>
-          <li><a href="00commercial/portraits.html">Portraits</a></li>
-          <li><a href="wedding.html">Weddings</a></li>
-          <li><a href="baptism.html">Christenings</a></li>
+          <li><a href="commercial.html">Commercial Φωτογραφία</a></li>
+          <li><a href="portraits.html">Πορτραίτα</a></li>
+          <li><a href="wedding.html">Γάμος</a></li>
+          <li><a href="baptism.html">Βάπτιση</a></li>
         </ul>
       </div>
       <div class="footer-column">
-        <h3>Information</h3>
+        <h3>Πληροφορίες</h3>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="packages.html">Packages & Pricing</a></li>
-          <li><a href="editing.html">Editing Services</a></li>
+          <li><a href="about.html">Σχετικά με εμάς</a></li>
+          <li><a href="packages.html">Πακέτα & Τιμές</a></li>
+          <li><a href="editing.html">Υπηρεσίες Editing</a></li>
           <li><a href="https://chromanest.blogspot.com">Blog</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
       <div class="footer-column">
-        <h3>Contact</h3>
+        <h3>Επικοινωνία</h3>
         <ul>
           <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
           <li><i class="fas fa-phone"></i> +30 6973949986</li>
@@ -451,9 +559,10 @@ Let us help you make a statement, tell your story, and brighten your world—one
       </div>
     </div>
     <div class="copyright">
-      <p>2025 Chromanest &copy; All rights reserved.</p>
+      <p>2025-2045 ChromaNest &copy; All rights reserved.</p>
     </div>
   </footer>
+  
   <!-- SCRIPTS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
