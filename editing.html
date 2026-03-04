@@ -282,14 +282,45 @@
         grid-template-columns: repeat(2, 1fr);
       }
       
+      /* Fix for pros-list on mobile - THIS IS THE IMPORTANT PART */
       .pros-list ul {
-        columns: 1;
+        columns: 1 !important;
+      }
+      
+      .pros-list {
+        padding: 1.5rem !important;
+      }
+      
+      .pros-list li {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+      }
+      
+      .culling-nested {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .culling-nested li {
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
       }
     }
 
     @media (min-width: 769px) {
       .menu-toggle {
         display: none;
+      }
+    }
+    
+    /* Extra small devices */
+    @media (max-width: 480px) {
+      .pros-list {
+        padding: 1.2rem !important;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -668,6 +699,7 @@
       color: #6f6f6f;
     }
 
+    /* Additional mobile fixes for smaller screens */
     @media (max-width: 576px) {
       .footer-content {
         grid-template-columns: 1fr;
