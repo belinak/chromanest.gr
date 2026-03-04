@@ -90,15 +90,23 @@
       color: #888;
     }
 
-    /* Dropdown arrow indicator */
-    .dropdown > .nav-link::after {
-      content: '▼';
+    /* Dropdown arrow indicator - hidden by default, only shown on mobile */
+    .dropdown-toggle {
+      display: none; /* Hidden on desktop */
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
       font-size: 0.7rem;
-      margin-left: 5px;
       transition: transform 0.3s;
+      width: 24px;
+      height: 24px;
     }
 
-    .dropdown.active > .nav-link::after {
+    .dropdown-toggle::after {
+      content: '▼';
+    }
+
+    .dropdown.active .dropdown-toggle {
       transform: rotate(180deg);
     }
 
@@ -149,6 +157,11 @@
 
     /* Click functionality for mobile */
     @media (max-width: 768px) {
+      /* Show dropdown toggle only on mobile */
+      .dropdown-toggle {
+        display: inline-flex; /* Show on mobile */
+      }
+      
       .dropdown-menu {
         position: static;
         max-height: 0;
@@ -227,6 +240,15 @@
       /* Ensure all dropdown items are visible */
       .dropdown-menu li {
         width: 100%;
+      }
+      
+      /* Make the toggle arrow clickable with larger touch target */
+      .dropdown-toggle {
+        pointer-events: auto;
+        width: 44px; /* Larger touch target */
+        height: 44px;
+        margin: -10px -10px -10px 0; /* Expand click area */
+        padding: 10px;
       }
     }
 
@@ -589,7 +611,10 @@
       <li class="nav-item"><a href="index.html" class="nav-link">Αρχική</a></li>
       <li class="nav-item"><a href="about.html" class="nav-link">Σχετικά</a></li>
       <li class="nav-item dropdown">
-        <a href="commercial.html" class="nav-link">Commercial</a>
+        <a href="commercial.html" class="nav-link">
+          Commercial
+          <span class="dropdown-toggle" id="dropdown-toggle-commercial"></span>
+        </a>
         <ul class="dropdown-menu">
           <li><a href="portraits.html">Πορτραίτα</a></li>
           <li><a href="proportraits.html">Επαγγελματικά πορτραίτα</a></li>
@@ -707,34 +732,41 @@
         dropdowns.forEach(dropdown => {
           dropdown.classList.remove('active');
           const menu = dropdown.querySelector('.dropdown-menu');
-          menu.classList.remove('show');
+          if (menu) menu.classList.remove('show');
         });
       }
     });
 
-    // Handle dropdown clicks on mobile
+    // Handle dropdown toggle clicks on mobile (arrow only)
     dropdowns.forEach(dropdown => {
-      const link = dropdown.querySelector('.nav-link');
+      const toggle = dropdown.querySelector('.dropdown-toggle');
+      const menu = dropdown.querySelector('.dropdown-menu');
       
-      link.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
-          e.preventDefault();
-          e.stopPropagation();
-          
-          // Close other dropdowns
-          dropdowns.forEach(otherDropdown => {
-            if (otherDropdown !== dropdown) {
-              otherDropdown.classList.remove('active');
-              otherDropdown.querySelector('.dropdown-menu').classList.remove('show');
-            }
-          });
-          
-          // Toggle current dropdown
-          dropdown.classList.toggle('active');
-          const menu = dropdown.querySelector('.dropdown-menu');
-          menu.classList.toggle('show');
-        }
-      });
+      if (toggle) {
+        toggle.addEventListener('click', (e) => {
+          // Only handle on mobile
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Close other dropdowns
+            dropdowns.forEach(otherDropdown => {
+              if (otherDropdown !== dropdown) {
+                otherDropdown.classList.remove('active');
+                const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                if (otherMenu) otherMenu.classList.remove('show');
+              }
+            });
+            
+            // Toggle current dropdown
+            dropdown.classList.toggle('active');
+            menu.classList.toggle('show');
+          }
+        });
+      }
+      
+      // The link itself will work normally (navigate to commercial.html)
+      // No need to prevent default behavior
     });
 
     // Close mobile menu when clicking outside
@@ -744,7 +776,8 @@
           navMenu.classList.remove('show');
           dropdowns.forEach(dropdown => {
             dropdown.classList.remove('active');
-            dropdown.querySelector('.dropdown-menu').classList.remove('show');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            if (menu) menu.classList.remove('show');
           });
         }
       }
@@ -761,7 +794,8 @@
         navMenu.classList.remove('show');
         dropdowns.forEach(dropdown => {
           dropdown.classList.remove('active');
-          dropdown.querySelector('.dropdown-menu').classList.remove('show');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) menu.classList.remove('show');
         });
       }
     });
