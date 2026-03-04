@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ChromaNest | Christening Photography</title>
   
-  
   <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/Favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/Favicon/apple-touch-icon.png">
@@ -34,7 +33,7 @@
       background-color: #fff;
     }
     
-    /* ====== NAVBAR - EXACT COPY FROM CONTACT PAGE ====== */
+    /* ====== NAVBAR - UPDATED WITH MOBILE MENU ====== */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -55,18 +54,16 @@
       letter-spacing: 1px;
     }
     
-     .logo {
+    .logo {
       display: flex;
       align-items: center;
     }
     
     .logo img {
-      height: 50px; /* 1 unit */
-      width: 200px; /* 4 units (1:4 ratio) */
+      height: 50px;
+      width: 200px;
       object-fit: contain;
     }
-
-    
     
     .nav-menu {
       display: flex;
@@ -83,10 +80,33 @@
       color: #333;
       font-weight: 500;
       transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
     
     .nav-link:hover {
       color: #888;
+    }
+    
+    /* Dropdown toggle - hidden on desktop */
+    .dropdown-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.7rem;
+      transition: transform 0.3s;
+      width: 24px;
+      height: 24px;
+    }
+    
+    .dropdown-toggle::after {
+      content: '▼';
+    }
+    
+    .dropdown.active .dropdown-toggle {
+      transform: rotate(180deg);
     }
     
     .dropdown-menu {
@@ -97,36 +117,39 @@
       background-color: #fff;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       list-style: none;
-      min-width: 180px;
+      min-width: 220px;
       padding: 0.5rem 0;
       z-index: 1000;
-       /* NEW: Scroll functionality */
-  max-height: 80vh;        /* Limits height to 80% of viewport */
-  overflow-y: auto;        /* Enables vertical scrolling when needed */
-  scrollbar-width: thin;   /* Makes scrollbar thinner (Firefox) */
-  scrollbar-color: #888 #f0f0f0; /* Scrollbar colors (Firefox) */
+      /* Scroll functionality */
+      max-height: 80vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #888 #f0f0f0;
     }
     
-    /* NEW: Webkit scrollbar styling */
-.dropdown-menu::-webkit-scrollbar {
-  width: 6px;              /* Scrollbar width */
-}
-
-.dropdown-menu::-webkit-scrollbar-track {
-  background: #f0f0f0;     /* Track background */
-}
-
-.dropdown-menu::-webkit-scrollbar-thumb {
-  background-color: #888;  /* Scrollbar handle color */
-  border-radius: 6px;      /* Rounded corners */
-}
-
-.dropdown-menu::-webkit-scrollbar-thumb:hover {
-  background-color: #555;  /* Darker color on hover */
-}
+    /* Webkit scrollbar styling */
+    .dropdown-menu::-webkit-scrollbar {
+      width: 6px;
+    }
     
-    .dropdown:hover .dropdown-menu {
-      display: block;
+    .dropdown-menu::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+    
+    .dropdown-menu::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 6px;
+    }
+    
+    .dropdown-menu::-webkit-scrollbar-thumb:hover {
+      background-color: #555;
+    }
+    
+    /* Desktop hover functionality */
+    @media (min-width: 769px) {
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
     }
     
     .dropdown-menu li {
@@ -139,11 +162,154 @@
       color: #333;
       text-decoration: none;
       transition: background-color 0.3s;
-       white-space: nowrap;      /* NEW: Prevents text wrapping on desktop */
+      white-space: nowrap;
     }
     
     .dropdown-menu a:hover {
       background-color: #f5f5f5;
+    }
+    
+    /* ========= MOBILE STYLES ========= */
+    @media (max-width: 768px) {
+      /* Show dropdown toggle only on mobile */
+      .dropdown-toggle {
+        display: inline-flex;
+      }
+      
+      /* Transform navbar for mobile */
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+        position: relative;
+      }
+      
+      /* Hamburger menu */
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        cursor: pointer;
+        font-size: 1.5rem;
+        z-index: 1001;
+      }
+      
+      /* Mobile menu - hidden by default */
+      .nav-menu {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+        display: none;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      
+      .nav-menu.show {
+        display: flex;
+      }
+      
+      /* Mobile nav items */
+      .nav-item {
+        width: 100%;
+        margin: 0.25rem 0;
+      }
+      
+      .nav-link {
+        padding: 0.75rem 0;
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      /* Transform dropdown for mobile */
+      .dropdown-menu {
+        position: static;
+        max-height: 0;
+        width: 100%;
+        box-shadow: none;
+        background-color: #f9f9f9;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+        padding: 0;
+        margin: 0;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+      }
+      
+      .dropdown-menu.show {
+        max-height: 1000px;
+        padding: 0.5rem 0;
+        opacity: 1;
+        visibility: visible;
+        display: block;
+      }
+      
+      .dropdown-menu a {
+        white-space: normal;
+        padding-left: 2rem;
+        font-size: 0.95rem;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .dropdown-menu li:last-child a {
+        border-bottom: none;
+      }
+      
+      /* Better touch targets */
+      .dropdown-toggle {
+        width: 44px;
+        height: 44px;
+        margin: -10px -10px -10px 0;
+        padding: 10px;
+        position: relative;
+        z-index: 2;
+      }
+      
+      .nav-link {
+        position: relative;
+        z-index: 1;
+      }
+      
+      /* Logo size for mobile */
+      .logo img {
+        height: 40px;
+        width: 160px;
+      }
+      
+      /* Footer responsive */
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      /* Christening content responsive */
+      .cta-split-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cta-photos {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .cta-photos img {
+        width: 48%;
+      }
+
+      .cta-content {
+        margin-top: 2rem;
+      }
+
+      .cta-img-bottom {
+        width: 100%;
+      }
+    }
+    
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
     }
     
     /* ====== CHRISTENING PAGE CONTENT STYLES ====== */
@@ -212,7 +378,6 @@
     .cta-button-christening {
       background: #000;
       color: #fff;
-      
       padding: 0.75rem 2rem;
       font-size: 1.1rem;
       text-decoration: none;
@@ -297,7 +462,7 @@
       border-radius: 50%;
     }
 
-    /* ====== FOOTER - EXACT COPY FROM CONTACT PAGE ====== */
+    /* ====== FOOTER ====== */
     .footer {
       background-color: #eee;
       color: #4f4f4f;
@@ -377,70 +542,6 @@
       color: #888;
     }
     
-    /* ====== RESPONSIVE STYLES ====== */
-    @media (max-width: 768px) {
-      /* Navbar Responsive - EXACT from contact page */
-      .navbar {
-        flex-direction: column;
-        padding: 1rem 5%;
-      }
-      
-      .nav-menu {
-        margin-top: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .nav-item {
-        margin: 0.5rem;
-      }
-      
-      /* Footer Responsive - EXACT from contact page */
-      .footer-content {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      /* Christening content responsive */
-      .cta-split-inner {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .cta-photos {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .cta-photos img {
-        width: 48%;
-      }
-
-      .cta-content {
-        margin-top: 2rem;
-      }
-
-      .cta-img-bottom {
-        width: 100%;
-      }
-      
-       .logo img {
-        height: 40px;
-        width: 160px;
-      }
-       .dropdown-menu {
-    position: static;       /* Removes absolute positioning on mobile */
-    max-height: 300px;      /* Fixed max height for mobile */
-    width: 100%;            /* Full width */
-    box-shadow: none;       /* Removes shadow */
-    background-color: #f9f9f9; /* Lighter background */
-  }
-  
-  .dropdown-menu a {
-    white-space: normal;    /* Allows text wrapping on mobile */
-  }
-    }
-    
     @media (max-width: 576px) {
       .footer-content {
         grid-template-columns: 1fr;
@@ -458,10 +559,8 @@
         height: 35px;
         width: 140px;
       }
-      
     }
 
-    /* Additional responsive for very small screens */
     @media (max-width: 480px) {
       .cta-content h2 {
         font-size: 2rem;
@@ -470,200 +569,276 @@
       .cta-content p {
         font-size: 1rem;
       }
-      
-      .nav-menu {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .nav-item {
-        margin: 0.3rem;
-      }
     }
   </style>
 </head>
 <body>
 
-<!-- NAVBAR (identical) -->
-  <nav class="navbar">
-    <div class="logo">
-      <a href="index.html">
-        <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
+<!-- NAVBAR with hamburger menu and clickable dropdown arrow -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="index.html">
+      <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
+    </a>
+  </div>
+  <div class="menu-toggle" id="menu-toggle">
+    <i class="fas fa-bars"></i>
+  </div>
+  <ul class="nav-menu" id="nav-menu">
+    <li class="nav-item"><a href="index.html" class="nav-link">Αρχική</a></li>
+    <li class="nav-item"><a href="about.html" class="nav-link">Σχετικά</a></li>
+    <li class="nav-item dropdown">
+      <a href="commercial.html" class="nav-link">
+        Commercial
+        <span class="dropdown-toggle"></span>
       </a>
+      <ul class="dropdown-menu">
+        <li><a href="portraits.html">Πορτραίτα</a></li>
+        <li><a href="proportraits.html">Επαγγελματικά πορτραίτα</a></li>
+        <li><a href="fashioneshops.html">Fashion e-shops</a></li>
+        <li><a href="familyportraits.html">Οικογενειακά πορτραίτα</a></li>
+        <li><a href="newborns.html">Νεογέννητα</a></li>
+        <li><a href="maternity.html">Εγκυμοσύνη</a></li>
+        <li><a href="couples.html">Ζευγάρια</a></li>
+        <li><a href="weddingdresses.html">Νυφικά</a></li>
+        <li><a href="product.html">Product</a></li>
+        <li><a href="packaging.html">Packaging</a></li>
+        <li><a href="food.html">Food</a></li>
+        <li><a href="editorial.html">Editorial</a></li>
+        <li><a href="conceptual.html">Conceptual</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="hotels.html">Hotels</a></li>
+        <li><a href="airbnb.html">Airbnb-Real Estate</a></li>
+      </ul>
+    </li>
+    <li class="nav-item"><a href="wedding.html" class="nav-link">Γάμος</a></li>
+    <li class="nav-item"><a href="christening.html" class="nav-link">Βάπτιση</a></li>
+    <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
+    <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
+    <li class="nav-item"><a href="contact.html" class="nav-link">Επικοινωνία</a></li>
+  </ul>
+</nav>
+
+<!-- CHRISTENING CONTENT -->
+<section class="cta-photo-split" data-aos="fade-up">
+  <div class="cta-split-inner">
+    <!-- Left: 2 Photos -->
+    <div class="cta-photos">
+      <img src="images/Christening-imgs/christening1.jpg" alt="Christening 1" onclick="openLightbox(this.src)">
+      <img src="images/Christening-imgs/christening2.jpg" alt="Christening 2" onclick="openLightbox(this.src)">
     </div>
-    <ul class="nav-menu">
-      <li class="nav-item"><a href="index.html" class="nav-link">Αρχική</a></li>
-      <li class="nav-item"><a href="about.html" class="nav-link">Σχετικά</a></li>
-      <li class="nav-item dropdown">
-        <a href="commercial.html" class="nav-link">Commercial</a>
-        <ul class="dropdown-menu">
-          <li><a href="portraits.html">Πορτραίτα</a></li>
-          <li><a href="proportraits.html">Επαγγελματικά πορτραίτα</a></li>
-          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
-          <li><a href="familyportraits.html">Οικογενειακά πορτραίτα</a></li>
-          <li><a href="newborns.html">Νεογέννητα</a></li>
-          <li><a href="maternity.html">Εγκυμοσύνη</a></li>
-          <li><a href="couples.html">Ζευγάρια</a></li>
-          <li><a href="weddingdresses.html">Νυφικά</a></li>
-          <li><a href="product.html">Product</a></li>
-          <li><a href="packaging.html">Packaging</a></li>
-          <li><a href="food.html">Food</a></li>
-          <li><a href="editorial.html">Editorial</a></li>
-          <li><a href="conceptual.html">Conceptual</a></li>
-          <li><a href="events.html">Events</a></li>
-          <li><a href="hotels.html">Hotels</a></li>
-          <li><a href="airbnb.html">Airbnb-Real Estate</a></li>
-        </ul>
-      </li>
-      <li class="nav-item"><a href="wedding.html" class="nav-link">Γάμος</a></li>
-      <li class="nav-item"><a href="christening.html" class="nav-link">Βάπτιση</a></li>
-      <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
-      <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
-      <li class="nav-item"><a href="contact.html" class="nav-link">Επικοινωνία</a></li>
-    </ul>
-  </nav>
 
-  <!-- CHRISTENING CONTENT -->
-  <section class="cta-photo-split" data-aos="fade-up">
-    <div class="cta-split-inner">
-      <!-- Left: 2 Photos -->
-      <div class="cta-photos">
-        <img src="images/Christening-imgs/christening1.jpg" alt="Christening 1" onclick="openLightbox(this.src)">
-        <img src="images/Christening-imgs/christening2.jpg" alt="Christening 2" onclick="openLightbox(this.src)">
-      </div>
-
-      <!-- Right: CTA -->
-      <div class="cta-content">
-        <h2>Βάπτιση</h2>
-        <p>Με επαγγελματισμό και καλλιτεχνική προσέγγιση, αποτυπώνουμε τις μοναδικές στιγμές της βάπτισης του παιδιού σας. Από την ιερότητα της τελετής μέχρι την ανεπιτήδευτη οικογενειακή χαρά της δεξίωσης, δημιουργούμε μια ολοκληρωμένη φωτογραφική αφήγηση υψηλής αισθητικής. Με απόλυτο σεβασμό στο μυστήριο και διακριτικότητα στους πρωταγωνιστές, αποδίδουμε την αυθεντικότητα των συναισθημάτων και την ομορφιά της ημέρας.
+    <!-- Right: CTA -->
+    <div class="cta-content">
+      <h2>Βάπτιση</h2>
+      <p>Με επαγγελματισμό και καλλιτεχνική προσέγγιση, αποτυπώνουμε τις μοναδικές στιγμές της βάπτισης του παιδιού σας. Από την ιερότητα της τελετής μέχρι την ανεπιτήδευτη οικογενειακή χαρά της δεξίωσης, δημιουργούμε μια ολοκληρωμένη φωτογραφική αφήγηση υψηλής αισθητικής. Με απόλυτο σεβασμό στο μυστήριο και διακριτικότητα στους πρωταγωνιστές, αποδίδουμε την αυθεντικότητα των συναισθημάτων και την ομορφιά της ημέρας.
 <br><br>
 Για να κρατήσετε ζωντανή αυτή την ξεχωριστή εμπειρία, προσφέρουμε επιμελημένα ψηφιακά άλμπουμ υψηλής ανάλυσης, ιδανικά για κράτημα και άμεση κοινοποίηση, καθώς και προσεκτικά τυπωμένες φωτογραφίες επαγγελματικής ποιότητας σε εκλεκτό χαρτί.</p>
-        <div class="cta-button-wrapper">
-          <a href="contact.html" class="cta-button-christening">Κλείστε τώρα την ημερομηνία σας!</a>
-        </div>
-        <img src="images/Christening-imgs/christening3.jpg" alt="Christening 3" class="cta-img-bottom" onclick="openLightbox(this.src)">
+      <div class="cta-button-wrapper">
+        <a href="contact.html" class="cta-button-christening">Κλείστε τώρα την ημερομηνία σας!</a>
       </div>
+      <img src="images/Christening-imgs/christening3.jpg" alt="Christening 3" class="cta-img-bottom" onclick="openLightbox(this.src)">
     </div>
-  </section>
-
-  <!-- LIGHTBOX MODAL -->
-  <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
-    <span class="close" onclick="closeLightbox(event)">&times;</span>
-    <img id="lightbox-img" src="" alt="">
-    <span class="lightbox-prev" onclick="prevImage(event)">&#10094;</span>
-    <span class="lightbox-next" onclick="nextImage(event)">&#10095;</span>
   </div>
+</section>
 
- <!-- FOOTER (identical) -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-column">
-        <h3>ChromaNest</h3>
-        <p>Επαγγελματικές υπηρεσίες φωτογραφίας με έδρα την Αθήνα με ειδίκευση στα πορτρέτα, προϊόντα και τις ειδικές εκδηλώσεις.</p>
-        <div class="social-icons">
-          <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
-          <a href="https://gr.pinterest.com/chromanestcreatives/"><i class="fab fa-pinterest-p"></i></a>
-        </div>
-      </div>
-      <div class="footer-column">
-        <h3>Υπηρεσίες</h3>
-        <ul>
-          <li><a href="commercial.html">Commercial Φωτογραφία</a></li>
-          <li><a href="portraits.html">Πορτραίτα</a></li>
-          <li><a href="wedding.html">Γάμος</a></li>
-          <li><a href="baptism.html">Βάπτιση</a></li>
+<!-- LIGHTBOX MODAL -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+  <span class="close" onclick="closeLightbox(event)">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+  <span class="lightbox-prev" onclick="prevImage(event)">&#10094;</span>
+  <span class="lightbox-next" onclick="nextImage(event)">&#10095;</span>
+</div>
 
-        </ul>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-column">
+      <h3>ChromaNest</h3>
+      <p>Επαγγελματικές υπηρεσίες φωτογραφίας με έδρα την Αθήνα με ειδίκευση στα πορτρέτα, προϊόντα και τις ειδικές εκδηλώσεις.</p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
+        <a href="https://gr.pinterest.com/chromanestcreatives/"><i class="fab fa-pinterest-p"></i></a>
       </div>
-      <div class="footer-column">
-        <h3>Πληροφορίες</h3>
-        <ul>
+    </div>
+    <div class="footer-column">
+      <h3>Υπηρεσίες</h3>
+      <ul>
+        <li><a href="commercial.html">Commercial Φωτογραφία</a></li>
+        <li><a href="portraits.html">Πορτραίτα</a></li>
+        <li><a href="wedding.html">Γάμος</a></li>
+        <li><a href="baptism.html">Βάπτιση</a></li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <h3>Πληροφορίες</h3>
+      <ul>
         <li><a href="about.html">Σχετικά με εμάς</a></li>
-          <li><a href="packages.html">Πακέτα & Τιμές</a></li>
-          <li><a href="editing.html">Υπηρεσίες Editing</a></li>
-          <li><a href="https://chromanest.blogspot.com">Blog</a></li>        </ul>
-      </div>
-      <div class="footer-column">
-        <h3>Contact</h3>
-        <ul>
-          <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
-          <li><i class="fas fa-phone"></i> +30 6973949986</li>
-          <li><i class="fas fa-envelope"></i> chromanest.creatives@gmail.com</li>
-        </ul>
-      </div>
+        <li><a href="packages.html">Πακέτα & Τιμές</a></li>
+        <li><a href="editing.html">Υπηρεσίες Editing</a></li>
+        <li><a href="https://chromanest.blogspot.com">Blog</a></li>
+      </ul>
     </div>
-    <div class="copyright">
-      <p>2025-2045 ChromaNest &copy; All rights reserved.</p>
+    <div class="footer-column">
+      <h3>Επικοινωνία</h3>
+      <ul>
+        <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
+        <li><i class="fas fa-phone"></i> +30 6973949986</li>
+        <li><i class="fas fa-envelope"></i> chromanest.creatives@gmail.com</li>
+      </ul>
     </div>
-  </footer>
+  </div>
+  <div class="copyright">
+    <p>2025-2045 ChromaNest &copy; All rights reserved.</p>
+  </div>
+</footer>
 
+<!-- SCRIPTS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  // Initialize AOS
+  AOS.init({ 
+    duration: 1000,
+    once: true
+  });
 
-  <!-- SCRIPTS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    // Initialize AOS
-    AOS.init({ 
-      duration: 1000,
-      once: true
-    });
+  // Mobile menu functionality
+  const menuToggle = document.getElementById('menu-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  const dropdowns = document.querySelectorAll('.dropdown');
 
-    // Lightbox functionality
-    window.onload = function () {
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      const imageElements = Array.from(document.querySelectorAll('.cta-photos img, .cta-img-bottom'));
-      let currentIndex = 0;
+  // Toggle mobile menu
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navMenu.classList.toggle('show');
+    
+    // Close all dropdowns when closing main menu
+    if (!navMenu.classList.contains('show')) {
+      dropdowns.forEach(dropdown => {
+        dropdown.classList.remove('active');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (menu) menu.classList.remove('show');
+      });
+    }
+  });
 
-      // Make functions global so they work from inline HTML
-      window.openLightbox = function (src) {
-        currentIndex = imageElements.findIndex(img => img.src === src);
-        if (currentIndex === -1) currentIndex = 0;
-        lightboxImg.src = src;
-        lightbox.style.display = 'flex';
-      }
-
-      window.closeLightbox = function (event) {
-        if (event.target === lightbox || event.target.classList.contains('close')) {
-          lightbox.style.display = 'none';
-        }
-      }
-
-      window.showImage = function (index) {
-        if (index >= 0 && index < imageElements.length) {
-          currentIndex = index;
-          lightboxImg.src = imageElements[currentIndex].src;
-        }
-      }
-
-      window.nextImage = function (event) {
-        event.stopPropagation();
-        if (currentIndex < imageElements.length - 1) {
-          showImage(currentIndex + 1);
-        }
-      }
-
-      window.prevImage = function (event) {
-        event.stopPropagation();
-        if (currentIndex > 0) {
-          showImage(currentIndex - 1);
-        }
-      }
-
-      // Add keyboard navigation
-      document.addEventListener('keydown', function(event) {
-        if (lightbox.style.display === 'flex') {
-          if (event.key === 'Escape') {
-            lightbox.style.display = 'none';
-          } else if (event.key === 'ArrowRight') {
-            nextImage(event);
-          } else if (event.key === 'ArrowLeft') {
-            prevImage(event);
-          }
+  // Handle dropdown toggle clicks on mobile (arrow only)
+  dropdowns.forEach(dropdown => {
+    const toggle = dropdown.querySelector('.dropdown-toggle');
+    const menu = dropdown.querySelector('.dropdown-menu');
+    
+    if (toggle) {
+      toggle.addEventListener('click', (e) => {
+        // Only handle on mobile
+        if (window.innerWidth <= 768) {
+          e.preventDefault(); // Prevent navigation
+          e.stopPropagation();
+          
+          // Close other dropdowns
+          dropdowns.forEach(otherDropdown => {
+            if (otherDropdown !== dropdown) {
+              otherDropdown.classList.remove('active');
+              const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+              if (otherMenu) otherMenu.classList.remove('show');
+            }
+          });
+          
+          // Toggle current dropdown
+          dropdown.classList.toggle('active');
+          menu.classList.toggle('show');
         }
       });
-    };
-  </script>
+    }
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        navMenu.classList.remove('show');
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) menu.classList.remove('show');
+        });
+      }
+    }
+  });
+
+  // Prevent clicks inside nav menu from closing it
+  navMenu.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      navMenu.classList.remove('show');
+      dropdowns.forEach(dropdown => {
+        dropdown.classList.remove('active');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (menu) menu.classList.remove('show');
+      });
+    }
+  });
+
+  // Lightbox functionality
+  window.onload = function () {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const imageElements = Array.from(document.querySelectorAll('.cta-photos img, .cta-img-bottom'));
+    let currentIndex = 0;
+
+    // Make functions global so they work from inline HTML
+    window.openLightbox = function (src) {
+      currentIndex = imageElements.findIndex(img => img.src === src);
+      if (currentIndex === -1) currentIndex = 0;
+      lightboxImg.src = src;
+      lightbox.style.display = 'flex';
+    }
+
+    window.closeLightbox = function (event) {
+      if (event.target === lightbox || event.target.classList.contains('close')) {
+        lightbox.style.display = 'none';
+      }
+    }
+
+    window.showImage = function (index) {
+      if (index >= 0 && index < imageElements.length) {
+        currentIndex = index;
+        lightboxImg.src = imageElements[currentIndex].src;
+      }
+    }
+
+    window.nextImage = function (event) {
+      event.stopPropagation();
+      if (currentIndex < imageElements.length - 1) {
+        showImage(currentIndex + 1);
+      }
+    }
+
+    window.prevImage = function (event) {
+      event.stopPropagation();
+      if (currentIndex > 0) {
+        showImage(currentIndex - 1);
+      }
+    }
+
+    // Add keyboard navigation
+    document.addEventListener('keydown', function(event) {
+      if (lightbox.style.display === 'flex') {
+        if (event.key === 'Escape') {
+          lightbox.style.display = 'none';
+        } else if (event.key === 'ArrowRight') {
+          nextImage(event);
+        } else if (event.key === 'ArrowLeft') {
+          prevImage(event);
+        }
+      }
+    });
+  };
+</script>
 
 </body>
 </html>

@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ChromaNest | Editorials</title>
 
-  <!-- favicon links (kept from original) -->
+  <!-- favicon links -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/Favicon/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/Favicon/apple-touch-icon.png">
   <link rel="shortcut icon" href="images/Favicon/favicon.ico">
 
-  <!-- AOS + Font Awesome (exactly as provided) -->
+  <!-- AOS + Font Awesome -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* ===== RESET & BASE (unchanged from your original) ===== */
+    /* ===== RESET & BASE ===== */
     * {
       margin: 0;
       padding: 0;
@@ -30,7 +30,7 @@
       background-color: #fff;
     }
 
-    /* ===== NAVBAR (exactly as you provided) ===== */
+    /* ===== NAVBAR WITH MOBILE MENU ===== */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -57,8 +57,8 @@
     }
 
     .logo img {
-      height: 50px; /* 1 unit */
-      width: 200px; /* 4 units (1:4 ratio) */
+      height: 50px;
+      width: 200px;
       object-fit: contain;
     }
 
@@ -77,10 +77,33 @@
       color: #333;
       font-weight: 500;
       transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .nav-link:hover {
       color: #888;
+    }
+
+    /* Dropdown toggle - hidden on desktop */
+    .dropdown-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.7rem;
+      transition: transform 0.3s;
+      width: 24px;
+      height: 24px;
+    }
+
+    .dropdown-toggle::after {
+      content: '▼';
+    }
+
+    .dropdown.active .dropdown-toggle {
+      transform: rotate(180deg);
     }
 
     .dropdown-menu {
@@ -91,37 +114,39 @@
       background-color: #fff;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       list-style: none;
-      min-width: 180px;
+      min-width: 220px;
       padding: 0.5rem 0;
       z-index: 1000;
-      
-       /* NEW: Scroll functionality */
-  max-height: 80vh;        /* Limits height to 80% of viewport */
-  overflow-y: auto;        /* Enables vertical scrolling when needed */
-  scrollbar-width: thin;   /* Makes scrollbar thinner (Firefox) */
-  scrollbar-color: #888 #f0f0f0; /* Scrollbar colors (Firefox) */
+      /* Scroll functionality */
+      max-height: 80vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #888 #f0f0f0;
     }
     
-    /* NEW: Webkit scrollbar styling */
-.dropdown-menu::-webkit-scrollbar {
-  width: 6px;              /* Scrollbar width */
-}
+    /* Webkit scrollbar styling */
+    .dropdown-menu::-webkit-scrollbar {
+      width: 6px;
+    }
 
-.dropdown-menu::-webkit-scrollbar-track {
-  background: #f0f0f0;     /* Track background */
-}
+    .dropdown-menu::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
 
-.dropdown-menu::-webkit-scrollbar-thumb {
-  background-color: #888;  /* Scrollbar handle color */
-  border-radius: 6px;      /* Rounded corners */
-}
+    .dropdown-menu::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 6px;
+    }
 
-.dropdown-menu::-webkit-scrollbar-thumb:hover {
-  background-color: #555;  /* Darker color on hover */
-}
+    .dropdown-menu::-webkit-scrollbar-thumb:hover {
+      background-color: #555;
+    }
 
-    .dropdown:hover .dropdown-menu {
-      display: block;
+    /* Desktop hover functionality */
+    @media (min-width: 769px) {
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
     }
 
     .dropdown-menu li {
@@ -134,14 +159,141 @@
       color: #333;
       text-decoration: none;
       transition: background-color 0.3s;
-        white-space: nowrap;      /* NEW: Prevents text wrapping on desktop */
+      white-space: nowrap;
     }
 
     .dropdown-menu a:hover {
       background-color: #f5f5f5;
     }
 
-    /* ===== NEW THREE-COLUMN VERTICAL GRID (loved content) ===== */
+    /* ========= MOBILE STYLES ========= */
+    @media (max-width: 768px) {
+      /* Show dropdown toggle only on mobile */
+      .dropdown-toggle {
+        display: inline-flex;
+      }
+      
+      /* Transform navbar for mobile */
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+        position: relative;
+      }
+      
+      /* Hamburger menu */
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        cursor: pointer;
+        font-size: 1.5rem;
+        z-index: 1001;
+      }
+      
+      /* Mobile menu - hidden by default */
+      .nav-menu {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+        display: none;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      
+      .nav-menu.show {
+        display: flex;
+      }
+      
+      /* Mobile nav items */
+      .nav-item {
+        width: 100%;
+        margin: 0.25rem 0;
+      }
+      
+      .nav-link {
+        padding: 0.75rem 0;
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      /* Transform dropdown for mobile */
+      .dropdown-menu {
+        position: static;
+        max-height: 0;
+        width: 100%;
+        box-shadow: none;
+        background-color: #f9f9f9;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+        padding: 0;
+        margin: 0;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+      }
+      
+      .dropdown-menu.show {
+        max-height: 1000px;
+        padding: 0.5rem 0;
+        opacity: 1;
+        visibility: visible;
+        display: block;
+      }
+      
+      .dropdown-menu a {
+        white-space: normal;
+        padding-left: 2rem;
+        font-size: 0.95rem;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .dropdown-menu li:last-child a {
+        border-bottom: none;
+      }
+      
+      /* Better touch targets */
+      .dropdown-toggle {
+        width: 44px;
+        height: 44px;
+        margin: -10px -10px -10px 0;
+        padding: 10px;
+        position: relative;
+        z-index: 2;
+      }
+      
+      .nav-link {
+        position: relative;
+        z-index: 1;
+      }
+      
+      /* Logo size for mobile */
+      .logo img {
+        height: 40px;
+        width: 160px;
+      }
+      
+      /* Footer responsive */
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .grid-3col-vertical {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+
+    /* ===== THREE-COLUMN VERTICAL GRID ===== */
     .vertical-grid-section {
       max-width: 1400px;
       margin: 3rem auto;
@@ -162,18 +314,18 @@
     .grid-3col-vertical {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;        /* small gap as requested */
+      gap: 1.2rem;
     }
 
-    /* card styling — no round corners, same photo-card pattern but vertical aspect */
+    /* card styling — no round corners */
     .photo-card-vertical {
       position: relative;
       overflow: hidden;
-      border-radius: 0px;      /* explicitly no rounding */
+      border-radius: 0px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
-      aspect-ratio: 4 / 5;      /* vertical orientation (taller) */
+      aspect-ratio: 4 / 5;
       width: 100%;
     }
 
@@ -199,14 +351,14 @@
       transition: filter 0.4s ease;
     }
 
-    /* overlay exactly as your original pattern, but we adapt for title only on hover */
+    /* overlay */
     .card-overlay-vertical {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: transparent;      /* initially transparent */
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -221,28 +373,22 @@
       letter-spacing: 1px;
       transition: transform 0.3s ease, opacity 0.3s ease;
       transform: translateY(0);
-      opacity: 1;                /* title visible only on hover — we'll handle via hover */
+      opacity: 0;  /* hidden by default */
       text-align: center;
       padding: 0 1rem;
     }
 
-    /* on hover: darken overlay + keep title */
+    /* on hover: darken overlay + show title */
     .photo-card-vertical:hover .card-overlay-vertical {
-      background: rgba(0, 0, 0, 0.35);   /* darker as requested */
-    }
-
-    /* title is always visible? original spec: "Before hover only the image. No numbers. On hover display title" 
-       so we need title hidden by default */
-    .photo-card-vertical .card-title-vertical {
-      opacity: 0;                /* hidden before hover */
+      background: rgba(0, 0, 0, 0.35);
     }
 
     .photo-card-vertical:hover .card-title-vertical {
-      opacity: 1;                /* appear on hover */
-      transform: translateY(-8px); /* subtle move (like your original) */
+      opacity: 1;
+      transform: translateY(-8px);
     }
 
-    /* ===== FOOTER (identical to your original) ===== */
+    /* ===== FOOTER ===== */
     .footer {
       background-color: #eee;
       color: #4f4f4f;
@@ -323,7 +469,7 @@
       color: #888;
     }
 
-    /* ===== RESPONSIVE (merge both) ===== */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
       .grid-3col-vertical {
         gap: 1.2rem;
@@ -333,58 +479,9 @@
       }
     }
 
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        padding: 1rem 5%;
-      }
-
-      .nav-menu {
-        margin-top: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .nav-item {
-        margin: 0.5rem;
-      }
-
-      .footer-content {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .logo img {
-        height: 40px;
-        width: 160px;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-      .grid-3col-vertical {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
-      }
-      
-      
-      /* NEW: Mobile dropdown styles */
-  .dropdown-menu {
-    position: static;       /* Removes absolute positioning on mobile */
-    max-height: 300px;      /* Fixed max height for mobile */
-    width: 100%;            /* Full width */
-    box-shadow: none;       /* Removes shadow */
-    background-color: #f9f9f9; /* Lighter background */
-  }
-  
-  .dropdown-menu a {
-    white-space: normal;    /* Allows text wrapping on mobile */
-  }
-      
-    }
-
     @media (max-width: 576px) {
       .grid-3col-vertical {
-        grid-template-columns: 1fr; /* single column on mobile */
+        grid-template-columns: 1fr;
         gap: 1.2rem;
       }
 
@@ -411,22 +508,26 @@
 </head>
 <body>
 
-  <!-- ========== EXACT NAVBAR (from your original) ========== -->
+  <!-- NAVBAR with hamburger menu and clickable dropdown arrow -->
   <nav class="navbar">
     <div class="logo">
       <a href="index.html">
-        <!-- same logo path: you must have this image in your folder -->
         <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
       </a>
     </div>
-    <ul class="nav-menu">
+    <div class="menu-toggle" id="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-menu" id="nav-menu">
       <li class="nav-item"><a href="index.html" class="nav-link">Αρχική</a></li>
       <li class="nav-item"><a href="about.html" class="nav-link">Σχετικά</a></li>
-      <!-- dropdown unchanged -->
       <li class="nav-item dropdown">
-        <a href="commercial.html" class="nav-link">Commercial</a>
+        <a href="commercial.html" class="nav-link">
+          Commercial
+          <span class="dropdown-toggle"></span>
+        </a>
         <ul class="dropdown-menu">
-        <li><a href="portraits.html">Πορτραίτα</a></li>
+          <li><a href="portraits.html">Πορτραίτα</a></li>
           <li><a href="proportraits.html">Επαγγελματικά πορτραίτα</a></li>
           <li><a href="fashioneshops.html">Fashion e-shops</a></li>
           <li><a href="familyportraits.html">Οικογενειακά πορτραίτα</a></li>
@@ -442,19 +543,17 @@
           <li><a href="events.html">Events</a></li>
           <li><a href="hotels.html">Hotels</a></li>
           <li><a href="airbnb.html">Airbnb-Real Estate</a></li>
-                  </ul>
+        </ul>
       </li>
       <li class="nav-item"><a href="wedding.html" class="nav-link">Γάμος</a></li>
       <li class="nav-item"><a href="christening.html" class="nav-link">Βάπτιση</a></li>
-      <!-- <li class="nav-item"><a href="packages.html" class="nav-link">Packages</a></li> -->
       <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
       <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
       <li class="nav-item"><a href="contact.html" class="nav-link">Επικοινωνία</a></li>
-      <!-- <li class="nav-item"><a href="https://chromanest.blogspot.com" class="nav-link">Blog</a></li> -->
     </ul>
   </nav>
 
-  <!-- ========== MAIN CONTENT: VERTICAL 3‑COLUMN GRID WITH THE 10 TITLES ========== -->
+  <!-- MAIN CONTENT: VERTICAL 3‑COLUMN GRID WITH THE 10 TITLES -->
   <section class="vertical-grid-section" data-aos="fade-up">
     <h2 class="section-title">· editorial projects ·</h2>
     <div class="grid-3col-vertical">
@@ -462,9 +561,7 @@
       <!-- 1. Demis S/S -->
       <div class="photo-card-vertical" data-aos="zoom-in">
         <a href="editorial1demis.html">
-          <!-- placeholder vertical image (soft gradient) — replace with your own -->
-          <img src="images/04editorial/editorial1.jpg"
-               alt="Demis S/S" class="photo-img">
+          <img src="images/04editorial/editorial1.jpg" alt="Demis S/S" class="photo-img">
           <div class="card-overlay-vertical">
             <span class="card-title-vertical">Demis S/S</span>
           </div>
@@ -474,8 +571,7 @@
       <!-- 2. Zaza -->
       <div class="photo-card-vertical" data-aos="zoom-in" data-aos-delay="50">
         <a href="editorial2zaza.html">
-          <img src="images/04editorial/editorial2.jpg"
-               alt="Zaza" class="photo-img">
+          <img src="images/04editorial/editorial2.jpg" alt="Zaza" class="photo-img">
           <div class="card-overlay-vertical">
             <span class="card-title-vertical">Zaza</span>
           </div>
@@ -485,19 +581,17 @@
       <!-- 3. Demis F/W -->
       <div class="photo-card-vertical" data-aos="zoom-in" data-aos-delay="100">
         <a href="editorial3demisfw.html">
-          <img src="images/04editorial/editorial3.jpg"
-               alt="Demis F/W" class="photo-img">
+          <img src="images/04editorial/editorial3.jpg" alt="Demis F/W" class="photo-img">
           <div class="card-overlay-vertical">
             <span class="card-title-vertical">Demis F/W</span>
           </div>
         </a>
       </div>
 
-    <!-- 4. Fan Park -->
+      <!-- 4. Fan Park -->
       <div class="photo-card-vertical" data-aos="zoom-in">
         <a href="editorial4fanpark.html">
-          <img src="images/04editorial/editorial4.jpg"
-               alt="Fan Park" class="photo-img">
+          <img src="images/04editorial/editorial4.jpg" alt="Fan Park" class="photo-img">
           <div class="card-overlay-vertical">
             <span class="card-title-vertical">Fan Park</span>
           </div>
@@ -507,8 +601,7 @@
       <!-- 5. Perfect Red -->
       <div class="photo-card-vertical" data-aos="zoom-in">
         <a href="editorial5perfectred.html">
-          <img src="images/04editorial/editorial5.jpg"
-               alt="Perfect Red" class="photo-img">
+          <img src="images/04editorial/editorial5.jpg" alt="Perfect Red" class="photo-img">
           <div class="card-overlay-vertical">
             <span class="card-title-vertical">Perfect Red</span>
           </div>
@@ -518,8 +611,7 @@
       <!-- 6. Concrete reverie -->
       <div class="photo-card-vertical" data-aos="zoom-in" data-aos-delay="50">
         <a href="editorial6concrete.html">
-          <img src="images/04editorial/editorial6.jpg"
-               alt="Concrete reverie" class="photo-img">
+          <img src="images/04editorial/editorial6.jpg" alt="Concrete reverie" class="photo-img">
           <div class="card-overlay-vertical">
             <span class="card-title-vertical">Concrete reverie</span>
           </div>
@@ -529,8 +621,7 @@
       <!-- 7. Snik -->
       <div class="photo-card-vertical" data-aos="zoom-in" data-aos-delay="100">
         <a href="editorial7snik.html">
-          <img src="images/04editorial/editorial7.jpg"
-               alt="Snik" class="photo-img">
+          <img src="images/04editorial/editorial7.jpg" alt="Snik" class="photo-img">
           <div class="card-overlay-vertical">
             <span class="card-title-vertical">Snik</span>
           </div>
@@ -540,19 +631,17 @@
       <!-- 8. Sin‑v‑ner -->
       <div class="photo-card-vertical" data-aos="zoom-in" data-aos-delay="150">
         <a href="editorial8sinvner.html">
-          <img src="images/04editorial/editorial8.jpg"
-               alt="Sin‑v‑ner" class="photo-img">
+          <img src="images/04editorial/editorial8.jpg" alt="Sin‑v‑ner" class="photo-img">
           <div class="card-overlay-vertical">
             <span class="card-title-vertical">Sin‑v‑ner</span>
           </div>
         </a>
       </div>
 
-       <!-- 9. KvD -->
+      <!-- 9. KvD -->
       <div class="photo-card-vertical" data-aos="zoom-in" data-aos-delay="150">
         <a href="editorial9kvd.html">
-          <img src="images/04editorial/editorial9.jpg"
-               alt="KvD" class="photo-img">
+          <img src="images/04editorial/editorial9.jpg" alt="KvD" class="photo-img">
           <div class="card-overlay-vertical">
             <span class="card-title-vertical">KvD</span>
           </div>
@@ -562,21 +651,17 @@
       <!-- 10. Urban Keys -->
       <div class="photo-card-vertical" data-aos="zoom-in" data-aos-delay="50">
         <a href="editorial10urbankeys.html">
-          <img src="images/04editorial/editorial10.jpg"
-               alt="Urban Keys" class="photo-img">
+          <img src="images/04editorial/editorial10.jpg" alt="Urban Keys" class="photo-img">
           <div class="card-overlay-vertical">
             <span class="card-title-vertical">Urban Keys</span>
           </div>
         </a>
       </div>
-      
-      
-      
 
-    </div> <!-- end grid-3col-vertical -->
+    </div>
   </section>
 
-  <!-- ========== EXACT FOOTER (from your original) ========== -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-column">
@@ -604,7 +689,8 @@
           <li><a href="about.html">Σχετικά με εμάς</a></li>
           <li><a href="packages.html">Πακέτα & Τιμές</a></li>
           <li><a href="editing.html">Υπηρεσίες Editing</a></li>
-          <li><a href="https://chromanest.blogspot.com">Blog</a></li>        </ul>
+          <li><a href="https://chromanest.blogspot.com">Blog</a></li>
+        </ul>
       </div>
       <div class="footer-column">
         <h3>Επικοινωνία</h3>
@@ -620,10 +706,90 @@
     </div>
   </footer>
 
-  <!-- AOS script (from original) -->
+  <!-- AOS script -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 800, once: true });
+
+    // Mobile menu functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    // Toggle mobile menu
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navMenu.classList.toggle('show');
+      
+      // Close all dropdowns when closing main menu
+      if (!navMenu.classList.contains('show')) {
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) menu.classList.remove('show');
+        });
+      }
+    });
+
+    // Handle dropdown toggle clicks on mobile (arrow only)
+    dropdowns.forEach(dropdown => {
+      const toggle = dropdown.querySelector('.dropdown-toggle');
+      const menu = dropdown.querySelector('.dropdown-menu');
+      
+      if (toggle) {
+        toggle.addEventListener('click', (e) => {
+          // Only handle on mobile
+          if (window.innerWidth <= 768) {
+            e.preventDefault(); // Prevent navigation
+            e.stopPropagation();
+            
+            // Close other dropdowns
+            dropdowns.forEach(otherDropdown => {
+              if (otherDropdown !== dropdown) {
+                otherDropdown.classList.remove('active');
+                const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                if (otherMenu) otherMenu.classList.remove('show');
+              }
+            });
+            
+            // Toggle current dropdown
+            dropdown.classList.toggle('active');
+            menu.classList.toggle('show');
+          }
+        });
+      }
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+          navMenu.classList.remove('show');
+          dropdowns.forEach(dropdown => {
+            dropdown.classList.remove('active');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            if (menu) menu.classList.remove('show');
+          });
+        }
+      }
+    });
+
+    // Prevent clicks inside nav menu from closing it
+    navMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        navMenu.classList.remove('show');
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) menu.classList.remove('show');
+        });
+      }
+    });
   </script>
 </body>
 </html>
