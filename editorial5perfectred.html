@@ -30,7 +30,7 @@
       background-color: #fff;
     }
 
-    /* === NAVBAR (exactly as provided) === */
+    /* === NAVBAR WITH MOBILE MENU === */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -77,10 +77,33 @@
       color: #333;
       font-weight: 500;
       transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .nav-link:hover {
       color: #888;
+    }
+
+    /* Dropdown toggle - hidden on desktop */
+    .dropdown-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.7rem;
+      transition: transform 0.3s;
+      width: 24px;
+      height: 24px;
+    }
+
+    .dropdown-toggle::after {
+      content: '▼';
+    }
+
+    .dropdown.active .dropdown-toggle {
+      transform: rotate(180deg);
     }
 
     .dropdown-menu {
@@ -91,36 +114,39 @@
       background-color: #fff;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       list-style: none;
-      min-width: 180px;
+      min-width: 220px;
       padding: 0.5rem 0;
       z-index: 1000;
-       /* NEW: Scroll functionality */
-  max-height: 80vh;        /* Limits height to 80% of viewport */
-  overflow-y: auto;        /* Enables vertical scrolling when needed */
-  scrollbar-width: thin;   /* Makes scrollbar thinner (Firefox) */
-  scrollbar-color: #888 #f0f0f0; /* Scrollbar colors (Firefox) */
+      /* Scroll functionality */
+      max-height: 80vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #888 #f0f0f0;
     }
     
-    /* NEW: Webkit scrollbar styling */
-.dropdown-menu::-webkit-scrollbar {
-  width: 6px;              /* Scrollbar width */
-}
+    /* Webkit scrollbar styling */
+    .dropdown-menu::-webkit-scrollbar {
+      width: 6px;
+    }
 
-.dropdown-menu::-webkit-scrollbar-track {
-  background: #f0f0f0;     /* Track background */
-}
+    .dropdown-menu::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
 
-.dropdown-menu::-webkit-scrollbar-thumb {
-  background-color: #888;  /* Scrollbar handle color */
-  border-radius: 6px;      /* Rounded corners */
-}
+    .dropdown-menu::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 6px;
+    }
 
-.dropdown-menu::-webkit-scrollbar-thumb:hover {
-  background-color: #555;  /* Darker color on hover */
-}
+    .dropdown-menu::-webkit-scrollbar-thumb:hover {
+      background-color: #555;
+    }
 
-    .dropdown:hover .dropdown-menu {
-      display: block;
+    /* Desktop hover functionality */
+    @media (min-width: 769px) {
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
     }
 
     .dropdown-menu li {
@@ -133,17 +159,162 @@
       color: #333;
       text-decoration: none;
       transition: background-color 0.3s;
-       white-space: nowrap;      /* NEW: Prevents text wrapping on desktop */
+      white-space: nowrap;
     }
 
     .dropdown-menu a:hover {
       background-color: #f5f5f5;
     }
 
+    /* ========= MOBILE STYLES ========= */
+    @media (max-width: 768px) {
+      /* Show dropdown toggle only on mobile */
+      .dropdown-toggle {
+        display: inline-flex;
+      }
+      
+      /* Transform navbar for mobile */
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+        position: relative;
+      }
+      
+      /* Hamburger menu */
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        cursor: pointer;
+        font-size: 1.5rem;
+        z-index: 1001;
+      }
+      
+      /* Mobile menu - hidden by default */
+      .nav-menu {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+        display: none;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      
+      .nav-menu.show {
+        display: flex;
+      }
+      
+      /* Mobile nav items */
+      .nav-item {
+        width: 100%;
+        margin: 0.25rem 0;
+      }
+      
+      .nav-link {
+        padding: 0.75rem 0;
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      /* Transform dropdown for mobile */
+      .dropdown-menu {
+        position: static;
+        max-height: 0;
+        width: 100%;
+        box-shadow: none;
+        background-color: #f9f9f9;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+        padding: 0;
+        margin: 0;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+      }
+      
+      .dropdown-menu.show {
+        max-height: 1000px;
+        padding: 0.5rem 0;
+        opacity: 1;
+        visibility: visible;
+        display: block;
+      }
+      
+      .dropdown-menu a {
+        white-space: normal;
+        padding-left: 2rem;
+        font-size: 0.95rem;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .dropdown-menu li:last-child a {
+        border-bottom: none;
+      }
+      
+      /* Better touch targets */
+      .dropdown-toggle {
+        width: 44px;
+        height: 44px;
+        margin: -10px -10px -10px 0;
+        padding: 10px;
+        position: relative;
+        z-index: 2;
+      }
+      
+      .nav-link {
+        position: relative;
+        z-index: 1;
+      }
+      
+      /* Logo size for mobile */
+      .logo img {
+        height: 40px;
+        width: 160px;
+      }
+      
+      /* Footer responsive */
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      /* Carousel adjustments */
+      .strip-item img {
+        max-height: 50vh;
+      }
+      
+      .project-title {
+        font-size: 2.2rem;
+        margin-top: 0.5rem;
+      }
+      
+      .carousel-section {
+        margin: 1.5rem auto 2rem;
+      }
+      
+      .lightbox-nav button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.8rem;
+      }
+      
+      .scroll-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+
     /* === FILM-STRIP CAROUSEL === */
     .carousel-section {
       max-width: 1400px;
-      margin: 2rem auto 3rem;  /* Reduced top margin from 3rem to 2rem */
+      margin: 2rem auto 3rem;
       padding: 0 5%;
     }
 
@@ -151,20 +322,20 @@
       text-align: center;
       font-size: 2.8rem;
       font-weight: 300;
-      margin-bottom: 0.25rem;  /* Reduced from 0.5rem */
+      margin-bottom: 0.25rem;
       color: #222;
       letter-spacing: 1px;
       font-family: 'Courier New', Courier, monospace;
-      line-height: 1.2;        /* Tighter line height */
+      line-height: 1.2;
     }
 
     .project-sub {
       text-align: center;
       font-size: 1.1rem;
       color: #6f6f6f;
-      margin-bottom: 1.5rem;    /* Reduced from 2.5rem */
+      margin-bottom: 1.5rem;
       border-bottom: 1px solid #eee;
-      padding-bottom: 1rem;      /* Reduced from 1.2rem */
+      padding-bottom: 1rem;
     }
 
     .strip-wrapper {
@@ -172,7 +343,7 @@
       width: 100%;
       background: #fff;
       border-radius: 0px;
-      padding: 0.5rem 0 0 0;     /* Reduced top padding */
+      padding: 0.5rem 0 0 0;
     }
 
     .strip-scroll {
@@ -180,15 +351,13 @@
       overflow-x: auto;
       gap: 1.2rem;
       scroll-behavior: smooth;
-      padding: 0.5rem 0.2rem 1rem 0.2rem;  /* Reduced vertical padding */
+      padding: 0.5rem 0.2rem 1rem 0.2rem;
       cursor: grab;
       align-items: center;
-      /* Remove min-height - let content determine height */
     }
 
-    /* Remove the vertical scrollbar completely */
     .strip-scroll::-webkit-scrollbar {
-      height: 6px;  /* Slightly thinner */
+      height: 6px;
     }
     
     .strip-scroll::-webkit-scrollbar-track {
@@ -200,7 +369,6 @@
       border-radius: 0px;
     }
     
-    /* For Firefox */
     .strip-scroll {
       scrollbar-width: thin;
       scrollbar-color: #b0b0b0 #eaeaea;
@@ -234,37 +402,9 @@
       pointer-events: none;
     }
 
-    /* Mobile-specific adjustments */
-    @media (max-width: 768px) {
-      .strip-item img {
-        max-height: 50vh;  /* Slightly smaller on mobile */
-      }
-      
-      .project-title {
-        font-size: 2.2rem;
-        margin-top: 0.5rem;
-      }
-      
-      .carousel-section {
-        margin: 1.5rem auto 2rem;  /* Even smaller margins on mobile */
-      }
-       /* NEW: Mobile dropdown styles */
-  .dropdown-menu {
-    position: static;       /* Removes absolute positioning on mobile */
-    max-height: 300px;      /* Fixed max height for mobile */
-    width: 100%;            /* Full width */
-    box-shadow: none;       /* Removes shadow */
-    background-color: #f9f9f9; /* Lighter background */
-  }
-  
-  .dropdown-menu a {
-    white-space: normal;    /* Allows text wrapping on mobile */
-  }
-    }
-
     @media (max-width: 576px) {
       .strip-item img {
-        max-height: 45vh;  /* Smaller on phones */
+        max-height: 45vh;
       }
       
       .project-title {
@@ -278,7 +418,7 @@
       }
       
       .strip-scroll {
-        gap: 0.8rem;  /* Smaller gap on mobile */
+        gap: 0.8rem;
       }
     }
 
@@ -286,7 +426,7 @@
       display: flex;
       justify-content: center;
       gap: 2rem;
-      margin: 1rem 0 1.5rem;  /* Reduced from 1.5rem 0 2rem */
+      margin: 1rem 0 1.5rem;
     }
 
     .scroll-arrow {
@@ -314,7 +454,7 @@
       text-align: center;
       font-size: 0.95rem;
       color: #777;
-      margin-top: 0.25rem;  /* Reduced from 0.5rem */
+      margin-top: 0.25rem;
     }
 
     /* === LIGHTBOX / BLACKBOX STYLES === */
@@ -412,12 +552,12 @@
       letter-spacing: 1px;
     }
 
-    /* === FOOTER (identical to original) === */
+    /* === FOOTER === */
     .footer {
       background-color: #eee;
       color: #4f4f4f;
       padding: 60px 5% 30px;
-      margin-top: 2rem;  /* Reduced from 3rem */
+      margin-top: 2rem;
     }
 
     .footer-content {
@@ -493,45 +633,6 @@
       color: #888;
     }
 
-    /* === RESPONSIVE (updated) === */
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        padding: 1rem 5%;
-      }
-
-      .nav-menu {
-        margin-top: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .nav-item {
-        margin: 0.5rem;
-      }
-
-      .footer-content {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .logo img {
-        height: 40px;
-        width: 160px;
-      }
-      
-      .lightbox-nav button {
-        width: 40px;
-        height: 40px;
-        font-size: 1.8rem;
-      }
-      
-      .scroll-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 1.6rem;
-      }
-    }
-
     @media (max-width: 576px) {
       .footer-content {
         grid-template-columns: 1fr;
@@ -556,18 +657,24 @@
 </head>
 <body>
 
-  <!-- ========== EXACT NAVBAR ========== -->
+  <!-- ========== NAVBAR WITH HAMBURGER MENU ========== -->
   <nav class="navbar">
     <div class="logo">
       <a href="index.html">
         <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
       </a>
     </div>
-    <ul class="nav-menu">
+    <div class="menu-toggle" id="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-menu" id="nav-menu">
       <li class="nav-item"><a href="index.html" class="nav-link">Αρχική</a></li>
       <li class="nav-item"><a href="about.html" class="nav-link">Σχετικά</a></li>
       <li class="nav-item dropdown">
-        <a href="commercial.html" class="nav-link">Commercial</a>
+        <a href="commercial.html" class="nav-link">
+          Commercial
+          <span class="dropdown-toggle"></span>
+        </a>
         <ul class="dropdown-menu">
           <li><a href="portraits.html">Πορτραίτα</a></li>
           <li><a href="proportraits.html">Επαγγελματικά πορτραίτα</a></li>
@@ -595,42 +702,33 @@
     </ul>
   </nav>
 
-  <!-- ========== Fan Park – FILM STRIP CAROUSEL ========== -->
+  <!-- ========== Perfect Red – FILM STRIP CAROUSEL ========== -->
   <section class="carousel-section" data-aos="fade-up">
     <h1 class="project-title">Perfect Red</h1>
     <div class="project-sub">-  -</div>
 
     <div class="strip-wrapper" data-aos="fade-up" data-aos-delay="80">
-      <!-- scrollable strip with gap -->
       <div class="strip-scroll" id="stripScroll">
-        <!-- image 1 – horizontal (16:9) -->
         <div class="strip-item" data-index="0">
           <img src="images/04editorial/5perfectred/perfectred1.jpg" alt="perfectred horizontal 1">
         </div>
-        <!-- image 2 – vertical (3:4) -->
         <div class="strip-item" data-index="1">
           <img src="images/04editorial/5perfectred/perfectred2.jpg" alt="perfectred vertical 2">
         </div>
-        <!-- image 3 – horizontal (16:9) -->
         <div class="strip-item" data-index="2">
           <img src="images/04editorial/5perfectred/perfectred3.jpg" alt="perfectred horizontal 3">
         </div>
-        <!-- image 4 – vertical (2:3) -->
         <div class="strip-item" data-index="3">
           <img src="images/04editorial/5perfectred/perfectred4.jpg" alt="perfectred vertical 4">
         </div>
-        <!-- image 5 – horizontal (3:2) -->
         <div class="strip-item" data-index="4">
           <img src="images/04editorial/5perfectred/perfectred5.jpg" alt="perfectred horizontal 5">
         </div>
-        <!-- image 6 – vertical (4:5) -->
         <div class="strip-item" data-index="5">
           <img src="images/04editorial/5perfectred/perfectred6.jpg" alt="perfectred vertical 6">
         </div>
-                       
       </div>
 
-      <!-- left / right arrow buttons to scroll -->
       <div class="scroll-arrows">
         <button class="scroll-arrow" id="scrollLeft" aria-label="scroll left"><i class="fas fa-chevron-left"></i></button>
         <button class="scroll-arrow" id="scrollRight" aria-label="scroll right"><i class="fas fa-chevron-right"></i></button>
@@ -655,7 +753,7 @@
     <div class="lightbox-counter" id="lightboxCounter"></div>
   </div>
 
-  <!-- ========== FOOTER  ========== -->
+  <!-- ========== FOOTER ========== -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-column">
@@ -671,7 +769,7 @@
       <div class="footer-column">
         <h3>Υπηρεσίες</h3>
         <ul>
-           <li><a href="commercial.html">Commercial Φωτογραφία</a></li>
+          <li><a href="commercial.html">Commercial Φωτογραφία</a></li>
           <li><a href="portraits.html">Πορτραίτα</a></li>
           <li><a href="wedding.html">Γάμος</a></li>
           <li><a href="baptism.html">Βάπτιση</a></li>
@@ -684,7 +782,7 @@
           <li><a href="packages.html">Πακέτα & Τιμές</a></li>
           <li><a href="editing.html">Υπηρεσίες Editing</a></li>
           <li><a href="https://chromanest.blogspot.com">Blog</a></li>
-                  </ul>
+        </ul>
       </div>
       <div class="footer-column">
         <h3>Επικοινωνία</h3>
@@ -703,10 +801,90 @@
   <!-- AOS script -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   
-  <!-- Combined script for arrow scrolling + lightbox -->
+  <!-- Combined script for arrow scrolling + lightbox + mobile menu -->
   <script>
     (function() {
       AOS.init({ duration: 800, once: true });
+
+      // ===== MOBILE MENU FUNCTIONALITY =====
+      const menuToggle = document.getElementById('menu-toggle');
+      const navMenu = document.getElementById('nav-menu');
+      const dropdowns = document.querySelectorAll('.dropdown');
+
+      // Toggle mobile menu
+      menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navMenu.classList.toggle('show');
+        
+        // Close all dropdowns when closing main menu
+        if (!navMenu.classList.contains('show')) {
+          dropdowns.forEach(dropdown => {
+            dropdown.classList.remove('active');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            if (menu) menu.classList.remove('show');
+          });
+        }
+      });
+
+      // Handle dropdown toggle clicks on mobile (arrow only)
+      dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        
+        if (toggle) {
+          toggle.addEventListener('click', (e) => {
+            // Only handle on mobile
+            if (window.innerWidth <= 768) {
+              e.preventDefault(); // Prevent navigation
+              e.stopPropagation();
+              
+              // Close other dropdowns
+              dropdowns.forEach(otherDropdown => {
+                if (otherDropdown !== dropdown) {
+                  otherDropdown.classList.remove('active');
+                  const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                  if (otherMenu) otherMenu.classList.remove('show');
+                }
+              });
+              
+              // Toggle current dropdown
+              dropdown.classList.toggle('active');
+              menu.classList.toggle('show');
+            }
+          });
+        }
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+          if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            navMenu.classList.remove('show');
+            dropdowns.forEach(dropdown => {
+              dropdown.classList.remove('active');
+              const menu = dropdown.querySelector('.dropdown-menu');
+              if (menu) menu.classList.remove('show');
+            });
+          }
+        }
+      });
+
+      // Prevent clicks inside nav menu from closing it
+      navMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+          navMenu.classList.remove('show');
+          dropdowns.forEach(dropdown => {
+            dropdown.classList.remove('active');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            if (menu) menu.classList.remove('show');
+          });
+        }
+      });
 
       // ===== SCROLL ARROWS =====
       const strip = document.getElementById('stripScroll');
@@ -735,7 +913,6 @@
       const lightboxNext = document.getElementById('lightboxNext');
       const lightboxCounter = document.getElementById('lightboxCounter');
       
-      // Get all strip items (which contain the images)
       const items = Array.from(document.querySelectorAll('.strip-item'));
       const imageSources = items.map(item => {
         const img = item.querySelector('img');
@@ -747,51 +924,44 @@
 
       let currentIndex = 0;
 
-      // Open lightbox
       items.forEach((item, index) => {
         item.addEventListener('click', () => {
           currentIndex = index;
           updateLightboxImage();
           lightbox.classList.add('active');
-          document.body.style.overflow = 'hidden'; // Prevent scrolling
+          document.body.style.overflow = 'hidden';
         });
       });
 
-      // Update lightbox image and counter
       function updateLightboxImage() {
         lightboxImage.src = imageSources[currentIndex].src;
         lightboxImage.alt = imageSources[currentIndex].alt;
         lightboxCounter.textContent = `${currentIndex + 1} / ${imageSources.length}`;
       }
 
-      // Close lightbox
       function closeLightbox() {
         lightbox.classList.remove('active');
-        document.body.style.overflow = ''; // Restore scrolling
+        document.body.style.overflow = '';
       }
 
       lightboxClose.addEventListener('click', closeLightbox);
 
-      // Click outside to close (click on lightbox background)
       lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) {
           closeLightbox();
         }
       });
 
-      // Previous image
       lightboxPrev.addEventListener('click', () => {
         currentIndex = (currentIndex - 1 + imageSources.length) % imageSources.length;
         updateLightboxImage();
       });
 
-      // Next image
       lightboxNext.addEventListener('click', () => {
         currentIndex = (currentIndex + 1) % imageSources.length;
         updateLightboxImage();
       });
 
-      // Keyboard navigation
       document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('active')) return;
         

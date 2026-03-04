@@ -11,8 +11,7 @@
   <link rel="shortcut icon" href="images/Favicon/favicon.ico">
   
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
-<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   
   <style>
     /* Reset and base styles */
@@ -29,7 +28,7 @@
       background-color: #fff;
     }
     
-    /* Navbar styles */
+    /* Navbar styles with mobile menu */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -76,10 +75,33 @@
       color: #333;
       font-weight: 500;
       transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
     
     .nav-link:hover {
       color: #888;
+    }
+    
+    /* Dropdown toggle - hidden on desktop */
+    .dropdown-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.7rem;
+      transition: transform 0.3s;
+      width: 24px;
+      height: 24px;
+    }
+
+    .dropdown-toggle::after {
+      content: '▼';
+    }
+
+    .dropdown.active .dropdown-toggle {
+      transform: rotate(180deg);
     }
     
     .dropdown-menu {
@@ -90,35 +112,39 @@
       background-color: #fff;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       list-style: none;
-      min-width: 180px;
+      min-width: 220px;
       padding: 0.5rem 0;
       z-index: 1000;
-      /* NEW: Scroll functionality */
-  max-height: 80vh;        /* Limits height to 80% of viewport */
-  overflow-y: auto;        /* Enables vertical scrolling when needed */
-  scrollbar-width: thin;   /* Makes scrollbar thinner (Firefox) */
-  scrollbar-color: #888 #f0f0f0; /* Scrollbar colors (Firefox) */
+      /* Scroll functionality */
+      max-height: 80vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #888 #f0f0f0;
     }
-    /* NEW: Webkit scrollbar styling */
-.dropdown-menu::-webkit-scrollbar {
-  width: 6px;              /* Scrollbar width */
-}
-
-.dropdown-menu::-webkit-scrollbar-track {
-  background: #f0f0f0;     /* Track background */
-}
-
-.dropdown-menu::-webkit-scrollbar-thumb {
-  background-color: #888;  /* Scrollbar handle color */
-  border-radius: 6px;      /* Rounded corners */
-}
-
-.dropdown-menu::-webkit-scrollbar-thumb:hover {
-  background-color: #555;  /* Darker color on hover */
-}
     
-    .dropdown:hover .dropdown-menu {
-      display: block;
+    /* Webkit scrollbar styling */
+    .dropdown-menu::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .dropdown-menu::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+
+    .dropdown-menu::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 6px;
+    }
+
+    .dropdown-menu::-webkit-scrollbar-thumb:hover {
+      background-color: #555;
+    }
+    
+    /* Desktop hover functionality */
+    @media (min-width: 769px) {
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
     }
     
     .dropdown-menu li {
@@ -131,11 +157,189 @@
       color: #333;
       text-decoration: none;
       transition: background-color 0.3s;
-      white-space: nowrap;      /* NEW: Prevents text wrapping on desktop */
+      white-space: nowrap;
     }
     
     .dropdown-menu a:hover {
       background-color: #f5f5f5;
+    }
+    
+    /* ========= MOBILE STYLES ========= */
+    @media (max-width: 768px) {
+      /* Show dropdown toggle only on mobile */
+      .dropdown-toggle {
+        display: inline-flex;
+      }
+      
+      /* Transform navbar for mobile */
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+        position: relative;
+      }
+      
+      /* Hamburger menu */
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        cursor: pointer;
+        font-size: 1.5rem;
+        z-index: 1001;
+      }
+      
+      /* Mobile menu - hidden by default */
+      .nav-menu {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+        display: none;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      
+      .nav-menu.show {
+        display: flex;
+      }
+      
+      /* Mobile nav items */
+      .nav-item {
+        width: 100%;
+        margin: 0.25rem 0;
+      }
+      
+      .nav-link {
+        padding: 0.75rem 0;
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      /* Transform dropdown for mobile */
+      .dropdown-menu {
+        position: static;
+        max-height: 0;
+        width: 100%;
+        box-shadow: none;
+        background-color: #f9f9f9;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+        padding: 0;
+        margin: 0;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+      }
+      
+      .dropdown-menu.show {
+        max-height: 1000px;
+        padding: 0.5rem 0;
+        opacity: 1;
+        visibility: visible;
+        display: block;
+      }
+      
+      .dropdown-menu a {
+        white-space: normal;
+        padding-left: 2rem;
+        font-size: 0.95rem;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .dropdown-menu li:last-child a {
+        border-bottom: none;
+      }
+      
+      /* Better touch targets */
+      .dropdown-toggle {
+        width: 44px;
+        height: 44px;
+        margin: -10px -10px -10px 0;
+        padding: 10px;
+        position: relative;
+        z-index: 2;
+      }
+      
+      .nav-link {
+        position: relative;
+        z-index: 1;
+      }
+      
+      /* Logo size for mobile */
+      .logo img {
+        height: 40px;
+        width: 160px;
+      }
+      
+      /* Footer responsive */
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      /* Content section responsive */
+      .content-section {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      
+      .explore-section {
+        text-align: center;
+      }
+      
+      .explore-links {
+        align-items: center;
+      }
+      
+      .list-item {
+        width: fit-content;
+      }
+      
+      .hover-image {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 85vw;
+      }
+      
+      .list-item:hover {
+        margin-top: 160px;
+      }
+    }
+
+    /* Hide hover images on mobile devices - NEW FIX */
+    @media (max-width: 768px) {
+      .list-item:hover {
+        margin-bottom: 0; /* Reset margin on hover */
+        margin-top: 0; /* Reset margin on hover */
+      }
+      
+      .list-item:hover .hover-image {
+        max-height: 0; /* Hide the image */
+        opacity: 0; /* Make it invisible */
+        margin-bottom: 0; /* Remove any margin */
+        display: none; /* Ensure it doesn't take up space */
+      }
+      
+      /* Also hide hover images for any other hover states */
+      .hover-image {
+        display: none !important; /* Force hide on mobile */
+      }
+      
+      /* Prevent any hover effects on mobile */
+      .list-item, .list-item2 {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+      }
+      
+      /* Ensure links don't shift on tap/hover */
+      .explore-link {
+        pointer-events: auto;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
     }
     
     /* COMING SOON SECTION */
@@ -173,7 +377,6 @@
       justify-content: center;
     }
     
-    /* Restored original photo container */
     .photo-container {
       max-width: 100%;
       width: 100%;
@@ -194,7 +397,6 @@
       object-fit: cover;
     }
     
-    /* EXPLORE SECTION — image appears with plenty of space above */
     .explore-section {
       flex: 1;
       margin-top: 0;
@@ -213,15 +415,13 @@
       text-align: center;
     }
     
-    /* List container: use flex column with overflow visible */
     .explore-links {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem; /* base gap between items */
+      gap: 0.6rem;
       overflow: visible;
     }
     
-    /* Each item wrapper */
     .list-item {
       position: relative;
       width: 100%;
@@ -238,7 +438,6 @@
       text-align: center;
     }
     
-    /* The actual link */
     .explore-link {
       display: inline-block;
       padding: 0.4rem 0;
@@ -262,10 +461,9 @@
       pointer-events: none;
     }
     
-    /* Image container: sits above the link */
     .hover-image {
       position: absolute;
-      top: 100%;           /* directly above the link */
+      top: 100%;
       left: 0;
       width: 100%;
       max-height: 0;
@@ -281,7 +479,7 @@
       display: block;
       width: 100%;
       height: auto;
-      max-height: 140px;      /* horizontal image height */
+      max-height: 140px;
       object-fit: cover;
       object-position: center 30%;
       border-radius: 0;
@@ -289,38 +487,22 @@
       background: #fff;
     }
     
-    /* ----- AMPLE SPACING: push the item down so image fits without overlap ----- */
     .list-item:hover {
-      /* create enough space above for the image + some air */
-      margin-bottom: 150px;       /* image ~140px + 10px gap */
-      margin-top: 0px;     /* extra breathing room below */
+      margin-bottom: 150px;
+      margin-top: 0px;
     }
     
-    /* reveal the image */
     .list-item:hover .hover-image {
-      max-height: 150px;       /* allow full image height */
+      max-height: 150px;
       opacity: 1;
-      margin-bottom: 12px;     /* gap between image and link */
+      margin-bottom: 12px;
     }
     
-    /* underline effect */
-    .list-item:hover .explore-link {
-     /* border-bottom: 1px solid #e0e0e0;*/
-     /* color: #000;*/
-     /* margin-bottom: 2px;*/
-    }
-    
-    /* First item needs extra margin-top to appear below the heading */
-    .list-item:first-child:hover {
-      margin-bottom: 150px;       /* image appears between H2 and first link */
-    }
-    
-    /* ensure nothing gets clipped */
     .explore-section, .explore-links, .list-item {
       overflow: visible;
     }
     
-    /* Footer unchanged */
+    /* Footer */
     .footer {
       background-color: #eee;
       color: #4f4f4f;
@@ -400,73 +582,6 @@
       color: #888;
     }
     
-    /* Responsive */
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        padding: 1rem 5%;
-      }
-      
-      .nav-menu {
-        margin-top: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .nav-item {
-        margin: 0.5rem;
-      }
-      
-      .footer-content {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .content-section {
-        flex-direction: column;
-        gap: 2rem;
-      }
-      
-      .explore-section {
-        text-align: center;
-      }
-      
-      .explore-links {
-        align-items: center;
-      }
-      
-      .list-item {
-        width: fit-content;
-      }
-      
-      .hover-image {
-        left: 50%;
-        transform: translateX(-50%);
-        width: 85vw;
-      }
-      
-      .list-item:hover {
-        margin-top: 160px;    /* a bit more on mobile */
-      }
-      
-      .logo img {
-        height: 40px;
-        width: 160px;
-      }
-      
-      /* NEW: Mobile dropdown styles */
-  .dropdown-menu {
-    position: static;       /* Removes absolute positioning on mobile */
-    max-height: 300px;      /* Fixed max height for mobile */
-    width: 100%;            /* Full width */
-    box-shadow: none;       /* Removes shadow */
-    background-color: #f9f9f9; /* Lighter background */
-  }
-  
-  .dropdown-menu a {
-    white-space: normal;    /* Allows text wrapping on mobile */
-  }
-    }
-    
     @media (max-width: 576px) {
       .footer-content {
         grid-template-columns: 1fr;
@@ -480,20 +595,26 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR with hamburger menu and clickable dropdown arrow -->
   <nav class="navbar">
     <div class="logo">
       <a href="index.html">
         <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
       </a>
     </div>
-    <ul class="nav-menu">
+    <div class="menu-toggle" id="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-menu" id="nav-menu">
       <li class="nav-item"><a href="index.html" class="nav-link">Αρχική</a></li>
       <li class="nav-item"><a href="about.html" class="nav-link">Σχετικά</a></li>
       <li class="nav-item dropdown">
-        <a href="commercial.html" class="nav-link">Commercial</a>
+        <a href="commercial.html" class="nav-link">
+          Commercial
+          <span class="dropdown-toggle"></span>
+        </a>
         <ul class="dropdown-menu">
-         <li><a href="portraits.html">Πορτραίτα</a></li>
+          <li><a href="portraits.html">Πορτραίτα</a></li>
           <li><a href="proportraits.html">Επαγγελματικά πορτραίτα</a></li>
           <li><a href="fashioneshops.html">Fashion e-shops</a></li>
           <li><a href="familyportraits.html">Οικογενειακά πορτραίτα</a></li>
@@ -509,7 +630,7 @@
           <li><a href="events.html">Events</a></li>
           <li><a href="hotels.html">Hotels</a></li>
           <li><a href="airbnb.html">Airbnb-Real Estate</a></li>
-                  </ul>
+        </ul>
       </li>
       <li class="nav-item"><a href="wedding.html" class="nav-link">Γάμος</a></li>
       <li class="nav-item"><a href="christening.html" class="nav-link">Βάπτιση</a></li>
@@ -525,7 +646,7 @@
     <p>Δουλεύουμε πάνω σε κάτι όμορφο για την ξεχωριστή σας ημέρα. <br>Το portfolio γαμήλιας φωτογραφίας μας θα είναι σύντομα διαθέσιμο.</p>    
     
     <div class="content-section">
-      <!-- LEFT: original photo container (exactly as first code) -->
+      <!-- LEFT: original photo container -->
       <div class="vertical-photo-section" data-aos="fade-right">
         <div class="photo-container">
           <img src="images/Wedding-imgs/wedding1.jpg" 
@@ -537,7 +658,7 @@
         </div>
       </div>
       
-      <!-- RIGHT: list with ample space above each hovered item -->
+      <!-- RIGHT: list with hover images -->
       <div class="explore-section" data-aos="fade-left">
         <h2>Ανακαλύψτε περισσότερες υπηρεσίες:</h2>
         <div class="explore-links">
@@ -547,7 +668,7 @@
             <div class="hover-image">
               <img src="images/Wedding-imgs/listitems/1baptism.jpg" alt="baptism">
             </div>
-            <a href="baptism.html" class="explore-link"><i class="fa-regular fa-dove" style="color: #e0e0e0;"></i>Βάπτιση</a>
+            <a href="christening.html" class="explore-link"><i class="fa-regular fa-dove" style="color: #e0e0e0;"></i>Βάπτιση</a>
           </div>
           
           <!-- Maternity -->
@@ -607,7 +728,7 @@
     </div>
   </section>
 
-  <!-- FOOTER (identical) -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-column">
@@ -622,11 +743,11 @@
       <div class="footer-column">
         <h3>Υπηρεσίες</h3>
         <ul>
-         <li><a href="commercial.html">Commercial Φωτογραφία</a></li>
+          <li><a href="commercial.html">Commercial Φωτογραφία</a></li>
           <li><a href="portraits.html">Πορτραίτα</a></li>
           <li><a href="wedding.html">Γάμος</a></li>
           <li><a href="baptism.html">Βάπτιση</a></li>
-                  </ul>
+        </ul>
       </div>
       <div class="footer-column">
         <h3>Πληροφορίες</h3>
@@ -635,7 +756,7 @@
           <li><a href="packages.html">Πακέτα & Τιμές</a></li>
           <li><a href="editing.html">Υπηρεσίες Editing</a></li>
           <li><a href="https://chromanest.blogspot.com">Blog</a></li>
-                  </ul>
+        </ul>
       </div>
       <div class="footer-column">
         <h3>Επικοινωνία</h3>
@@ -654,6 +775,87 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000 });
+    
+    // Mobile menu functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    // Toggle mobile menu
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navMenu.classList.toggle('show');
+      
+      // Close all dropdowns when closing main menu
+      if (!navMenu.classList.contains('show')) {
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) menu.classList.remove('show');
+        });
+      }
+    });
+
+    // Handle dropdown toggle clicks on mobile (arrow only)
+    dropdowns.forEach(dropdown => {
+      const toggle = dropdown.querySelector('.dropdown-toggle');
+      const menu = dropdown.querySelector('.dropdown-menu');
+      
+      if (toggle) {
+        toggle.addEventListener('click', (e) => {
+          // Only handle on mobile
+          if (window.innerWidth <= 768) {
+            e.preventDefault(); // Prevent navigation
+            e.stopPropagation();
+            
+            // Close other dropdowns
+            dropdowns.forEach(otherDropdown => {
+              if (otherDropdown !== dropdown) {
+                otherDropdown.classList.remove('active');
+                const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                if (otherMenu) otherMenu.classList.remove('show');
+              }
+            });
+            
+            // Toggle current dropdown
+            dropdown.classList.toggle('active');
+            menu.classList.toggle('show');
+          }
+        });
+      }
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+          navMenu.classList.remove('show');
+          dropdowns.forEach(dropdown => {
+            dropdown.classList.remove('active');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            if (menu) menu.classList.remove('show');
+          });
+        }
+      }
+    });
+
+    // Prevent clicks inside nav menu from closing it
+    navMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        navMenu.classList.remove('show');
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) menu.classList.remove('show');
+        });
+      }
+    });
+
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }

@@ -387,24 +387,53 @@
       transition: opacity 0.25s ease;
     }
 
-    .before-img, .after-img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    /* Desktop styles - before/after hover effect */
+    @media (min-width: 769px) {
+      .before-img, .after-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .after-img {
+        opacity: 0;
+      }
+
+      .grid-card:hover .after-img {
+        opacity: 1;
+      }
+
+      .grid-card:hover .before-img {
+        opacity: 0;
+      }
+      
+      /* Hide GIF container on desktop */
+      .gif-container {
+        display: none;
+      }
     }
 
-    .after-img {
-      opacity: 0;
-    }
-
-    .grid-card:hover .after-img {
-      opacity: 1;
-    }
-
-    .grid-card:hover .before-img {
-      opacity: 0;
+    /* Mobile styles - GIF display */
+    @media (max-width: 768px) {
+      /* Hide before/after containers on mobile */
+      .before-img, .after-img {
+        display: none;
+      }
+      
+      /* Show GIF container */
+      .gif-container {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      
+      .gif-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
     .card-label {
@@ -705,7 +734,7 @@
     </div>
   </section>
 
-  <!-- GRID 28 items (no numbering, bigger photos) -->
+  <!-- GRID 28 items (before/after on desktop, GIFs on mobile) -->
   <section class="editing-grid-section" data-aos="fade-up">
     <h2 class="grid-title">Ενδεικτικές υπηρεσίες επεξεργασίας</h2>
     <div class="image-grid" id="editingGrid"></div>
@@ -921,22 +950,32 @@
 
         const indexStr = i.toString().padStart(2, '0');
         
+        // Desktop: before/after images (from BA folder)
         const beforeDiv = document.createElement('div');
         beforeDiv.className = 'before-img';
         const beforeImg = document.createElement('img');
-        beforeImg.src = `images/Editing/${indexStr}before.jpg`;
+        beforeImg.src = `images/Editing/BA/${indexStr}before.jpg`;
         beforeImg.alt = `before-${i}`;
         beforeDiv.appendChild(beforeImg);
 
         const afterDiv = document.createElement('div');
         afterDiv.className = 'after-img';
         const afterImg = document.createElement('img');
-        afterImg.src = `images/Editing/${indexStr}after.jpg`;
+        afterImg.src = `images/Editing/BA/${indexStr}after.jpg`;
         afterImg.alt = `after-${i}`;
         afterDiv.appendChild(afterImg);
 
+        // Mobile: GIF (from GIF folder)
+        const gifDiv = document.createElement('div');
+        gifDiv.className = 'gif-container';
+        const gifImg = document.createElement('img');
+        gifImg.src = `images/Editing/GIF/${indexStr}.gif`;
+        gifImg.alt = `editing-process-${i}`;
+        gifDiv.appendChild(gifImg);
+
         imgContainer.appendChild(beforeDiv);
         imgContainer.appendChild(afterDiv);
+        imgContainer.appendChild(gifDiv);
 
         const label = document.createElement('div');
         label.className = 'card-label';
@@ -946,10 +985,12 @@
         card.appendChild(label);
         grid.appendChild(card);
 
-        [beforeImg, afterImg].forEach(img => {
+        // Error handling for images
+        [beforeImg, afterImg, gifImg].forEach(img => {
           img.onerror = function() {
             this.style.backgroundColor = '#e0e0e0';
             this.style.opacity = '0.7';
+            console.log(`Failed to load: ${this.src}`);
           };
         });
       }
