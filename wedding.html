@@ -305,32 +305,29 @@
       }
     }
 
-    /* Hide hover images on mobile devices - NEW FIX */
+    /* Hide hover images on mobile devices */
     @media (max-width: 768px) {
       .list-item:hover {
-        margin-bottom: 0; /* Reset margin on hover */
-        margin-top: 0; /* Reset margin on hover */
+        margin-bottom: 0;
+        margin-top: 0;
       }
       
       .list-item:hover .hover-image {
-        max-height: 0; /* Hide the image */
-        opacity: 0; /* Make it invisible */
-        margin-bottom: 0; /* Remove any margin */
-        display: none; /* Ensure it doesn't take up space */
+        max-height: 0;
+        opacity: 0;
+        margin-bottom: 0;
+        display: none;
       }
       
-      /* Also hide hover images for any other hover states */
       .hover-image {
-        display: none !important; /* Force hide on mobile */
+        display: none !important;
       }
       
-      /* Prevent any hover effects on mobile */
       .list-item, .list-item2 {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
       }
       
-      /* Ensure links don't shift on tap/hover */
       .explore-link {
         pointer-events: auto;
       }
@@ -415,31 +412,29 @@
       text-align: center;
     }
     
+    /* CENTERED EXPLORE SECTION STYLES */
     .explore-links {
       display: flex;
       flex-direction: column;
       gap: 0.6rem;
       overflow: visible;
+      align-items: center;
     }
-    
-    .list-item {
+
+    .list-item, .list-item2 {
       position: relative;
       width: 100%;
       transition: margin-top 0.35s ease, margin-bottom 0.35s ease;
       overflow: visible;
       text-align: center;
+      display: flex;
+      justify-content: center;
     }
-    
-    .list-item2 {
-      position: relative;
-      width: 100%;
-      transition: margin-top 0.35s ease, margin-bottom 0.35s ease;
-      overflow: visible;
-      text-align: center;
-    }
-    
+
     .explore-link {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 0.4rem 0;
       color: #2c2c2c;
       text-decoration: none;
@@ -451,14 +446,15 @@
       border-radius: 0;
       width: auto;
       pointer-events: auto;
+      gap: 12px;
     }
     
-    .explore-link i {
-      margin-right: 12px;
-      color: #a17f5f;
+    .custom-icon {
       width: 1.6rem;
-      font-size: 1.2rem;
-      pointer-events: none;
+      height: 1.6rem;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
     }
     
     .hover-image {
@@ -658,7 +654,7 @@
         </div>
       </div>
       
-      <!-- RIGHT: list with hover images -->
+      <!-- RIGHT: list with hover images and custom icons (centered) -->
       <div class="explore-section" data-aos="fade-left">
         <h2>Ανακαλύψτε περισσότερες υπηρεσίες:</h2>
         <div class="explore-links">
@@ -668,7 +664,9 @@
             <div class="hover-image">
               <img src="images/Wedding-imgs/listitems/1baptism.jpg" alt="baptism">
             </div>
-            <a href="christening.html" class="explore-link"><i class="fa-regular fa-dove" style="color: #e0e0e0;"></i>Βάπτιση</a>
+            <a href="christening.html" class="explore-link">
+              <img src="images/icons/baptism-icon.png" alt="" class="custom-icon">Βάπτιση
+            </a>
           </div>
           
           <!-- Maternity -->
@@ -676,7 +674,9 @@
             <div class="hover-image">
               <img src="images/Wedding-imgs/listitems/2maternity.jpg" alt="maternity">
             </div>
-            <a href="maternity.html" class="explore-link"><i class="fa-regular fa-person-pregnant" style="color: #e0e0e0;"></i>Εγκυμοσύνη</a>
+            <a href="maternity.html" class="explore-link">
+              <img src="images/icons/maternity-icon.png" alt="" class="custom-icon">Εγκυμοσύνη
+            </a>
           </div>
           
           <!-- Newborns -->
@@ -684,7 +684,9 @@
             <div class="hover-image">
               <img src="images/Wedding-imgs/listitems/3newborns.jpg" alt="newborns">
             </div>
-            <a href="newborns.html" class="explore-link"><i class="fa-regular fa-baby" style="color: #e0e0e0;"></i>Νεογέννητα</a>
+            <a href="newborns.html" class="explore-link">
+              <img src="images/icons/newborn-icon.png" alt="" class="custom-icon">Νεογέννητα
+            </a>
           </div>
           
           <!-- Family portraits -->
@@ -692,7 +694,9 @@
             <div class="hover-image">
               <img src="images/Wedding-imgs/listitems/4family.jpg" alt="family">
             </div>
-            <a href="familyportraits.html" class="explore-link"><i class="fa-regular fa-users" style="color: #e0e0e0;"></i>Οικογενειακά Πορτραίτα</a>
+            <a href="familyportraits.html" class="explore-link">
+              <img src="images/icons/family-icon.png" alt="" class="custom-icon">Οικογενειακά Πορτραίτα
+            </a>
           </div>
           
           <!-- Portraits -->
@@ -700,7 +704,9 @@
             <div class="hover-image">
               <img src="images/Wedding-imgs/listitems/5portraits.jpg" alt="portrait">
             </div>
-            <a href="portraits.html" class="explore-link"><i class="fa fa-user" aria-hidden="true" style="color: #e0e0e0;"></i>Πορτραίτα</a>
+            <a href="portraits.html" class="explore-link">
+              <img src="images/icons/portrait-icon.png" alt="" class="custom-icon">Πορτραίτα
+            </a>
           </div>
           
           <!-- Couples -->
@@ -708,7 +714,9 @@
             <div class="hover-image">
               <img src="images/Wedding-imgs/listitems/6couples.jpg" alt="couples">
             </div>
-            <a href="couples.html" class="explore-link"><i class="fa fa-heart" aria-hidden="true" style="color: #e0e0e0;"></i>Ζευγάρια</a>
+            <a href="couples.html" class="explore-link">
+              <img src="images/icons/couples-icon.png" alt="" class="custom-icon">Ζευγάρια
+            </a>
           </div>
           
           <!-- Wedding dresses -->
@@ -716,12 +724,16 @@
             <div class="hover-image">
               <img src="images/Wedding-imgs/listitems/7weddingdresses.jpg" alt="wedding dress">
             </div>
-            <a href="weddingdresses.html" class="explore-link"><i class="fa-regular fa-gem" style="color: #e0e0e0;"></i>Νυφικά</a>
+            <a href="weddingdresses.html" class="explore-link">
+              <img src="images/icons/weddingdress-icon.png" alt="" class="custom-icon">Νυφικά
+            </a>
           </div>
           
           <!-- Contact -->
           <div class="list-item2">
-            <a href="contact.html" class="explore-link"><i class="fa-regular fa-phone" style="color: #e0e0e0;"></i>Επικοινωνία</a>
+            <a href="contact.html" class="explore-link">
+              <img src="images/icons/contact-icon.png" alt="" class="custom-icon">Επικοινωνία
+            </a>
           </div>
         </div>
       </div>
