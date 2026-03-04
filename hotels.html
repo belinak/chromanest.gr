@@ -91,16 +91,16 @@
     }
 
     /* Dropdown arrow indicator */
-   /*  .dropdown > .nav-link::after { */
-   /*    content: '▼'; */
-   /*    font-size: 0.7rem; */
-      /* margin-left: 5px; */
-      /* transition: transform 0.3s; */
-    /* } */
+    .dropdown > .nav-link::after {
+      content: '▼';
+      font-size: 0.7rem;
+      margin-left: 5px;
+      transition: transform 0.3s;
+    }
 
-    /*.dropdown.active > .nav-link::after { */
-     /* transform: rotate(180deg); */
-   /* } */
+    .dropdown.active > .nav-link::after {
+      transform: rotate(180deg);
+    }
 
     /* Updated dropdown styles with scroll functionality */
     .dropdown-menu {
@@ -156,19 +156,31 @@
         box-shadow: none;
         background-color: #f9f9f9;
         overflow: hidden;
-        transition: max-height 0.3s ease-out;
+        transition: max-height 0.5s ease-in-out;
         padding: 0;
+        margin: 0;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
       }
       
       .dropdown-menu.show {
-        max-height: 400px;
+        max-height: 1000px; /* Large enough to show all items */
         padding: 0.5rem 0;
+        opacity: 1;
+        visibility: visible;
         display: block;
       }
       
       .dropdown-menu a {
         white-space: normal;
         padding-left: 2rem;
+        font-size: 0.95rem;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .dropdown-menu li:last-child a {
+        border-bottom: none;
       }
       
       .nav-item {
@@ -179,6 +191,7 @@
       .navbar {
         flex-direction: column;
         padding: 1rem 5%;
+        position: relative;
       }
       
       .nav-menu {
@@ -186,6 +199,8 @@
         width: 100%;
         margin-top: 1rem;
         display: none;
+        max-height: 80vh;
+        overflow-y: auto;
       }
       
       .nav-menu.show {
@@ -195,6 +210,7 @@
       .nav-link {
         padding: 0.75rem 0;
         width: 100%;
+        justify-content: space-between;
       }
       
       /* Hamburger menu for mobile */
@@ -206,6 +222,11 @@
         cursor: pointer;
         font-size: 1.5rem;
         z-index: 1001;
+      }
+      
+      /* Ensure all dropdown items are visible */
+      .dropdown-menu li {
+        width: 100%;
       }
     }
 
@@ -677,8 +698,18 @@
     const dropdowns = document.querySelectorAll('.dropdown');
 
     // Toggle mobile menu
-    menuToggle.addEventListener('click', () => {
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       navMenu.classList.toggle('show');
+      
+      // Close all dropdowns when closing main menu
+      if (!navMenu.classList.contains('show')) {
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          menu.classList.remove('show');
+        });
+      }
     });
 
     // Handle dropdown clicks on mobile
@@ -688,6 +719,17 @@
       link.addEventListener('click', (e) => {
         if (window.innerWidth <= 768) {
           e.preventDefault();
+          e.stopPropagation();
+          
+          // Close other dropdowns
+          dropdowns.forEach(otherDropdown => {
+            if (otherDropdown !== dropdown) {
+              otherDropdown.classList.remove('active');
+              otherDropdown.querySelector('.dropdown-menu').classList.remove('show');
+            }
+          });
+          
+          // Toggle current dropdown
           dropdown.classList.toggle('active');
           const menu = dropdown.querySelector('.dropdown-menu');
           menu.classList.toggle('show');
@@ -706,6 +748,11 @@
           });
         }
       }
+    });
+
+    // Prevent clicks inside nav menu from closing it
+    navMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
     });
 
     // Handle window resize
