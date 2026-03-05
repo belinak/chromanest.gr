@@ -2,7 +2,7 @@
 <html lang="el">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>ChromaNest | Conceptual</title>
 
   <!-- favicon -->
@@ -400,7 +400,6 @@
       margin-bottom: 0;
       cursor: pointer;
       transition: transform 0.2s;
-      /* Remove fixed min-height - let Masonry handle layout */
     }
 
     .grid-item img {
@@ -416,7 +415,6 @@
       opacity: 1;
     }
 
-    /* Simple background while loading */
     .grid-item:not(.loaded) {
       background: #f0f0f0;
     }
@@ -484,6 +482,7 @@
       justify-content: space-between;
       padding: 0 20px;
       pointer-events: none;
+      z-index: 2010;
     }
 
     .lightbox-nav button {
@@ -502,6 +501,25 @@
       background: rgba(255,255,255,0.3);
     }
 
+    /* Always show navigation buttons on mobile */
+    @media (max-width: 768px) {
+      .lightbox-nav {
+        padding: 0 10px;
+      }
+      
+      .lightbox-nav button {
+        background: rgba(0, 0, 0, 0.6);
+        font-size: 30px;
+        padding: 8px 15px;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255,255,255,0.3);
+      }
+    }
+
     .lightbox-counter {
       position: absolute;
       bottom: 20px;
@@ -510,6 +528,27 @@
       text-align: center;
       color: #aaa;
       font-size: 14px;
+      z-index: 2010;
+    }
+
+    /* Swipe hint for mobile - subtle */
+    .swipe-hint {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .swipe-hint {
+        display: block;
+        position: absolute;
+        bottom: 50px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: rgba(255,255,255,0.4);
+        font-size: 12px;
+        z-index: 2005;
+        pointer-events: none;
+      }
     }
 
     /* ----- FOOTER ----- */
@@ -675,6 +714,7 @@
       <img class="lightbox-img" id="lightbox-img" src="" alt="">
       <div class="lightbox-counter" id="lightbox-counter"></div>
     </div>
+    <div class="swipe-hint">← σύρε για πλοήγηση →</div>
   </div>
 
   <!-- FOOTER -->
@@ -731,12 +771,10 @@
     const navMenu = document.getElementById('nav-menu');
     const dropdowns = document.querySelectorAll('.dropdown');
 
-    // Toggle mobile menu
     menuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       navMenu.classList.toggle('show');
       
-      // Close all dropdowns when closing main menu
       if (!navMenu.classList.contains('show')) {
         dropdowns.forEach(dropdown => {
           dropdown.classList.remove('active');
@@ -746,19 +784,16 @@
       }
     });
 
-    // Handle dropdown toggle clicks on mobile (arrow only)
     dropdowns.forEach(dropdown => {
       const toggle = dropdown.querySelector('.dropdown-toggle');
       const menu = dropdown.querySelector('.dropdown-menu');
       
       if (toggle) {
         toggle.addEventListener('click', (e) => {
-          // Only handle on mobile
           if (window.innerWidth <= 768) {
-            e.preventDefault(); // Prevent navigation
+            e.preventDefault();
             e.stopPropagation();
             
-            // Close other dropdowns
             dropdowns.forEach(otherDropdown => {
               if (otherDropdown !== dropdown) {
                 otherDropdown.classList.remove('active');
@@ -767,7 +802,6 @@
               }
             });
             
-            // Toggle current dropdown
             dropdown.classList.toggle('active');
             menu.classList.toggle('show');
           }
@@ -775,7 +809,6 @@
       }
     });
 
-    // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
       if (window.innerWidth <= 768) {
         if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
@@ -789,12 +822,10 @@
       }
     });
 
-    // Prevent clicks inside nav menu from closing it
     navMenu.addEventListener('click', (e) => {
       e.stopPropagation();
     });
 
-    // Handle window resize
     window.addEventListener('resize', () => {
       if (window.innerWidth > 768) {
         navMenu.classList.remove('show');
@@ -808,35 +839,25 @@
 
     (function() {
       const grid = document.querySelector('.grid');
-      const sizer = document.querySelector('.grid-sizer');
       const totalImages = 84;
       const basePath = 'images/13conceptual/conceptual';
-
-      // Define special cases for GIFs
       const gifImages = [84];
 
-      // Create all items first
       for (let i = 1; i <= totalImages; i++) {
         const item = document.createElement('div');
         item.className = 'grid-item';
         
         const img = document.createElement('img');
-        
-        // Determine file extension based on GIF list
         const fileExt = gifImages.includes(i) ? 'gif' : 'jpg';
         
-        // Use data-src for lazy loading
         img.dataset.src = `${basePath}${i}.${fileExt}`;
         img.alt = `Conceptual ${i}`;
-        
-        // Use a minimal placeholder
         img.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1 1\'%3E%3C/svg%3E';
         
         item.appendChild(img);
         grid.appendChild(item);
       }
 
-      // Initialize Masonry ONCE
       let msnry = new Masonry(grid, {
         itemSelector: '.grid-item',
         columnWidth: '.grid-sizer',
@@ -845,10 +866,8 @@
         initLayout: true
       });
 
-      // Force initial layout
       msnry.layout();
 
-      // Set up Intersection Observer for lazy loading
       const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -859,11 +878,9 @@
               img.onload = () => {
                 img.classList.add('loaded');
                 entry.target.classList.add('loaded');
-                // Let Masonry handle the layout naturally
                 msnry.layout();
               };
 
-              // Handle GIFs (they might not trigger onload consistently)
               if (img.src.includes('.gif')) {
                 setTimeout(() => {
                   img.classList.add('loaded');
@@ -879,12 +896,11 @@
         threshold: 0.01
       });
 
-      // Observe all grid items
       document.querySelectorAll('.grid-item').forEach(item => {
         imageObserver.observe(item);
       });
 
-      // Lightbox functionality
+      // Lightbox functionality with swipe
       const items = document.querySelectorAll('.grid-item');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
@@ -893,6 +909,8 @@
       const prevBtn = document.getElementById('lightbox-prev');
       const nextBtn = document.getElementById('lightbox-next');
       let currentIndex = 0;
+      let touchStartX = 0;
+      let touchEndX = 0;
 
       function openLightbox(index) {
         currentIndex = index;
@@ -911,6 +929,30 @@
       function closeLightbox() {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
+      }
+
+      // Touch swipe functionality
+      lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, false);
+
+      lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, false);
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            currentIndex = (currentIndex + 1) % items.length;
+          } else {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+          }
+          updateLightbox();
+        }
       }
 
       items.forEach((item, idx) => {
