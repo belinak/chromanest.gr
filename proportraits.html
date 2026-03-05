@@ -2,7 +2,7 @@
 <html lang="el">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>ChromaNest | Επαγγελματικά Πορτρέτα</title>
 
   <!-- favicon -->
@@ -507,6 +507,7 @@
       justify-content: space-between;
       padding: 0 20px;
       pointer-events: none;
+      z-index: 2010;
     }
 
     .lightbox-nav button {
@@ -525,6 +526,25 @@
       background: rgba(255,255,255,0.3);
     }
 
+    /* Always show navigation buttons on mobile */
+    @media (max-width: 768px) {
+      .lightbox-nav {
+        padding: 0 10px;
+      }
+      
+      .lightbox-nav button {
+        background: rgba(0, 0, 0, 0.6);
+        font-size: 30px;
+        padding: 8px 15px;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255,255,255,0.3);
+      }
+    }
+
     .lightbox-counter {
       position: absolute;
       bottom: 20px;
@@ -533,6 +553,27 @@
       text-align: center;
       color: #aaa;
       font-size: 14px;
+      z-index: 2010;
+    }
+
+    /* Swipe hint for mobile - subtle */
+    .swipe-hint {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .swipe-hint {
+        display: block;
+        position: absolute;
+        bottom: 50px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: rgba(255,255,255,0.4);
+        font-size: 12px;
+        z-index: 2005;
+        pointer-events: none;
+      }
     }
 
     /* ----- FOOTER ----- */
@@ -739,6 +780,7 @@
       <img class="lightbox-img" id="lightbox-img" src="" alt="">
       <div class="lightbox-counter" id="lightbox-counter"></div>
     </div>
+    <div class="swipe-hint">← σύρε για πλοήγηση →</div>
   </div>
 
   <!-- FOOTER -->
@@ -748,7 +790,7 @@
         <h3>ChromaNest</h3>
         <p>Επαγγελματικές υπηρεσίες φωτογραφίας με έδρα την Αθήνα με ειδίκευση στα πορτρέτα, προϊόντα και τις ειδικές εκδηλώσεις.</p>
         <div class="social-icons">
-          <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.facebook.com/chromanest"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
           <a href="https://gr.pinterest.com/chromanestcreatives/"><i class="fab fa-pinterest-p"></i></a>
         </div>
@@ -872,7 +914,6 @@
 
     (function() {
       const grid = document.querySelector('.grid');
-      const sizer = document.querySelector('.grid-sizer');
       const totalImages = 20;
       const basePath = 'images/02pro-portraits/portrait';
 
@@ -931,7 +972,7 @@
         imageObserver.observe(item);
       });
 
-      // Lightbox functionality
+      // Lightbox functionality with swipe
       const items = document.querySelectorAll('.grid-item');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
@@ -940,6 +981,8 @@
       const prevBtn = document.getElementById('lightbox-prev');
       const nextBtn = document.getElementById('lightbox-next');
       let currentIndex = 0;
+      let touchStartX = 0;
+      let touchEndX = 0;
 
       function openLightbox(index) {
         currentIndex = index;
@@ -958,6 +1001,30 @@
       function closeLightbox() {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
+      }
+
+      // Touch swipe functionality
+      lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, false);
+
+      lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, false);
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            currentIndex = (currentIndex + 1) % items.length;
+          } else {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+          }
+          updateLightbox();
+        }
       }
 
       items.forEach((item, idx) => {
