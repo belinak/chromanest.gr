@@ -400,11 +400,17 @@
       margin-bottom: 0;
       cursor: pointer;
       transition: transform 0.2s;
+      /* Add loading state */
+      min-height: 150px;
+      background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+      background-size: 200% 100%;
+      animation: 1.5s shine linear infinite;
     }
 
-    .grid-item:hover {
-      transform: scale(1.01);
-      z-index: 10;
+    @keyframes shine {
+      to {
+        background-position-x: -200%;
+      }
     }
 
     .grid-item img {
@@ -412,6 +418,17 @@
       height: auto;
       display: block;
       background: #f0f0f0;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .grid-item img.loaded {
+      opacity: 1;
+    }
+
+    .grid-item.loaded {
+      background: none;
+      animation: none;
     }
 
     .grid:after {
@@ -593,6 +610,11 @@
       .logo img {
         height: 35px;
         width: 140px;
+      }
+      
+      .grid-sizer,
+      .grid-item {
+        width: 50%;
       }
     }
   </style>
@@ -815,22 +837,70 @@
         
         const img = document.createElement('img');
         
-        // Check if current index should be GIF
-        if (gifImages.includes(i)) {
-          img.src = `${basePath}${i}.gif`;  // Use GIF for specified images
-        } else {
-          img.src = `${basePath}${i}.jpg`;  // Use JPG for all others
-        }
+        // Determine file extension based on GIF list
+        const fileExt = gifImages.includes(i) ? 'gif' : 'jpg';
         
+        // Use data-src for lazy loading instead of src
+        img.dataset.src = `${basePath}${i}.${fileExt}`;
         img.alt = `Conceptual ${i}`;
-        img.loading = 'lazy';
+        
+        // Add a low-quality placeholder
+        img.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 3 2\'%3E%3C/svg%3E';
         
         item.appendChild(img);
         grid.appendChild(item);
       }
-      
-      // Wait for images to load, then init Masonry
-      imagesLoaded(grid, function() {
+
+      // Set up Intersection Observer for lazy loading
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target.querySelector('img');
+            if (img && img.dataset.src) {
+              // Load the actual image
+              img.src = img.dataset.src;
+              img.classList.add('loaded');
+              
+              // Add loaded class to parent when image is fully loaded
+              img.onload = () => {
+                entry.target.classList.add('loaded');
+                
+                // Re-layout Masonry after image loads
+                const msnry = Masonry.data(grid);
+                if (msnry) {
+                  setTimeout(() => msnry.layout(), 50);
+                }
+              };
+              
+              // Handle GIFs (they might not trigger onload the same way)
+              if (img.src.includes('.gif')) {
+                // For GIFs, we'll assume they're loaded after a short delay
+                setTimeout(() => {
+                  entry.target.classList.add('loaded');
+                  const msnry = Masonry.data(grid);
+                  if (msnry) {
+                    msnry.layout();
+                  }
+                }, 100);
+              }
+              
+              // Remove from observer after loading
+              observer.unobserve(entry.target);
+            }
+          }
+        });
+      }, {
+        rootMargin: '50px', // Start loading when image is 50px from viewport
+        threshold: 0.01
+      });
+
+      // Observe all grid items
+      document.querySelectorAll('.grid-item').forEach(item => {
+        imageObserver.observe(item);
+      });
+
+      // Initialize Masonry after initial layout
+      function initMasonry() {
         const msnry = new Masonry(grid, {
           itemSelector: '.grid-item',
           columnWidth: '.grid-sizer',
@@ -843,7 +913,24 @@
         setTimeout(() => {
           msnry.layout();
         }, 50);
-      });
+        
+        return msnry;
+      }
+
+      // Initial Masonry setup
+      let msnry = initMasonry();
+
+      // Re-layout Masonry when new images load
+      grid.addEventListener('load', function(e) {
+        if (e.target.tagName === 'IMG') {
+          // Small delay to ensure image is rendered
+          setTimeout(() => {
+            if (msnry) {
+              msnry.layout();
+            }
+          }, 100);
+        }
+      }, true);
 
       // Lightbox functionality
       const items = document.querySelectorAll('.grid-item');
@@ -864,7 +951,1002 @@
 
       function updateLightbox() {
         const img = items[currentIndex].querySelector('img');
-        lightboxImg.src = img.src;
+        // Use the actual src (either loaded or data-src)
+        lightboxImg.src = img.dataset.src || img.src;
+        lightboxImg.alt = img.alt;
+        counter.textContent = (currentIndex + 1) + ' / ' + items.length;
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      items.forEach((item, idx) => {
+        item.addEventListener('click', () => openLightbox(idx));
+      });
+
+      closeBtn.addEventListener('click', closeLightbox);
+
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        updateLightbox();
+      });
+
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % items.length;
+        updateLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') {
+          currentIndex = (currentIndex - 1 + items.length) % items.length;
+          updateLightbox();
+        }
+        if (e.key === 'ArrowRight') {
+          currentIndex = (currentIndex + 1) % items.length;
+          updateLightbox();
+        }
+      });
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChromaNest | Conceptual</title>
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/Favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/Favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/Favicon/apple-touch-icon.png">
+  <link rel="shortcut icon" href="images/Favicon/favicon.ico">
+
+  <!-- AOS & Font Awesome -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Masonry & imagesLoaded -->
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+
+    /* ----- NAVBAR WITH MOBILE MENU ----- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+      width: 200px;
+      object-fit: contain;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-item {
+      position: relative;
+      margin-left: 1.5rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-link:hover {
+      color: #888;
+    }
+
+    /* Dropdown toggle - hidden on desktop */
+    .dropdown-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.7rem;
+      transition: transform 0.3s;
+      width: 24px;
+      height: 24px;
+    }
+
+    .dropdown-toggle::after {
+      content: '▼';
+    }
+
+    .dropdown.active .dropdown-toggle {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      min-width: 220px;
+      padding: 0.5rem 0;
+      z-index: 1000;
+      /* Scroll functionality */
+      max-height: 80vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #888 #f0f0f0;
+    }
+    
+    /* Webkit scrollbar styling */
+    .dropdown-menu::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .dropdown-menu::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+
+    .dropdown-menu::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 6px;
+    }
+
+    .dropdown-menu::-webkit-scrollbar-thumb:hover {
+      background-color: #555;
+    }
+
+    /* Desktop hover functionality */
+    @media (min-width: 769px) {
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+    }
+
+    .dropdown-menu li {
+      padding: 0;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.7rem 1.2rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f5f5f5;
+    }
+
+    /* ========= MOBILE STYLES ========= */
+    @media (max-width: 768px) {
+      /* Show dropdown toggle only on mobile */
+      .dropdown-toggle {
+        display: inline-flex;
+      }
+      
+      /* Transform navbar for mobile */
+      .navbar {
+        flex-direction: column;
+        padding: 1rem 5%;
+        position: relative;
+      }
+      
+      /* Hamburger menu */
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        cursor: pointer;
+        font-size: 1.5rem;
+        z-index: 1001;
+      }
+      
+      /* Mobile menu - hidden by default */
+      .nav-menu {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+        display: none;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      
+      .nav-menu.show {
+        display: flex;
+      }
+      
+      /* Mobile nav items */
+      .nav-item {
+        width: 100%;
+        margin: 0.25rem 0;
+      }
+      
+      .nav-link {
+        padding: 0.75rem 0;
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      /* Transform dropdown for mobile */
+      .dropdown-menu {
+        position: static;
+        max-height: 0;
+        width: 100%;
+        box-shadow: none;
+        background-color: #f9f9f9;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+        padding: 0;
+        margin: 0;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+      }
+      
+      .dropdown-menu.show {
+        max-height: 1000px;
+        padding: 0.5rem 0;
+        opacity: 1;
+        visibility: visible;
+        display: block;
+      }
+      
+      .dropdown-menu a {
+        white-space: normal;
+        padding-left: 2rem;
+        font-size: 0.95rem;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .dropdown-menu li:last-child a {
+        border-bottom: none;
+      }
+      
+      /* Better touch targets */
+      .dropdown-toggle {
+        width: 44px;
+        height: 44px;
+        margin: -10px -10px -10px 0;
+        padding: 10px;
+        position: relative;
+        z-index: 2;
+      }
+      
+      .nav-link {
+        position: relative;
+        z-index: 1;
+      }
+      
+      /* Logo size for mobile */
+      .logo img {
+        height: 40px;
+        width: 160px;
+      }
+      
+      /* Footer responsive */
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      /* Grid for mobile */
+      .grid-sizer,
+      .grid-item {
+        width: 50%;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+
+    /* ----- CENTERED TEXT SECTION ----- */
+    .portrait-container {
+      max-width: 1000px;
+      margin: 2rem auto 0rem;
+      padding: 0 5%;
+      text-align: center;
+    }
+
+    .discreet-title {
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-transform: none;
+      color: #1f1f1f;
+      margin-bottom: rem;
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: 0.8rem;
+      display: inline-block;
+      line-height: 1.3;
+    }
+
+    .portrait-description {
+      max-width: 750px;
+      margin: 0 auto 0.8rem auto;
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .portrait-description p {
+      margin-bottom: 0.8rem;
+    }
+
+    .services-list {
+      list-style: none;
+      margin: 0.8rem 0;
+      padding: 0;
+    }
+
+    .services-list li {
+      margin-bottom: 0.3rem;
+    }
+
+    .target-box {
+      background-color: #f5f5f5;
+      padding: 1.5rem 1.5rem 0.8rem 1.5rem;
+      border-radius: 6px;
+      max-width: 700px;
+      margin: 1rem auto 0.5rem;
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    .target-box strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-style: normal;
+      font-size: 1rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #000;
+      color: #fff;
+      font-size: 1.1rem;
+      padding: 0.5rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      margin: 0.8rem 0 0.2rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      background-color: #586b80;
+    }
+
+    /* ===== MASONRY GALLERY ===== */
+    .masonry__gallery {
+      max-width: 1600px;
+      margin: 3rem auto 2rem;
+      padding: 0 5%;
+    }
+
+    .grid {
+      position: relative;
+      margin-left: -2px;
+      margin-right: -2px;
+    }
+
+    .grid-sizer,
+    .grid-item {
+      width: 33.333%;
+      padding: 2px;
+      box-sizing: border-box;
+    }
+
+    .grid-item {
+      float: left;
+      margin-bottom: 0;
+      cursor: pointer;
+      transition: transform 0.2s;
+      /* Add loading state */
+      min-height: 150px;
+      background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+      background-size: 200% 100%;
+      animation: 1.5s shine linear infinite;
+    }
+
+    @keyframes shine {
+      to {
+        background-position-x: -200%;
+      }
+    }
+
+    .grid-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #f0f0f0;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .grid-item img.loaded {
+      opacity: 1;
+    }
+
+    .grid-item.loaded {
+      background: none;
+      animation: none;
+    }
+
+    .grid:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    /* ----- LIGHTBOX ----- */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      max-width: 90vw;
+      max-height: 85vh;
+      position: relative;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 85vh;
+      display: block;
+      border: 2px solid #333;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      cursor: pointer;
+      z-index: 2010;
+      transition: color 0.2s;
+    }
+
+    .lightbox-close:hover {
+      color: #e8d8c3;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      pointer-events: none;
+    }
+
+    .lightbox-nav button {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      font-size: 40px;
+      padding: 10px 20px;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: background 0.2s;
+      border-radius: 4px;
+    }
+
+    .lightbox-nav button:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .lightbox-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    /* ----- FOOTER ----- */
+    .footer {
+      background-color: #eee;
+      color: #4f4f4f;
+      padding: 60px 5% 30px;
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4f4f4f;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #4f4f4f;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: #888;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+      color: #4f4f4f;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-size: 14px;
+      color: #888;
+    }
+
+    @media (max-width: 576px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      .logo img {
+        height: 35px;
+        width: 140px;
+      }
+      
+      .grid-sizer,
+      .grid-item {
+        width: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR with hamburger menu and clickable dropdown arrow -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/chromanest-creatives-studio-logo-black.jpg" alt="Chromanest Logo">
+      </a>
+    </div>
+    <div class="menu-toggle" id="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-menu" id="nav-menu">
+      <li class="nav-item"><a href="index.html" class="nav-link">Αρχική</a></li>
+      <li class="nav-item"><a href="about.html" class="nav-link">Σχετικά</a></li>
+      <li class="nav-item dropdown">
+        <a href="commercial.html" class="nav-link">
+          Commercial
+          <span class="dropdown-toggle"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="portraits.html">Πορτραίτα</a></li>
+          <li><a href="proportraits.html">Επαγγελματικά πορτραίτα</a></li>
+          <li><a href="fashioneshops.html">Fashion e-shops</a></li>
+          <li><a href="familyportraits.html">Οικογενειακά πορτραίτα</a></li>
+          <li><a href="newborns.html">Νεογέννητα</a></li>
+          <li><a href="maternity.html">Εγκυμοσύνη</a></li>
+          <li><a href="couples.html">Ζευγάρια</a></li>
+          <li><a href="weddingdresses.html">Νυφικά</a></li>
+          <li><a href="product.html">Product</a></li>
+          <li><a href="packaging.html">Packaging</a></li>
+          <li><a href="food.html">Food</a></li>
+          <li><a href="editorial.html">Editorial</a></li>
+          <li><a href="conceptual.html">Conceptual</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="hotels.html">Hotels</a></li>
+          <li><a href="airbnb.html">Airbnb-Real Estate</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="wedding.html" class="nav-link">Γάμος</a></li>
+      <li class="nav-item"><a href="christening.html" class="nav-link">Βάπτιση</a></li>
+      <li class="nav-item"><a href="editing.html" class="nav-link">Editing</a></li>
+      <li class="nav-item"><a href="faq.html" class="nav-link">FAQ</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link">Επικοινωνία</a></li>
+    </ul>
+  </nav>
+
+  <!-- TEXT SECTION -->
+  <section class="portrait-container" data-aos="fade-up">
+    <div class="discreet-title">Conceptual/Fine Art Photography</div>
+  </section>
+
+  <!-- MASONRY GALLERY -->
+  <section class="masonry__gallery" data-aos="fade-up">
+    <div class="grid js-masonry">
+      <div class="grid-sizer"></div>
+      <!-- Items will be inserted here by JavaScript -->
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightbox-close">&times;</span>
+    <div class="lightbox-nav">
+      <button id="lightbox-prev">&#10094;</button>
+      <button id="lightbox-next">&#10095;</button>
+    </div>
+    <div class="lightbox-content">
+      <img class="lightbox-img" id="lightbox-img" src="" alt="">
+      <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>ChromaNest</h3>
+        <p>Επαγγελματικές υπηρεσίες φωτογραφίας με έδρα την Αθήνα με ειδίκευση στα πορτρέτα, προϊόντα και τις ειδικές εκδηλώσεις.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/1FPfm918UD/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/chromanest.creatives"><i class="fab fa-instagram"></i></a>
+          <a href="https://gr.pinterest.com/chromanestcreatives/"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Υπηρεσίες</h3>
+        <ul>
+          <li><a href="commercial.html">Commercial Φωτογραφία</a></li>
+          <li><a href="portraits.html">Πορτραίτα</a></li>
+          <li><a href="wedding.html">Γάμος</a></li>
+          <li><a href="baptism.html">Βάπτιση</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Πληροφορίες</h3>
+        <ul>
+          <li><a href="about.html">Σχετικά με εμάς</a></li>
+          <li><a href="packages.html">Πακέτα & Τιμές</a></li>
+          <li><a href="editing.html">Υπηρεσίες Editing</a></li>
+          <li><a href="https://chromanest.blogspot.com">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Επικοινωνία</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Athens, Greece</li>
+          <li><i class="fas fa-phone"></i> +30 6973949986</li>
+          <li><i class="fas fa-envelope"></i> chromanest.creatives@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>2025-2045 ChromaNest &copy; All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 600, once: true });
+
+    // Mobile menu functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    // Toggle mobile menu
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navMenu.classList.toggle('show');
+      
+      // Close all dropdowns when closing main menu
+      if (!navMenu.classList.contains('show')) {
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) menu.classList.remove('show');
+        });
+      }
+    });
+
+    // Handle dropdown toggle clicks on mobile (arrow only)
+    dropdowns.forEach(dropdown => {
+      const toggle = dropdown.querySelector('.dropdown-toggle');
+      const menu = dropdown.querySelector('.dropdown-menu');
+      
+      if (toggle) {
+        toggle.addEventListener('click', (e) => {
+          // Only handle on mobile
+          if (window.innerWidth <= 768) {
+            e.preventDefault(); // Prevent navigation
+            e.stopPropagation();
+            
+            // Close other dropdowns
+            dropdowns.forEach(otherDropdown => {
+              if (otherDropdown !== dropdown) {
+                otherDropdown.classList.remove('active');
+                const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                if (otherMenu) otherMenu.classList.remove('show');
+              }
+            });
+            
+            // Toggle current dropdown
+            dropdown.classList.toggle('active');
+            menu.classList.toggle('show');
+          }
+        });
+      }
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+          navMenu.classList.remove('show');
+          dropdowns.forEach(dropdown => {
+            dropdown.classList.remove('active');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            if (menu) menu.classList.remove('show');
+          });
+        }
+      }
+    });
+
+    // Prevent clicks inside nav menu from closing it
+    navMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        navMenu.classList.remove('show');
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (menu) menu.classList.remove('show');
+        });
+      }
+    });
+
+    (function() {
+      const grid = document.querySelector('.grid');
+      const sizer = document.querySelector('.grid-sizer');
+      const totalImages = 84;
+      const basePath = 'images/13conceptual/conceptual';
+
+      // Define special cases for GIFs
+      const gifImages = [84]; // Add more numbers here if you want other GIFs (e.g., [77, 45, 23])
+
+      // Create all items
+      for (let i = 1; i <= totalImages; i++) {
+        const item = document.createElement('div');
+        item.className = 'grid-item';
+        
+        const img = document.createElement('img');
+        
+        // Determine file extension based on GIF list
+        const fileExt = gifImages.includes(i) ? 'gif' : 'jpg';
+        
+        // Use data-src for lazy loading instead of src
+        img.dataset.src = `${basePath}${i}.${fileExt}`;
+        img.alt = `Conceptual ${i}`;
+        
+        // Add a low-quality placeholder
+        img.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 3 2\'%3E%3C/svg%3E';
+        
+        item.appendChild(img);
+        grid.appendChild(item);
+      }
+
+      // Set up Intersection Observer for lazy loading
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target.querySelector('img');
+            if (img && img.dataset.src) {
+              // Load the actual image
+              img.src = img.dataset.src;
+              img.classList.add('loaded');
+              
+              // Add loaded class to parent when image is fully loaded
+              img.onload = () => {
+                entry.target.classList.add('loaded');
+                
+                // Re-layout Masonry after image loads
+                const msnry = Masonry.data(grid);
+                if (msnry) {
+                  setTimeout(() => msnry.layout(), 50);
+                }
+              };
+              
+              // Handle GIFs (they might not trigger onload the same way)
+              if (img.src.includes('.gif')) {
+                // For GIFs, we'll assume they're loaded after a short delay
+                setTimeout(() => {
+                  entry.target.classList.add('loaded');
+                  const msnry = Masonry.data(grid);
+                  if (msnry) {
+                    msnry.layout();
+                  }
+                }, 100);
+              }
+              
+              // Remove from observer after loading
+              observer.unobserve(entry.target);
+            }
+          }
+        });
+      }, {
+        rootMargin: '50px', // Start loading when image is 50px from viewport
+        threshold: 0.01
+      });
+
+      // Observe all grid items
+      document.querySelectorAll('.grid-item').forEach(item => {
+        imageObserver.observe(item);
+      });
+
+      // Initialize Masonry after initial layout
+      function initMasonry() {
+        const msnry = new Masonry(grid, {
+          itemSelector: '.grid-item',
+          columnWidth: '.grid-sizer',
+          percentPosition: true,
+          transitionDuration: 0,
+          initLayout: true
+        });
+        
+        // Force layout after a tiny delay
+        setTimeout(() => {
+          msnry.layout();
+        }, 50);
+        
+        return msnry;
+      }
+
+      // Initial Masonry setup
+      let msnry = initMasonry();
+
+      // Re-layout Masonry when new images load
+      grid.addEventListener('load', function(e) {
+        if (e.target.tagName === 'IMG') {
+          // Small delay to ensure image is rendered
+          setTimeout(() => {
+            if (msnry) {
+              msnry.layout();
+            }
+          }, 100);
+        }
+      }, true);
+
+      // Lightbox functionality
+      const items = document.querySelectorAll('.grid-item');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const counter = document.getElementById('lightbox-counter');
+      const closeBtn = document.getElementById('lightbox-close');
+      const prevBtn = document.getElementById('lightbox-prev');
+      const nextBtn = document.getElementById('lightbox-next');
+      let currentIndex = 0;
+
+      function openLightbox(index) {
+        currentIndex = index;
+        updateLightbox();
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function updateLightbox() {
+        const img = items[currentIndex].querySelector('img');
+        // Use the actual src (either loaded or data-src)
+        lightboxImg.src = img.dataset.src || img.src;
         lightboxImg.alt = img.alt;
         counter.textContent = (currentIndex + 1) + ' / ' + items.length;
       }
@@ -905,6 +1987,14 @@
         }
       });
 
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+    })();
+  </script>
+</body>
+</html>
       lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) closeLightbox();
       });
