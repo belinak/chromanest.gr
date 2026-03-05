@@ -400,17 +400,7 @@
       margin-bottom: 0;
       cursor: pointer;
       transition: transform 0.2s;
-      /* Add loading state */
-      min-height: 150px;
-      background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-      background-size: 200% 100%;
-      animation: 1.5s shine linear infinite;
-    }
-
-    @keyframes shine {
-      to {
-        background-position-x: -200%;
-      }
+      /* Remove fixed min-height - let Masonry handle layout */
     }
 
     .grid-item img {
@@ -426,9 +416,9 @@
       opacity: 1;
     }
 
-    .grid-item.loaded {
-      background: none;
-      animation: none;
+    /* Simple background while loading */
+    .grid-item:not(.loaded) {
+      background: #f0f0f0;
     }
 
     .grid:after {
@@ -825,7 +815,7 @@
       // Define special cases for GIFs
       const gifImages = [84];
 
-      // Create all items first (important: add all items to DOM before Masonry)
+      // Create all items first
       for (let i = 1; i <= totalImages; i++) {
         const item = document.createElement('div');
         item.className = 'grid-item';
@@ -839,14 +829,14 @@
         img.dataset.src = `${basePath}${i}.${fileExt}`;
         img.alt = `Conceptual ${i}`;
         
-        // Use a minimal placeholder (doesn't affect layout)
+        // Use a minimal placeholder
         img.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1 1\'%3E%3C/svg%3E';
         
         item.appendChild(img);
         grid.appendChild(item);
       }
 
-      // Initialize Masonry ONCE after all items are in the DOM
+      // Initialize Masonry ONCE
       let msnry = new Masonry(grid, {
         itemSelector: '.grid-item',
         columnWidth: '.grid-sizer',
@@ -858,48 +848,34 @@
       // Force initial layout
       msnry.layout();
 
-      // Flag to prevent multiple layouts
-      let isLayoutScheduled = false;
-
-      // Function to safely relayout without causing shifts
-      function safeLayout() {
-        if (!isLayoutScheduled) {
-          isLayoutScheduled = true;
-          requestAnimationFrame(() => {
-            msnry.layout();
-            isLayoutScheduled = false;
-          });
-        }
-      }
-
       // Set up Intersection Observer for lazy loading
       const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const img = entry.target.querySelector('img');
             if (img && img.dataset.src && !img.src.includes(img.dataset.src)) {
-              // Store the original src to check if already loaded
-              const originalSrc = img.src;
-              
-              // Load the actual image
               img.src = img.dataset.src;
               
               img.onload = () => {
                 img.classList.add('loaded');
                 entry.target.classList.add('loaded');
-                
-                // Only relayout if the image actually changed the height
-                // This prevents unnecessary shifting
-                if (entry.target.offsetHeight > 0) {
-                  // Use a debounced layout
-                  safeLayout();
-                }
+                // Let Masonry handle the layout naturally
+                msnry.layout();
               };
+
+              // Handle GIFs (they might not trigger onload consistently)
+              if (img.src.includes('.gif')) {
+                setTimeout(() => {
+                  img.classList.add('loaded');
+                  entry.target.classList.add('loaded');
+                  msnry.layout();
+                }, 100);
+              }
             }
           }
         });
       }, {
-        rootMargin: '200px 0px', // Load even earlier to prevent visible changes
+        rootMargin: '200px 0px',
         threshold: 0.01
       });
 
@@ -908,7 +884,7 @@
         imageObserver.observe(item);
       });
 
-      // Lightbox functionality (unchanged)
+      // Lightbox functionality
       const items = document.querySelectorAll('.grid-item');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
