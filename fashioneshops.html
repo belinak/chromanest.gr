@@ -422,6 +422,8 @@
       margin-bottom: 0;
       cursor: pointer;
       transition: transform 0.2s;
+      /* Add loading state */
+      background: #f0f0f0;
     }
 
     .grid-item:hover {
@@ -434,6 +436,16 @@
       height: auto;
       display: block;
       background: #f0f0f0;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .grid-item img.loaded {
+      opacity: 1;
+    }
+
+    .grid-item.loaded {
+      background: none;
     }
 
     .grid:after {
@@ -851,34 +863,59 @@
       const totalImages = 12;
       const basePath = 'images/08fashioneshops/fashioneshops';
 
-      // Create all items
+      // Create all items first
       for (let i = 1; i <= totalImages; i++) {
         const item = document.createElement('div');
         item.className = 'grid-item';
         
         const img = document.createElement('img');
-        img.src = `${basePath}${i}.jpg`;
+        // Use data-src for lazy loading
+        img.dataset.src = `${basePath}${i}.jpg`;
         img.alt = `Φωτογράφηση ρούχων ${i}`;
-        img.loading = 'lazy';
+        // Use a minimal placeholder
+        img.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1 1\'%3E%3C/svg%3E';
         
         item.appendChild(img);
         grid.appendChild(item);
       }
 
-      // Wait for images to load, then init Masonry
-      imagesLoaded(grid, function() {
-        const msnry = new Masonry(grid, {
-          itemSelector: '.grid-item',
-          columnWidth: '.grid-sizer',
-          percentPosition: true,
-          transitionDuration: 0,
-          initLayout: true
+      // Initialize Masonry ONCE
+      let msnry = new Masonry(grid, {
+        itemSelector: '.grid-item',
+        columnWidth: '.grid-sizer',
+        percentPosition: true,
+        transitionDuration: 0,
+        initLayout: true
+      });
+
+      // Force initial layout
+      msnry.layout();
+
+      // Set up Intersection Observer for lazy loading
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target.querySelector('img');
+            if (img && img.dataset.src && !img.src.includes(img.dataset.src)) {
+              img.src = img.dataset.src;
+              
+              img.onload = () => {
+                img.classList.add('loaded');
+                entry.target.classList.add('loaded');
+                // Let Masonry handle the layout naturally
+                msnry.layout();
+              };
+            }
+          }
         });
-        
-        // Force layout after a tiny delay
-        setTimeout(() => {
-          msnry.layout();
-        }, 50);
+      }, {
+        rootMargin: '200px 0px',
+        threshold: 0.01
+      });
+
+      // Observe all grid items
+      document.querySelectorAll('.grid-item').forEach(item => {
+        imageObserver.observe(item);
       });
 
       // Lightbox functionality
@@ -900,7 +937,7 @@
 
       function updateLightbox() {
         const img = items[currentIndex].querySelector('img');
-        lightboxImg.src = img.src;
+        lightboxImg.src = img.dataset.src || img.src;
         lightboxImg.alt = img.alt;
         counter.textContent = (currentIndex + 1) + ' / ' + items.length;
       }

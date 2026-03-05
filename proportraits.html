@@ -418,17 +418,13 @@
       margin-bottom: 0;
       cursor: pointer;
       transition: transform 0.2s;
-      /* Add loading state */
-      min-height: 150px;
-      background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-      background-size: 200% 100%;
-      animation: 1.5s shine linear infinite;
+      /* Simple loading state without fixed height */
+      background: #f0f0f0;
     }
 
-    @keyframes shine {
-      to {
-        background-position-x: -200%;
-      }
+    .grid-item:hover {
+      transform: scale(1.01);
+      z-index: 10;
     }
 
     .grid-item img {
@@ -446,7 +442,6 @@
 
     .grid-item.loaded {
       background: none;
-      animation: none;
     }
 
     .grid:after {
@@ -881,50 +876,53 @@
       const totalImages = 20;
       const basePath = 'images/02pro-portraits/portrait';
 
-      // Create all items
+      // Create all items first
       for (let i = 1; i <= totalImages; i++) {
         const item = document.createElement('div');
         item.className = 'grid-item';
         
         const img = document.createElement('img');
-        // Use data-src for lazy loading instead of src
+        // Use data-src for lazy loading
         img.dataset.src = `${basePath}${i}.jpg`;
         img.alt = `Επαγγελματικό Πορτραίτο ${i}`;
-        // Add a low-quality placeholder
-        img.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 3 2\'%3E%3C/svg%3E';
+        // Use a minimal placeholder
+        img.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1 1\'%3E%3C/svg%3E';
         
         item.appendChild(img);
         grid.appendChild(item);
       }
 
+      // Initialize Masonry ONCE
+      let msnry = new Masonry(grid, {
+        itemSelector: '.grid-item',
+        columnWidth: '.grid-sizer',
+        percentPosition: true,
+        transitionDuration: 0,
+        initLayout: true
+      });
+
+      // Force initial layout
+      msnry.layout();
+
       // Set up Intersection Observer for lazy loading
-      const imageObserver = new IntersectionObserver((entries, observer) => {
+      const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const img = entry.target.querySelector('img');
-            if (img && img.dataset.src) {
-              // Load the actual image
+            if (img && img.dataset.src && !img.src.includes(img.dataset.src)) {
               img.src = img.dataset.src;
-              img.classList.add('loaded');
               
-              // Add loaded class to parent when image is fully loaded
               img.onload = () => {
+                img.classList.add('loaded');
                 entry.target.classList.add('loaded');
-                
-                // Re-layout Masonry after image loads
-                const msnry = Masonry.data(grid);
-                if (msnry) {
-                  setTimeout(() => msnry.layout(), 50);
-                }
+                // Let Masonry handle the layout naturally
+                msnry.layout();
               };
-              
-              // Remove from observer after loading
-              observer.unobserve(entry.target);
             }
           }
         });
       }, {
-        rootMargin: '50px', // Start loading when image is 50px from viewport
+        rootMargin: '200px 0px',
         threshold: 0.01
       });
 
@@ -932,39 +930,6 @@
       document.querySelectorAll('.grid-item').forEach(item => {
         imageObserver.observe(item);
       });
-
-      // Initialize Masonry after initial layout
-      function initMasonry() {
-        const msnry = new Masonry(grid, {
-          itemSelector: '.grid-item',
-          columnWidth: '.grid-sizer',
-          percentPosition: true,
-          transitionDuration: 0,
-          initLayout: true
-        });
-        
-        // Force layout after a tiny delay
-        setTimeout(() => {
-          msnry.layout();
-        }, 50);
-        
-        return msnry;
-      }
-
-      // Initial Masonry setup
-      let msnry = initMasonry();
-
-      // Re-layout Masonry when new images load
-      grid.addEventListener('load', function(e) {
-        if (e.target.tagName === 'IMG') {
-          // Small delay to ensure image is rendered
-          setTimeout(() => {
-            if (msnry) {
-              msnry.layout();
-            }
-          }, 100);
-        }
-      }, true);
 
       // Lightbox functionality
       const items = document.querySelectorAll('.grid-item');
@@ -985,7 +950,6 @@
 
       function updateLightbox() {
         const img = items[currentIndex].querySelector('img');
-        // Use the actual src (either loaded or data-src)
         lightboxImg.src = img.dataset.src || img.src;
         lightboxImg.alt = img.alt;
         counter.textContent = (currentIndex + 1) + ' / ' + items.length;
